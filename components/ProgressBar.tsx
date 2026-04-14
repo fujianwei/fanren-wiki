@@ -4,7 +4,7 @@ interface ProgressBarProps {
 }
 
 export default function ProgressBar({ current, total }: ProgressBarProps) {
-  const percent = Math.round(((current - 1) / total) * 100);
+  const percent = Math.round((current / total) * 100);
   return (
     <div className="w-full">
       <div className="flex justify-between text-xs text-bamboo-500 mb-1">
