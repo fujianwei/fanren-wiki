@@ -21,7 +21,8 @@ export default async function ResultPage({ params }: Props) {
 
   if (!character) notFound();
 
-  const resultUrl = `https://fanren-wiki.vercel.app/result/${mbti}`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanren-wiki.vercel.app";
+  const resultUrl = `${baseUrl}/result/${mbti}`;
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
