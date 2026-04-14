@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+const FEATURE_CARDS = [
+  { icon: "👤", title: "人物百科", desc: "韩立、南宫婉、墨大夫……人界篇所有主要人物档案" },
+  { icon: "🗺️", title: "地图势力", desc: "七玄门、黄枫谷、乱星海……人界势力分布全览" },
+  { icon: "📜", title: "剧情时间线", desc: "从凡人少年到元婴老怪，完整剧情脉络一览" },
+] as const;
+
 export default function HomePage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
@@ -43,11 +49,7 @@ export default function HomePage() {
 
       {/* 功能预览卡片 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[
-          { icon: "👤", title: "人物百科", desc: "韩立、南宫婉、墨大夫……人界篇所有主要人物档案" },
-          { icon: "🗺️", title: "地图势力", desc: "七玄门、黄枫谷、乱星海……人界势力分布全览" },
-          { icon: "📜", title: "剧情时间线", desc: "从凡人少年到元婴老怪，完整剧情脉络一览" },
-        ].map((item) => (
+        {FEATURE_CARDS.map((item) => (
           <div
             key={item.title}
             className="bg-bamboo-100 rounded-xl p-6 border border-bamboo-200 opacity-60"
