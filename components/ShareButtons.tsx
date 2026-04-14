@@ -13,9 +13,14 @@ export default function ShareButtons({ characterName, mbti, resultUrl }: ShareBu
 
   async function handleCopy() {
     const text = `我在凡人修仙传人界篇人物测试中，测出我最像「${characterName}」(${mbti})！你也来测测看 → ${resultUrl}`;
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // 降级：选中文本提示用户手动复制
+      window.prompt("请手动复制以下内容：", text);
+    }
   }
 
   const weiboText = encodeURIComponent(
