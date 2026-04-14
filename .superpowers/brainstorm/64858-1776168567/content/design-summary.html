@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计方案总览</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f2f5f0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; color: #3a5c32; padding: 24px; }
+  h1 { font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+  .sub { font-size: 13px; color: #7a9a72; margin-bottom: 24px; }
+  .section { background: white; border-radius: 10px; padding: 20px; margin-bottom: 16px; border: 1px solid #d4e0cc; }
+  .section-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #7a9e72; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .section-title::before { content: ''; display: inline-block; width: 3px; height: 14px; background: #7a9e72; border-radius: 2px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tag { background: #e8ede4; color: #4a6741; border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; }
+  .tag.highlight { background: #7a9e72; color: white; }
+  .feature { background: #f8faf6; border-radius: 8px; padding: 14px; flex: 1; min-width: 180px; border: 1px solid #e0e8db; }
+  .feature-icon { font-size: 22px; margin-bottom: 6px; }
+  .feature-name { font-size: 13px; font-weight: 700; color: #3a5c32; margin-bottom: 4px; }
+  .feature-desc { font-size: 11px; color: #7a9a72; line-height: 1.6; }
+  .palette { display: flex; gap: 8px; align-items: center; }
+  .swatch { width: 32px; height: 32px; border-radius: 6px; }
+  .swatch-label { font-size: 10px; color: #7a9a72; margin-top: 3px; text-align: center; }
+  .tech-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tech { background: #f2f5f0; border: 1px solid #c8d8c2; border-radius: 6px; padding: 8px 14px; font-size: 12px; }
+  .tech strong { display: block; color: #3a5c32; font-weight: 700; margin-bottom: 2px; }
+  .tech span { color: #7a9a72; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<h1>凡人修仙传·人界篇 网站设计方案</h1>
+<p class="sub">所有决策已确认，以下是完整设计总览</p>
+
+<!-- 视觉风格 -->
+<div class="section">
+  <div class="section-title">视觉风格</div>
+  <div style="margin-bottom:12px;">
+    <div class="row" style="margin-bottom:8px;">
+      <span class="tag highlight">竹林烟雨</span>
+      <span class="tag">低饱和绿色调</span>
+      <span class="tag">山清水秀·仙气</span>
+      <span class="tag">温柔亲和</span>
+    </div>
+  </div>
+  <div class="palette">
+    <div>
+      <div class="swatch" style="background:#7a9e72;"></div>
+      <div class="swatch-label">主色</div>
+    </div>
+    <div>
+      <div class="swatch" style="background:#b8cdb0;"></div>
+      <div class="swatch-label">辅色</div>
+    </div>
+    <div>
+      <div class="swatch" style="background:#d4e0cc;"></div>
+      <div class="swatch-label">浅色</div>
+    </div>
+    <div>
+      <div class="swatch" style="background:#e8ede4;"></div>
+      <div class="swatch-label">背景色</div>
+    </div>
+    <div>
+      <div class="swatch" style="background:#f2f5f0;"></div>
+      <div class="swatch-label">底色</div>
+    </div>
+    <div>
+      <div class="swatch" style="background:#3a5c32; border:1px solid #d4e0cc;"></div>
+      <div class="swatch-label">文字色</div>
+    </div>
+  </div>
+</div>
+
+<!-- 四大功能模块 -->
+<div class="section">
+  <div class="section-title">四大功能模块</div>
+  <div class="row">
+    <div class="feature">
+      <div class="feature-icon">👤</div>
+      <div class="feature-name">人物百科</div>
+      <div class="feature-desc">人界篇所有主要人物，修为、门派、经历、关系网，每人一个 Markdown 文件</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🗺️</div>
+      <div class="feature-name">地图与势力</div>
+      <div class="feature-desc">人界各大区域、门派势力分布，可视化地图 + 势力详情页</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📜</div>
+      <div class="feature-name">剧情时间线</div>
+      <div class="feature-desc">韩立从七玄门到飞升灵界的完整剧情脉络，横向时间轴展示</div>
+    </div>
+    <div class="feature" style="border-color:#7a9e72; background:#f0f7ee;">
+      <div class="feature-icon">✨</div>
+      <div class="feature-name">人物匹配测试</div>
+      <div class="feature-desc">修仙世界情景题 → 内部 MBTI 维度计算 → 匹配你是哪位人界人物，结果可分享</div>
+    </div>
+  </div>
+</div>
+
+<!-- 首页布局 -->
+<div class="section">
+  <div class="section-title">首页布局</div>
+  <div style="background:#f8faf6; border-radius:8px; padding:14px; border:1px solid #e0e8db; font-size:12px; color:#5a7a52; line-height:2;">
+    <div>📌 顶部导航栏 — Logo + 四个功能链接</div>
+    <div>🖼️ Hero 区域（左右分栏）</div>
+    <div style="padding-left:20px;">└ 左：网站标题 + 简介 + "探索人界"按钮</div>
+    <div style="padding-left:20px;">└ 右：<strong style="color:#3a5c32;">"你是哪位修仙人物？"</strong> 测试入口（突出显示）</div>
+    <div>📦 下方三栏 — 人物百科 / 地图势力 / 剧情时间线 预览卡片</div>
+    <div>🦶 底部 Footer — 版权 + 免责声明</div>
+  </div>
+</div>
+
+<!-- 技术栈 -->
+<div class="section">
+  <div class="section-title">技术栈</div>
+  <div class="tech-row">
+    <div class="tech">
+      <strong>Next.js 14</strong>
+      <span>React 框架，文件即路由</span>
+    </div>
+    <div class="tech">
+      <strong>TypeScript</strong>
+      <span>类型安全，Java工程师友好</span>
+    </div>
+    <div class="tech">
+      <strong>Tailwind CSS</strong>
+      <span>样式快速开发</span>
+    </div>
+    <div class="tech">
+      <strong>MDX / gray-matter</strong>
+      <span>Markdown 内容解析</span>
+    </div>
+    <div class="tech">
+      <strong>Vercel</strong>
+      <span>一键免费部署</span>
+    </div>
+  </div>
+</div>
+
+<!-- 内容管理 -->
+<div class="section">
+  <div class="section-title">内容管理方式</div>
+  <div style="font-size:12px; color:#5a7a52; line-height:2;">
+    <div>📁 <code style="background:#e8ede4;padding:1px 6px;border-radius:3px;">content/characters/</code> — 每个人物一个 .md 文件</div>
+    <div>📁 <code style="background:#e8ede4;padding:1px 6px;border-radius:3px;">content/locations/</code> — 地点和势力数据</div>
+    <div>📁 <code style="background:#e8ede4;padding:1px 6px;border-radius:3px;">content/timeline/</code> — 剧情事件列表</div>
+    <div>📁 <code style="background:#e8ede4;padding:1px 6px;border-radius:3px;">content/quiz/</code> — 测试题目和人物匹配规则（JSON）</div>
+  </div>
+</div>
+
+</body>
+</html>
