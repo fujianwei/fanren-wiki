@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "lianqi",
+    "name": "炼气期",
+    "description": "修仙之路的起点，灵气初入体内，感受到天地法则的第一缕气息。",
+    "baseLifespan": 100
+  },
+  {
+    "slug": "zhuji",
+    "name": "筑基期",
+    "description": "根基已成，修为渐稳，踏上了真正的修仙之途。",
+    "baseLifespan": 200
+  },
+  {
+    "slug": "jiedan",
+    "name": "结丹期",
+    "description": "金丹凝聚，脱离凡俗，寿元大增，已是一方强者。",
+    "baseLifespan": 400
+  },
+  {
+    "slug": "yuanying",
+    "name": "元婴期",
+    "description": "元婴出窍，神通广大，俯瞰芸芸众生，名动一方。",
+    "baseLifespan": 1000
+  },
+  {
+    "slug": "huashen",
+    "name": "化神期",
+    "description": "神魂化虚，与天地同寿，距离飞升仙界仅一步之遥。",
+    "baseLifespan": 2500
+  }
+]
