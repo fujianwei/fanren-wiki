@@ -1,0 +1,88 @@
+export type RealmSlug = "lianqi" | "zhuji" | "jiedan" | "yuanying" | "huashen";
+export type OutcomeSlug = "caidan" | "feisheng" | "tupo" | "shouhu" | "yinshi" | "doufa" | "zuohua";
+export type MbtiDimension = "EI" | "SN" | "TF" | "JP";
+
+export interface DestinyScores {
+  courage: number;
+  wisdom: number;
+  loyalty: number;
+  ambition: number;
+}
+
+export interface MbtiVotes {
+  E: number; I: number;
+  S: number; N: number;
+  T: number; F: number;
+  J: number; P: number;
+}
+
+export interface ChoiceOption {
+  text: string;
+  scores: Partial<DestinyScores>;
+  mbti?: Partial<Record<MbtiDimension, string>>;
+  branch?: "A" | "B";
+}
+
+export interface SliderQuestion {
+  id: string;
+  type: "slider";
+  text: string;
+  leftLabel: string;
+  rightLabel: string;
+  scoring: {
+    left: { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> };
+    middle: { scores: Partial<DestinyScores> };
+    right: { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> };
+  };
+  timed?: false;
+}
+
+export interface RankingOption {
+  text: string;
+  dimension: keyof DestinyScores | "wisdom_sn";
+  split?: boolean;
+  splitDimensions?: (keyof DestinyScores)[];
+}
+
+export interface RankingQuestion {
+  id: string;
+  type: "ranking";
+  text: string;
+  options: RankingOption[];
+  rankScores: [number, number, number, number];
+  timed?: false;
+}
+
+export interface ChoiceQuestion {
+  id: string;
+  type: "choice" | "image-choice";
+  text: string;
+  options: ChoiceOption[];
+  timed?: number;
+}
+
+export type DestinyQuestion = SliderQuestion | RankingQuestion | ChoiceQuestion;
+
+export interface Realm {
+  slug: RealmSlug;
+  name: string;
+  description: string;
+  baseLifespan: number;
+}
+
+export interface Outcome {
+  slug: OutcomeSlug;
+  name: string;
+  description: string;
+  keywords: string[];
+  personalityNote: string;
+}
+
+export interface DestinyResult {
+  realm: Realm;
+  outcome: Outcome;
+  lifespan: number;
+  scores: DestinyScores;
+  mbtiType: string;
+  resultId: string;
+}
