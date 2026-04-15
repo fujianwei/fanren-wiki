@@ -1,5 +1,9 @@
 export type RealmSlug = "lianqi" | "zhuji" | "jiedan" | "yuanying" | "huashen";
-export type OutcomeSlug = "caidan" | "feisheng" | "tupo" | "shouhu" | "yinshi" | "doufa" | "zuohua";
+export type OutcomeSlug =
+  | "caidan" | "feisheng" | "tupo" | "shouhu" | "yinshi" | "doufa" | "zuohua"
+  | "moxiu" | "bawang" | "xinmo" | "beici" | "shuangxiu" | "zongshi"
+  | "tiandi" | "niepan" | "fanchen" | "xianyou";
+export type PathId = "A1" | "A2" | "B1" | "B2";
 export type MbtiDimension = "EI" | "SN" | "TF" | "JP";
 
 export interface DestinyScores {
@@ -21,6 +25,7 @@ export interface ChoiceOption {
   scores: Partial<DestinyScores>;
   mbti?: Partial<Record<MbtiDimension, string>>;
   branch?: "A" | "B";
+  branch2?: PathId;
 }
 
 export interface SliderQuestion {
