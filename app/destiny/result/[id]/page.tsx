@@ -13,7 +13,11 @@ const outcomes = outcomesData as Outcome[];
 const characters = charactersData as Character[];
 
 const REALM_SLUGS: RealmSlug[] = ["lianqi", "zhuji", "jiedan", "yuanying", "huashen"];
-const OUTCOME_SLUGS: OutcomeSlug[] = ["tupo", "shouhu", "yinshi", "doufa", "zuohua", "caidan"];
+const OUTCOME_SLUGS: OutcomeSlug[] = [
+  "tupo", "shouhu", "yinshi", "doufa", "zuohua", "caidan",
+  "moxiu", "bawang", "xinmo", "beici", "shuangxiu", "zongshi",
+  "tiandi", "niepan", "fanchen", "xianyou",
+];
 
 export function generateStaticParams() {
   const params: { id: string }[] = [
@@ -27,12 +31,18 @@ export function generateStaticParams() {
 
 interface Props {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ mbti?: string; lifespan?: string }>;
+  searchParams: Promise<{ mbti?: string; lifespan?: string; c?: string; w?: string; l?: string; a?: string }>;
 }
 
 export default async function DestinyResultPage({ params, searchParams }: Props) {
   const { id } = await params;
-  const { mbti = "INTJ", lifespan = "0" } = await searchParams;
+  const { mbti = "INTJ", lifespan = "0", c = "50", w = "50", l = "50", a = "50" } = await searchParams;
+  const radarScores = {
+    courage: Math.min(100, Math.max(0, Number(c))),
+    wisdom: Math.min(100, Math.max(0, Number(w))),
+    loyalty: Math.min(100, Math.max(0, Number(l))),
+    ambition: Math.min(100, Math.max(0, Number(a))),
+  };
 
   // 解析 id：最后一段是 outcomeSlug，前面是 realmSlug
   const parts = id.split("-");
@@ -76,10 +86,10 @@ export default async function DestinyResultPage({ params, searchParams }: Props)
         <div className="flex justify-center mb-4">
           <RadarChart
             dimensions={[
-              { label: "勇气", value: 50 },
-              { label: "智慧", value: 50 },
-              { label: "情义", value: 50 },
-              { label: "野心", value: 50 },
+              { label: "勇气", value: radarScores.courage },
+              { label: "智慧", value: radarScores.wisdom },
+              { label: "情义", value: radarScores.loyalty },
+              { label: "野心", value: radarScores.ambition },
             ]}
             size={180}
           />
