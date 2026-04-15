@@ -316,5 +316,103 @@
       { "text": "愤怒，但选择原谅，试图理解他的苦衷", "scores": { "loyalty": 10, "wisdom": 10 } },
       { "text": "冷静分析，把这次背叛变成自己的筹码", "scores": { "ambition": 15, "wisdom": 10 } }
     ]
+  },
+  {
+    "id": "QBX",
+    "type": "image-choice",
+    "text": "游历数年，你偶然站在一处山顶，俯瞰天地。心中忽然生出一个念头——",
+    "options": [
+      { "text": "我想弄清楚，天道究竟是什么", "scores": { "wisdom": 10 }, "mbti": { "SN": "N" }, "branch2": "B1" },
+      { "text": "我想去更远的地方，见更多的人和事", "scores": { "loyalty": 10 }, "mbti": { "EI": "E" }, "branch2": "B2" }
+    ]
+  },
+  {
+    "id": "QBA1",
+    "type": "choice",
+    "text": "你在一处上古遗迹中发现了两件东西：一部残缺的无上功法，和一本记载天道奥义的古籍。你只能带走一件。你选——",
+    "options": [
+      { "text": "无上功法，修为才是根本", "scores": { "ambition": 15, "courage": 10 } },
+      { "text": "天道古籍，悟道才是修仙的意义", "scores": { "wisdom": 20 }, "mbti": { "SN": "N" } },
+      { "text": "两件都研究透，再决定带哪件", "scores": { "wisdom": 15 }, "mbti": { "JP": "J" } }
+    ]
+  },
+  {
+    "id": "QBA2",
+    "type": "slider",
+    "text": "闭关参悟天道时，你感受到了一种极致的孤独。对你而言，这种孤独——",
+    "leftLabel": "是享受，孤独才能真正与天地同频",
+    "rightLabel": "令你不安，你需要有人陪伴",
+    "scoring": {
+      "left":   { "scores": { "wisdom": 15 }, "mbti": { "EI": "I" } },
+      "middle": { "scores": { "wisdom": 7, "loyalty": 5 } },
+      "right":  { "scores": { "loyalty": 15 }, "mbti": { "EI": "E" } }
+    }
+  },
+  {
+    "id": "QBA3",
+    "type": "choice",
+    "text": "你悟出了一门独特的功法，有人愿以重宝换取，也有弟子愿拜你为师传承此道。你——",
+    "options": [
+      { "text": "收下弟子，将此道传承下去", "scores": { "loyalty": 15, "wisdom": 10 } },
+      { "text": "秘而不宣，此道只属于你", "scores": { "ambition": 10, "wisdom": 10 }, "mbti": { "EI": "I" } },
+      { "text": "换取重宝，用资源继续钻研", "scores": { "ambition": 15, "wisdom": 5 } }
+    ]
+  },
+  {
+    "id": "QBA4",
+    "type": "ranking",
+    "text": "在求道的路上，你认为真正的修仙境界是——（按你的理解从高到低排序）",
+    "options": [
+      { "text": "突破天地枷锁，飞升而去", "dimension": "ambition" },
+      { "text": "与天地融为一体，永存于世", "dimension": "wisdom_sn" },
+      { "text": "将道传于后人，薪火相传", "dimension": "loyalty" },
+      { "text": "守护一方净土，无愧于心", "dimension": "courage" }
+    ],
+    "rankScores": [20, 10, 5, 0]
+  },
+  {
+    "id": "QBB1",
+    "type": "image-choice",
+    "text": "游历江湖，你结识了形形色色的人。你最愿意与哪类人为伍——",
+    "options": [
+      { "text": "快意恩仇的江湖侠客", "scores": { "courage": 10, "loyalty": 15 }, "mbti": { "EI": "E" } },
+      { "text": "见多识广的行商旅人", "scores": { "wisdom": 10, "loyalty": 10 }, "mbti": { "SN": "S" } },
+      { "text": "身世成谜的孤独剑客", "scores": { "wisdom": 15 }, "mbti": { "EI": "I" } },
+      { "text": "落魄失意的没落修士", "scores": { "loyalty": 20 }, "mbti": { "TF": "F" } }
+    ]
+  },
+  {
+    "id": "QBB2",
+    "type": "choice",
+    "text": "江湖中你救下了一个被追杀的少年，他说自己身负一个足以改变修仙界格局的秘密。你——",
+    "options": [
+      { "text": "护送他到安全的地方，不过问秘密", "scores": { "loyalty": 20, "wisdom": 5 } },
+      { "text": "答应保护他，但想知道秘密内容", "scores": { "ambition": 10, "wisdom": 10 } },
+      { "text": "将他托付给附近宗门，自己继续上路", "scores": { "wisdom": 10 }, "mbti": { "JP": "J" } },
+      { "text": "暗中调查他的身份再决定", "scores": { "wisdom": 15 }, "mbti": { "TF": "T" } }
+    ]
+  },
+  {
+    "id": "QBB3",
+    "type": "slider",
+    "text": "漂泊江湖多年，你内心深处对归宿的渴望——",
+    "leftLabel": "很强烈，你渴望有个地方可以停下来",
+    "rightLabel": "几乎没有，自由才是你的归宿",
+    "scoring": {
+      "left":   { "scores": { "loyalty": 15 }, "mbti": { "JP": "J" } },
+      "middle": { "scores": { "loyalty": 7, "wisdom": 5 } },
+      "right":  { "scores": { "ambition": 10, "wisdom": 10 }, "mbti": { "JP": "P" } }
+    }
+  },
+  {
+    "id": "QBB4",
+    "type": "choice",
+    "text": "多年江湖漂泊后，你最深的感悟是——",
+    "options": [
+      { "text": "人心险恶，不如独善其身", "scores": { "wisdom": 15, "loyalty": -10 }, "mbti": { "EI": "I" } },
+      { "text": "世间虽苦，但值得留恋", "scores": { "loyalty": 15, "wisdom": 5 } },
+      { "text": "强者为尊，弱肉强食是永恒的法则", "scores": { "courage": 15, "ambition": 10 } },
+      { "text": "随遇而安，活在当下最重要", "scores": { "wisdom": 10 }, "mbti": { "JP": "P" } }
+    ]
   }
 ]
