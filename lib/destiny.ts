@@ -28,8 +28,12 @@ export function calcOutcome(
   const { wisdom, ambition, loyalty, courage } = scores;
   let slug: OutcomeSlug;
 
+  // B2 路径：xianyou 是最高优先级（0.3%，无条件）
+  if (path === "B2" && Math.random() < 0.003) {
+    slug = "xianyou";
+  }
   // 彩蛋先判断（各路径通用）
-  if (wisdom >= 85 && ambition >= 85 && Math.random() < 0.01) {
+  else if (wisdom >= 85 && ambition >= 85 && Math.random() < 0.01) {
     slug = "caidan";
   } else {
     switch (path) {
@@ -65,9 +69,7 @@ export function calcOutcome(
         break;
       }
 
-      case "B2": {
-        const r = Math.random();
-        if (r < 0.003) { slug = "xianyou"; break; }
+      case "B2":
         if (realmSlug === "huashen" && ambition >= 80) slug = "feisheng";
         else if (loyalty >= 70 && wisdom < 35) slug = "beici";
         else if (loyalty >= 70) slug = "shouhu";
@@ -75,7 +77,6 @@ export function calcOutcome(
         else if (ambition >= 80 && wisdom < 40) slug = "tupo";
         else slug = "zuohua";
         break;
-      }
 
       default:
         slug = "zuohua";
