@@ -1,6 +1,6 @@
 import realmsData from "@/content/destiny/realms.json";
 import outcomesData from "@/content/destiny/outcomes.json";
-import type { DestinyScores, MbtiVotes, Realm, Outcome, RealmSlug, OutcomeSlug } from "@/types/destiny";
+import type { DestinyScores, MbtiVotes, Realm, Outcome, RealmSlug, OutcomeSlug, PathId } from "@/types/destiny";
 
 const realms = realmsData as Realm[];
 const outcomes = outcomesData as Outcome[];
@@ -20,24 +20,66 @@ export function calcLifespan(baseLifespan: number, wisdom: number): number {
   return Math.round(baseLifespan * (0.8 + wisdom / 250));
 }
 
-export function calcOutcome(scores: DestinyScores, realmSlug: string): Outcome {
+export function calcOutcome(
+  scores: DestinyScores,
+  realmSlug: string,
+  path: PathId = "A1"
+): Outcome {
   const { wisdom, ambition, loyalty, courage } = scores;
   let slug: OutcomeSlug;
 
+  // 彩蛋先判断（各路径通用）
   if (wisdom >= 85 && ambition >= 85 && Math.random() < 0.01) {
     slug = "caidan";
-  } else if (realmSlug === "huashen" && ambition >= 80) {
-    slug = "feisheng";
-  } else if (ambition >= 80 && wisdom < 40) {
-    slug = "tupo";
-  } else if (loyalty >= 70) {
-    slug = "shouhu";
-  } else if (wisdom >= 60 && ambition < 50) {
-    slug = "yinshi";
-  } else if (courage >= 70 && wisdom < 40) {
-    slug = "doufa";
   } else {
-    slug = "zuohua";
+    switch (path) {
+      case "A1":
+        if (realmSlug === "huashen" && ambition >= 80) slug = "feisheng";
+        else if (courage >= 80 && wisdom < 30 && loyalty < 30) slug = "bawang";
+        else if (courage >= 70 && loyalty < 30) slug = "moxiu";
+        else if (loyalty >= 70) slug = "shouhu";
+        else if (courage >= 70 && wisdom < 40) slug = "doufa";
+        else if (ambition >= 80 && wisdom < 40) slug = "tupo";
+        else slug = "zuohua";
+        break;
+
+      case "A2":
+        if (realmSlug === "huashen" && ambition >= 80) slug = "feisheng";
+        else if (loyalty >= 80 && courage >= 60) slug = "shuangxiu";
+        else if (ambition >= 80 && loyalty < 25) slug = "xinmo";
+        else if (loyalty >= 70 && wisdom < 35) slug = "beici";
+        else if (wisdom >= 70 && ambition < 40 && courage >= 50) slug = "zongshi";
+        else if (ambition >= 80 && wisdom < 40) slug = "tupo";
+        else slug = "zuohua";
+        break;
+
+      case "B1": {
+        const tupoCondition = ambition >= 80 && wisdom < 40;
+        if (realmSlug === "huashen" && ambition >= 80) slug = "feisheng";
+        else if (wisdom >= 85 && loyalty >= 70) slug = "tiandi";
+        else if (tupoCondition && Math.random() < 0.05) slug = "niepan";
+        else if (wisdom >= 70 && ambition < 40 && courage >= 50) slug = "zongshi";
+        else if (wisdom >= 60 && ambition < 50) slug = "yinshi";
+        else if (tupoCondition) slug = "tupo";
+        else slug = "zuohua";
+        break;
+      }
+
+      case "B2": {
+        const r = Math.random();
+        if (r < 0.003) { slug = "xianyou"; break; }
+        if (realmSlug === "huashen" && ambition >= 80) slug = "feisheng";
+        else if (loyalty >= 70 && wisdom < 35) slug = "beici";
+        else if (loyalty >= 70) slug = "shouhu";
+        else if (courage < 30 && ambition < 30) slug = "fanchen";
+        else if (ambition >= 80 && wisdom < 40) slug = "tupo";
+        else slug = "zuohua";
+        break;
+      }
+
+      default:
+        slug = "zuohua";
+    }
   }
 
   return outcomes.find((o) => o.slug === slug)!;

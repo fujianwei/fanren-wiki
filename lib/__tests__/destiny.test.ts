@@ -59,10 +59,10 @@ describe("calcOutcome", () => {
     expect(calcOutcome(scores, "lianqi").slug).toBe("shouhu");
     spy.mockRestore();
   });
-  it("returns yinshi for wisdom>=60 && ambition<50", () => {
+  it("returns yinshi for wisdom>=60 && ambition<50 (B1 path)", () => {
     const spy = jest.spyOn(Math, "random").mockReturnValue(0.5);
     const scores: DestinyScores = { courage: 30, wisdom: 65, loyalty: 30, ambition: 40 };
-    expect(calcOutcome(scores, "lianqi").slug).toBe("yinshi");
+    expect(calcOutcome(scores, "lianqi", "B1").slug).toBe("yinshi");
     spy.mockRestore();
   });
   it("returns doufa for courage>=70 && wisdom<40", () => {
@@ -76,6 +76,70 @@ describe("calcOutcome", () => {
     const scores: DestinyScores = { courage: 30, wisdom: 30, loyalty: 30, ambition: 30 };
     expect(calcOutcome(scores, "lianqi").slug).toBe("zuohua");
     spy.mockRestore();
+  });
+});
+
+describe("calcOutcome with path", () => {
+  beforeEach(() => jest.spyOn(Math, "random").mockReturnValue(0.5));
+  afterEach(() => jest.restoreAllMocks());
+
+  // A1 路径
+  it("A1: returns bawang for courage>=80 wisdom<30 loyalty<30", () => {
+    expect(calcOutcome({ courage: 85, wisdom: 25, loyalty: 20, ambition: 40 }, "lianqi", "A1").slug).toBe("bawang");
+  });
+  it("A1: returns moxiu for courage>=70 loyalty<30 (bawang not met)", () => {
+    expect(calcOutcome({ courage: 72, wisdom: 50, loyalty: 20, ambition: 40 }, "lianqi", "A1").slug).toBe("moxiu");
+  });
+  it("A1: returns shouhu for loyalty>=70", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 50, loyalty: 75, ambition: 30 }, "lianqi", "A1").slug).toBe("shouhu");
+  });
+
+  // A2 路径
+  it("A2: returns shuangxiu for loyalty>=80 courage>=60", () => {
+    expect(calcOutcome({ courage: 65, wisdom: 50, loyalty: 82, ambition: 40 }, "lianqi", "A2").slug).toBe("shuangxiu");
+  });
+  it("A2: returns xinmo for ambition>=80 loyalty<25", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 50, loyalty: 20, ambition: 85 }, "lianqi", "A2").slug).toBe("xinmo");
+  });
+  it("A2: returns beici for loyalty>=70 wisdom<35", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 30, loyalty: 72, ambition: 40 }, "lianqi", "A2").slug).toBe("beici");
+  });
+  it("A2: returns zongshi for wisdom>=70 ambition<40 courage>=50", () => {
+    expect(calcOutcome({ courage: 55, wisdom: 72, loyalty: 40, ambition: 35 }, "lianqi", "A2").slug).toBe("zongshi");
+  });
+
+  // B1 路径
+  it("B1: returns tiandi for wisdom>=85 loyalty>=70", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 88, loyalty: 72, ambition: 40 }, "lianqi", "B1").slug).toBe("tiandi");
+  });
+  it("B1: returns zongshi for wisdom>=70 ambition<40 courage>=50", () => {
+    expect(calcOutcome({ courage: 55, wisdom: 72, loyalty: 40, ambition: 35 }, "lianqi", "B1").slug).toBe("zongshi");
+  });
+  it("B1: returns yinshi for wisdom>=60 ambition<50", () => {
+    expect(calcOutcome({ courage: 30, wisdom: 65, loyalty: 30, ambition: 40 }, "lianqi", "B1").slug).toBe("yinshi");
+  });
+
+  // B2 路径
+  it("B2: returns beici for loyalty>=70 wisdom<35 (before shouhu)", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 30, loyalty: 72, ambition: 40 }, "lianqi", "B2").slug).toBe("beici");
+  });
+  it("B2: returns shouhu for loyalty>=70 wisdom>=35", () => {
+    expect(calcOutcome({ courage: 40, wisdom: 40, loyalty: 72, ambition: 40 }, "lianqi", "B2").slug).toBe("shouhu");
+  });
+  it("B2: returns fanchen for courage<30 ambition<30", () => {
+    expect(calcOutcome({ courage: 25, wisdom: 50, loyalty: 40, ambition: 25 }, "lianqi", "B2").slug).toBe("fanchen");
+  });
+
+  // niepan 彩蛋 (5%)
+  it("B1: returns niepan when random<0.05 and tupo conditions met", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.03);
+    expect(calcOutcome({ courage: 40, wisdom: 30, loyalty: 40, ambition: 85 }, "lianqi", "B1").slug).toBe("niepan");
+  });
+
+  // xianyou 彩蛋 (0.3%)
+  it("B2: returns xianyou when random<0.003", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.001);
+    expect(calcOutcome({ courage: 40, wisdom: 50, loyalty: 40, ambition: 40 }, "lianqi", "B2").slug).toBe("xianyou");
   });
 });
 
