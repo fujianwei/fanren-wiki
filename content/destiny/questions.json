@@ -220,5 +220,101 @@
       { "text": "一张记录了无数秘境位置的地图", "scores": { "ambition": 10, "wisdom": 10 } },
       { "text": "什么都不留，一切随风而去", "scores": { "wisdom": 5 }, "mbti": { "JP": "P" } }
     ]
+  },
+  {
+    "id": "QAX",
+    "type": "choice",
+    "text": "在门派中历练数年，你逐渐找到了自己的位置。师兄弟们都说，你是那种——",
+    "options": [
+      { "text": "冲锋在前的人，战场上才是你的归宿", "scores": { "courage": 10, "ambition": 5 }, "branch2": "A1" },
+      { "text": "深谋远虑的人，棋局之中才见真章", "scores": { "wisdom": 10 }, "mbti": { "JP": "J" }, "branch2": "A2" }
+    ]
+  },
+  {
+    "id": "QAA1",
+    "type": "image-choice",
+    "text": "一场大战在即，你主动请缨担任——",
+    "options": [
+      { "text": "先锋突破，第一个冲入敌阵", "scores": { "courage": 15, "ambition": 5 } },
+      { "text": "断后殿军，保证同伴安全撤退", "scores": { "loyalty": 15, "courage": 5 } },
+      { "text": "奇兵绕后，出其不意断敌退路", "scores": { "wisdom": 10, "courage": 10 } }
+    ]
+  },
+  {
+    "id": "QAA2",
+    "type": "slider",
+    "text": "战场上你的杀戮欲——",
+    "leftLabel": "极强，战斗是你最真实的状态",
+    "rightLabel": "克制，战斗只是手段",
+    "scoring": {
+      "left":   { "scores": { "courage": 15, "loyalty": -15 } },
+      "middle": { "scores": { "courage": 5, "wisdom": 5 } },
+      "right":  { "scores": { "wisdom": 10, "loyalty": 5 } }
+    }
+  },
+  {
+    "id": "QAA3",
+    "type": "choice",
+    "text": "你的至交在战场上被敌方俘虏，敌方开出条件：用你的修为换他自由。你——",
+    "options": [
+      { "text": "答应，修为可以再练，朋友只有一个", "scores": { "loyalty": 25, "ambition": -10 } },
+      { "text": "拒绝，以武力强行救人", "scores": { "courage": 20, "loyalty": 10 } },
+      { "text": "假意答应，暗中布局", "scores": { "wisdom": 15, "courage": 10 } }
+    ]
+  },
+  {
+    "id": "QAA4",
+    "type": "choice",
+    "text": "你在战场上声名大噪，有人私下找你，说可以帮你走上更高的位置，但需要出卖门派的一个秘密。你——",
+    "options": [
+      { "text": "断然拒绝，当场击杀来人", "scores": { "courage": 10, "loyalty": 10 } },
+      { "text": "假装答应，暗中报告掌门", "scores": { "wisdom": 15, "loyalty": 5 } },
+      { "text": "动摇了，最终还是拒绝", "scores": { "wisdom": 5, "ambition": -5 } },
+      { "text": "答应了，野心压过了一切", "scores": { "ambition": 20, "loyalty": -20 } }
+    ]
+  },
+  {
+    "id": "QAB1",
+    "type": "choice",
+    "text": "掌门交给你一个任务：调查门内一名长老是否有异心。你的方式是——",
+    "options": [
+      { "text": "暗中监视，收集证据再说", "scores": { "wisdom": 15 }, "mbti": { "JP": "J" } },
+      { "text": "直接找他摊牌，看他反应", "scores": { "courage": 10, "wisdom": 5 }, "mbti": { "EI": "E" } },
+      { "text": "广布消息，让他自乱阵脚", "scores": { "ambition": 10, "wisdom": 10 } }
+    ]
+  },
+  {
+    "id": "QAB2",
+    "type": "slider",
+    "text": "你对门派内部的权力争斗，内心的态度是——",
+    "leftLabel": "乐在其中，这正是磨砺自己的舞台",
+    "rightLabel": "厌倦，只想专心修炼",
+    "scoring": {
+      "left":   { "scores": { "ambition": 15, "wisdom": 5 } },
+      "middle": { "scores": { "wisdom": 10 } },
+      "right":  { "scores": { "wisdom": 10, "ambition": -5 }, "mbti": { "EI": "I" } }
+    }
+  },
+  {
+    "id": "QAB3",
+    "type": "ranking",
+    "text": "在门派中立足，你最看重的是——（从高到低排序）",
+    "options": [
+      { "text": "掌门的信任", "dimension": "wisdom" },
+      { "text": "同门的情义", "dimension": "loyalty" },
+      { "text": "自身的实力", "dimension": "courage" },
+      { "text": "手中的秘密", "dimension": "ambition" }
+    ],
+    "rankScores": [20, 10, 5, 0]
+  },
+  {
+    "id": "QAB4",
+    "type": "choice",
+    "text": "你最信任的师兄，在你最脆弱的时候背叛了你，将你的弱点告知了敌人。你——",
+    "options": [
+      { "text": "心如死灰，从此不再信任任何人", "scores": { "wisdom": 15, "loyalty": -20 }, "mbti": { "TF": "T" } },
+      { "text": "愤怒，但选择原谅，试图理解他的苦衷", "scores": { "loyalty": 10, "wisdom": 10 } },
+      { "text": "冷静分析，把这次背叛变成自己的筹码", "scores": { "ambition": 15, "wisdom": 10 } }
+    ]
   }
 ]
