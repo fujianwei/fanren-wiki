@@ -15,6 +15,7 @@ import type {
   DestinyScores,
   MbtiVotes,
   MbtiDimension,
+  PathId,
 } from "@/types/destiny";
 
 const allQuestions = questionsData as DestinyQuestion[];
@@ -22,13 +23,21 @@ const allQuestions = questionsData as DestinyQuestion[];
 const INIT_SCORES: DestinyScores = { courage: 0, wisdom: 0, loyalty: 0, ambition: 0 };
 const INIT_VOTES: MbtiVotes = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 
-function buildSequence(branch: "A" | "B"): string[] {
+function buildSequence(branch: "A" | "B", path: PathId | null): string[] {
   const trunk = ["Q1", "Q2", "Q3", "Q4", "Q5"];
-  const branchA = ["QA1", "QA2", "QA3", "QA4", "QA5", "QA6"];
-  const branchB = ["QB1", "QB2", "QB3", "QB4", "QB5", "QB6"];
   const finale = ["QF1", "QF2", "QF3"];
-  const mid = branch === "A" ? branchA : branchB;
-  return [...trunk, ...mid, ...finale];
+
+  if (branch === "A") {
+    const shared = ["QA1", "QA2", "QA3", "QAX"];
+    if (path === "A1") return [...trunk, ...shared, "QAA1", "QAA2", "QAA3", "QAA4", ...finale];
+    if (path === "A2") return [...trunk, ...shared, "QAB1", "QAB2", "QAB3", "QAB4", ...finale];
+    return [...trunk, ...shared, ...finale];
+  } else {
+    const shared = ["QB1", "QB2", "QB3", "QBX"];
+    if (path === "B1") return [...trunk, ...shared, "QBA1", "QBA2", "QBA3", "QBA4", ...finale];
+    if (path === "B2") return [...trunk, ...shared, "QBB1", "QBB2", "QBB3", "QBB4", ...finale];
+    return [...trunk, ...shared, ...finale];
+  }
 }
 
 function applyMbtiVote(
@@ -46,6 +55,7 @@ function applyMbtiVote(
 export default function DestinyQuiz() {
   const router = useRouter();
   const [branch, setBranch] = useState<"A" | "B" | null>(null);
+  const [path, setPath] = useState<PathId | null>(null);
   const [sequence, setSequence] = useState<string[]>(["Q1", "Q2", "Q3", "Q4", "Q5"]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [scores, setScores] = useState<DestinyScores>(INIT_SCORES);
@@ -57,7 +67,6 @@ export default function DestinyQuiz() {
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [timerFired, setTimerFired] = useState(false);
 
-  // Refs to avoid stale closure in the timerFired useEffect
   const scoresRef = useRef(scores);
   const votesRef = useRef(votes);
   useEffect(() => { scoresRef.current = scores; }, [scores]);
@@ -65,9 +74,8 @@ export default function DestinyQuiz() {
 
   const currentId = sequence[currentIdx];
   const question = allQuestions.find((q) => q.id === currentId);
-  const total = branch ? buildSequence(branch).length : 14;
+  const total = branch && path ? buildSequence(branch, path).length : 16;
 
-  // 初始化当前题的临时状态
   useEffect(() => {
     setSliderValue(50);
     setSelectedChoice(null);
@@ -78,28 +86,19 @@ export default function DestinyQuiz() {
     }
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 限时题倒计时
   useEffect(() => {
     const q = question as ChoiceQuestion | undefined;
-    if (!q || !q.timed) {
-      setTimeLeft(null);
-      return;
-    }
+    if (!q || !q.timed) { setTimeLeft(null); return; }
     setTimeLeft(q.timed);
     const interval = setInterval(() => {
       setTimeLeft((t) => {
-        if (t === null || t <= 1) {
-          clearInterval(interval);
-          setTimerFired(true);
-          return null;
-        }
+        if (t === null || t <= 1) { clearInterval(interval); setTimerFired(true); return null; }
         return t - 1;
       });
     }, 1000);
     return () => clearInterval(interval);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 超时自动随机选择
   useEffect(() => {
     if (!timerFired) return;
     const q = question as ChoiceQuestion | undefined;
@@ -108,13 +107,14 @@ export default function DestinyQuiz() {
     handleChoiceConfirm(randomOpt, scoresRef.current, votesRef.current);
   }, [timerFired]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function finish(finalScores: DestinyScores, finalVotes: MbtiVotes) {
+  function finish(finalScores: DestinyScores, finalVotes: MbtiVotes, finalPath: PathId) {
     const realm = calcRealm(finalScores);
     const lifespan = calcLifespan(realm.baseLifespan, finalScores.wisdom);
-    const outcome = calcOutcome(finalScores, realm.slug);
+    const outcome = calcOutcome(finalScores, realm.slug, finalPath);
     const mbtiType = calcMbti(finalVotes);
     const id = `${realm.slug}-${outcome.slug}`;
-    router.push(`/destiny/result/${id}?mbti=${mbtiType}&lifespan=${lifespan}`);
+    const { courage, wisdom, loyalty, ambition } = finalScores;
+    router.push(`/destiny/result/${id}?mbti=${mbtiType}&lifespan=${lifespan}&c=${courage}&w=${wisdom}&l=${loyalty}&a=${ambition}`);
   }
 
   function handleChoiceConfirm(
@@ -130,13 +130,29 @@ export default function DestinyQuiz() {
     setScores(newScores);
     setVotes(newVotes);
 
+    // 一级分支（Q5）
     if (option.branch) {
       const newBranch = option.branch;
       setBranch(newBranch);
-      const newSeq = buildSequence(newBranch);
-      setSequence(newSeq);
+      const tempSeq = buildSequence(newBranch, null);
+      setSequence(tempSeq);
       setTimeout(() => {
-        setCurrentIdx(newSeq.indexOf(newBranch === "A" ? "QA1" : "QB1"));
+        setCurrentIdx(tempSeq.indexOf(newBranch === "A" ? "QA1" : "QB1"));
+        setSelectedChoice(null);
+      }, 400);
+      return;
+    }
+
+    // 二级分支（QAX / QBX）
+    if (option.branch2) {
+      const newPath = option.branch2;
+      setPath(newPath);
+      const parentBranch = newPath.startsWith("A") ? "A" : "B" as "A" | "B";
+      const newSeq = buildSequence(parentBranch, newPath);
+      setSequence(newSeq);
+      const firstId = newPath === "A1" ? "QAA1" : newPath === "A2" ? "QAB1" : newPath === "B1" ? "QBA1" : "QBB1";
+      setTimeout(() => {
+        setCurrentIdx(newSeq.indexOf(firstId));
         setSelectedChoice(null);
       }, 400);
       return;
@@ -145,7 +161,7 @@ export default function DestinyQuiz() {
     setTimeout(() => {
       const nextIdx = currentIdx + 1;
       if (nextIdx >= sequence.length) {
-        finish(newScores, newVotes);
+        finish(newScores, newVotes, path ?? "A1");
       } else {
         setCurrentIdx(nextIdx);
         setSelectedChoice(null);
@@ -163,7 +179,7 @@ export default function DestinyQuiz() {
     setVotes(newVotes);
     const nextIdx = currentIdx + 1;
     if (nextIdx >= sequence.length) {
-      finish(newScores, newVotes);
+      finish(newScores, newVotes, path ?? "A1");
     } else {
       setCurrentIdx(nextIdx);
     }
@@ -198,7 +214,7 @@ export default function DestinyQuiz() {
     setVotes(newVotes);
     const nextIdx = currentIdx + 1;
     if (nextIdx >= sequence.length) {
-      finish(newScores, newVotes);
+      finish(newScores, newVotes, path ?? "A1");
     } else {
       setCurrentIdx(nextIdx);
     }
