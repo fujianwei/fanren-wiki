@@ -44,11 +44,11 @@ export function calcOutcome(scores: DestinyScores, realmSlug: string): Outcome {
 }
 
 export function calcMbti(votes: MbtiVotes): string {
-  // ties default to I, N, T, J
+  // ties default to I, N, F, P
   const ei = votes.E > votes.I ? "E" : "I";
   const sn = votes.S > votes.N ? "S" : "N";
-  const tf = votes.F > votes.T ? "F" : "T";
-  const jp = votes.P > votes.J ? "P" : "J";
+  const tf = votes.T > votes.F ? "T" : "F";
+  const jp = votes.J > votes.P ? "J" : "P";
   return `${ei}${sn}${tf}${jp}`;
 }
 

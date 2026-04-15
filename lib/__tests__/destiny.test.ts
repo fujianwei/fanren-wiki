@@ -80,9 +80,9 @@ describe("calcOutcome", () => {
 });
 
 describe("calcMbti", () => {
-  it("returns INTJ for default tie-breaking (all zeros)", () => {
+  it("returns INFP for default tie-breaking (all zeros)", () => {
     const votes: MbtiVotes = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    expect(calcMbti(votes)).toBe("INTJ");
+    expect(calcMbti(votes)).toBe("INFP");
   });
   it("returns ENFP when E/N/F/P each have more votes", () => {
     const votes: MbtiVotes = { E: 3, I: 1, S: 1, N: 3, T: 1, F: 3, J: 1, P: 3 };
