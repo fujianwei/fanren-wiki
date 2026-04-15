@@ -78,8 +78,10 @@ export function calcOutcome(
         else slug = "zuohua";
         break;
 
-      default:
+      default: {
         slug = "zuohua";
+        break;
+      }
     }
   }
 
