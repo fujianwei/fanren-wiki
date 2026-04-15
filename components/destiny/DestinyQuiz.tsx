@@ -114,7 +114,7 @@ export default function DestinyQuiz() {
     const outcome = calcOutcome(finalScores, realm.slug);
     const mbtiType = calcMbti(finalVotes);
     const id = `${realm.slug}-${outcome.slug}`;
-    router.push(`/destiny/result/${id}?mbti=${mbtiType.toLowerCase()}&lifespan=${lifespan}`);
+    router.push(`/destiny/result/${id}?mbti=${mbtiType}&lifespan=${lifespan}`);
   }
 
   function handleChoiceConfirm(
@@ -136,7 +136,7 @@ export default function DestinyQuiz() {
       const newSeq = buildSequence(newBranch);
       setSequence(newSeq);
       setTimeout(() => {
-        setCurrentIdx(5);
+        setCurrentIdx(newSeq.indexOf(newBranch === "A" ? "QA1" : "QB1"));
         setSelectedChoice(null);
       }, 400);
       return;
@@ -182,7 +182,7 @@ export default function DestinyQuiz() {
       if (pts === 0) return;
 
       if (opt.split && opt.splitDimensions) {
-        const half = Math.floor(pts / 2);
+        const half = Math.round(pts / 2);
         for (const dim of opt.splitDimensions) {
           newScores = applyScores(newScores, { [dim]: half });
         }
