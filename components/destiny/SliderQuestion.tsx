@@ -4,13 +4,12 @@ interface Props {
   text: string;
   leftLabel: string;
   rightLabel: string;
-  value: number; // 0-100
+  value: number;
   onChange: (value: number) => void;
   onConfirm: () => void;
   disabled?: boolean;
 }
 
-/** 将 0-100 映射到三段：left(0-33) / middle(34-66) / right(67-100) */
 export function sliderSegment(value: number): "left" | "middle" | "right" {
   if (value <= 33) return "left";
   if (value <= 66) return "middle";
@@ -19,11 +18,14 @@ export function sliderSegment(value: number): "left" | "middle" | "right" {
 
 export default function SliderQuestion({ text, leftLabel, rightLabel, value, onChange, onConfirm, disabled }: Props) {
   return (
-    <div className="bg-white rounded-2xl border border-bamboo-200 p-8 shadow-sm">
-      <p className="text-bamboo-400 text-xs tracking-widest mb-4">程度选择</p>
-      <h2 className="text-bamboo-700 font-serif text-lg leading-relaxed mb-8">{text}</h2>
+    <div
+      className="rounded-2xl p-8 relative overflow-hidden card-glow"
+      style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
+    >
+      <p className="text-xs tracking-widest mb-4" style={{ color: "#6a8878" }}>程度选择</p>
+      <h2 className="font-serif text-lg leading-relaxed mb-8" style={{ color: "#e8f0ec" }}>{text}</h2>
 
-      <div className="flex justify-between text-bamboo-500 text-sm mb-3">
+      <div className="flex justify-between text-sm mb-4" style={{ color: "#6a8878" }}>
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
@@ -35,14 +37,15 @@ export default function SliderQuestion({ text, leftLabel, rightLabel, value, onC
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-bamboo-400 cursor-pointer disabled:opacity-50"
+        className="jade-slider"
       />
 
-      <div className="mt-6 text-center">
+      <div className="mt-8 text-center">
         <button
           disabled={disabled}
           onClick={onConfirm}
-          className="bg-bamboo-400 text-white px-8 py-2.5 rounded-full text-sm hover:bg-bamboo-500 transition-colors disabled:opacity-50"
+          className="btn-primary"
+          style={{ opacity: disabled ? 0.5 : 1 }}
         >
           确认
         </button>

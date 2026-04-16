@@ -18,15 +18,12 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface RankOption {
-  id: string;
-  text: string;
-}
+interface RankOption { id: string; text: string; }
 
 interface Props {
   text: string;
   options: RankOption[];
-  order: string[]; // option ids in current order
+  order: string[];
   onOrderChange: (newOrder: string[]) => void;
   onConfirm: () => void;
   disabled?: boolean;
@@ -39,16 +36,31 @@ function SortableItem({ id, text, rank }: { id: string; text: string; rank: numb
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={{
+        ...style,
+        border: isDragging ? "1px solid #4ade9a" : "1px solid #1a2820",
+        backgroundColor: isDragging ? "rgba(74,222,154,0.08)" : "#111a16",
+        boxShadow: isDragging ? "0 0 16px rgba(74,222,154,0.25)" : "none",
+        opacity: isDragging ? 0.8 : 1,
+        borderRadius: "12px",
+        padding: "16px",
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        cursor: "grab",
+        userSelect: "none",
+        transition: "border-color 0.2s, box-shadow 0.2s",
+      }}
       {...attributes}
       {...listeners}
-      className={`flex items-center gap-3 p-4 rounded-xl border-2 bg-bamboo-50 cursor-grab select-none transition-colors
-        ${isDragging ? "opacity-50 border-bamboo-400 shadow-lg" : "border-bamboo-200 hover:border-bamboo-300"}`}
     >
-      <span className="w-6 h-6 rounded-full bg-bamboo-400 text-white text-xs flex items-center justify-center font-bold shrink-0">
+      <span
+        className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+        style={{ backgroundColor: "#4ade9a", color: "#0a0e0d" }}
+      >
         {rank}
       </span>
-      <span className="text-bamboo-700 text-sm">{text}</span>
+      <span className="text-sm" style={{ color: "#b8ccc2" }}>{text}</span>
     </div>
   );
 }
@@ -69,9 +81,12 @@ export default function RankingQuestion({ text, options, order, onOrderChange, o
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-bamboo-200 p-8 shadow-sm">
-      <p className="text-bamboo-400 text-xs tracking-widest mb-4">拖拽排序</p>
-      <h2 className="text-bamboo-700 font-serif text-lg leading-relaxed mb-6">{text}</h2>
+    <div
+      className="rounded-2xl p-8 relative overflow-hidden card-glow"
+      style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
+    >
+      <p className="text-xs tracking-widest mb-4" style={{ color: "#6a8878" }}>拖拽排序</p>
+      <h2 className="font-serif text-lg leading-relaxed mb-6" style={{ color: "#e8f0ec" }}>{text}</h2>
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={order} strategy={verticalListSortingStrategy}>
@@ -88,7 +103,8 @@ export default function RankingQuestion({ text, options, order, onOrderChange, o
         <button
           disabled={disabled}
           onClick={onConfirm}
-          className="bg-bamboo-400 text-white px-8 py-2.5 rounded-full text-sm hover:bg-bamboo-500 transition-colors disabled:opacity-50"
+          className="btn-primary"
+          style={{ opacity: disabled ? 0.5 : 1 }}
         >
           确认排序
         </button>
