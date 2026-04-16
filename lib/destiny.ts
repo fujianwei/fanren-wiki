@@ -1,6 +1,6 @@
 import realmsData from "@/content/destiny/realms.json";
 import outcomesData from "@/content/destiny/outcomes.json";
-import type { DestinyScores, MbtiVotes, Realm, Outcome, RealmSlug, OutcomeSlug, PathId } from "@/types/destiny";
+import type { DestinyScores, MbtiVotes, Realm, Outcome, RealmSlug, OutcomeSlug, PathId, DynamicQuestion, ResolvedQuestionVersion } from "@/types/destiny";
 
 const realms = realmsData as Realm[];
 const outcomes = outcomesData as Outcome[];
@@ -106,4 +106,28 @@ export function applyScores(
     result[key] = Math.max(0, Math.min(100, result[key] + (delta[key] ?? 0)));
   }
   return result;
+}
+
+export function resolveQuestion(
+  question: DynamicQuestion,
+  prevAnswer: string | null,
+  scores: DestinyScores
+): ResolvedQuestionVersion {
+  let matched: (typeof question.versions)[number] | undefined;
+
+  for (const version of question.versions) {
+    const cond = version.condition;
+    if (cond.type === "prevAnswer" && prevAnswer === cond.value) {
+      matched = version; break;
+    }
+    if (cond.type === "score") {
+      const val = scores[cond.dimension];
+      if ("gte" in cond && val >= cond.gte) { matched = version; break; }
+      if ("lt" in cond && val < cond.lt) { matched = version; break; }
+    }
+    if (cond.type === "default") { matched = version; break; }
+  }
+
+  const v = matched ?? question.versions[question.versions.length - 1];
+  return { ...v, id: question.id, type: question.type, timed: question.timed } as ResolvedQuestionVersion;
 }

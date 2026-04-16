@@ -153,3 +153,69 @@ describe("calcMbti", () => {
     expect(calcMbti(votes)).toBe("ENFP");
   });
 });
+
+describe("resolveQuestion", () => {
+  const { resolveQuestion } = require("../destiny");
+
+  const baseScores = { courage: 0, wisdom: 0, loyalty: 0, ambition: 0 };
+
+  const q = {
+    id: "TEST",
+    type: "choice",
+    versions: [
+      {
+        condition: { type: "prevAnswer", value: "选A" },
+        text: "prevAnswer版本",
+        options: [{ text: "opt1", scores: { courage: 10 } }],
+      },
+      {
+        condition: { type: "score", dimension: "courage", gte: 50 },
+        text: "高勇气版本",
+        options: [{ text: "opt2", scores: { wisdom: 10 } }],
+      },
+      {
+        condition: { type: "default" },
+        text: "默认版本",
+        options: [{ text: "opt3", scores: {} }],
+      },
+    ],
+  };
+
+  it("returns prevAnswer version when prevAnswer matches", () => {
+    expect(resolveQuestion(q, "选A", baseScores).text).toBe("prevAnswer版本");
+  });
+
+  it("returns score version when score condition met and no prevAnswer match", () => {
+    expect(resolveQuestion(q, "选B", { ...baseScores, courage: 60 }).text).toBe("高勇气版本");
+  });
+
+  it("returns default version when no condition matches", () => {
+    expect(resolveQuestion(q, "选B", baseScores).text).toBe("默认版本");
+  });
+
+  it("returns default version when prevAnswer is null", () => {
+    expect(resolveQuestion(q, null, baseScores).text).toBe("默认版本");
+  });
+
+  it("prevAnswer takes priority over score condition", () => {
+    expect(resolveQuestion(q, "选A", { ...baseScores, courage: 60 }).text).toBe("prevAnswer版本");
+  });
+
+  it("supports lt score condition", () => {
+    const qLt = {
+      id: "TEST2", type: "slider",
+      versions: [
+        { condition: { type: "score", dimension: "wisdom", lt: 30 }, text: "低智慧版本", leftLabel: "l", rightLabel: "r", scoring: { left: { scores: {} }, middle: { scores: {} }, right: { scores: {} } } },
+        { condition: { type: "default" }, text: "默认版本", leftLabel: "l", rightLabel: "r", scoring: { left: { scores: {} }, middle: { scores: {} }, right: { scores: {} } } },
+      ],
+    };
+    expect(resolveQuestion(qLt, null, { ...baseScores, wisdom: 20 }).text).toBe("低智慧版本");
+    expect(resolveQuestion(qLt, null, { ...baseScores, wisdom: 40 }).text).toBe("默认版本");
+  });
+
+  it("merges id and type into resolved version", () => {
+    const resolved = resolveQuestion(q, null, baseScores);
+    expect(resolved.id).toBe("TEST");
+    expect(resolved.type).toBe("choice");
+  });
+});
