@@ -13,7 +13,8 @@
             "text": "云雾缭绕的深山洞府",
             "scores": {
               "courage": 5,
-              "ambition": 10
+              "ambition": 10,
+              "perseverance": 8
             }
           },
           {
@@ -38,7 +39,8 @@
             "text": "险峻壮阔的悬崖峰顶",
             "scores": {
               "courage": 15,
-              "ambition": 5
+              "ambition": 5,
+              "perseverance": 10
             }
           }
         ]
@@ -66,7 +68,8 @@
           {
             "text": "炼丹制药，以术辅道",
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 8
             },
             "mbti": {
               "SN": "N"
@@ -86,7 +89,8 @@
             "text": "孤剑独行，追求极致",
             "scores": {
               "courage": 10,
-              "ambition": 15
+              "ambition": 15,
+              "perseverance": 10
             }
           }
         ]
@@ -131,7 +135,8 @@
             "text": "剑道修行，追求极致",
             "scores": {
               "courage": 10,
-              "ambition": 15
+              "ambition": 15,
+              "perseverance": 10
             }
           }
         ]
@@ -153,7 +158,8 @@
           {
             "text": "辅助炼丹，精研药理",
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 8
             },
             "mbti": {
               "SN": "N"
@@ -172,7 +178,8 @@
             "text": "剑道修行，以心御剑",
             "scores": {
               "wisdom": 10,
-              "courage": 5
+              "courage": 5,
+              "perseverance": 10
             }
           }
         ]
@@ -193,7 +200,8 @@
           {
             "text": "辅助炼丹，精研药理",
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 8
             },
             "mbti": {
               "SN": "N"
@@ -213,7 +221,8 @@
             "text": "剑道修行，追求极致",
             "scores": {
               "courage": 10,
-              "ambition": 15
+              "ambition": 15,
+              "perseverance": 10
             }
           }
         ]
@@ -508,7 +517,8 @@
             "text": "继续冲，把敌方先锋打退！",
             "scores": {
               "courage": 25,
-              "loyalty": 10
+              "loyalty": 10,
+              "perseverance": 8
             }
           },
           {
@@ -532,7 +542,8 @@
             "text": "冲上前线，用自己吸引火力",
             "scores": {
               "courage": 15,
-              "loyalty": 20
+              "loyalty": 20,
+              "perseverance": 8
             }
           },
           {
@@ -554,7 +565,8 @@
             "text": "冲上前线，保护师门",
             "scores": {
               "courage": 20,
-              "loyalty": 15
+              "loyalty": 15,
+              "perseverance": 8
             }
           },
           {
@@ -1195,7 +1207,8 @@
           {
             "text": "立刻答应，这是千载难逢的机遇",
             "scores": {
-              "ambition": 25
+              "ambition": 25,
+              "perseverance": 15
             },
             "mbti": {
               "JP": "P"
@@ -1204,7 +1217,8 @@
           {
             "text": "答应，但暗中保留了一条后路",
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -1233,7 +1247,8 @@
           {
             "text": "答应，风险值得冒",
             "scores": {
-              "ambition": 15
+              "ambition": 15,
+              "perseverance": 15
             },
             "mbti": {
               "JP": "P"
@@ -1242,7 +1257,8 @@
           {
             "text": "答应，但留了后手",
             "scores": {
-              "wisdom": 25
+              "wisdom": 25,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -1269,7 +1285,8 @@
           {
             "text": "毫不犹豫答应，这是千载难逢的机遇",
             "scores": {
-              "ambition": 20
+              "ambition": 20,
+              "perseverance": 15
             },
             "mbti": {
               "JP": "P"
@@ -1278,7 +1295,8 @@
           {
             "text": "仔细权衡后答应，但留了一手后路",
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -1470,13 +1488,15 @@
       "middle": {
         "scores": {
           "wisdom": 5,
-          "ambition": 5
+          "ambition": 5,
+          "perseverance": 5
         }
       },
       "right": {
         "scores": {
           "ambition": 15,
-          "courage": 10
+          "courage": 10,
+          "perseverance": 15
         }
       }
     }
@@ -1489,7 +1509,8 @@
       {
         "text": "一部你穷尽一生领悟的功法残卷",
         "scores": {
-          "wisdom": 15
+          "wisdom": 15,
+          "perseverance": 12
         },
         "mbti": {
           "SN": "N"
@@ -1508,7 +1529,8 @@
         "text": "一张记录了无数秘境位置的地图",
         "scores": {
           "ambition": 10,
-          "wisdom": 10
+          "wisdom": 10,
+          "perseverance": 8
         }
       },
       {
@@ -1759,7 +1781,8 @@
             "text": "拒绝，以武力强行救人",
             "scores": {
               "courage": 20,
-              "loyalty": 10
+              "loyalty": 10,
+              "perseverance": 10
             }
           },
           {
@@ -1790,7 +1813,8 @@
             "text": "拒绝，以武力救人",
             "scores": {
               "courage": 20,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 10
             }
           },
           {
@@ -1819,7 +1843,8 @@
             "text": "拒绝，以武力强行救人",
             "scores": {
               "courage": 20,
-              "loyalty": 10
+              "loyalty": 10,
+              "perseverance": 10
             }
           },
           {
@@ -1849,7 +1874,8 @@
             "text": "断然拒绝，当场击杀来人",
             "scores": {
               "courage": 10,
-              "loyalty": 10
+              "loyalty": 10,
+              "perseverance": 12
             }
           },
           {
@@ -1863,7 +1889,8 @@
             "text": "真的动摇了，但最终拒绝",
             "scores": {
               "wisdom": 5,
-              "ambition": -5
+              "ambition": -5,
+              "perseverance": 8
             }
           },
           {
@@ -1887,7 +1914,8 @@
             "text": "断然拒绝，当场击杀来人",
             "scores": {
               "courage": 10,
-              "loyalty": 15
+              "loyalty": 15,
+              "perseverance": 12
             }
           },
           {
@@ -1901,7 +1929,8 @@
             "text": "动摇了，最终还是拒绝",
             "scores": {
               "wisdom": 5,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 8
             }
           },
           {
@@ -1923,7 +1952,8 @@
             "text": "断然拒绝，当场击杀来人",
             "scores": {
               "courage": 10,
-              "loyalty": 10
+              "loyalty": 10,
+              "perseverance": 12
             }
           },
           {
@@ -1937,7 +1967,8 @@
             "text": "动摇了，最终还是拒绝",
             "scores": {
               "wisdom": 5,
-              "ambition": -5
+              "ambition": -5,
+              "perseverance": 8
             }
           },
           {
@@ -2431,7 +2462,8 @@
           {
             "text": "取古籍，功法终究是外物",
             "scores": {
-              "wisdom": 25
+              "wisdom": 25,
+              "perseverance": 12
             },
             "mbti": {
               "SN": "N"
@@ -2447,7 +2479,8 @@
           {
             "text": "两件都研究透再决定",
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -2473,7 +2506,8 @@
           {
             "text": "取古籍，悟道才是正途",
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 12
             },
             "mbti": {
               "SN": "N"
@@ -2483,7 +2517,8 @@
             "text": "两件都研究透再决定",
             "scores": {
               "wisdom": 15,
-              "ambition": 5
+              "ambition": 5,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -2507,7 +2542,8 @@
           {
             "text": "天道古籍，悟道才是修仙的意义",
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 12
             },
             "mbti": {
               "SN": "N"
@@ -2516,7 +2552,8 @@
           {
             "text": "两件都研究透，再决定带哪件",
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 8
             },
             "mbti": {
               "JP": "J"
@@ -2541,7 +2578,8 @@
         "scoring": {
           "left": {
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 15
             },
             "mbti": {
               "EI": "I"
@@ -2550,7 +2588,8 @@
           "middle": {
             "scores": {
               "wisdom": 8,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 5
             }
           },
           "right": {
@@ -2574,7 +2613,8 @@
         "scoring": {
           "left": {
             "scores": {
-              "wisdom": 20
+              "wisdom": 20,
+              "perseverance": 15
             },
             "mbti": {
               "EI": "I"
@@ -2583,7 +2623,8 @@
           "middle": {
             "scores": {
               "wisdom": 8,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 5
             }
           },
           "right": {
@@ -2608,7 +2649,8 @@
         "scoring": {
           "left": {
             "scores": {
-              "wisdom": 18
+              "wisdom": 18,
+              "perseverance": 15
             },
             "mbti": {
               "EI": "I"
@@ -2617,7 +2659,8 @@
           "middle": {
             "scores": {
               "wisdom": 8,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 5
             }
           },
           "right": {
@@ -2640,7 +2683,8 @@
         "scoring": {
           "left": {
             "scores": {
-              "wisdom": 15
+              "wisdom": 15,
+              "perseverance": 15
             },
             "mbti": {
               "EI": "I"
@@ -2649,7 +2693,8 @@
           "middle": {
             "scores": {
               "wisdom": 7,
-              "loyalty": 5
+              "loyalty": 5,
+              "perseverance": 5
             }
           },
           "right": {
