@@ -2,46 +2,138 @@
   {
     "id": "Q1",
     "type": "image-choice",
-    "text": "你是一名普通农家子弟，某日偶遇一位云游道人，他说你与修仙有缘，愿带你入门。你看了看四周的景色，心中最向往的是哪里？",
-    "options": [
-      { "text": "云雾缭绕的深山洞府", "scores": { "courage": 5, "ambition": 10 } },
-      { "text": "热闹繁华的修仙坊市", "scores": { "courage": 10 }, "mbti": { "EI": "E" } },
-      { "text": "宁静清幽的竹林小筑", "scores": { "wisdom": 10 }, "mbti": { "EI": "I" } },
-      { "text": "险峻壮阔的悬崖峰顶", "scores": { "courage": 15, "ambition": 5 } }
+    "versions": [
+      {
+        "condition": { "type": "default" },
+        "text": "你是一名普通农家子弟，某日偶遇一位云游道人，他说你与修仙有缘，愿带你入门。你看了看四周的景色，心中最向往的是哪里？",
+        "options": [
+          { "text": "云雾缭绕的深山洞府", "scores": { "courage": 5, "ambition": 10 } },
+          { "text": "热闹繁华的修仙坊市", "scores": { "courage": 10 }, "mbti": { "EI": "E" } },
+          { "text": "宁静清幽的竹林小筑", "scores": { "wisdom": 10 }, "mbti": { "EI": "I" } },
+          { "text": "险峻壮阔的悬崖峰顶", "scores": { "courage": 15, "ambition": 5 } }
+        ]
+      }
     ]
   },
   {
     "id": "Q2",
     "type": "choice",
-    "text": "入门之后，师父让你选择主修方向：",
-    "options": [
-      { "text": "攻伐之道，以力破万法", "scores": { "courage": 15, "ambition": 10 } },
-      { "text": "辅助炼丹，精研药理", "scores": { "wisdom": 15 }, "mbti": { "SN": "N" } },
-      { "text": "阵法机关，以智御敌", "scores": { "wisdom": 10, "courage": 5 }, "mbti": { "SN": "N" } },
-      { "text": "剑道修行，追求极致", "scores": { "courage": 10, "ambition": 15 } }
+    "versions": [
+      {
+        "condition": { "type": "prevAnswer", "value": "云雾缭绕的深山洞府" },
+        "text": "道人将你带入深山，问你想走哪条路：",
+        "options": [
+          { "text": "以力破万法，攻伐为尊", "scores": { "courage": 15, "ambition": 10 } },
+          { "text": "炼丹制药，以术辅道", "scores": { "wisdom": 15 }, "mbti": { "SN": "N" } },
+          { "text": "布阵设机，以智御敌", "scores": { "wisdom": 10, "courage": 5 }, "mbti": { "SN": "N" } },
+          { "text": "孤剑独行，追求极致", "scores": { "courage": 10, "ambition": 15 } }
+        ]
+      },
+      {
+        "condition": { "type": "prevAnswer", "value": "热闹繁华的修仙坊市" },
+        "text": "在坊市见识了各路修士的风采，你决定主修：",
+        "options": [
+          { "text": "战斗之道，在厮杀中磨砺", "scores": { "courage": 15, "ambition": 10 }, "mbti": { "EI": "E" } },
+          { "text": "炼器制符，在交易中获利", "scores": { "wisdom": 10, "ambition": 10 }, "mbti": { "SN": "S" } },
+          { "text": "广结善缘，以人脉立身", "scores": { "loyalty": 15 }, "mbti": { "EI": "E" } },
+          { "text": "剑道修行，追求极致", "scores": { "courage": 10, "ambition": 15 } }
+        ]
+      },
+      {
+        "condition": { "type": "prevAnswer", "value": "宁静清幽的竹林小筑" },
+        "text": "在竹林中静心数日，你领悟到自己的方向：",
+        "options": [
+          { "text": "攻伐之道，以力破万法", "scores": { "courage": 15, "ambition": 5 } },
+          { "text": "辅助炼丹，精研药理", "scores": { "wisdom": 15 }, "mbti": { "SN": "N" } },
+          { "text": "阵法机关，以静制动", "scores": { "wisdom": 15 }, "mbti": { "JP": "J" } },
+          { "text": "剑道修行，以心御剑", "scores": { "wisdom": 10, "courage": 5 } }
+        ]
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "入门之后，师父让你选择主修方向：",
+        "options": [
+          { "text": "攻伐之道，以力破万法", "scores": { "courage": 15, "ambition": 10 } },
+          { "text": "辅助炼丹，精研药理", "scores": { "wisdom": 15 }, "mbti": { "SN": "N" } },
+          { "text": "阵法机关，以智御敌", "scores": { "wisdom": 10, "courage": 5 }, "mbti": { "SN": "N" } },
+          { "text": "剑道修行，追求极致", "scores": { "courage": 10, "ambition": 15 } }
+        ]
+      }
     ]
   },
   {
     "id": "Q3",
     "type": "slider",
-    "text": "同门师兄弟向你借一件你珍视的法器，你内心的倾向是？",
-    "leftLabel": "慷慨借出",
-    "rightLabel": "婉言拒绝",
-    "scoring": {
-      "left":   { "scores": { "loyalty": 15 }, "mbti": { "TF": "F" } },
-      "middle": { "scores": { "loyalty": 7, "wisdom": 7 } },
-      "right":  { "scores": { "wisdom": 12 }, "mbti": { "TF": "T" } }
-    }
+    "versions": [
+      {
+        "condition": { "type": "score", "dimension": "courage", "gte": 25 },
+        "text": "同门师兄弟向你借一件你珍视的法器，你内心的倾向是？",
+        "leftLabel": "慷慨借出，兄弟之间不分你我",
+        "rightLabel": "婉言拒绝，法器是你的命",
+        "scoring": {
+          "left":   { "scores": { "loyalty": 15 }, "mbti": { "TF": "F" } },
+          "middle": { "scores": { "loyalty": 7, "wisdom": 7 } },
+          "right":  { "scores": { "courage": 5, "wisdom": 10 }, "mbti": { "TF": "T" } }
+        }
+      },
+      {
+        "condition": { "type": "score", "dimension": "wisdom", "gte": 25 },
+        "text": "同门师兄弟向你借一件你珍视的法器，你权衡了一下利弊：",
+        "leftLabel": "慷慨借出，积累人情",
+        "rightLabel": "婉言拒绝，保存实力",
+        "scoring": {
+          "left":   { "scores": { "loyalty": 12, "wisdom": 5 }, "mbti": { "TF": "F" } },
+          "middle": { "scores": { "wisdom": 10 } },
+          "right":  { "scores": { "wisdom": 15 }, "mbti": { "TF": "T" } }
+        }
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "同门师兄弟向你借一件你珍视的法器，你内心的倾向是？",
+        "leftLabel": "慷慨借出",
+        "rightLabel": "婉言拒绝",
+        "scoring": {
+          "left":   { "scores": { "loyalty": 15 }, "mbti": { "TF": "F" } },
+          "middle": { "scores": { "loyalty": 7, "wisdom": 7 } },
+          "right":  { "scores": { "wisdom": 12 }, "mbti": { "TF": "T" } }
+        }
+      }
+    ]
   },
   {
     "id": "Q4",
     "type": "image-choice",
-    "text": "外出历练时，你遭遇了一名比你强大的修士，对方似乎并无善意。你环顾四周，选择了——",
-    "options": [
-      { "text": "正面迎战，以命搏命", "scores": { "courage": 20 }, "mbti": { "JP": "P" } },
-      { "text": "先礼后兵，试探对方意图", "scores": { "wisdom": 15 }, "mbti": { "EI": "E" } },
-      { "text": "悄然隐匿，静待时机", "scores": { "wisdom": 10, "courage": -5 }, "mbti": { "JP": "J" } },
-      { "text": "拔腿就跑，留得青山在", "scores": { "wisdom": 5, "courage": -10 } }
+    "versions": [
+      {
+        "condition": { "type": "score", "dimension": "courage", "gte": 25 },
+        "text": "外出历练，你遭遇了一名比你强大的修士，对方眼神凌厉。你感到热血上涌——",
+        "options": [
+          { "text": "正面迎战，就算输也要打", "scores": { "courage": 20 }, "mbti": { "JP": "P" } },
+          { "text": "先礼后兵，试探对方底细", "scores": { "wisdom": 15 }, "mbti": { "EI": "E" } },
+          { "text": "悄然隐匿，伺机而动", "scores": { "wisdom": 10, "courage": -5 }, "mbti": { "JP": "J" } },
+          { "text": "拔腿就跑，留得青山在", "scores": { "wisdom": 5, "courage": -10 } }
+        ]
+      },
+      {
+        "condition": { "type": "score", "dimension": "wisdom", "gte": 25 },
+        "text": "外出历练，你遭遇了一名比你强大的修士。你迅速评估了形势——",
+        "options": [
+          { "text": "正面迎战，以命搏命", "scores": { "courage": 20 }, "mbti": { "JP": "P" } },
+          { "text": "先礼后兵，摸清对方意图", "scores": { "wisdom": 20 }, "mbti": { "EI": "E" } },
+          { "text": "悄然隐匿，静待时机", "scores": { "wisdom": 15, "courage": -5 }, "mbti": { "JP": "J" } },
+          { "text": "拔腿就跑，留得青山在", "scores": { "wisdom": 5, "courage": -10 } }
+        ]
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "外出历练时，你遭遇了一名比你强大的修士，对方似乎并无善意。你环顾四周，选择了——",
+        "options": [
+          { "text": "正面迎战，以命搏命", "scores": { "courage": 20 }, "mbti": { "JP": "P" } },
+          { "text": "先礼后兵，试探对方意图", "scores": { "wisdom": 15 }, "mbti": { "EI": "E" } },
+          { "text": "悄然隐匿，静待时机", "scores": { "wisdom": 10, "courage": -5 }, "mbti": { "JP": "J" } },
+          { "text": "拔腿就跑，留得青山在", "scores": { "wisdom": 5, "courage": -10 } }
+        ]
+      }
     ]
   },
   {
@@ -56,36 +148,123 @@
   {
     "id": "QA1",
     "type": "choice",
-    "text": "【紧急！】门派突遭敌袭，师父命你立刻做出选择：",
     "timed": 5,
-    "options": [
-      { "text": "冲上前线，保护师门", "scores": { "courage": 20, "loyalty": 15 } },
-      { "text": "先保护师弟师妹撤退", "scores": { "loyalty": 20, "wisdom": 10 } }
+    "versions": [
+      {
+        "condition": { "type": "score", "dimension": "courage", "gte": 40 },
+        "text": "【紧急！】敌袭！你已经冲到了最前线，师父在身后大喊——",
+        "options": [
+          { "text": "继续冲，把敌方先锋打退！", "scores": { "courage": 25, "loyalty": 10 } },
+          { "text": "退回来，先保护弟子撤离！", "scores": { "loyalty": 20, "wisdom": 10 } }
+        ]
+      },
+      {
+        "condition": { "type": "score", "dimension": "loyalty", "gte": 30 },
+        "text": "【紧急！】门派突遭敌袭，你第一反应是找到师弟师妹的位置——",
+        "options": [
+          { "text": "冲上前线，用自己吸引火力", "scores": { "courage": 15, "loyalty": 20 } },
+          { "text": "先把他们带到安全地方", "scores": { "loyalty": 25, "wisdom": 5 } }
+        ]
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "【紧急！】门派突遭敌袭，师父命你立刻做出选择：",
+        "options": [
+          { "text": "冲上前线，保护师门", "scores": { "courage": 20, "loyalty": 15 } },
+          { "text": "先保护师弟师妹撤退", "scores": { "loyalty": 20, "wisdom": 10 } }
+        ]
+      }
     ]
   },
   {
     "id": "QA2",
     "type": "slider",
-    "text": "战斗中你击败了一名敌方弟子，对方已无力抵抗。你会——",
-    "leftLabel": "赶尽杀绝",
-    "rightLabel": "手下留情",
-    "scoring": {
-      "left":   { "scores": { "courage": 10, "loyalty": -10 }, "mbti": { "TF": "T" } },
-      "middle": { "scores": { "wisdom": 5 } },
-      "right":  { "scores": { "loyalty": 15 }, "mbti": { "TF": "F" } }
-    }
+    "versions": [
+      {
+        "condition": { "type": "prevAnswer", "value": "冲上前线，保护师门" },
+        "text": "战斗中你击败了一名敌方弟子，对方跪地求饶。你刚从激战中回过神——",
+        "leftLabel": "斩草除根，绝不留后患",
+        "rightLabel": "手下留情，他只是奉命行事",
+        "scoring": {
+          "left":   { "scores": { "courage": 15, "loyalty": -15 }, "mbti": { "TF": "T" } },
+          "middle": { "scores": { "wisdom": 5 } },
+          "right":  { "scores": { "loyalty": 20 }, "mbti": { "TF": "F" } }
+        }
+      },
+      {
+        "condition": { "type": "prevAnswer", "value": "继续冲，把敌方先锋打退！" },
+        "text": "战斗中你击败了一名敌方弟子，对方跪地求饶。你刚从激战中回过神——",
+        "leftLabel": "斩草除根，绝不留后患",
+        "rightLabel": "手下留情，他只是奉命行事",
+        "scoring": {
+          "left":   { "scores": { "courage": 15, "loyalty": -15 }, "mbti": { "TF": "T" } },
+          "middle": { "scores": { "wisdom": 5 } },
+          "right":  { "scores": { "loyalty": 20 }, "mbti": { "TF": "F" } }
+        }
+      },
+      {
+        "condition": { "type": "prevAnswer", "value": "先保护师弟师妹撤退" },
+        "text": "战斗中你击败了一名敌方弟子，对方已无力抵抗。你想起了刚才保护弟子时的心情——",
+        "leftLabel": "赶尽杀绝，不给敌人机会",
+        "rightLabel": "手下留情，你不是嗜杀之人",
+        "scoring": {
+          "left":   { "scores": { "courage": 10, "loyalty": -10 }, "mbti": { "TF": "T" } },
+          "middle": { "scores": { "wisdom": 5, "loyalty": 5 } },
+          "right":  { "scores": { "loyalty": 20 }, "mbti": { "TF": "F" } }
+        }
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "战斗中你击败了一名敌方弟子，对方已无力抵抗。你会——",
+        "leftLabel": "赶尽杀绝",
+        "rightLabel": "手下留情",
+        "scoring": {
+          "left":   { "scores": { "courage": 10, "loyalty": -10 }, "mbti": { "TF": "T" } },
+          "middle": { "scores": { "wisdom": 5 } },
+          "right":  { "scores": { "loyalty": 15 }, "mbti": { "TF": "F" } }
+        }
+      }
+    ]
   },
   {
     "id": "QA3",
     "type": "ranking",
-    "text": "请将以下目标按你的优先级从高到低排序：",
-    "options": [
-      { "text": "突破境界，追求长生", "dimension": "ambition" },
-      { "text": "守护挚友，不离不弃", "dimension": "loyalty" },
-      { "text": "名扬天下，威震四方", "dimension": "courage" },
-      { "text": "寻找真相，探索天道", "dimension": "wisdom" }
-    ],
-    "rankScores": [20, 10, 5, 0]
+    "rankScores": [20, 10, 5, 0],
+    "versions": [
+      {
+        "condition": { "type": "score", "dimension": "courage", "gte": 50 },
+        "text": "经历了这场战斗，你重新审视自己修仙的意义——（从高到低排序）",
+        "rankingTexts": ["变得更强，不再让人欺负", "守护身边重要的人", "突破境界，追求长生", "弄清楚天道的真相"],
+        "options": [
+          { "text": "变得更强，不再让人欺负", "scores": {}, "dimension": "courage" },
+          { "text": "守护身边重要的人", "scores": {}, "dimension": "loyalty" },
+          { "text": "突破境界，追求长生", "scores": {}, "dimension": "ambition" },
+          { "text": "弄清楚天道的真相", "scores": {}, "dimension": "wisdom" }
+        ]
+      },
+      {
+        "condition": { "type": "score", "dimension": "loyalty", "gte": 30 },
+        "text": "看着受伤的同门，你心中涌起一种感触，重新排列你的优先级——（从高到低排序）",
+        "rankingTexts": ["守护挚友，不离不弃", "突破境界，追求长生", "名扬天下，威震四方", "寻找真相，探索天道"],
+        "options": [
+          { "text": "守护挚友，不离不弃", "scores": {}, "dimension": "loyalty" },
+          { "text": "突破境界，追求长生", "scores": {}, "dimension": "ambition" },
+          { "text": "名扬天下，威震四方", "scores": {}, "dimension": "courage" },
+          { "text": "寻找真相，探索天道", "scores": {}, "dimension": "wisdom" }
+        ]
+      },
+      {
+        "condition": { "type": "default" },
+        "text": "请将以下目标按你的优先级从高到低排序：",
+        "rankingTexts": ["突破境界，追求长生", "守护挚友，不离不弃", "名扬天下，威震四方", "寻找真相，探索天道"],
+        "options": [
+          { "text": "突破境界，追求长生", "scores": {}, "dimension": "ambition" },
+          { "text": "守护挚友，不离不弃", "scores": {}, "dimension": "loyalty" },
+          { "text": "名扬天下，威震四方", "scores": {}, "dimension": "courage" },
+          { "text": "寻找真相，探索天道", "scores": {}, "dimension": "wisdom" }
+        ]
+      }
+    ]
   },
   {
     "id": "QA4",
