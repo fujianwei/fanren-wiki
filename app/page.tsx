@@ -11,7 +11,30 @@ export default function HomePage() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       {/* Hero 区域 */}
       <div className="flex flex-col md:flex-row gap-6 mb-16">
-        {/* 左：网站介绍 */}
+        {/* 左：命运测试入口 */}
+        <div
+          className="md:w-72 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
+          style={{ backgroundColor: "#1a3828" }}
+        >
+          <div className="text-4xl">🗡️</div>
+          <h2 className="font-serif font-bold text-xl tracking-wide" style={{ color: "#e8f0ec" }}>
+            你的修仙<br />命运如何？
+          </h2>
+          <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
+            命运几何，唯天知晓<br />
+            一念之间，定你此生修仙造化<br />
+            天机不可泄露，唯有亲历方知<br />
+            入此门者，命运自现
+          </p>
+          <Link
+            href="/destiny"
+            className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
+          >
+            踏入修仙之路
+          </Link>
+        </div>
+
+        {/* 右：网站介绍 */}
         <div
           className="flex-1 rounded-2xl p-8 flex flex-col justify-center"
           style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
@@ -24,32 +47,12 @@ export default function HomePage() {
             从七玄门的懵懂少年，到天南大地的元婴老怪。<br />
             这里记录着人界篇的每一段传奇。
           </p>
-          <Link
-            href="/quiz"
-            className="btn-primary inline-block text-sm font-medium px-6 py-2.5 rounded-full w-fit"
+          <span
+            className="btn-secondary inline-block text-sm px-6 py-2.5 rounded-full w-fit cursor-not-allowed opacity-50"
+            title="敬请期待"
           >
-            探索人界 →
-          </Link>
-        </div>
-
-        {/* 右：测试入口 */}
-        <div
-          className="md:w-72 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
-          style={{ backgroundColor: "#1a3828" }}
-        >
-          <div className="text-4xl">✨</div>
-          <h2 className="font-serif font-bold text-xl tracking-wide" style={{ color: "#e8f0ec" }}>
-            你是哪位<br />修仙人物？
-          </h2>
-          <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
-            12道修仙情景题<br />测出你的人界人物原型
-          </p>
-          <Link
-            href="/quiz"
-            className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
-          >
-            立即测试
-          </Link>
+            敬请期待
+          </span>
         </div>
       </div>
 
