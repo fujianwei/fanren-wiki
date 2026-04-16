@@ -219,3 +219,42 @@ describe("resolveQuestion", () => {
     expect(resolved.type).toBe("choice");
   });
 });
+
+describe("calcRealmWithTrials", () => {
+  const { calcRealmWithTrials } = require("../destiny");
+
+  it("stays at lianqi when courage+perseverance < 40", () => {
+    const scores = { courage: 10, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 10 };
+    const result = calcRealmWithTrials(scores, 50);
+    expect(result.realm.slug).toBe("lianqi");
+    expect(result.diedInTrials).toBe(false);
+  });
+
+  it("can reach zhuji when sum >= 40 and trial succeeds", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0);
+    const scores = { courage: 20, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 20 };
+    const result = calcRealmWithTrials(scores, 50);
+    expect(result.realm.slug).toBe("zhuji");
+    expect(result.diedInTrials).toBe(false);
+    jest.restoreAllMocks();
+  });
+
+  it("dies in trials when random > success rate", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.99);
+    const scores = { courage: 20, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 20 };
+    const result = calcRealmWithTrials(scores, 50);
+    expect(result.diedInTrials).toBe(true);
+    expect(result.realm.slug).toBe("lianqi");
+    jest.restoreAllMocks();
+  });
+
+  it("uses fortune to boost success rate", () => {
+    jest.spyOn(Math, "random").mockReturnValue(0.79);
+    const scores = { courage: 20, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 0 };
+    const resultLow = calcRealmWithTrials(scores, 0);
+    expect(resultLow.diedInTrials).toBe(true);
+    const resultHigh = calcRealmWithTrials(scores, 100);
+    expect(resultHigh.diedInTrials).toBe(false);
+    jest.restoreAllMocks();
+  });
+});
