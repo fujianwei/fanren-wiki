@@ -18,7 +18,6 @@ export default function ShareButtons({ characterName, mbti, resultUrl }: ShareBu
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // 降级：选中文本提示用户手动复制
       window.prompt("请手动复制以下内容：", text);
     }
   }
@@ -30,17 +29,21 @@ export default function ShareButtons({ characterName, mbti, resultUrl }: ShareBu
 
   return (
     <div className="flex flex-col sm:flex-row gap-3">
-      <button
-        onClick={handleCopy}
-        className="flex-1 bg-bamboo-400 hover:bg-bamboo-500 text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
-      >
-        {copied ? "✓ 已复制！" : "📋 复制分享文字"}
+      <button onClick={handleCopy} className="btn-primary flex-1">
+        {copied ? "✓ 已复制！" : "复制分享文字"}
       </button>
       <a
         href={weiboUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 bg-red-400 hover:bg-red-500 text-white text-sm font-medium px-6 py-3 rounded-full transition-colors text-center"
+        className="flex-1 text-center font-bold text-sm tracking-widest rounded-full py-3 px-6 transition-all duration-200"
+        style={{
+          backgroundColor: "#b91c1c",
+          color: "#fca5a5",
+          border: "1px solid rgba(239,68,68,0.4)",
+          boxShadow: "0 0 16px rgba(185,28,28,0.3)",
+          fontFamily: "var(--font-serif)",
+        }}
       >
         微博分享
       </a>
