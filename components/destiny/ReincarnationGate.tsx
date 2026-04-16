@@ -172,6 +172,18 @@ export default function ReincarnationGate({ onComplete }: Props) {
             >
               踏入修仙之路
             </button>
+
+            <button
+              onClick={() => {
+                cyclesRef.current = 0;
+                setCycles(0);
+                setFortune(0);
+                setPhase("spinning");
+              }}
+              className="text-bamboo-400 text-xs hover:text-bamboo-600 transition-colors underline underline-offset-4"
+            >
+              再入轮回，重塑天资
+            </button>
           </div>
         )}
       </div>
