@@ -64,6 +64,7 @@ body {
   border: 1px solid transparent;
   background: linear-gradient(135deg, rgba(74,222,154,0.15), transparent 50%, rgba(212,168,67,0.08)) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   pointer-events: none;
@@ -78,6 +79,7 @@ body {
   border: 1px solid transparent;
   background: linear-gradient(135deg, rgba(239,68,68,0.25), transparent 50%, rgba(185,28,28,0.12)) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   pointer-events: none;
@@ -190,6 +192,14 @@ body {
 .btn-death:hover {
   box-shadow: 0 0 36px rgba(239,68,68,0.4), 0 4px 16px rgba(0,0,0,0.5);
   transform: translateY(-1px);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-death:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* 滑块自定义样式 */
