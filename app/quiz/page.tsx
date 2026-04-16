@@ -42,9 +42,12 @@ export default function QuizPage() {
         <ProgressBar current={currentIndex + 1} total={questions.length} />
       </div>
 
-      <div className="bg-white rounded-2xl border border-bamboo-200 p-8 shadow-sm">
-        <p className="text-bamboo-400 text-xs tracking-widest mb-4">情景 {currentIndex + 1}</p>
-        <h2 className="text-bamboo-700 font-serif text-lg leading-relaxed mb-8">
+      <div
+        className="rounded-2xl p-8 shadow-sm"
+        style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
+      >
+        <p className="text-xs tracking-widest mb-4" style={{ color: "#6a8878" }}>情景 {currentIndex + 1}</p>
+        <h2 className="font-serif text-lg leading-relaxed mb-8" style={{ color: "#e8f0ec" }}>
           {question.scenario}
         </h2>
 
@@ -57,15 +60,16 @@ export default function QuizPage() {
                 key={choice}
                 onClick={() => handleSelect(choice)}
                 disabled={!!selected}
-                className={`w-full text-left p-5 rounded-xl border-2 transition-all duration-200
-                  ${isChosen
-                    ? "border-bamboo-400 bg-bamboo-100 text-bamboo-700"
+                className="w-full text-left p-5 rounded-xl border-2 transition-all duration-200 cursor-pointer"
+                style={
+                  isChosen
+                    ? { borderColor: "#4a7a5a", backgroundColor: "#1a3828", color: "#e8f0ec" }
                     : selected
-                    ? "border-bamboo-200 bg-bamboo-50 text-bamboo-400 opacity-50"
-                    : "border-bamboo-200 bg-bamboo-50 text-bamboo-600 hover:border-bamboo-400 hover:bg-bamboo-100 cursor-pointer"
-                  }`}
+                    ? { borderColor: "#1a2820", backgroundColor: "#0a0e0d", color: "#6a8878", opacity: 0.5 }
+                    : { borderColor: "#1a2820", backgroundColor: "#0a0e0d", color: "#b8ccc2" }
+                }
               >
-                <span className="font-bold text-bamboo-400 mr-3">{choice}.</span>
+                <span className="font-bold mr-3" style={{ color: "#6a8878" }}>{choice}.</span>
                 {text}
               </button>
             );
