@@ -31,17 +31,18 @@ export function generateStaticParams() {
 
 interface Props {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ mbti?: string; lifespan?: string; c?: string; w?: string; l?: string; a?: string }>;
+  searchParams: Promise<{ mbti?: string; lifespan?: string; c?: string; w?: string; l?: string; a?: string; p?: string }>;
 }
 
 export default async function DestinyResultPage({ params, searchParams }: Props) {
   const { id } = await params;
-  const { mbti = "INTJ", lifespan = "0", c = "50", w = "50", l = "50", a = "50" } = await searchParams;
+  const { mbti = "INTJ", lifespan = "0", c = "50", w = "50", l = "50", a = "50", p = "50" } = await searchParams;
   const radarScores = {
     courage: Math.min(100, Math.max(0, Number(c))),
     wisdom: Math.min(100, Math.max(0, Number(w))),
     loyalty: Math.min(100, Math.max(0, Number(l))),
     ambition: Math.min(100, Math.max(0, Number(a))),
+    perseverance: Math.min(100, Math.max(0, Number(p))),
   };
 
   // 解析 id：最后一段是 outcomeSlug，前面是 realmSlug
@@ -87,11 +88,12 @@ export default async function DestinyResultPage({ params, searchParams }: Props)
           <RadarChart
             dimensions={[
               { label: "勇气", value: radarScores.courage },
-              { label: "智慧", value: radarScores.wisdom },
+              { label: "悟性", value: radarScores.wisdom },
               { label: "情义", value: radarScores.loyalty },
               { label: "野心", value: radarScores.ambition },
+              { label: "向道之心", value: radarScores.perseverance },
             ]}
-            size={180}
+            size={200}
           />
         </div>
         <div className="flex flex-wrap justify-center gap-2 mb-4">
