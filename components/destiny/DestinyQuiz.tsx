@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import ProgressBar from "@/components/ProgressBar";
 import SliderQuestion, { sliderSegment } from "@/components/destiny/SliderQuestion";
 import RankingQuestion from "@/components/destiny/RankingQuestion";
-import { applyScores, calcRealm, calcLifespan, calcOutcome, calcMbti } from "@/lib/destiny";
+import { applyScores, calcRealm, calcLifespan, calcOutcome, calcMbti, resolveQuestion } from "@/lib/destiny";
 import questionsData from "@/content/destiny/questions.json";
 import type {
   DestinyQuestion,
@@ -16,6 +16,8 @@ import type {
   MbtiVotes,
   MbtiDimension,
   PathId,
+  DynamicQuestion,
+  ResolvedQuestionVersion,
 } from "@/types/destiny";
 
 const allQuestions = questionsData as DestinyQuestion[];
@@ -66,6 +68,7 @@ export default function DestinyQuiz() {
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [timerFired, setTimerFired] = useState(false);
+  const [prevAnswer, setPrevAnswer] = useState<string | null>(null);
 
   const scoresRef = useRef(scores);
   const votesRef = useRef(votes);
@@ -74,20 +77,24 @@ export default function DestinyQuiz() {
 
   const currentId = sequence[currentIdx];
   const question = allQuestions.find((q) => q.id === currentId);
+  const resolvedQuestion: ResolvedQuestionVersion | DestinyQuestion | undefined =
+    question && "versions" in question
+      ? resolveQuestion(question as DynamicQuestion, prevAnswer, scores)
+      : question;
   const total = branch && path ? buildSequence(branch, path).length : 16;
 
   useEffect(() => {
     setSliderValue(50);
     setSelectedChoice(null);
     setTimerFired(false);
-    if (question?.type === "ranking") {
-      const q = question as RankingQ;
+    if (resolvedQuestion?.type === "ranking") {
+      const q = resolvedQuestion as RankingQ;
       setRankOrder(q.options.map((_, i) => String(i)));
     }
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    const q = question as ChoiceQuestion | undefined;
+    const q = resolvedQuestion as ChoiceQuestion | undefined;
     if (!q || !q.timed) { setTimeLeft(null); return; }
     setTimeLeft(q.timed);
     const interval = setInterval(() => {
@@ -101,7 +108,7 @@ export default function DestinyQuiz() {
 
   useEffect(() => {
     if (!timerFired) return;
-    const q = question as ChoiceQuestion | undefined;
+    const q = resolvedQuestion as ChoiceQuestion | undefined;
     if (!q?.options?.length) return;
     const randomOpt = q.options[Math.floor(Math.random() * q.options.length)];
     handleChoiceConfirm(randomOpt, scoresRef.current, votesRef.current);
@@ -124,6 +131,7 @@ export default function DestinyQuiz() {
   ) {
     if (selectedChoice) return;
     setSelectedChoice(option.text);
+    setPrevAnswer(option.text);
 
     const newScores = applyScores(currentScores, option.scores);
     const newVotes = applyMbtiVote(currentVotes, option.mbti);
@@ -170,8 +178,10 @@ export default function DestinyQuiz() {
   }
 
   function handleSliderConfirm() {
-    const q = question as SliderQ;
+    const q = resolvedQuestion as SliderQ;
     const seg = sliderSegment(sliderValue);
+    const segLabel = seg === "left" ? (q.leftLabel ?? "left") : seg === "right" ? (q.rightLabel ?? "right") : "middle";
+    setPrevAnswer(segLabel);
     const scoring = q.scoring[seg];
     const newScores = applyScores(scores, scoring.scores);
     const newVotes = applyMbtiVote(votes, (scoring as { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> }).mbti);
@@ -186,8 +196,11 @@ export default function DestinyQuiz() {
   }
 
   function handleRankingConfirm() {
-    const q = question as RankingQ;
-    const rankScores = q.rankScores;
+    const q = resolvedQuestion as RankingQ;
+    const originalQ = question as RankingQ;
+    const rankScores = originalQ.rankScores ?? [20, 10, 5, 0] as [number, number, number, number];
+    const firstOptIdx = Number(rankOrder[0]);
+    setPrevAnswer(q.options[firstOptIdx]?.text ?? null);
     let newScores = { ...scores };
     let newVotes = { ...votes };
 
@@ -220,7 +233,7 @@ export default function DestinyQuiz() {
     }
   }
 
-  if (!question) return null;
+  if (!resolvedQuestion) return null;
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
@@ -237,8 +250,8 @@ export default function DestinyQuiz() {
         </div>
       )}
 
-      {(question.type === "choice" || question.type === "image-choice") && (() => {
-        const q = question as ChoiceQuestion;
+      {(resolvedQuestion.type === "choice" || resolvedQuestion.type === "image-choice") && (() => {
+        const q = resolvedQuestion as ChoiceQuestion;
         return (
           <div className="bg-white rounded-2xl border border-bamboo-200 p-8 shadow-sm">
             <p className="text-bamboo-400 text-xs tracking-widest mb-4">情景 {currentIdx + 1}</p>
@@ -268,21 +281,21 @@ export default function DestinyQuiz() {
         );
       })()}
 
-      {question.type === "slider" && (
+      {resolvedQuestion.type === "slider" && (
         <SliderQuestion
-          text={(question as SliderQ).text}
-          leftLabel={(question as SliderQ).leftLabel}
-          rightLabel={(question as SliderQ).rightLabel}
+          text={(resolvedQuestion as SliderQ).text}
+          leftLabel={(resolvedQuestion as SliderQ).leftLabel}
+          rightLabel={(resolvedQuestion as SliderQ).rightLabel}
           value={sliderValue}
           onChange={setSliderValue}
           onConfirm={handleSliderConfirm}
         />
       )}
 
-      {question.type === "ranking" && (
+      {resolvedQuestion.type === "ranking" && (
         <RankingQuestion
-          text={(question as RankingQ).text}
-          options={(question as RankingQ).options.map((o, i) => ({ id: String(i), text: o.text }))}
+          text={(resolvedQuestion as RankingQ).text}
+          options={(resolvedQuestion as RankingQ).options.map((o, i) => ({ id: String(i), text: o.text }))}
           order={rankOrder}
           onOrderChange={setRankOrder}
           onConfirm={handleRankingConfirm}
