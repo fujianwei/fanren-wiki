@@ -91,3 +91,41 @@ export interface DestinyResult {
   mbtiType: string;
   resultId: string;
 }
+
+// ===== v3: 动态题目系统类型 =====
+
+export type VersionCondition =
+  | { type: "prevAnswer"; value: string }
+  | { type: "score"; dimension: keyof DestinyScores; gte: number }
+  | { type: "score"; dimension: keyof DestinyScores; lt: number }
+  | { type: "default" };
+
+export interface SliderScoring {
+  left: { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> };
+  middle: { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> };
+  right: { scores: Partial<DestinyScores>; mbti?: Partial<Record<MbtiDimension, string>> };
+}
+
+export interface QuestionVersion {
+  condition: VersionCondition;
+  text: string;
+  options?: ChoiceOption[];
+  leftLabel?: string;
+  rightLabel?: string;
+  scoring?: SliderScoring;
+  rankingTexts?: string[];
+}
+
+export interface DynamicQuestion {
+  id: string;
+  type: "choice" | "image-choice" | "slider" | "ranking";
+  timed?: number;
+  versions: QuestionVersion[];
+}
+
+export interface ResolvedQuestionVersion extends QuestionVersion {
+  id: string;
+  type: "choice" | "image-choice" | "slider" | "ranking";
+  timed?: number;
+  rankScores?: [number, number, number, number];
+}
