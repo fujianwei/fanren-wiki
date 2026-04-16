@@ -259,34 +259,71 @@ export default function DestinyQuiz() {
 
       {timeLeft !== null && (
         <div className="text-center mb-4">
-          <span className={`text-2xl font-bold font-serif ${timeLeft <= 2 ? "text-red-500" : "text-bamboo-500"}`}>
+          <span
+            className="text-2xl font-bold font-serif transition-colors duration-500"
+            style={{ color: timeLeft <= 2 ? "#ef4444" : "#4ade9a" }}
+          >
             {timeLeft}
           </span>
-          <span className="text-bamboo-400 text-sm ml-1">秒</span>
+          <span className="text-sm ml-1" style={{ color: "#6a8878" }}>秒</span>
         </div>
       )}
 
       {(resolvedQuestion.type === "choice" || resolvedQuestion.type === "image-choice") && (() => {
         const q = resolvedQuestion as ChoiceQuestion;
         return (
-          <div className="bg-white rounded-2xl border border-bamboo-200 p-8 shadow-sm">
-            <p className="text-bamboo-400 text-xs tracking-widest mb-4">情景 {currentIdx + 1}</p>
-            <h2 className="text-bamboo-700 font-serif text-lg leading-relaxed mb-8">{q.text}</h2>
+          <div
+            className="rounded-2xl p-8 relative overflow-hidden card-glow"
+            style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
+          >
+            {/* 水墨角落纹饰 */}
+            <svg className="corner-ornament corner-ornament-tl" viewBox="0 0 56 56" fill="none">
+              <path d="M2 2 L2 28 Q2 54 28 54" stroke="#4ade9a" strokeWidth="1.5" fill="none"/>
+              <circle cx="2" cy="2" r="2" fill="#4ade9a"/>
+              <path d="M9 2 L9 21 Q9 47 35 47" stroke="#4ade9a" strokeWidth="0.7" fill="none" opacity="0.4"/>
+            </svg>
+            <svg className="corner-ornament corner-ornament-br" viewBox="0 0 56 56" fill="none">
+              <path d="M2 2 L2 28 Q2 54 28 54" stroke="#4ade9a" strokeWidth="1.5" fill="none"/>
+              <circle cx="2" cy="2" r="2" fill="#4ade9a"/>
+              <path d="M9 2 L9 21 Q9 47 35 47" stroke="#4ade9a" strokeWidth="0.7" fill="none" opacity="0.4"/>
+            </svg>
+
+            <p className="text-xs tracking-widest mb-4" style={{ color: "#6a8878" }}>情景 {currentIdx + 1}</p>
+            <h2 className="font-serif text-lg leading-relaxed mb-8" style={{ color: "#e8f0ec" }}>{q.text}</h2>
             <div className="flex flex-col gap-4">
               {q.options.map((opt, i) => {
                 const isChosen = selectedChoice === opt.text;
+                const isDisabled = !!selectedChoice && !isChosen;
                 return (
                   <button
                     key={i}
                     onClick={() => handleChoiceConfirm(opt, scores, votes)}
                     disabled={!!selectedChoice}
-                    className={`w-full text-left p-5 rounded-xl border-2 transition-all duration-200
-                      ${isChosen
-                        ? "border-bamboo-400 bg-bamboo-100 text-bamboo-700"
-                        : selectedChoice
-                        ? "border-bamboo-200 bg-bamboo-50 text-bamboo-400 opacity-50"
-                        : "border-bamboo-200 bg-bamboo-50 text-bamboo-600 hover:border-bamboo-400 hover:bg-bamboo-100 cursor-pointer"
-                      }`}
+                    className="w-full text-left p-5 rounded-xl transition-all duration-200"
+                    style={{
+                      border: isChosen ? "1px solid #4ade9a" : "1px solid #1a2820",
+                      backgroundColor: isChosen ? "rgba(74,222,154,0.12)" : "rgba(26,40,32,0.6)",
+                      color: isChosen ? "#d4faea" : isDisabled ? "#6a8878" : "#b8ccc2",
+                      boxShadow: isChosen ? "0 0 20px rgba(74,222,154,0.18)" : "none",
+                      opacity: isDisabled ? 0.35 : 1,
+                      cursor: selectedChoice ? "default" : "pointer",
+                    }}
+                    onMouseEnter={e => {
+                      if (!selectedChoice) {
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#22c47a";
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(74,222,154,0.08)";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#a8f5d4";
+                        (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 16px rgba(74,222,154,0.12)";
+                      }
+                    }}
+                    onMouseLeave={e => {
+                      if (!selectedChoice && !isChosen) {
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#1a2820";
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(26,40,32,0.6)";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#b8ccc2";
+                        (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+                      }
+                    }}
                   >
                     {opt.text}
                   </button>
