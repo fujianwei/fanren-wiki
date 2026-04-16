@@ -11,6 +11,7 @@ export interface DestinyScores {
   wisdom: number;
   loyalty: number;
   ambition: number;
+  perseverance: number;
 }
 
 export interface MbtiVotes {
