@@ -6,6 +6,7 @@ import ProgressBar from "@/components/ProgressBar";
 import SliderQuestion, { sliderSegment } from "@/components/destiny/SliderQuestion";
 import RankingQuestion from "@/components/destiny/RankingQuestion";
 import { applyScores, calcRealmWithTrials, calcLifespan, calcOutcome, calcMbti, resolveQuestion } from "@/lib/destiny";
+import ReincarnationGate from "@/components/destiny/ReincarnationGate";
 import questionsData from "@/content/destiny/questions.json";
 import type {
   DestinyQuestion,
@@ -56,8 +57,9 @@ function applyMbtiVote(
 
 export default function DestinyQuiz() {
   const router = useRouter();
+  const [gateCleared, setGateCleared] = useState(false);
   const [branch, setBranch] = useState<"A" | "B" | null>(null);
-  const [fortune] = useState<number>(() => Math.floor(Math.random() * 100) + 1);
+  const [fortune, setFortune] = useState<number>(1);
   const [path, setPath] = useState<PathId | null>(null);
   const [sequence, setSequence] = useState<string[]>(["Q1", "Q2", "Q3", "Q4", "Q5"]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -234,6 +236,17 @@ export default function DestinyQuiz() {
     } else {
       setCurrentIdx(nextIdx);
     }
+  }
+
+  if (!gateCleared) {
+    return (
+      <ReincarnationGate
+        onComplete={(f) => {
+          setFortune(f);
+          setGateCleared(true);
+        }}
+      />
+    );
   }
 
   if (!resolvedQuestion) return null;
