@@ -149,7 +149,7 @@ export function calcRealmWithTrials(scores: { courage: number; perseverance: num
   if (sum >= 90) targetSlug = "huashen";
   else if (sum >= 75) targetSlug = "yuanying";
   else if (sum >= 60) targetSlug = "jiedan";
-  else if (scores.courage >= 20) targetSlug = "zhuji";
+  else if (sum >= 40) targetSlug = "zhuji";
   else targetSlug = "lianqi";
 
   const targetIdx = order.indexOf(targetSlug);

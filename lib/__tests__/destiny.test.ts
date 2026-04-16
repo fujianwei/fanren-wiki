@@ -249,8 +249,11 @@ describe("calcRealmWithTrials", () => {
   });
 
   it("uses fortune to boost success rate", () => {
+    // courage+perseverance=40 → zhuji trial, base rate=70%
+    // fortune=0: rate=70+0*0.2+0*0.1=70% → random=0.79 > 0.70 → fail
+    // fortune=100: rate=70+0*0.2+100*0.1=80% → random=0.79 < 0.80 → succeed
     jest.spyOn(Math, "random").mockReturnValue(0.79);
-    const scores = { courage: 20, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 0 };
+    const scores = { courage: 40, wisdom: 0, loyalty: 0, ambition: 0, perseverance: 0 };
     const resultLow = calcRealmWithTrials(scores, 0);
     expect(resultLow.diedInTrials).toBe(true);
     const resultHigh = calcRealmWithTrials(scores, 100);
