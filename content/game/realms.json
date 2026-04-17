@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "lianqi",
+    "name": "炼气期",
+    "normalLifespan": 100,
+    "limitLifespan": 150,
+    "eventCost": { "min": 4, "max": 5 },
+    "dungeonCost": { "min": 5, "max": 10 },
+    "battleCost": { "min": 2, "max": 4 },
+    "retreatCost": { "short": 3, "mid": 8, "long": 15 },
+    "retreatXp": { "short": 5, "mid": 10, "long": 18 },
+    "breakthroughRate": 0.70,
+    "failDeathRate": 0.02,
+    "breakthroughCost": 8
+  },
+  {
+    "slug": "zhuji",
+    "name": "筑基期",
+    "normalLifespan": 200,
+    "limitLifespan": 300,
+    "eventCost": { "min": 5, "max": 8 },
+    "dungeonCost": { "min": 15, "max": 25 },
+    "battleCost": { "min": 4, "max": 6 },
+    "retreatCost": { "short": 8, "mid": 20, "long": 40 },
+    "retreatXp": { "short": 5, "mid": 10, "long": 18 },
+    "breakthroughRate": 0.50,
+    "failDeathRate": 0.05,
+    "breakthroughCost": 25
+  },
+  {
+    "slug": "jiedan",
+    "name": "结丹期",
+    "normalLifespan": 500,
+    "limitLifespan": 800,
+    "eventCost": { "min": 15, "max": 25 },
+    "dungeonCost": { "min": 50, "max": 80 },
+    "battleCost": { "min": 10, "max": 15 },
+    "retreatCost": { "short": 20, "mid": 50, "long": 100 },
+    "retreatXp": { "short": 5, "mid": 10, "long": 18 },
+    "breakthroughRate": 0.20,
+    "failDeathRate": 0.90,
+    "breakthroughCost": 80
+  },
+  {
+    "slug": "yuanying",
+    "name": "元婴期",
+    "normalLifespan": 1000,
+    "limitLifespan": 1500,
+    "eventCost": { "min": 40, "max": 60 },
+    "dungeonCost": { "min": 100, "max": 150 },
+    "battleCost": { "min": 20, "max": 30 },
+    "retreatCost": { "short": 50, "mid": 120, "long": 250 },
+    "retreatXp": { "short": 5, "mid": 10, "long": 18 },
+    "breakthroughRate": 0.35,
+    "failDeathRate": 0.50,
+    "breakthroughCost": 200
+  },
+  {
+    "slug": "huashen",
+    "name": "化神期",
+    "normalLifespan": 2000,
+    "limitLifespan": 3000,
+    "eventCost": { "min": 80, "max": 120 },
+    "dungeonCost": { "min": 200, "max": 300 },
+    "battleCost": { "min": 40, "max": 60 },
+    "retreatCost": { "short": 100, "mid": 250, "long": 500 },
+    "retreatXp": { "short": 5, "mid": 10, "long": 18 },
+    "breakthroughRate": 0,
+    "failDeathRate": 0,
+    "breakthroughCost": 0
+  }
+]

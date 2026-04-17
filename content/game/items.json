@@ -1,0 +1,128 @@
+[
+  {
+    "id": "yangshang_dan",
+    "name": "养伤丹",
+    "category": "mechanism",
+    "description": "消除任意等级受伤状态",
+    "buyPrice": 150,
+    "sellPrice": 135,
+    "effect": { "type": "heal_injury" }
+  },
+  {
+    "id": "huixue_dan",
+    "name": "回血丹",
+    "category": "mechanism",
+    "description": "消除受伤状态（同养伤丹，价格更低）",
+    "buyPrice": 50,
+    "sellPrice": 45,
+    "effect": { "type": "heal_injury" }
+  },
+  {
+    "id": "juqi_dan",
+    "name": "聚气丹",
+    "category": "mechanism",
+    "description": "当前境界修为+10点（受灵根倍率影响）",
+    "buyPrice": 80,
+    "sellPrice": 72,
+    "effect": { "type": "add_xp", "amount": 10 }
+  },
+  {
+    "id": "yanshou_dan",
+    "name": "延寿丹",
+    "category": "mechanism",
+    "description": "寿命+50年，不超极限上限",
+    "buyPrice": 200,
+    "sellPrice": 180,
+    "effect": { "type": "add_lifespan", "amount": 50 }
+  },
+  {
+    "id": "dixin_dan",
+    "name": "涤心丹",
+    "category": "mechanism",
+    "description": "消除一种负面情绪分数（负面情绪清零）",
+    "buyPrice": 300,
+    "sellPrice": 270,
+    "effect": { "type": "clear_emotion" }
+  },
+  {
+    "id": "xuming_dan",
+    "name": "续命丹",
+    "category": "mechanism",
+    "description": "濒死自动触发保命，根基受损-5%冲关",
+    "buyPrice": null,
+    "sellPrice": 3000,
+    "effect": { "type": "auto_save" }
+  },
+  {
+    "id": "zhuji_dan",
+    "name": "筑基丹",
+    "category": "breakthrough",
+    "description": "炼气→筑基冲关成功率+15%",
+    "buyPrice": 500,
+    "sellPrice": 450,
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "lianqi", "bonus": 0.15 }
+  },
+  {
+    "id": "jucheng_dan",
+    "name": "降尘丹",
+    "category": "breakthrough",
+    "description": "筑基→结丹冲关成功率+15%",
+    "buyPrice": 800,
+    "sellPrice": 720,
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "zhuji", "bonus": 0.15 }
+  },
+  {
+    "id": "butian_dan",
+    "name": "补天丹",
+    "category": "breakthrough",
+    "description": "结丹→元婴冲关成功率+15%（极稀有）",
+    "buyPrice": 50000,
+    "sellPrice": 45000,
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "jiedan", "bonus": 0.15 }
+  },
+  {
+    "id": "jiuqu_dan",
+    "name": "九曲灵参丸",
+    "category": "breakthrough",
+    "description": "结丹→元婴战胜心魔概率+20%（不可出售）",
+    "buyPrice": null,
+    "sellPrice": null,
+    "effect": { "type": "heart_demon_bonus", "bonus": 0.20 }
+  },
+  {
+    "id": "jiangyun_dan",
+    "name": "绛云丹",
+    "category": "breakthrough",
+    "description": "元婴→化神冲关成功率+15%",
+    "buyPrice": 2000,
+    "sellPrice": 1800,
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "yuanying", "bonus": 0.15 }
+  },
+  {
+    "id": "juling_zhen",
+    "name": "聚灵阵",
+    "category": "array",
+    "description": "闭关修为+10%，副本降低轻伤概率",
+    "buyPrice": 300,
+    "sellPrice": 270,
+    "effect": { "type": "retreat_xp_bonus", "mult": 0.10, "breakthrough_bonus": 0.08, "dungeon_safe": false }
+  },
+  {
+    "id": "huti_zhen",
+    "name": "护体阵",
+    "category": "array",
+    "description": "冲关+12%，副本抵挡一次致命伤",
+    "buyPrice": 800,
+    "sellPrice": 720,
+    "effect": { "type": "retreat_xp_bonus", "mult": 0, "breakthrough_bonus": 0.12, "dungeon_safe": true }
+  },
+  {
+    "id": "tiangang_zhen",
+    "name": "天罡阵",
+    "category": "array",
+    "description": "冲关+20%，闭关+25%，副本大幅降低死亡（不可购买）",
+    "buyPrice": null,
+    "sellPrice": 5000,
+    "effect": { "type": "retreat_xp_bonus", "mult": 0.25, "breakthrough_bonus": 0.20, "dungeon_safe": true }
+  }
+]

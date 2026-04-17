@@ -1,0 +1,26 @@
+[
+  {
+    "type": "tianling",
+    "name": "天灵根",
+    "cultivationMult": 2.0,
+    "fortuneRange": [91, 100]
+  },
+  {
+    "type": "shuang",
+    "name": "双灵根",
+    "cultivationMult": 1.4,
+    "fortuneRange": [81, 90]
+  },
+  {
+    "type": "san",
+    "name": "三灵根",
+    "cultivationMult": 1.0,
+    "fortuneRange": [51, 80]
+  },
+  {
+    "type": "wei",
+    "name": "伪灵根",
+    "cultivationMult": 0.5,
+    "fortuneRange": [1, 50]
+  }
+]
