@@ -6,7 +6,7 @@ import StatusPanel from "@/components/game/StatusPanel";
 import EventCard from "@/components/game/EventCard";
 import MarketModal from "@/components/game/MarketModal";
 import SectChoiceModal from "@/components/game/SectChoiceModal";
-import { calcLifespanCost, getRealmConfig, calcBreakthroughRate } from "@/lib/game/engine";
+import { calcLifespanCost, getRealmConfig, calcBreakthroughRate, calcHeartDemonRate, calcFateAscendRate } from "@/lib/game/engine";
 import type { GameEvent, EventOption, EventEffect, ItemId } from "@/types/game";
 import eventsLianqi from "@/content/game/events-lianqi.json";
 import eventsZhuji from "@/content/game/events-zhuji.json";
@@ -93,14 +93,26 @@ function BreakthroughPanel() {
 
   function attempt() {
     const roll = Math.random();
-    if (roll < successRate) {
+    let effectiveRate = successRate;
+
+    // 结丹→元婴：额外乘以心魔概率
+    if (state.realmSlug === "jiedan") {
+      const jiuquBonus = (state.inventory["jiuqu_dan"] ?? 0) > 0 ? 0.20 : 0;
+      const heartDemonRate = calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + jiuquBonus;
+      effectiveRate = successRate * Math.min(1, heartDemonRate);
+    }
+
+    if (roll < effectiveRate) {
       dispatch({ type: "BREAKTHROUGH_SUCCESS" });
     } else {
       const failDeath = Math.random() < realm.failDeathRate;
       if (failDeath) {
-        dispatch({ type: "END_GAME", endingType: "death_break" });
+        // 结丹→元婴失败90%陨落：心魔陨落
+        const endingType = state.realmSlug === "jiedan" ? "death_heart" : "death_break";
+        dispatch({ type: "END_GAME", endingType });
       } else {
         dispatch({ type: "BREAKTHROUGH_FAIL" });
+        dispatch({ type: "ADD_EMOTION", positive: 0, negative: 8 }); // 冲关失败积累恐惧
       }
     }
   }
@@ -116,6 +128,23 @@ function BreakthroughPanel() {
       <div className="text-sm mb-4" style={{ color: "#6a8878" }}>
         成功率：{Math.round(successRate * 100)}%
       </div>
+      {state.realmSlug === "jiedan" && (
+        <div className="mt-3 pt-3 text-xs" style={{ borderTop: "1px solid #1a2820" }}>
+          <div className="flex justify-between mb-1">
+            <span style={{ color: "#6a8878" }}>心魔关</span>
+            <span style={{ color: state.emotion.positive >= state.emotion.negative ? "#4ade9a" : "#ef4444" }}>
+              {Math.round((calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + ((state.inventory["jiuqu_dan"] ?? 0) > 0 ? 0.20 : 0)) * 100)}%
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span style={{ color: "#4ade9a" }}>正面情绪 {state.emotion.positive}</span>
+            <span style={{ color: "#ef4444" }}>负面情绪 {state.emotion.negative}</span>
+          </div>
+          <div className="mt-1" style={{ color: "#6a8878" }}>
+            综合成功率：{Math.round(successRate * Math.min(1, calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + ((state.inventory["jiuqu_dan"] ?? 0) > 0 ? 0.20 : 0)) * 100)}%
+          </div>
+        </div>
+      )}
       <div className="flex gap-3">
         <button
           onClick={attempt}
@@ -261,9 +290,12 @@ function GamePlay() {
 
   useEffect(() => {
     if (state.phase === "ended") {
-      router.push(`/game/ending?type=${state.endingType}`);
+      const fateParam = (state.endingType === "ascend" || state.endingType === "ascend_fail")
+        ? `&fate=${state.fate}`
+        : "";
+      router.push(`/game/ending?type=${state.endingType}${fateParam}`);
     }
-  }, [state.phase, state.endingType, router]);
+  }, [state.phase, state.endingType, state.fate, router]);
 
   function addLog(msg: string) {
     setLog((prev) => [msg, ...prev].slice(0, 5));
@@ -333,6 +365,13 @@ function GamePlay() {
     dispatch({ type: "ADD_XP", points: Math.round(xpBase * injuryMult) });
     const label = duration === "short" ? "短期" : duration === "mid" ? "中期" : "长期";
     addLog(`闭关（${label}）：消耗 ${cost} 年${state.injury !== "none" ? `，受伤减益×${injuryMult}` : ""}`);
+  }
+
+  function handleAscend() {
+    const roll = Math.random();
+    const ascendRate = calcFateAscendRate(state.fate);
+    const endingType = roll < ascendRate ? "ascend" : "ascend_fail";
+    dispatch({ type: "END_GAME", endingType });
   }
 
   const NEXT_REALM_NAMES: Record<string, string> = {
@@ -452,17 +491,27 @@ function GamePlay() {
             )}
 
             {state.xp >= 90 && (
-              <button
-                onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
-                className="py-2.5 rounded-lg text-sm font-medium"
-                style={{
-                  backgroundColor: "#1a2820",
-                  border: "1px solid #d4a84344",
-                  color: "#d4a843",
-                }}
-              >
-                尝试冲关 → {NEXT_REALM_NAMES[state.realmSlug]}
-              </button>
+              state.realmSlug === "huashen" ? (
+                <button
+                  onClick={handleAscend}
+                  className="py-2.5 rounded-lg text-sm font-medium"
+                  style={{ backgroundColor: "#d4a843", color: "#0a0e0d" }}
+                >
+                  ✦ 飞升灵界
+                </button>
+              ) : (
+                <button
+                  onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
+                  className="py-2.5 rounded-lg text-sm font-medium"
+                  style={{
+                    backgroundColor: "#1a2820",
+                    border: "1px solid #d4a84344",
+                    color: "#d4a843",
+                  }}
+                >
+                  尝试冲关 → {NEXT_REALM_NAMES[state.realmSlug]}
+                </button>
+              )
             )}
           </div>
         </div>

@@ -40,6 +40,7 @@ const ENDING_TEXT: Record<string, { title: string; text: string; color: string }
 function EndingContent() {
   const params = useSearchParams();
   const endingType = params.get("type") ?? "natural";
+  const fateStr = params.get("fate");
   const ending = ENDING_TEXT[endingType] ?? ENDING_TEXT["natural"];
   const isDeath = endingType.startsWith("death");
 
@@ -61,6 +62,11 @@ function EndingContent() {
         <p className="text-sm leading-relaxed mb-8" style={{ color: "#b8ccc2" }}>
           {ending.text}
         </p>
+        {(endingType === "ascend" || endingType === "ascend_fail") && fateStr && (
+          <div className="text-xs mt-3" style={{ color: "#6a8878" }}>
+            天命值：{fateStr} / 100
+          </div>
+        )}
         <div className="flex flex-col gap-3">
           <Link href="/game" className="btn-primary py-3 rounded-full font-medium text-sm">
             再入轮回
