@@ -50,9 +50,7 @@ export type ItemEffect =
   | { type: "heart_demon_bonus"; bonus: number }
   | { type: "retreat_xp_bonus"; mult: number; breakthrough_bonus: number; dungeon_safe: boolean };
 
-export interface Inventory {
-  [itemId: string]: number;
-}
+export type Inventory = Partial<Record<ItemId, number>>;
 
 export interface EmotionState {
   positive: number;
