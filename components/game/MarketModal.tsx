@@ -58,7 +58,7 @@ export default function MarketModal({ onClose }: Props) {
     const count = inventory[item.id as ItemId] ?? 0;
     if (count <= 0 || !item.sellPrice) return;
     dispatch({ type: "ADD_LINGSHI", amount: item.sellPrice });
-    dispatch({ type: "USE_ITEM", itemId: item.id as ItemId });
+    dispatch({ type: "REMOVE_ITEM", itemId: item.id as ItemId });
     showMessage(`售出 ${item.name}，获得 ${item.sellPrice} 灵石`);
   }
 

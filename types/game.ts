@@ -93,6 +93,7 @@ export type GameAction =
   | { type: "ADD_LINGSHI"; amount: number }
   | { type: "ADD_ITEM"; itemId: ItemId; count: number }
   | { type: "USE_ITEM"; itemId: ItemId }
+  | { type: "REMOVE_ITEM"; itemId: ItemId }
   | { type: "SET_INJURY"; level: InjuryLevel }
   | { type: "ADD_EMOTION"; positive: number; negative: number }
   | { type: "ADD_ENEMY"; enemy: Enemy }

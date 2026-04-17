@@ -1,6 +1,6 @@
 "use client";
 
-import { GameProvider, useGame } from "@/components/game/GameProvider";
+import { useGame } from "@/components/game/GameProvider";
 import SpiritRootGate from "@/components/game/SpiritRootGate";
 import type { SpiritRoot } from "@/types/game";
 import { useRouter } from "next/navigation";
@@ -18,9 +18,5 @@ function GameEntry() {
 }
 
 export default function GamePage() {
-  return (
-    <GameProvider>
-      <GameEntry />
-    </GameProvider>
-  );
+  return <GameEntry />;
 }

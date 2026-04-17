@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useGame } from "@/components/game/GameProvider";
-import { GameProvider } from "@/components/game/GameProvider";
 import StatusPanel from "@/components/game/StatusPanel";
 import EventCard from "@/components/game/EventCard";
 import MarketModal from "@/components/game/MarketModal";
-import { calcLifespanCost, getRealmConfig } from "@/lib/game/engine";
-import type { GameEvent, EventOption, EventEffect } from "@/types/game";
+import { calcLifespanCost, getRealmConfig, calcBreakthroughRate } from "@/lib/game/engine";
+import type { GameEvent, EventOption, EventEffect, ItemId } from "@/types/game";
 import eventsLianqi from "@/content/game/events-lianqi.json";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +18,100 @@ function pickEvent(realmSlug: string, history: string[]): GameEvent | null {
   const unseen = pool.filter((e) => !history.includes(e.id));
   const candidates = unseen.length > 0 ? unseen : pool;
   return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function BreakthroughPanel() {
+  const { state, dispatch } = useGame();
+  const realm = getRealmConfig(state.realmSlug);
+
+  const arrayBonus = (() => {
+    let bonus = 0;
+    if ((state.inventory["tiangang_zhen"] ?? 0) > 0) bonus += 0.20;
+    else if ((state.inventory["huti_zhen"] ?? 0) > 0) bonus += 0.12;
+    else if ((state.inventory["juling_zhen"] ?? 0) > 0) bonus += 0.08;
+    return bonus;
+  })();
+
+  const pillBonus = (() => {
+    const pillMap: Record<string, number> = {
+      zhuji_dan: 0.15,
+      jucheng_dan: 0.15,
+      butian_dan: 0.15,
+      jiangyun_dan: 0.15,
+    };
+    const realmPillMap: Record<string, string> = {
+      lianqi: "zhuji_dan",
+      zhuji: "jucheng_dan",
+      jiedan: "butian_dan",
+      yuanying: "jiangyun_dan",
+    };
+    const pillId = realmPillMap[state.realmSlug];
+    if (pillId && (state.inventory[pillId as ItemId] ?? 0) > 0) {
+      return pillMap[pillId];
+    }
+    return 0;
+  })();
+
+  const successRate = calcBreakthroughRate({
+    realmSlug: state.realmSlug,
+    xp: state.xp,
+    itemBonus: arrayBonus + pillBonus,
+    lingshi: state.lingshi,
+    rootIntact: state.rootIntact,
+    rootDamageCount: state.rootDamageCount,
+    breakthroughExp: state.breakthroughExp,
+  });
+
+  const NEXT_REALM: Record<string, string> = {
+    lianqi: "筑基期",
+    zhuji: "结丹期",
+    jiedan: "元婴期",
+    yuanying: "化神期",
+    huashen: "飞升",
+  };
+
+  function attempt() {
+    const roll = Math.random();
+    if (roll < successRate) {
+      dispatch({ type: "BREAKTHROUGH_SUCCESS" });
+    } else {
+      const failDeath = Math.random() < realm.failDeathRate;
+      if (failDeath) {
+        dispatch({ type: "END_GAME", endingType: "death_break" });
+      } else {
+        dispatch({ type: "BREAKTHROUGH_FAIL" });
+      }
+    }
+  }
+
+  return (
+    <div
+      className="rounded-xl p-6 text-center"
+      style={{ backgroundColor: "#111a16", border: "1px solid #d4a84344" }}
+    >
+      <div className="font-serif font-bold mb-2" style={{ color: "#d4a843" }}>
+        冲关 → {NEXT_REALM[state.realmSlug]}
+      </div>
+      <div className="text-sm mb-4" style={{ color: "#6a8878" }}>
+        成功率：{Math.round(successRate * 100)}%
+      </div>
+      <div className="flex gap-3">
+        <button
+          onClick={attempt}
+          className="flex-1 py-3 rounded-lg font-medium text-sm"
+          style={{ backgroundColor: "#d4a843", color: "#0a0e0d" }}
+        >
+          渡劫！
+        </button>
+        <button
+          onClick={() => dispatch({ type: "BREAKTHROUGH_FAIL" })}
+          className="flex-1 py-3 rounded-lg text-sm btn-secondary"
+        >
+          暂不冲关
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function GamePlay() {
@@ -111,7 +204,11 @@ function GamePlay() {
         <StatusPanel />
       </div>
 
-      {currentEvent ? (
+      {state.phase === "breakthrough" ? (
+        <div className="mb-4">
+          <BreakthroughPanel />
+        </div>
+      ) : currentEvent ? (
         <div className="mb-4">
           <EventCard event={currentEvent} onChoose={(option) => handleEventChoice(option)} />
         </div>
@@ -186,9 +283,5 @@ function GamePlay() {
 }
 
 export default function GamePlayPage() {
-  return (
-    <GameProvider>
-      <GamePlay />
-    </GameProvider>
-  );
+  return <GamePlay />;
 }

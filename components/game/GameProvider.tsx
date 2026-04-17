@@ -97,6 +97,15 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return next;
     }
 
+    case "REMOVE_ITEM": {
+      const count = state.inventory[action.itemId] ?? 0;
+      if (count <= 0) return state;
+      return {
+        ...state,
+        inventory: { ...state.inventory, [action.itemId]: count - 1 },
+      };
+    }
+
     case "SET_INJURY": {
       if (action.level === "dying") {
         const xuming = state.inventory["xuming_dan"] ?? 0;
