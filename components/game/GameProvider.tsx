@@ -165,6 +165,16 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case "END_GAME":
       return { ...state, phase: "ended", endingType: action.endingType };
 
+    case "SET_SECT_PATH":
+      return { ...state, sectPath: action.sectPath };
+
+    case "APPLY_MODAO_PENALTY": {
+      // 魔道寿命上限-15%
+      const newMax = Math.round(state.lifespanMax * 0.85);
+      const newLifespan = Math.min(state.lifespan, newMax);
+      return { ...state, lifespanMax: newMax, lifespan: newLifespan };
+    }
+
     default:
       return state;
   }

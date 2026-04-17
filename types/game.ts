@@ -102,7 +102,9 @@ export type GameAction =
   | { type: "ATTEMPT_BREAKTHROUGH" }
   | { type: "BREAKTHROUGH_SUCCESS" }
   | { type: "BREAKTHROUGH_FAIL" }
-  | { type: "END_GAME"; endingType: GameState["endingType"] };
+  | { type: "END_GAME"; endingType: GameState["endingType"] }
+  | { type: "SET_SECT_PATH"; sectPath: SectPath }
+  | { type: "APPLY_MODAO_PENALTY" };
 
 export interface GameEvent {
   id: string;

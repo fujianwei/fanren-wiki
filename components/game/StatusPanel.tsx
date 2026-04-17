@@ -21,8 +21,8 @@ const INJURY_LABELS = {
 export default function StatusPanel() {
   const { state } = useGame();
   const {
-    realmSlug, xp, lifespan, lifespanMax, lingshi, inventory, injury, enemies,
-    breakthroughExp, spiritRoot,
+    realmSlug, xp, lifespan, lifespanMax, injury, enemies,
+    breakthroughExp, spiritRoot, sectPath,
   } = state;
 
   const lifespanPct = lifespanMax > 0 ? (lifespan / lifespanMax) * 100 : 0;
@@ -30,20 +30,6 @@ export default function StatusPanel() {
   const canBreakthrough = xp >= 90;
   const injuryInfo = INJURY_LABELS[injury];
 
-  const mechanismItems = [
-    { id: "yangshang_dan", name: "养伤丹" },
-    { id: "huixue_dan", name: "回血丹" },
-    { id: "juqi_dan", name: "聚气丹" },
-    { id: "yanshou_dan", name: "延寿丹" },
-    { id: "dixin_dan", name: "涤心丹" },
-    { id: "xuming_dan", name: "续命丹" },
-  ].filter((item) => (inventory[item.id as keyof typeof inventory] ?? 0) > 0);
-
-  const arrays = [
-    { id: "juling_zhen", name: "聚灵阵" },
-    { id: "huti_zhen", name: "护体阵" },
-    { id: "tiangang_zhen", name: "天罡阵" },
-  ].filter((item) => (inventory[item.id as keyof typeof inventory] ?? 0) > 0);
 
   return (
     <div
@@ -54,8 +40,13 @@ export default function StatusPanel() {
         <span className="font-serif font-bold" style={{ color: "#e8f0ec" }}>
           {REALM_NAMES[realmSlug]}
         </span>
-        <span className="text-xs" style={{ color: "#6a8878" }}>
+        <span className="text-xs flex items-center gap-1" style={{ color: "#6a8878" }}>
           {spiritRoot.name}
+          {sectPath && (
+            <span className="text-xs ml-2" style={{ color: sectPath === "modao" ? "#ef4444" : sectPath === "sanxiu" ? "#d4a843" : "#4ade9a" }}>
+              {sectPath === "zhengdao" ? "正道" : sectPath === "modao" ? "魔道" : "散修"}
+            </span>
+          )}
         </span>
       </div>
 
@@ -119,19 +110,6 @@ export default function StatusPanel() {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 text-xs" style={{ color: "#b8ccc2" }}>
-        <span>灵石 ×{lingshi}</span>
-        {mechanismItems.map((item) => (
-          <span key={item.id}>
-            {item.name} ×{inventory[item.id as keyof typeof inventory]}
-          </span>
-        ))}
-        {arrays.map((item) => (
-          <span key={item.id} style={{ color: "#d4a843" }}>
-            {item.name}
-          </span>
-        ))}
-      </div>
     </div>
   );
 }

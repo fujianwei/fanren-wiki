@@ -5,6 +5,7 @@ import { useGame } from "@/components/game/GameProvider";
 import StatusPanel from "@/components/game/StatusPanel";
 import EventCard from "@/components/game/EventCard";
 import MarketModal from "@/components/game/MarketModal";
+import SectChoiceModal from "@/components/game/SectChoiceModal";
 import { calcLifespanCost, getRealmConfig, calcBreakthroughRate } from "@/lib/game/engine";
 import type { GameEvent, EventOption, EventEffect, ItemId } from "@/types/game";
 import eventsLianqi from "@/content/game/events-lianqi.json";
@@ -249,6 +250,7 @@ function GamePlay() {
   const [showInventory, setShowInventory] = useState(false);
   const [showBattle, setShowBattle] = useState(false);
   const [battleEnemy, setBattleEnemy] = useState<{ name: string; realm: RealmSlug; desc: string } | null>(null);
+  const [showSectChoice, setShowSectChoice] = useState(false);
   const [log, setLog] = useState<string[]>([]);
 
   useEffect(() => {
@@ -435,6 +437,20 @@ function GamePlay() {
               外出历练
             </button>
 
+            {state.sectPath === null && (
+              <button
+                onClick={() => setShowSectChoice(true)}
+                className="py-2.5 rounded-lg text-sm"
+                style={{
+                  backgroundColor: "#1a2820",
+                  border: "1px solid #4ade9a33",
+                  color: "#4ade9a",
+                }}
+              >
+                选择修仙道路
+              </button>
+            )}
+
             {state.xp >= 90 && (
               <button
                 onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
@@ -462,6 +478,7 @@ function GamePlay() {
 
       {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
       {showInventory && <InventoryModal onClose={() => setShowInventory(false)} />}
+      {showSectChoice && <SectChoiceModal onClose={() => setShowSectChoice(false)} />}
       {showBattle && battleEnemy && (
         <BattleModal
           enemyName={battleEnemy.name}
