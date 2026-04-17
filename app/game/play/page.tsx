@@ -8,12 +8,32 @@ import MarketModal from "@/components/game/MarketModal";
 import { calcLifespanCost, getRealmConfig, calcBreakthroughRate } from "@/lib/game/engine";
 import type { GameEvent, EventOption, EventEffect, ItemId } from "@/types/game";
 import eventsLianqi from "@/content/game/events-lianqi.json";
+import eventsZhuji from "@/content/game/events-zhuji.json";
+import eventsJiedan from "@/content/game/events-jiedan.json";
+import eventsYuanying from "@/content/game/events-yuanying.json";
+import eventsHuashen from "@/content/game/events-huashen.json";
 import { useRouter } from "next/navigation";
+import BattleModal from "@/components/game/BattleModal";
+import type { RealmSlug } from "@/types/game";
 
-const ALL_EVENTS: GameEvent[] = eventsLianqi as GameEvent[];
+const ALL_EVENTS: GameEvent[] = [
+  ...(eventsLianqi as GameEvent[]),
+  ...(eventsZhuji as GameEvent[]),
+  ...(eventsJiedan as GameEvent[]),
+  ...(eventsYuanying as GameEvent[]),
+  ...(eventsHuashen as GameEvent[]),
+];
 
-function pickEvent(realmSlug: string, history: string[]): GameEvent | null {
-  const pool = ALL_EVENTS.filter((e) => e.realmSlug === realmSlug);
+function pickEvent(realmSlug: string, history: string[], sectPath: string | null): GameEvent | null {
+  const pool = ALL_EVENTS.filter((e) => {
+    if (e.realmSlug !== realmSlug) return false;
+    // 宗门任务只有加入宗门才出现
+    if ((e as any).requires_sect && !sectPath) return false;
+    // 因果前置条件
+    const karma = (e as any).requires_karma as string | undefined;
+    if (karma && !history.includes(karma)) return false;
+    return true;
+  });
   if (pool.length === 0) return null;
   const unseen = pool.filter((e) => !history.includes(e.id));
   const candidates = unseen.length > 0 ? unseen : pool;
@@ -114,11 +134,121 @@ function BreakthroughPanel() {
   );
 }
 
+const ITEM_META: Record<string, { name: string; category: "mechanism" | "breakthrough" | "array"; desc: string }> = {
+  yangshang_dan: { name: "养伤丹", category: "mechanism", desc: "消除任意受伤" },
+  huixue_dan:    { name: "回血丹", category: "mechanism", desc: "消除受伤状态" },
+  juqi_dan:      { name: "聚气丹", category: "mechanism", desc: "修为+10（受灵根倍率）" },
+  yanshou_dan:   { name: "延寿丹", category: "mechanism", desc: "寿命+50年" },
+  dixin_dan:     { name: "涤心丹", category: "mechanism", desc: "清除负面情绪" },
+  xuming_dan:    { name: "续命丹", category: "mechanism", desc: "濒死自动保命" },
+  zhuji_dan:     { name: "筑基丹", category: "breakthrough", desc: "炼气→筑基 +25%" },
+  jucheng_dan:   { name: "降尘丹", category: "breakthrough", desc: "筑基→结丹 +25%" },
+  butian_dan:    { name: "补天丹", category: "breakthrough", desc: "结丹→元婴 +25%" },
+  jiuqu_dan:     { name: "九曲灵参丸", category: "breakthrough", desc: "心魔概率 +20%" },
+  jiangyun_dan:  { name: "绛云丹", category: "breakthrough", desc: "元婴→化神 +25%" },
+  juling_zhen:   { name: "聚灵阵", category: "array", desc: "冲关+8%，闭关+10%" },
+  huti_zhen:     { name: "护体阵", category: "array", desc: "冲关+12%，副本护盾" },
+  tiangang_zhen: { name: "天罡阵", category: "array", desc: "冲关+20%，闭关+25%" },
+};
+
+const CATEGORY_LABELS = {
+  mechanism: "机制类丹药",
+  breakthrough: "突破类丹药",
+  array: "阵法",
+};
+
+function InventoryModal({ onClose }: { onClose: () => void }) {
+  const { state, dispatch } = useGame();
+  const { inventory, lingshi } = state;
+  const [openCat, setOpenCat] = useState<Record<string, boolean>>({
+    mechanism: true,
+    breakthrough: true,
+    array: true,
+  });
+
+  const byCategory = (cat: "mechanism" | "breakthrough" | "array") =>
+    Object.entries(ITEM_META)
+      .filter(([, m]) => m.category === cat)
+      .map(([id, m]) => ({ id, ...m, count: inventory[id as keyof typeof inventory] ?? 0 }));
+
+  const totalCount = Object.values(ITEM_META).length;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div
+        className="w-full max-w-sm rounded-2xl overflow-hidden"
+        style={{ backgroundColor: "#111a16", border: "1px solid #1a2820", maxHeight: "75vh", overflowY: "auto" }}
+      >
+        {/* 标题 */}
+        <div className="flex items-center justify-between px-4 py-3 sticky top-0" style={{ backgroundColor: "#111a16", borderBottom: "1px solid #1a2820" }}>
+          <span className="font-serif font-bold text-sm" style={{ color: "#e8f0ec" }}>储物袋</span>
+          <button onClick={onClose} className="text-xs" style={{ color: "#6a8878" }}>关闭</button>
+        </div>
+
+        {(["mechanism", "breakthrough", "array"] as const).map((cat) => {
+          const items = byCategory(cat);
+          const isOpen = openCat[cat];
+          return (
+            <div key={cat}>
+              <button
+                onClick={() => setOpenCat((prev) => ({ ...prev, [cat]: !prev[cat] }))}
+                className="w-full flex items-center justify-between px-4 py-2 text-xs"
+                style={{ color: "#6a8878", borderTop: "1px solid #1a2820" }}
+              >
+                <span>{CATEGORY_LABELS[cat]}</span>
+                <span style={{ color: "#4a6a58" }}>{isOpen ? "▲" : "▼"} {items.length}种</span>
+              </button>
+              {isOpen && (
+                <div className="px-3 pb-3 flex flex-col gap-1.5">
+                  {items.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex items-center justify-between px-3 py-2 rounded-lg"
+                      style={{ backgroundColor: "#0e1610" }}
+                    >
+                      <div>
+                        <span className="text-sm" style={{ color: item.count > 0 ? "#e8f0ec" : "#4a6a58" }}>{item.name}</span>
+                        <span
+                          className="text-xs ml-2 px-1.5 py-0.5 rounded"
+                          style={{ backgroundColor: "#1a2820", color: item.count > 0 ? "#4ade9a" : "#2a3828" }}
+                        >
+                          ×{item.count}
+                        </span>
+                        <div className="text-xs mt-0.5" style={{ color: "#4a6a58" }}>{item.desc}</div>
+                      </div>
+                      {item.category === "mechanism" && item.id !== "xuming_dan" && item.count > 0 && (
+                        <button
+                          onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as any })}
+                          className="text-xs px-2 py-1 rounded ml-3 whitespace-nowrap"
+                          style={{ backgroundColor: "#1a2820", color: "#4ade9a", border: "1px solid #4ade9a33" }}
+                        >
+                          使用
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function GamePlay() {
   const { state, dispatch } = useGame();
   const router = useRouter();
   const [currentEvent, setCurrentEvent] = useState<GameEvent | null>(null);
   const [showMarket, setShowMarket] = useState(false);
+  const [showInventory, setShowInventory] = useState(false);
+  const [showBattle, setShowBattle] = useState(false);
+  const [battleEnemy, setBattleEnemy] = useState<{ name: string; realm: RealmSlug; desc: string } | null>(null);
   const [log, setLog] = useState<string[]>([]);
 
   useEffect(() => {
@@ -138,7 +268,7 @@ function GamePlay() {
   }
 
   function handleNextEvent() {
-    const event = pickEvent(state.realmSlug, state.eventHistory);
+    const event = pickEvent(state.realmSlug, state.eventHistory, state.sectPath);
     if (!event) {
       addLog("此境界已无更多事件，请冲关或闭关。");
       return;
@@ -174,8 +304,10 @@ function GamePlay() {
         positive: effect.positive ?? 0,
         negative: effect.negative ?? 0,
       });
+    } else if (effect.type === "trigger_karma") {
+      dispatch({ type: "RECORD_EVENT", eventId: effect.karmaId });
     }
-    // fate and karma effects are silent
+    // fate effects are silent
   }
 
   function handleRetreat(duration: "short" | "mid" | "long") {
@@ -200,8 +332,26 @@ function GamePlay() {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
-      <div className="mb-4">
-        <StatusPanel />
+      {/* 顶部：状态面板 + 储物袋按钮 */}
+      <div className="mb-4 flex items-start gap-2">
+        <div className="flex-1">
+          <StatusPanel />
+        </div>
+        <button
+          onClick={() => setShowInventory(true)}
+          className="mt-0 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap"
+          style={{ backgroundColor: "#111a16", border: "1px solid #1a2820", color: "#6a8878" }}
+        >
+          储物袋
+          {Object.values(state.inventory).reduce((s, v) => s + (v ?? 0), 0) > 0 && (
+            <span
+              className="ml-1.5 px-1.5 py-0.5 rounded-full text-xs"
+              style={{ backgroundColor: "#1a2820", color: "#4ade9a" }}
+            >
+              {Object.values(state.inventory).reduce((s, v) => s + (v ?? 0), 0)}
+            </span>
+          )}
+        </button>
       </div>
 
       {state.phase === "breakthrough" ? (
@@ -252,6 +402,16 @@ function GamePlay() {
               前往灵市
             </button>
 
+            <button
+              onClick={() => {
+                setBattleEnemy({ name: "野外散修", realm: state.realmSlug, desc: "一名与你同境界的散修，眼神凶狠。" });
+                setShowBattle(true);
+              }}
+              className="btn-secondary py-2.5 rounded-lg text-sm"
+            >
+              外出历练
+            </button>
+
             {state.xp >= 90 && (
               <button
                 onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
@@ -278,6 +438,17 @@ function GamePlay() {
       )}
 
       {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
+      {showInventory && <InventoryModal onClose={() => setShowInventory(false)} />}
+      {showBattle && battleEnemy && (
+        <BattleModal
+          enemyName={battleEnemy.name}
+          enemyRealm={battleEnemy.realm}
+          enemyDesc={battleEnemy.desc}
+          onWin={() => {}}
+          onLose={() => {}}
+          onClose={() => { setShowBattle(false); setBattleEnemy(null); }}
+        />
+      )}
     </div>
   );
 }
