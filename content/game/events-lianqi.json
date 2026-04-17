@@ -1,0 +1,70 @@
+[
+  {
+    "id": "lq_001",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "山中偶遇受伤散修",
+    "description": "修炼途中，你遇到一位受伤的散修倒在路边，他神情警惕，但身上似乎有颗品质不错的丹药。",
+    "options": [
+      {
+        "text": "出手救治，以诚相待",
+        "effects": [
+          { "type": "fate", "amount": 3 },
+          { "type": "lingshi", "amount": -20 }
+        ]
+      },
+      {
+        "text": "视而不见，继续赶路",
+        "effects": []
+      },
+      {
+        "text": "趁机索要丹药，以武力威胁",
+        "effects": [
+          { "type": "lingshi", "amount": 80 },
+          { "type": "emotion", "positive": 0, "negative": 8 },
+          { "type": "fate", "amount": -6 },
+          { "type": "add_enemy", "enemyId": "enemy_lq_001" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_002",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "宗门任务：采集灵草",
+    "description": "宗门布告栏上有一则任务：前往后山采集三株灵草，报酬为100灵石。",
+    "options": [
+      {
+        "text": "接取任务，前往后山",
+        "effects": [
+          { "type": "lingshi", "amount": 100 },
+          { "type": "emotion", "positive": 6, "negative": 0 }
+        ]
+      },
+      {
+        "text": "暂时不接，继续修炼",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "lq_003",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "karma",
+    "title": "昔日恩情回报",
+    "description": "你曾救治过的散修找上门来，带来了一颗筑基丹作为报答，神情真诚。",
+    "options": [
+      {
+        "text": "收下丹药，道谢",
+        "effects": [
+          { "type": "item", "itemId": "zhuji_dan", "count": 1 },
+          { "type": "emotion", "positive": 5, "negative": 0 }
+        ]
+      }
+    ]
+  }
+]
