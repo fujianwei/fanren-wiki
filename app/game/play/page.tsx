@@ -275,7 +275,8 @@ function GamePlay() {
     }
     const cost = calcLifespanCost(state.realmSlug, "event", state.sectPath === "modao");
     dispatch({ type: "CONSUME_LIFESPAN", years: cost });
-    dispatch({ type: "ADD_XP", points: 10 });
+    const injuryXpMult = { none: 1.0, light: 0.8, heavy: 0.5, dying: 0.2 }[state.injury] ?? 1.0;
+    dispatch({ type: "ADD_XP", points: Math.round(10 * injuryXpMult) });
     dispatch({ type: "RECORD_EVENT", eventId: event.id });
     setCurrentEvent(event);
     addLog(`消耗 ${cost} 年寿命`);
@@ -296,8 +297,14 @@ function GamePlay() {
       dispatch({ type: "ADD_ITEM", itemId: effect.itemId, count: effect.count });
       addLog(`获得道具`);
     } else if (effect.type === "injury") {
-      dispatch({ type: "SET_INJURY", level: effect.level });
-      addLog(`受伤：${effect.level}`);
+      // 叠加规则：已有轻伤再受伤→重伤，已有重伤再受伤→濒死
+      const currentInjury = state.injury;
+      let newLevel = effect.level;
+      if (currentInjury === "light" && effect.level === "light") newLevel = "heavy";
+      else if (currentInjury === "heavy" && (effect.level === "light" || effect.level === "heavy")) newLevel = "dying";
+      else if (currentInjury === "dying") newLevel = "dying";
+      dispatch({ type: "SET_INJURY", level: newLevel });
+      addLog(`受伤：${newLevel === "light" ? "轻伤" : newLevel === "heavy" ? "重伤" : "濒死"}`);
     } else if (effect.type === "emotion") {
       dispatch({
         type: "ADD_EMOTION",
@@ -311,13 +318,19 @@ function GamePlay() {
   }
 
   function handleRetreat(duration: "short" | "mid" | "long") {
+    // 濒死无法主动行动
+    if (state.injury === "dying") {
+      addLog("濒死状态下无法闭关，请先治疗。");
+      return;
+    }
     const realm = getRealmConfig(state.realmSlug);
     const cost = realm.retreatCost[duration];
     const xpBase = realm.retreatXp[duration];
+    const injuryMult = state.injury === "heavy" ? 0.5 : state.injury === "light" ? 0.8 : 1.0;
     dispatch({ type: "CONSUME_LIFESPAN", years: cost });
-    dispatch({ type: "ADD_XP", points: xpBase });
+    dispatch({ type: "ADD_XP", points: Math.round(xpBase * injuryMult) });
     const label = duration === "short" ? "短期" : duration === "mid" ? "中期" : "长期";
-    addLog(`闭关（${label}）：消耗 ${cost} 年`);
+    addLog(`闭关（${label}）：消耗 ${cost} 年${state.injury !== "none" ? `，受伤减益×${injuryMult}` : ""}`);
   }
 
   const NEXT_REALM_NAMES: Record<string, string> = {
@@ -361,6 +374,16 @@ function GamePlay() {
       ) : currentEvent ? (
         <div className="mb-4">
           <EventCard event={currentEvent} onChoose={(option) => handleEventChoice(option)} />
+        </div>
+      ) : state.injury === "dying" ? (
+        <div
+          className="rounded-xl p-6 text-center mb-4"
+          style={{ backgroundColor: "#111a16", border: "1px solid #7f1d1d" }}
+        >
+          <div className="text-sm font-bold mb-2" style={{ color: "#ef4444" }}>濒死状态</div>
+          <p className="text-xs" style={{ color: "#6a8878" }}>
+            你已濒临陨落，无法进行任何主动行动。<br />请使用养伤丹或续命丹治疗。
+          </p>
         </div>
       ) : (
         <div
