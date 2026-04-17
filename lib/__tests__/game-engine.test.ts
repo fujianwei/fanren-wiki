@@ -113,7 +113,7 @@ describe("isBreakthroughUnlocked", () => {
 });
 
 describe("calcBreakthroughRate", () => {
-  it("炼气期修为100%基础70%", () => {
+  it("炼气期修为100%基础30%", () => {
     const rate = calcBreakthroughRate({
       realmSlug: "lianqi",
       xp: 100,
@@ -123,9 +123,9 @@ describe("calcBreakthroughRate", () => {
       rootDamageCount: 0,
       breakthroughExp: 0,
     });
-    expect(rate).toBeCloseTo(0.70, 2);
+    expect(rate).toBeCloseTo(0.30, 2);
   });
-  it("修为90%基础×0.5=35%", () => {
+  it("修为90%基础×0.5=15%", () => {
     const rate = calcBreakthroughRate({
       realmSlug: "lianqi",
       xp: 90,
@@ -135,9 +135,9 @@ describe("calcBreakthroughRate", () => {
       rootDamageCount: 0,
       breakthroughExp: 0,
     });
-    expect(rate).toBeCloseTo(0.35, 2);
+    expect(rate).toBeCloseTo(0.15, 2);
   });
-  it("修为95%基础×0.7=49%", () => {
+  it("修为95%基础×0.7=21%", () => {
     const rate = calcBreakthroughRate({
       realmSlug: "lianqi",
       xp: 95,
@@ -147,7 +147,7 @@ describe("calcBreakthroughRate", () => {
       rootDamageCount: 0,
       breakthroughExp: 0,
     });
-    expect(rate).toBeCloseTo(0.49, 2);
+    expect(rate).toBeCloseTo(0.21, 2);
   });
   it("筑基丹+15%", () => {
     const base = calcBreakthroughRate({
@@ -160,7 +160,7 @@ describe("calcBreakthroughRate", () => {
     });
     expect(withDan - base).toBeCloseTo(0.15, 2);
   });
-  it("根基稳固+10%", () => {
+  it("根基稳固+15%", () => {
     const base = calcBreakthroughRate({
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
@@ -169,9 +169,9 @@ describe("calcBreakthroughRate", () => {
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 0, rootIntact: true, rootDamageCount: 0, breakthroughExp: 0,
     });
-    expect(intact - base).toBeCloseTo(0.10, 2);
+    expect(intact - base).toBeCloseTo(0.15, 2);
   });
-  it("灵石500=+3%", () => {
+  it("灵石500=+2%", () => {
     const base = calcBreakthroughRate({
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
@@ -180,18 +180,18 @@ describe("calcBreakthroughRate", () => {
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 500, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
     });
-    expect(with500 - base).toBeCloseTo(0.03, 2);
+    expect(with500 - base).toBeCloseTo(0.02, 2);
   });
-  it("灵石上限+9%（9000灵石）", () => {
+  it("灵石上限+5%（2500灵石）", () => {
     const base = calcBreakthroughRate({
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
     });
-    const with9000 = calcBreakthroughRate({
+    const with2500 = calcBreakthroughRate({
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
-      lingshi: 9000, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
+      lingshi: 2500, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
     });
-    expect(with9000 - base).toBeCloseTo(0.09, 2);
+    expect(with2500 - base).toBeCloseTo(0.05, 2);
   });
   it("续命丹副作用每次-5%，2次=-10%", () => {
     const clean = calcBreakthroughRate({
@@ -298,7 +298,7 @@ describe("getRealmConfig", () => {
     const config = getRealmConfig("lianqi");
     expect(config.slug).toBe("lianqi");
     expect(config.normalLifespan).toBe(100);
-    expect(config.breakthroughRate).toBe(0.70);
+    expect(config.breakthroughRate).toBe(0.30);
   });
   it("获取结丹期配置", () => {
     const config = getRealmConfig("jiedan");
