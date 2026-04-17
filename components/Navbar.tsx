@@ -39,6 +39,15 @@ export default function Navbar() {
           >
             踏入仙途
           </Link>
+          <Link
+            href="/game"
+            className="font-medium transition-colors"
+            style={{ color: "#d4a843" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#e8c86a")}
+            onMouseLeave={e => (e.currentTarget.style.color = "#d4a843")}
+          >
+            修仙模拟
+          </Link>
         </div>
       </div>
     </nav>
