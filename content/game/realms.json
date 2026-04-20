@@ -9,7 +9,7 @@
     "battleCost": { "min": 2, "max": 4 },
     "retreatCost": { "short": 3, "mid": 8, "long": 15 },
     "retreatXp": { "short": 5, "mid": 10, "long": 18 },
-    "breakthroughRate": 0.70,
+    "breakthroughRate": 0.30,
     "failDeathRate": 0.02,
     "breakthroughCost": 8
   },
@@ -23,7 +23,7 @@
     "battleCost": { "min": 4, "max": 6 },
     "retreatCost": { "short": 8, "mid": 20, "long": 40 },
     "retreatXp": { "short": 5, "mid": 10, "long": 18 },
-    "breakthroughRate": 0.50,
+    "breakthroughRate": 0.20,
     "failDeathRate": 0.05,
     "breakthroughCost": 25
   },
@@ -37,7 +37,7 @@
     "battleCost": { "min": 10, "max": 15 },
     "retreatCost": { "short": 20, "mid": 50, "long": 100 },
     "retreatXp": { "short": 5, "mid": 10, "long": 18 },
-    "breakthroughRate": 0.20,
+    "breakthroughRate": 0.08,
     "failDeathRate": 0.90,
     "breakthroughCost": 80
   },
@@ -51,7 +51,7 @@
     "battleCost": { "min": 20, "max": 30 },
     "retreatCost": { "short": 50, "mid": 120, "long": 250 },
     "retreatXp": { "short": 5, "mid": 10, "long": 18 },
-    "breakthroughRate": 0.35,
+    "breakthroughRate": 0.15,
     "failDeathRate": 0.50,
     "breakthroughCost": 200
   },

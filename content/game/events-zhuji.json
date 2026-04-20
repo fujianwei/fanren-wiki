@@ -1,0 +1,722 @@
+[
+  {
+    "id": "zj_001",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "karma",
+    "title": "落难的结丹修士",
+    "description": "山道上，一位结丹修士被人重创，勉强撑着一口气。他身上的气息显示修为远在你之上，却如今狼狈至此。",
+    "options": [
+      {
+        "text": "出手相救，消耗灵石治疗",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -100
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "zj_saved_jiedan"
+          }
+        ]
+      },
+      {
+        "text": "视而不见，此事与我无关",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -3
+          }
+        ]
+      },
+      {
+        "text": "趁火打劫，搜走他的储物袋",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 400
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 12
+          },
+          {
+            "type": "fate",
+            "amount": -8
+          },
+          {
+            "type": "add_enemy",
+            "enemyId": "enemy_zj_001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_002",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "karma",
+    "requires_karma": "zj_saved_jiedan",
+    "title": "结丹前辈的回报",
+    "description": "你曾救助的结丹修士寻上门来，他已痊愈，气息稳健。他说：「那日若非你出手，老夫早已陨落。此物送你，望你早日结丹。」",
+    "options": [
+      {
+        "text": "恭敬收下",
+        "effects": [
+          {
+            "type": "item",
+            "itemId": "jucheng_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_003",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "battle",
+    "title": "仇家上门",
+    "description": "炼气期结下的仇家终于找上门来，他已突破筑基，修为与你相当，眼中满是怨恨。「上次让你跑了，这次休想！」",
+    "options": [
+      {
+        "text": "正面迎战",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 150
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "消耗灵石布阵防御，以守待攻",
+        "requires": {
+          "lingshi": 200
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -200
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "转身逃跑",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -150
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -2
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "zj_004",
+    "realmSlug": "zhuji",
+    "type": "active",
+    "category": "normal",
+    "title": "灵脉采集",
+    "description": "你发现了一处隐秘的天然灵脉，灵气充沛，在此修炼一段时间可大有裨益。但此地并非无主，随时可能有人前来。",
+    "options": [
+      {
+        "text": "快速采集，尽快离开",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 300
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "长期驻守，深度修炼",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 200
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 2
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "放弃，不想惹麻烦",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "zj_005",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "修炼瓶颈",
+    "description": "你在筑基中期陷入瓶颈，修为停滞不前已有数月。一位师兄建议你尝试「以战养修」，以战斗刺激灵力突破；另一位建议你静心闭关。",
+    "options": [
+      {
+        "text": "以战养修，主动出去历练",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 100
+          },
+          {
+            "type": "item",
+            "itemId": "yao_dan",
+            "count": 1
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "静心闭关，厚积薄发",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 15
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "zj_006",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "坊市奇遇",
+    "description": "在坊市中，你发现一个摊位上摆着一件外观普通的法器，摊主要价500灵石。旁边一位老修士偷偷告诉你，这东西他识得，实际价值远超此数。",
+    "options": [
+      {
+        "text": "花500灵石购入",
+        "requires": {
+          "lingshi": 500
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -500
+          },
+          {
+            "type": "item",
+            "itemId": "huti_zhen",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "半信半疑，放弃购买",
+        "effects": []
+      },
+      {
+        "text": "压价，出300灵石",
+        "requires": {
+          "lingshi": 300
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -300
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_007",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "遭遇天劫前兆",
+    "description": "修炼中你感到天地异变，一股莫名的压迫感笼罩全身，随后风平浪静。老修士说这是小型天劫的前兆，你的修为引起了天道注意。",
+    "options": [
+      {
+        "text": "正面迎接，以此磨砺意志",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 20
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "消耗灵石布阵抵御",
+        "requires": {
+          "lingshi": 300
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -300
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "zj_008",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "同门反目",
+    "description": "一位曾经交好的同门突然翻脸，声称你偷了他的修炼资源，当众指责你，要求你赔偿500灵石。你知道这是无中生有，但众目睽睽之下难以辩解。",
+    "options": [
+      {
+        "text": "据理力争，当众揭穿他",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 3
+          },
+          {
+            "type": "add_enemy",
+            "enemyId": "enemy_zj_002"
+          }
+        ]
+      },
+      {
+        "text": "息事宁人，赔偿了事",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -300
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 6
+          }
+        ]
+      },
+      {
+        "text": "找长老评理",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 100
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_009",
+    "realmSlug": "zhuji",
+    "type": "active",
+    "category": "dungeon",
+    "title": "废弃矿洞探索",
+    "description": "听闻附近有一座废弃的灵石矿洞，早年被开采殆尽，但近来有人在其中发现了残余灵脉。矿洞深处危机四伏，但收益可观。",
+    "options": [
+      {
+        "text": "深入探索，不到最深处不回头",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 500
+          },
+          {
+            "type": "item",
+            "itemId": "yangshang_dan",
+            "count": 1
+          },
+          {
+            "type": "injury",
+            "level": "heavy"
+          }
+        ]
+      },
+      {
+        "text": "浅尝即止，取到就走",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 200
+          }
+        ]
+      },
+      {
+        "text": "不去，风险太大",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "zj_010",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "灵兽幼崽",
+    "description": "你在山中发现了一只受伤的灵兽幼崽，它望着你的眼神清澈无辜。收养它需要花费大量灵石喂养，但灵兽向来重情义。",
+    "options": [
+      {
+        "text": "收养它，花灵石照料",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -200
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 7,
+            "negative": 0
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "zj_adopted_beast"
+          }
+        ]
+      },
+      {
+        "text": "治好它，放归山林",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -50
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "不管，继续赶路",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "zj_011",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "karma",
+    "requires_karma": "zj_adopted_beast",
+    "title": "灵兽报恩",
+    "description": "你收养的灵兽幼崽已经长大，它在你修炼时守护左右。一次遭遇偷袭时，它挺身而出替你挡下了致命一击，自己却身受重伤。",
+    "options": [
+      {
+        "text": "花灵石为它治伤",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -100
+          },
+          {
+            "type": "item",
+            "itemId": "juling_zhen",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_012",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "黑市交易",
+    "description": "一个神秘人悄悄找到你，说手中有一件来路不明的宝贝，价格公道，但绝不能声张。他拿出一颗丹药，看成色应是降尘丹。",
+    "options": [
+      {
+        "text": "花600灵石购入",
+        "requires": {
+          "lingshi": 600
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -600
+          },
+          {
+            "type": "item",
+            "itemId": "jucheng_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "来路不明，拒绝",
+        "effects": []
+      },
+      {
+        "text": "举报此人，换取宗门奖励",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 150
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          },
+          {
+            "type": "fate",
+            "amount": -3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_013",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "修炼资源被盗",
+    "description": "你储存在洞府的一批灵石和丹药不翼而飞，显然是被人盗走。追查之下发现是一名低修为散修所为，已被抓获。",
+    "options": [
+      {
+        "text": "严惩，追回全部损失",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 200
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 4
+          }
+        ]
+      },
+      {
+        "text": "看他可怜，追回一半，放他离开",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 100
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "text": "全部追回，再给他一些盘缠",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 50
+          },
+          {
+            "type": "emotion",
+            "positive": 7,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_014",
+    "realmSlug": "zhuji",
+    "type": "passive",
+    "category": "normal",
+    "title": "丹药副作用发作",
+    "description": "你之前服用了过多聚气丹催修，如今副作用发作，气息紊乱，需要静养或花费灵石购买稳固气息的药材。",
+    "options": [
+      {
+        "text": "花200灵石购药调理",
+        "requires": {
+          "lingshi": 200
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -200
+          }
+        ]
+      },
+      {
+        "text": "硬撑，靠自身调节",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "zj_015",
+    "realmSlug": "zhuji",
+    "type": "active",
+    "category": "normal",
+    "title": "坊市散活：护送商队",
+    "description": "坊市告示栏上有一则散活：护送一批珍贵药材穿越险地，报酬丰厚。雇主说路上有强盗出没，需要有一定实力的修士护送。",
+    "options": [
+      {
+        "text": "接下任务",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 250
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "不接，风险太高",
+        "effects": []
+      }
+    ]
+  }
+]

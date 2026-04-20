@@ -6,7 +6,8 @@ export type ItemId =
   | "yangshang_dan" | "huixue_dan" | "juqi_dan" | "yanshou_dan"
   | "dixin_dan" | "xuming_dan"
   | "zhuji_dan" | "jucheng_dan" | "butian_dan" | "jiuqu_dan" | "jiangyun_dan"
-  | "juling_zhen" | "huti_zhen" | "tiangang_zhen";
+  | "juling_zhen" | "huti_zhen" | "tiangang_zhen"
+  | "yao_dan";
 
 export interface SpiritRoot {
   type: SpiritRootType;
@@ -43,6 +44,7 @@ export interface ItemConfig {
 export type ItemEffect =
   | { type: "heal_injury" }
   | { type: "add_xp"; amount: number }
+  | { type: "add_xp_flat"; amount: number }
   | { type: "add_lifespan"; amount: number }
   | { type: "clear_emotion" }
   | { type: "auto_save" }
@@ -124,6 +126,7 @@ export interface EventOption {
 
 export type EventEffect =
   | { type: "lingshi"; amount: number }
+  | { type: "xp"; amount: number }
   | { type: "item"; itemId: ItemId; count: number }
   | { type: "injury"; level: InjuryLevel }
   | { type: "emotion"; positive?: number; negative?: number }

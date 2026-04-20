@@ -1,0 +1,765 @@
+[
+  {
+    "id": "jd_001",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "karma",
+    "title": "弱小修士求援",
+    "description": "一名筑基期修士跌跌撞撞地跑来，身后有数名结丹期修士追杀。他跪地求你出手相助，说追他的人是魔修，手段残忍。",
+    "options": [
+      {
+        "text": "出手相救，与魔修正面交锋",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "jd_saved_weak"
+          }
+        ]
+      },
+      {
+        "text": "暗中协助，制造混乱让他逃脱",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "jd_saved_weak"
+          }
+        ]
+      },
+      {
+        "text": "此事与我无关，离开",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_002",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "karma",
+    "requires_karma": "jd_saved_weak",
+    "title": "被救者的馈赠",
+    "description": "你曾救下的那名筑基修士，如今已突破结丹，专程前来致谢。他说：「当日若非前辈出手，晚辈早已魂飞魄散。此物乃晚辈毕生积蓄，请前辈笑纳。」",
+    "options": [
+      {
+        "text": "收下谢礼",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 2000
+          },
+          {
+            "type": "item",
+            "itemId": "butian_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ]
+      },
+      {
+        "text": "婉拒灵石，只收补天丹",
+        "effects": [
+          {
+            "type": "item",
+            "itemId": "butian_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_003",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "battle",
+    "title": "强敌突袭",
+    "description": "一名元婴期修士突然出现，眼中闪烁着危险的光芒。「你身上有我需要的东西。」他缓缓拔出法器，修为压制令你喘不过气。",
+    "options": [
+      {
+        "text": "拼死一战",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "heavy"
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "text": "丢出一半灵石，趁乱逃脱",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -1000
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -2
+          }
+        ]
+      },
+      {
+        "text": "消耗护体阵抵御，全力反击",
+        "requires": {
+          "itemId": "huti_zhen"
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 500
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "jd_004",
+    "realmSlug": "jiedan",
+    "type": "active",
+    "category": "dungeon",
+    "title": "古修遗迹探索",
+    "description": "你发现了一处上古修士的遗迹，封印已经松动。遗迹内部危机四伏，但据说藏有极为珍贵的修炼资源，甚至可能有补天丹的存在。",
+    "options": [
+      {
+        "text": "全力探索，务必找到补天丹",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 3000
+          },
+          {
+            "type": "item",
+            "itemId": "butian_dan",
+            "count": 1
+          },
+          {
+            "type": "injury",
+            "level": "heavy"
+          }
+        ]
+      },
+      {
+        "text": "稳扎稳打，取能拿到的就走",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 1500
+          },
+          {
+            "type": "item",
+            "itemId": "yangshang_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "风险太大，放弃",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "jd_005",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "心魔初现",
+    "description": "修炼中，你突然陷入幻境，过往的种种执念化为心魔，令你无法平静。你清醒地意识到：若不能放下，结丹冲元婴时必有大患。",
+    "options": [
+      {
+        "text": "直面心魔，强行压制",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 10
+          }
+        ]
+      },
+      {
+        "text": "花灵石请高僧做法，化解心魔",
+        "requires": {
+          "lingshi": 500
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -500
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "放下执念，以平常心接受",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 20
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "jd_006",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "修仙界大会",
+    "description": "附近举办了一场修仙界的交流大会，各路高手云集。你可以参加切磋，也可以在会场的交易区寻找宝物。",
+    "options": [
+      {
+        "text": "参加切磋，以战会友",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 500
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "在交易区寻宝",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -800
+          },
+          {
+            "type": "item",
+            "itemId": "jiuqu_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "观摩学习，不参与",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 15
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "jd_007",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "魔修诱惑",
+    "description": "一名魔修找上你，说他手中有一部奇功，修炼速度是正道功法的两倍，愿意低价出售。他说：「修仙之道，成者为王，何必在乎手段？」",
+    "options": [
+      {
+        "text": "断然拒绝",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "text": "花1000灵石购入",
+        "requires": {
+          "lingshi": 1000
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -1000
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 3
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_008",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "无辜者求助",
+    "description": "一名凡人老者跪在路边，说他的孙女被一名修士掳走，索要千灵石赎金。他倾家荡产也只凑了200灵石，泣不成声地恳求你出手相助。",
+    "options": [
+      {
+        "text": "出手救人，不要赎金",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 7
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "收下200灵石，出手救人",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 200
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "凡人之事，与我无关",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -6
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_009",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "炼丹失败",
+    "description": "你尝试自行炼制丹药，不料火候失控，丹炉爆炸，不仅损失了大量材料，还波及到了附近的建筑。",
+    "options": [
+      {
+        "text": "赔偿损失，承担责任",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -600
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "text": "悄悄溜走，假装不知道",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_010",
+    "realmSlug": "jiedan",
+    "type": "active",
+    "category": "normal",
+    "title": "拍卖会",
+    "description": "一场高规格的拍卖会在附近举行，据说有多件稀世珍宝上拍。你混入其中，发现一颗品相极佳的补天丹正在竞拍，起拍价30000灵石。",
+    "options": [
+      {
+        "text": "参与竞拍（需30000灵石）",
+        "requires": {
+          "lingshi": 30000
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -35000
+          },
+          {
+            "type": "item",
+            "itemId": "butian_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "观摩，寻找其他机会",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 500
+          },
+          {
+            "type": "emotion",
+            "positive": 2,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_011",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "旧友背叛",
+    "description": "你多年的道友突然出现，却带着一群人将你围住。他说：「对不住了，有人出了大价钱买你的人头。」眼中满是复杂之色。",
+    "options": [
+      {
+        "text": "愤而反击，与之决裂",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "lingshi",
+            "amount": 300
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 10
+          },
+          {
+            "type": "fate",
+            "amount": -5
+          }
+        ]
+      },
+      {
+        "text": "质问他为何背叛，给他机会解释",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -500
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 5
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_012",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "灵脉争夺",
+    "description": "你发现的灵脉被另一名结丹修士捷足先登，他傲慢地说：「先到先得，你来晚了。」但此地足够两人共同修炼。",
+    "options": [
+      {
+        "text": "强行驱逐，独占灵脉",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 800
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 6
+          },
+          {
+            "type": "add_enemy",
+            "enemyId": "enemy_jd_001"
+          }
+        ]
+      },
+      {
+        "text": "提议共享，各取所需",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 400
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "text": "礼让，另寻他处",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_013",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "天材地宝现世",
+    "description": "一株千年灵芝在你修炼的山头破土而出，散发着浓郁的灵气。此物价值连城，但它的出现必然会引来众多修士觊觎。",
+    "options": [
+      {
+        "text": "立刻采摘，快速离开",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 2000
+          },
+          {
+            "type": "item",
+            "itemId": "yanshou_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "守株待兔，等它成熟再采",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 4000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jd_014",
+    "realmSlug": "jiedan",
+    "type": "passive",
+    "category": "normal",
+    "title": "渡劫失败的前辈",
+    "description": "你遇到一位渡劫失败、元神受损的元婴前辈，他修为大损，如今只剩结丹境。他神情落寞，说自己已无力再次冲关，问你是否愿意接受他的传承。",
+    "options": [
+      {
+        "text": "恭敬接受传承",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 25
+          },
+          {
+            "type": "item",
+            "itemId": "jiuqu_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          }
+        ]
+      },
+      {
+        "text": "拒绝，此等传承来路不正",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 2
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "jd_015",
+    "realmSlug": "jiedan",
+    "type": "active",
+    "category": "normal",
+    "title": "坊市散活：讨伐妖兽",
+    "description": "坊市发布了一则高额悬赏：一头结丹期妖兽肆虐附近村落，悬赏1500灵石。妖兽实力与你相当，胜负难料。",
+    "options": [
+      {
+        "text": "接取任务，前去讨伐",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 1500
+          },
+          {
+            "type": "item",
+            "itemId": "yao_dan",
+            "count": 2
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "text": "不接，风险太高",
+        "effects": []
+      }
+    ]
+  }
+]

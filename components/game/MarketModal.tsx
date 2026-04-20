@@ -18,6 +18,11 @@ interface ItemData {
   sellPrice: number | null;
 }
 
+// 境界提升类：金色边框
+const BREAKTHROUGH_ITEMS = new Set(["zhuji_dan", "jucheng_dan", "butian_dan", "jiangyun_dan"]);
+// 超级稀有：整体金色
+const ULTRA_RARE_ITEMS = new Set(["butian_dan", "jiuqu_dan", "tiangang_zhen"]);
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -117,37 +122,53 @@ export default function MarketModal({ onClose }: Props) {
 
         {tab === "buy" && (
           <div className="flex flex-col gap-2">
-            {shopItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between px-3 py-2 rounded-lg"
-                style={{ backgroundColor: "#1a2820", border: "1px solid #2a3828" }}
-              >
-                <div>
-                  <div className="text-sm font-medium" style={{ color: "#e8f0ec" }}>
-                    {item.name}
-                  </div>
-                  <div className="text-xs" style={{ color: "#6a8878" }}>
-                    {item.description}
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleBuy(item)}
-                  disabled={!item.buyPrice || lingshi < item.buyPrice}
-                  className="ml-3 px-3 py-1 rounded-full text-xs whitespace-nowrap"
-                  style={{
-                    backgroundColor:
-                      !item.buyPrice || lingshi < item.buyPrice ? "#1a2820" : "#4ade9a",
-                    color:
-                      !item.buyPrice || lingshi < item.buyPrice ? "#4a6a58" : "#0a0e0d",
-                    cursor:
-                      !item.buyPrice || lingshi < item.buyPrice ? "not-allowed" : "pointer",
-                  }}
+            {shopItems.map((item) => {
+              const isUltra = ULTRA_RARE_ITEMS.has(item.id);
+              const isBreakthrough = BREAKTHROUGH_ITEMS.has(item.id);
+              const canBuy = !!(item.buyPrice && lingshi >= item.buyPrice);
+
+              const bg = isUltra ? "#1e1608" : "#1a2820";
+              const border = isUltra ? "1px solid #d4a843aa" : isBreakthrough ? "1px solid #d4a84355" : "1px solid #2a3828";
+              const shadow = isUltra ? "0 0 16px rgba(212,168,67,0.15)" : "none";
+              const nameColor = isUltra ? "#e8c86a" : isBreakthrough ? "#d4a843" : "#e8f0ec";
+
+              return (
+                <div
+                  key={item.id}
+                  className="relative flex items-center justify-between px-3 py-2.5 rounded-xl"
+                  style={{ backgroundColor: bg, border, boxShadow: shadow }}
                 >
-                  {item.buyPrice} 灵石
-                </button>
-              </div>
-            ))}
+                  {isUltra && (
+                    <div
+                      className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded"
+                      style={{ backgroundColor: "#d4a84333", color: "#d4a843", fontSize: "10px", lineHeight: 1.4 }}
+                    >
+                      ✦ 稀世
+                    </div>
+                  )}
+                  <div className="pr-12">
+                    <div className="text-sm font-medium" style={{ color: nameColor }}>
+                      {item.name}
+                    </div>
+                    <div className="text-xs mt-0.5" style={{ color: "#6a8878" }}>
+                      {item.description}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleBuy(item)}
+                    disabled={!canBuy}
+                    className="ml-3 px-3 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0"
+                    style={{
+                      backgroundColor: canBuy ? (isUltra || isBreakthrough ? "#d4a843" : "#4ade9a") : "#1a2820",
+                      color: canBuy ? "#0a0e0d" : "#4a6a58",
+                      cursor: canBuy ? "pointer" : "not-allowed",
+                    }}
+                  >
+                    {item.buyPrice} 灵石
+                  </button>
+                </div>
+              );
+            })}
             <p className="text-xs text-center mt-2" style={{ color: "#4a6a58" }}>
               每次进入市场随机展示3件商品
             </p>

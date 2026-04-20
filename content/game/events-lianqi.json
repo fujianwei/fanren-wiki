@@ -3,15 +3,25 @@
     "id": "lq_001",
     "realmSlug": "lianqi",
     "type": "passive",
-    "category": "normal",
+    "category": "karma",
     "title": "山中偶遇受伤散修",
     "description": "修炼途中，你遇到一位受伤的散修倒在路边，他神情警惕，但身上似乎有颗品质不错的丹药。",
     "options": [
       {
         "text": "出手救治，以诚相待",
         "effects": [
-          { "type": "fate", "amount": 3 },
-          { "type": "lingshi", "amount": -20 }
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "lingshi",
+            "amount": -20
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "lq_helped_wanderer"
+          }
         ]
       },
       {
@@ -21,10 +31,23 @@
       {
         "text": "趁机索要丹药，以武力威胁",
         "effects": [
-          { "type": "lingshi", "amount": 80 },
-          { "type": "emotion", "positive": 0, "negative": 8 },
-          { "type": "fate", "amount": -6 },
-          { "type": "add_enemy", "enemyId": "enemy_lq_001" }
+          {
+            "type": "lingshi",
+            "amount": 80
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -6
+          },
+          {
+            "type": "add_enemy",
+            "enemyId": "enemy_lq_001"
+          }
         ]
       }
     ]
@@ -34,14 +57,22 @@
     "realmSlug": "lianqi",
     "type": "active",
     "category": "normal",
+    "requires_sect": true,
     "title": "宗门任务：采集灵草",
-    "description": "宗门布告栏上有一则任务：前往后山采集三株灵草，报酬为100灵石。",
+    "description": "宗门布告栏上有一则任务：前往后山采集三株灵草，报酬为100灵石。路途平坦，风险不大。",
     "options": [
       {
         "text": "接取任务，前往后山",
         "effects": [
-          { "type": "lingshi", "amount": 100 },
-          { "type": "emotion", "positive": 6, "negative": 0 }
+          {
+            "type": "lingshi",
+            "amount": 100
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
         ]
       },
       {
@@ -51,20 +82,552 @@
     ]
   },
   {
+    "id": "lq_002b",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "坊市散活：护送商队",
+    "description": "坊市告示栏上有一则散活：护送一支小型商队穿越山道，报酬80灵石。雇主说路上偶有妖兽出没，但整体安全。",
+    "options": [
+      {
+        "text": "接下这份活计",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 80
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "不接，继续修炼",
+        "effects": []
+      }
+    ]
+  },
+  {
     "id": "lq_003",
     "realmSlug": "lianqi",
     "type": "passive",
     "category": "karma",
+    "requires_karma": "lq_helped_wanderer",
     "title": "昔日恩情回报",
-    "description": "你曾救治过的散修找上门来，带来了一颗筑基丹作为报答，神情真诚。",
+    "description": "你曾救治过的散修找上门来，带来了一颗筑基丹作为报答，神情真诚地说：「此恩此德，铭记于心。」",
     "options": [
       {
         "text": "收下丹药，道谢",
         "effects": [
-          { "type": "item", "itemId": "zhuji_dan", "count": 1 },
-          { "type": "emotion", "positive": 5, "negative": 0 }
+          {
+            "type": "item",
+            "itemId": "zhuji_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
         ]
       }
     ]
+  },
+  {
+    "id": "lq_004",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "山洞里发现前人遗留",
+    "description": "你在山中偶然发现一处隐蔽山洞，洞内有前辈修士留下的遗物，一个锈迹斑斑的储物袋，里面不知有何物。",
+    "options": [
+      {
+        "text": "取走储物袋",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 150
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 3
+          }
+        ]
+      },
+      {
+        "text": "原封不动，留给有缘人",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_005",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "battle",
+    "title": "野外遭遇妖兽袭击",
+    "description": "外出途中，一头炼气期妖兽突然从草丛中扑出，眼中凶光毕露。它比你弱，但动作迅猛。",
+    "options": [
+      {
+        "text": "迎战，正面击杀",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 60
+          },
+          {
+            "type": "item",
+            "itemId": "yao_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "施展身法，强行脱身",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -30
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      },
+      {
+        "text": "硬抗，以伤换伤",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 60
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "lq_006",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "坊市遭遇骗局",
+    "description": "一个神秘摊主向你兜售「极品灵根培育秘法」，声称服下后灵根品质大幅提升，索价200灵石。旁边几个托儿频频点头称赞。",
+    "options": [
+      {
+        "text": "花200灵石购买",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -200
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 6
+          }
+        ]
+      },
+      {
+        "text": "识破骗局，转身离开",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 3,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_007",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "拜访坊市老药师",
+    "description": "坊市里有位年迈的药师，据说手中藏有不少好货。你登门拜访，他打量了你一眼，拿出几件东西供你挑选。",
+    "options": [
+      {
+        "text": "购买养伤丹（150灵石）",
+        "requires": {
+          "lingshi": 150
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -150
+          },
+          {
+            "type": "item",
+            "itemId": "yangshang_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "购买聚气丹（80灵石）",
+        "requires": {
+          "lingshi": 80
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -80
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "随便聊聊，不买",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 2,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_008",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "修炼走火入魔",
+    "description": "一次修炼中你急于求成，强行催动灵力，不料走火入魔，气息大乱，经脉受损。",
+    "options": [
+      {
+        "text": "强行压制，硬撑过去",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      },
+      {
+        "text": "立即停止修炼，消耗灵石稳固气息（50灵石）",
+        "requires": {
+          "lingshi": 50
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -50
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_009",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "天降灵雨",
+    "description": "难得一遇的灵雨从天而降，灵气浓郁，此时修炼事半功倍。你感到体内灵力涌动，修为隐隐有所增进。",
+    "options": [
+      {
+        "text": "盘坐入定，尽情吸收",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 15
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "lq_010",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "同门师兄借钱",
+    "description": "同门师兄找到你，说最近手头紧，向你借100灵石，承诺一个月后归还。他平日与你关系一般。",
+    "options": [
+      {
+        "text": "借给他",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -100
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "lq_lent_money"
+          }
+        ]
+      },
+      {
+        "text": "婉言拒绝",
+        "effects": []
+      },
+      {
+        "text": "借给他，但要求加收利息",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -100
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_011",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "karma",
+    "requires_karma": "lq_lent_money",
+    "title": "师兄归还灵石",
+    "description": "那位借了你灵石的师兄找上门来，不仅还清了100灵石，还额外多给了50灵石作为谢礼，说你雪中送炭，他铭记在心。",
+    "options": [
+      {
+        "text": "收下，道声客气",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 150
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_012",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "battle",
+    "title": "遭遇劫道散修",
+    "description": "山道上，两名炼气期散修拦住去路，亮出法器，声称此路是他们的地盘，要交买路钱200灵石。",
+    "options": [
+      {
+        "text": "交钱了事",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -200
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 6
+          }
+        ]
+      },
+      {
+        "text": "奋起反抗，与之一战",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 120
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "虚张声势，谎称有强援",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -80
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 3
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "lq_013",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "深山探宝",
+    "description": "听闻深山中有一处废弃的前辈洞府，或许藏有遗留的修炼资源。但深山中也有不少危险，此去凶吉未卜。",
+    "options": [
+      {
+        "text": "大胆前往，搜寻宝物",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 200
+          },
+          {
+            "type": "item",
+            "itemId": "huixue_dan",
+            "count": 1
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "谨慎探查，发现危险立刻撤退",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 80
+          }
+        ]
+      },
+      {
+        "text": "不去，太危险了",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "lq_014",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "宗门惩处",
+    "description": "你因上次修炼时误伤了宗门灵田，长老传唤你前去问责，罚没灵石100枚，并记入宗门档案。",
+    "options": [
+      {
+        "text": "认罚，乖乖交出灵石",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -100
+          },
+          {
+            "type": "emotion",
+            "positive": 2,
+            "negative": 3
+          }
+        ]
+      },
+      {
+        "text": "据理力争，为自己辩解",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -50
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lq_015",
+    "realmSlug": "lianqi",
+    "type": "passive",
+    "category": "normal",
+    "title": "偶遇前辈指点",
+    "description": "一位结丹期前辈见你修炼姿势有误，主动停下来为你纠正，并传授了一些修炼心得，令你豁然开朗。",
+    "options": [
+      {
+        "text": "恭敬聆听，认真领悟",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 20
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "weight": 3
   }
 ]

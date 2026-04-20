@@ -1,0 +1,786 @@
+[
+  {
+    "id": "hs_001",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "karma",
+    "title": "天道试炼",
+    "description": "你感到天地间有一股无形的意志在审视你，这是化神期特有的天道感应。一道声音在你脑海中响起：「汝修行至此，可愿舍身护道？」",
+    "options": [
+      {
+        "text": "愿意，舍身护道乃修仙本义",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "lingshi",
+            "amount": -5000
+          }
+        ]
+      },
+      {
+        "text": "沉默，用行动回答",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "拒绝，我修仙只为自己",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -8
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_002",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "飞升在即的感悟",
+    "description": "化神圆满之际，你隐约感受到灵界的气息。那是一种无法言说的召唤，仿佛有什么东西在等待着你。你知道，飞升的时机近了。",
+    "options": [
+      {
+        "text": "静心感悟，为飞升做准备",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 25
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          }
+        ]
+      },
+      {
+        "text": "继续积累资源，万无一失再飞升",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 8000
+          },
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "hs_003",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "battle",
+    "title": "天魔入侵",
+    "description": "一头来自域外的天魔突破封印，降临人界。它的修为深不可测，所到之处生灵涂炭。附近的修士纷纷逃离，只有你留了下来。",
+    "options": [
+      {
+        "text": "独自迎战天魔",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "heavy"
+          },
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "召集周围修士联手对抗",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "lingshi",
+            "amount": -5000
+          }
+        ]
+      },
+      {
+        "text": "撤离，保存实力",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -8
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 10
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "hs_004",
+    "realmSlug": "huashen",
+    "type": "active",
+    "category": "dungeon",
+    "title": "飞升古道探索",
+    "description": "传说中有一条上古修士踏过的飞升古道，其中留有无数先辈的感悟与遗物。踏入其中，或许能获得飞升的关键机缘，但古道中危机四伏。",
+    "options": [
+      {
+        "text": "踏入古道，寻找飞升机缘",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 10000
+          },
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ]
+      },
+      {
+        "text": "在古道入口感悟，不深入",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "不去，临近飞升不冒险",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "hs_005",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "后辈求道",
+    "description": "数名资质出众的年轻修士联袂拜访，跪求你收徒传道。他们眼中满是对修仙大道的渴望，其中一人的灵根品质极佳。",
+    "options": [
+      {
+        "text": "悉心传授，倾囊相授",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -3000
+          },
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "传授基础，让他们自行摸索",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "拒绝，飞升在即无暇收徒",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "hs_006",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "旧怨清算",
+    "description": "一名与你有旧怨的化神修士找上门来，他修为与你相当。他说：「你我之间的恩怨，今日了结。」眼中却有一丝疲惫。",
+    "options": [
+      {
+        "text": "主动化解，放下恩怨",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "一战了结，胜者无憾",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 5000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 3
+          }
+        ]
+      },
+      {
+        "text": "放走他，给他一条生路",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_007",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "人界最后的守护",
+    "description": "魔道大军压境，人界岌岌可危。各大正道宗门联合发出号召，请求化神期修士出战。这或许是你飞升前在人界最后能做的事。",
+    "options": [
+      {
+        "text": "挺身而出，守护人界",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "lingshi",
+            "amount": -8000
+          }
+        ]
+      },
+      {
+        "text": "出力但不出头，暗中协助",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "lingshi",
+            "amount": -3000
+          }
+        ]
+      },
+      {
+        "text": "飞升在即，不参与",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -8
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_008",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "道心动摇",
+    "description": "数百年的修炼岁月中，你亲眼目睹了太多生死离合。此刻，你突然对修仙的意义产生了深深的疑惑：飞升之后，又是什么？",
+    "options": [
+      {
+        "text": "道心坚定，修仙本就是超脱",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ]
+      },
+      {
+        "text": "陷入迷茫，无法自拔",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 10
+          }
+        ]
+      },
+      {
+        "text": "接受疑惑，带着问题继续前行",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 3
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_009",
+    "realmSlug": "huashen",
+    "type": "active",
+    "category": "normal",
+    "title": "最后的积累",
+    "description": "飞升前，你决定做最后一次大规模的资源积累。你的名望足以让各大坊市给你最优惠的价格，也有不少人主动送上珍贵资源。",
+    "options": [
+      {
+        "text": "接受馈赠，感谢众人",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 15000
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "text": "婉拒，以清白之身飞升",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_010",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "昔日同门的拜访",
+    "description": "你炼气期的同门，如今也修至元婴，白发苍苍地找上门来。他说：「你要飞升了？我等不到那一天了，但能看到同门飞升，此生无憾。」",
+    "options": [
+      {
+        "text": "倾尽所有帮他延寿",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -10000
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "陪他叙旧，送上一些资源",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -3000
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "道别，各自珍重",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_011",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "天道惩戒",
+    "description": "你过往的某些行为引起了天道的注意，一股无形的压力笼罩全身，修为隐隐受到压制。这是天道对你的警示。",
+    "options": [
+      {
+        "text": "虔诚认错，做出弥补",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -5000
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "强行对抗天道压制",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "fate",
+            "amount": -5
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_012",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "灵界的召唤",
+    "description": "修炼中，你清晰地感受到灵界的召唤越来越强烈。那是一种无比纯粹的灵气，与人界的浑浊截然不同。你知道，你已经准备好了。",
+    "options": [
+      {
+        "text": "全力感悟，与灵界共鸣",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 30
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "压制感应，继续在人界积累",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 10000
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "hs_013",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "无辜者的最后守护",
+    "description": "一场天灾席卷了附近的凡人村落，数万生灵危在旦夕。以你化神期的修为，可以轻易化解，但这需要消耗大量寿命。",
+    "options": [
+      {
+        "text": "出手相救，不惜寿命",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "出手相救，但保留实力",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 7,
+            "negative": 0
+          },
+          {
+            "type": "lingshi",
+            "amount": -3000
+          }
+        ]
+      },
+      {
+        "text": "凡人生死，天道自有安排",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -8
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_014",
+    "realmSlug": "huashen",
+    "type": "passive",
+    "category": "normal",
+    "title": "修仙路的终极叩问",
+    "description": "一位与你同期的化神修士前来拜访，他说他已放弃飞升，选择留守人界。「灵界虽好，但这里也需要人守护。你，真的准备好离开了吗？」",
+    "options": [
+      {
+        "text": "我已准备好，飞升是修仙的终极目标",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "text": "他说得对，我留下来守护人界",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "沉默，心中已有答案",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hs_015",
+    "realmSlug": "huashen",
+    "type": "active",
+    "category": "normal",
+    "title": "最后的坊市之行",
+    "description": "你在飞升前最后一次踏入坊市，昔日熟悉的摊位，熟悉的面孔，一切都那么亲切。你知道，这是最后一次了。",
+    "options": [
+      {
+        "text": "购入绛云丹，为飞升做最后准备",
+        "requires": {
+          "lingshi": 2000
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -2000
+          },
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "text": "将多余的灵石散给坊市中的穷苦修士",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -5000
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "静静感受，不做任何事",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  }
+]

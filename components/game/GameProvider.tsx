@@ -86,6 +86,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       } else if (effect.type === "add_xp" && effect.amount != null) {
         const gained = calcXpGain(effect.amount, state.spiritRoot.cultivationMult, state.xp);
         next = { ...next, xp: Math.min(100, state.xp + gained) };
+      } else if (effect.type === "add_xp_flat" && effect.amount != null) {
+        next = { ...next, xp: Math.min(100, state.xp + effect.amount) };
       } else if (effect.type === "add_lifespan" && effect.amount != null) {
         const realm = getRealmConfig(state.realmSlug);
         const newMax = Math.min(realm.limitLifespan, state.lifespanMax + effect.amount);
@@ -153,6 +155,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         xp: 0,
         lifespanMax: newRealm.normalLifespan,
         lifespan: newRealm.normalLifespan,
+        breakthroughExp: 0,
         phase: "playing",
       };
     }

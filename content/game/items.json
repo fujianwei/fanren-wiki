@@ -60,7 +60,7 @@
     "description": "炼气→筑基冲关成功率+15%",
     "buyPrice": 500,
     "sellPrice": 450,
-    "effect": { "type": "breakthrough_bonus", "realmFrom": "lianqi", "bonus": 0.15 }
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "lianqi", "bonus": 0.25 }
   },
   {
     "id": "jucheng_dan",
@@ -69,7 +69,7 @@
     "description": "筑基→结丹冲关成功率+15%",
     "buyPrice": 800,
     "sellPrice": 720,
-    "effect": { "type": "breakthrough_bonus", "realmFrom": "zhuji", "bonus": 0.15 }
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "zhuji", "bonus": 0.25 }
   },
   {
     "id": "butian_dan",
@@ -78,7 +78,7 @@
     "description": "结丹→元婴冲关成功率+15%（极稀有）",
     "buyPrice": 50000,
     "sellPrice": 45000,
-    "effect": { "type": "breakthrough_bonus", "realmFrom": "jiedan", "bonus": 0.15 }
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "jiedan", "bonus": 0.25 }
   },
   {
     "id": "jiuqu_dan",
@@ -96,7 +96,7 @@
     "description": "元婴→化神冲关成功率+15%",
     "buyPrice": 2000,
     "sellPrice": 1800,
-    "effect": { "type": "breakthrough_bonus", "realmFrom": "yuanying", "bonus": 0.15 }
+    "effect": { "type": "breakthrough_bonus", "realmFrom": "yuanying", "bonus": 0.25 }
   },
   {
     "id": "juling_zhen",
@@ -124,5 +124,14 @@
     "buyPrice": null,
     "sellPrice": 5000,
     "effect": { "type": "retreat_xp_bonus", "mult": 0.25, "breakthrough_bonus": 0.20, "dungeon_safe": true }
+  },
+  {
+    "id": "yao_dan",
+    "name": "妖丹",
+    "category": "mechanism",
+    "description": "妖兽精华凝聚而成，服下可直接提升修为5%，不受灵根影响",
+    "buyPrice": null,
+    "sellPrice": 200,
+    "effect": { "type": "add_xp_flat", "amount": 5 }
   }
 ]

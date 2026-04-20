@@ -1,0 +1,685 @@
+[
+  {
+    "id": "yy_001",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "karma",
+    "title": "垂死的化神前辈",
+    "description": "你在天外荒原发现一位化神期前辈，他遭人暗算，元神将散。他用最后一丝神识说：「我有一件宝物，若你愿意为我了却一桩心愿，它便是你的。」",
+    "options": [
+      {
+        "text": "答应他，倾听他的心愿",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "trigger_karma",
+            "karmaId": "yy_promised_elder"
+          }
+        ]
+      },
+      {
+        "text": "拒绝，不想卷入是非",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -5
+          }
+        ]
+      },
+      {
+        "text": "趁他神识涣散，夺取宝物",
+        "effects": [
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 15
+          },
+          {
+            "type": "fate",
+            "amount": -10
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_002",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "karma",
+    "requires_karma": "yy_promised_elder",
+    "title": "心愿了结",
+    "description": "你完成了化神前辈的心愿，他留下的遗物自动飞向你。一件精心炼制的绛云丹和一枚天罡阵法盘落入你手中，还有一封信：「此生无憾，望后辈飞升灵界。」",
+    "options": [
+      {
+        "text": "郑重收下",
+        "effects": [
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          },
+          {
+            "type": "item",
+            "itemId": "tiangang_zhen",
+            "count": 1
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 10
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_003",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "battle",
+    "title": "化神修士的刁难",
+    "description": "一名化神期修士拦住你的去路，说你曾经得罪过他的弟子。他修为远在你之上，却没有直接出手，而是要你「表示诚意」。",
+    "options": [
+      {
+        "text": "低头认错，奉上灵石",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -3000
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          },
+          {
+            "type": "fate",
+            "amount": -3
+          }
+        ]
+      },
+      {
+        "text": "据理力争，不卑不亢",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "text": "拼死一战，以弱搏强",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "heavy"
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          }
+        ]
+      },
+      {
+        "text": "转身离开，不参与此事",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "yy_004",
+    "realmSlug": "yuanying",
+    "type": "active",
+    "category": "dungeon",
+    "title": "秘境探索",
+    "description": "一处上古秘境开启，入口只维持三天。秘境内有传说中的化神期修士留下的道统传承，但其中的禁制也足以让元婴修士陨落。",
+    "options": [
+      {
+        "text": "全力闯入，争夺传承",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 8000
+          },
+          {
+            "type": "item",
+            "itemId": "jiangyun_dan",
+            "count": 1
+          },
+          {
+            "type": "injury",
+            "level": "heavy"
+          }
+        ]
+      },
+      {
+        "text": "谨慎探索，浅尝即止",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 3000
+          },
+          {
+            "type": "item",
+            "itemId": "yangshang_dan",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "text": "不去，不值得冒险",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "yy_005",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "渡人成仙",
+    "description": "一名资质极佳的年轻修士找上你，他修为停滞在结丹巅峰已久，苦苦求你指点突破之法。你若倾力相助，他或许真能踏入元婴。",
+    "options": [
+      {
+        "text": "倾力相助，渡他成仙",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -2000
+          },
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "给些建议，不费太多精力",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 15
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "修仙路各凭本事，拒绝",
+        "effects": []
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "yy_006",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "寿命告急",
+    "description": "你突然感到寿命流逝加速，推算之下发现元婴期寿命已不足两成。若不能尽快突破化神，恐怕难逃坐化之命。",
+    "options": [
+      {
+        "text": "花大量灵石购买延寿丹",
+        "requires": {
+          "lingshi": 5000
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -5000
+          },
+          {
+            "type": "item",
+            "itemId": "yanshou_dan",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "text": "坦然接受，加快冲关步伐",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_007",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "魔道势力威胁",
+    "description": "魔道一方派来使者，要求你缴纳「保护费」，否则将对你的道侣、弟子不利。他们显然已经掌握了你的软肋。",
+    "options": [
+      {
+        "text": "缴纳灵石，暂时妥协",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -4000
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 10
+          },
+          {
+            "type": "fate",
+            "amount": -4
+          }
+        ]
+      },
+      {
+        "text": "断然拒绝，以力抗之",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ]
+      },
+      {
+        "text": "联合正道宗门，共同对抗",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -1000
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_008",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "天道感悟",
+    "description": "在一次深度冥想中，你隐约感受到了天道的脉络，一种前所未有的通透感油然而生。这种感悟可遇而不可求，稍纵即逝。",
+    "options": [
+      {
+        "text": "全力沉浸，深度领悟",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 30
+          },
+          {
+            "type": "emotion",
+            "positive": 10,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "weight": 3
+  },
+  {
+    "id": "yy_009",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "同阶修士挑战",
+    "description": "一名元婴期修士向你发出挑战书，说要以战会友，切磋道法。他修为与你相当，胜负难料，但胜者可得到一件宝物。",
+    "options": [
+      {
+        "text": "接受挑战",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 3000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 6,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "婉拒，不想无谓消耗",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "yy_010",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "昔日仇人的最后一搏",
+    "description": "炼气期结下的仇人，历经数百年修炼，如今也到了元婴期。他找上门来，说：「这是我最后一次机会，若再不手刃你，我死不瞑目。」",
+    "options": [
+      {
+        "text": "与他了结恩怨",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 2000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "放他一条生路，化解恩怨",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_011",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "修炼资源枯竭",
+    "description": "你长期修炼的灵地突然灵气枯竭，原来是被人暗中破坏了灵脉。重新寻找合适的修炼之地需要大量时间和灵石。",
+    "options": [
+      {
+        "text": "花大量灵石购置新洞府",
+        "requires": {
+          "lingshi": 5000
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -5000
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "text": "将就修炼，节省灵石",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_012",
+    "realmSlug": "yuanying",
+    "type": "active",
+    "category": "normal",
+    "title": "拍卖稀世珍宝",
+    "description": "你手中有一件不需要的宝物，可以在大型拍卖会上出售，换取大量灵石用于冲关准备。",
+    "options": [
+      {
+        "text": "出售天罡阵",
+        "requires": {
+          "itemId": "tiangang_zhen"
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "text": "出售绛云丹",
+        "requires": {
+          "itemId": "jiangyun_dan"
+        },
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 2000
+          }
+        ]
+      },
+      {
+        "text": "什么都不卖",
+        "effects": []
+      }
+    ]
+  },
+  {
+    "id": "yy_013",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "弟子遭难",
+    "description": "你收下的弟子在外历练时遭遇强敌，身受重伤，派人传信求救。赶去救援需要消耗大量时间和资源，但若置之不理，弟子凶多吉少。",
+    "options": [
+      {
+        "text": "立刻赶去救援",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -2000
+          },
+          {
+            "type": "fate",
+            "amount": 7
+          },
+          {
+            "type": "emotion",
+            "positive": 8,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "派人送去灵石，让他自救",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -1000
+          },
+          {
+            "type": "emotion",
+            "positive": 2,
+            "negative": 3
+          }
+        ]
+      },
+      {
+        "text": "修仙路各凭本事，不管",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": -5
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_014",
+    "realmSlug": "yuanying",
+    "type": "passive",
+    "category": "normal",
+    "title": "天外陨石",
+    "description": "一块天外陨石坠落，其中蕴含极为纯粹的天地元气。周围数名修士同时发现，都在觊觎这块宝物。",
+    "options": [
+      {
+        "text": "强行争夺，以力取之",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 5000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 6
+          }
+        ]
+      },
+      {
+        "text": "提议公平分配",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 2000
+          },
+          {
+            "type": "emotion",
+            "positive": 5,
+            "negative": 0
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "text": "放弃，不参与争夺",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "yy_015",
+    "realmSlug": "yuanying",
+    "type": "active",
+    "category": "normal",
+    "title": "坊市散活：护送稀世丹药",
+    "description": "一位炼丹大师委托你护送一批价值连城的丹药穿越危险地带，报酬4000灵石。路途中必有人劫道，但你修为不俗。",
+    "options": [
+      {
+        "text": "接下任务",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": 4000
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "emotion",
+            "positive": 4,
+            "negative": 0
+          }
+        ]
+      },
+      {
+        "text": "不接",
+        "effects": []
+      }
+    ]
+  }
+]

@@ -85,8 +85,10 @@ export function calcBreakthroughRate(params: BreakthroughParams): number {
   const realm = getRealmConfig(params.realmSlug);
   const base = realm.breakthroughRate * xpMultiplier(params.xp);
 
-  const lingshiBonus = Math.min(0.09, Math.floor(params.lingshi / 500) * 0.03);
-  const rootBonus = params.rootIntact ? 0.10 : 0;
+  // 灵石加成上限降低：每500灵石+2%，上限+5%
+  const lingshiBonus = Math.min(0.05, Math.floor(params.lingshi / 500) * 0.02);
+  // 根基稳固加成提升
+  const rootBonus = params.rootIntact ? 0.15 : 0;
   const rootDamage = params.rootDamageCount * 0.05;
   const expBonus = Math.min(0.15, params.breakthroughExp / 100);
 
