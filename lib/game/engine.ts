@@ -1,20 +1,36 @@
 import realmsData from "@/content/game/realms.json";
 import spiritRootsData from "@/content/game/spirit-roots.json";
-import type { RealmSlug, SpiritRoot, RealmConfig } from "@/types/game";
+import type {
+  RealmSlug,
+  SpiritRoot,
+  RealmConfig,
+  LifespanEventType,
+  RetreatDuration,
+} from "@/types/game";
 
 const realms = realmsData as RealmConfig[];
 const spiritRoots = spiritRootsData as SpiritRoot[];
 
 export function getRealmConfig(slug: RealmSlug): RealmConfig {
-  return realms.find((r) => r.slug === slug)!;
+  const realm = realms.find((r) => r.slug === slug);
+  if (!realm) {
+    throw new Error(`Unknown realm slug: ${slug}`);
+  }
+  return realm;
 }
 
 export function getSpiritRoot(fortune: number): SpiritRoot {
-  return (
-    spiritRoots.find(
-      (r) => fortune >= r.fortuneRange[0] && fortune <= r.fortuneRange[1]
-    ) ?? spiritRoots[spiritRoots.length - 1]
+  const sortedRoots = [...spiritRoots].sort(
+    (a, b) => a.fortuneRange[0] - b.fortuneRange[0]
   );
+  const matched = sortedRoots.find(
+    (r) => fortune >= r.fortuneRange[0] && fortune <= r.fortuneRange[1]
+  );
+  if (matched) return matched;
+  if (fortune > sortedRoots[sortedRoots.length - 1].fortuneRange[1]) {
+    return sortedRoots[sortedRoots.length - 1];
+  }
+  return sortedRoots[0];
 }
 
 export function calcXpGain(
@@ -29,7 +45,7 @@ export function calcXpGain(
 
 export function calcLifespanCost(
   realmSlug: RealmSlug,
-  eventType: "event" | "dungeon" | "battle" | "retreat_short" | "retreat_mid" | "retreat_long",
+  eventType: LifespanEventType,
   isModao: boolean = false
 ): number {
   const realm = getRealmConfig(realmSlug);
@@ -71,6 +87,11 @@ function xpMultiplier(xp: number): number {
   return 0;
 }
 
+function toNonNegativeFinite(value: number): number {
+  if (!Number.isFinite(value)) return 0;
+  return Math.max(0, value);
+}
+
 export interface BreakthroughParams {
   realmSlug: RealmSlug;
   xp: number;
@@ -83,16 +104,21 @@ export interface BreakthroughParams {
 
 export function calcBreakthroughRate(params: BreakthroughParams): number {
   const realm = getRealmConfig(params.realmSlug);
-  const base = realm.breakthroughRate * xpMultiplier(params.xp);
+  const normalizedXp = toNonNegativeFinite(params.xp);
+  const normalizedLingshi = toNonNegativeFinite(params.lingshi);
+  const normalizedRootDamage = toNonNegativeFinite(params.rootDamageCount);
+  const normalizedBreakthroughExp = toNonNegativeFinite(params.breakthroughExp);
+  const normalizedItemBonus = Number.isFinite(params.itemBonus) ? params.itemBonus : 0;
+  const base = realm.breakthroughRate * xpMultiplier(normalizedXp);
 
   // 灵石加成上限降低：每500灵石+2%，上限+5%
-  const lingshiBonus = Math.min(0.05, Math.floor(params.lingshi / 500) * 0.02);
+  const lingshiBonus = Math.min(0.05, Math.floor(normalizedLingshi / 500) * 0.02);
   // 根基稳固加成提升
   const rootBonus = params.rootIntact ? 0.15 : 0;
-  const rootDamage = params.rootDamageCount * 0.05;
-  const expBonus = Math.min(0.15, params.breakthroughExp / 100);
+  const rootDamage = normalizedRootDamage * 0.05;
+  const expBonus = Math.min(0.15, normalizedBreakthroughExp / 100);
 
-  const total = base + params.itemBonus + lingshiBonus + rootBonus - rootDamage + expBonus;
+  const total = base + normalizedItemBonus + lingshiBonus + rootBonus - rootDamage + expBonus;
   return Math.min(0.99, Math.max(0.01, total));
 }
 
@@ -115,7 +141,7 @@ export function calcFateAscendRate(fate: number): number {
 
 export function calcRetreatXp(
   realmSlug: RealmSlug,
-  duration: "short" | "mid" | "long",
+  duration: RetreatDuration,
   cultivationMult: number,
   arrayMult: number = 0
 ): number {

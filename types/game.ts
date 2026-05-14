@@ -1,5 +1,13 @@
 export type SpiritRootType = "tianling" | "shuang" | "san" | "wei";
 export type RealmSlug = "lianqi" | "zhuji" | "jiedan" | "yuanying" | "huashen";
+export type LifespanEventType =
+  | "event"
+  | "dungeon"
+  | "battle"
+  | "retreat_short"
+  | "retreat_mid"
+  | "retreat_long";
+export type RetreatDuration = "short" | "mid" | "long";
 export type SectPath = "zhengdao" | "modao" | "sanxiu";
 export type InjuryLevel = "none" | "light" | "heavy" | "dying";
 export type ItemId =

@@ -37,6 +37,12 @@ describe("getSpiritRoot", () => {
   it("fortune=1 -> 伪灵根 (boundary)", () => {
     expect(getSpiritRoot(1).type).toBe("wei");
   });
+  it("fortune>100 -> 天灵根 (clamp to upper bound)", () => {
+    expect(getSpiritRoot(999).type).toBe("tianling");
+  });
+  it("fortune<1 -> 伪灵根 (clamp to lower bound)", () => {
+    expect(getSpiritRoot(-10).type).toBe("wei");
+  });
 });
 
 describe("calcXpGain", () => {
@@ -229,6 +235,32 @@ describe("calcBreakthroughRate", () => {
     });
     expect(rate).toBeGreaterThanOrEqual(0.01);
   });
+  it("异常负数输入不会异常放大成功率", () => {
+    const base = calcBreakthroughRate({
+      realmSlug: "lianqi", xp: 100, itemBonus: 0,
+      lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
+    });
+    const withInvalidNegatives = calcBreakthroughRate({
+      realmSlug: "lianqi", xp: -100, itemBonus: 0,
+      lingshi: -5000, rootIntact: false, rootDamageCount: -3, breakthroughExp: -20,
+    });
+    expect(withInvalidNegatives).toBeLessThanOrEqual(base);
+    expect(withInvalidNegatives).toBeGreaterThanOrEqual(0.01);
+  });
+  it("NaN 输入会被安全处理并返回有效概率", () => {
+    const rate = calcBreakthroughRate({
+      realmSlug: "lianqi",
+      xp: Number.NaN,
+      itemBonus: Number.NaN,
+      lingshi: Number.NaN,
+      rootIntact: false,
+      rootDamageCount: Number.NaN,
+      breakthroughExp: Number.NaN,
+    });
+    expect(Number.isFinite(rate)).toBe(true);
+    expect(rate).toBeGreaterThanOrEqual(0.01);
+    expect(rate).toBeLessThanOrEqual(0.99);
+  });
 });
 
 describe("calcHeartDemonRate", () => {
@@ -303,5 +335,8 @@ describe("getRealmConfig", () => {
   it("获取结丹期配置", () => {
     const config = getRealmConfig("jiedan");
     expect(config.failDeathRate).toBe(0.90);
+  });
+  it("非法境界会抛出明确错误", () => {
+    expect(() => getRealmConfig("invalid" as never)).toThrow("Unknown realm slug");
   });
 });

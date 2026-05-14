@@ -23,3 +23,5 @@ export interface Character {
   traits: string[];
   quote: string;
 }
+
+export * from "./game";
