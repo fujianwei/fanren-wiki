@@ -31,13 +31,13 @@ export default function Navbar() {
           <span className="cursor-not-allowed opacity-50" title="敬请期待">地图势力</span>
           <span className="cursor-not-allowed opacity-50" title="敬请期待">剧情时间线</span>
           <Link
-            href="/destiny"
+            href="/quiz"
             className="font-medium transition-colors"
             style={{ color: "#6fedb5" }}
             onMouseEnter={e => (e.currentTarget.style.color = "#4ade9a")}
             onMouseLeave={e => (e.currentTarget.style.color = "#6fedb5")}
           >
-            踏入仙途
+            人物测试
           </Link>
           <Link
             href="/game"

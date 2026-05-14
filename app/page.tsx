@@ -11,26 +11,26 @@ export default function HomePage() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       {/* Hero 区域 */}
       <div className="flex flex-col md:flex-row gap-6 mb-16">
-        {/* 左：命运测试入口 */}
+        {/* 左：人物测试入口 */}
         <div
           className="md:w-72 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
           style={{ backgroundColor: "#1a3828" }}
         >
           <div className="text-4xl">🗡️</div>
           <h2 className="font-serif font-bold text-xl tracking-wide" style={{ color: "#e8f0ec" }}>
-            你的修仙<br />命运如何？
+            你最像哪位<br />修仙人物？
           </h2>
           <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
-            命运几何，唯天知晓<br />
-            一念之间，定你此生修仙造化<br />
-            天机不可泄露，唯有亲历方知<br />
-            入此门者，命运自现
+            十二道修仙情景题<br />
+            映照你的处世心性与道途选择<br />
+            看看你在人界最像谁<br />
+            一测便知
           </p>
           <Link
-            href="/destiny"
+            href="/quiz"
             className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
           >
-            踏入修仙之路
+            开始人物测试
           </Link>
         </div>
 
