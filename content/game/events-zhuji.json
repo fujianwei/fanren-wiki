@@ -154,8 +154,18 @@
         ]
       },
       {
-        "text": "转身离开，不参与此事",
-        "effects": []
+        "text": "先行退避，另寻时机",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 3
+          },
+          {
+            "type": "fate",
+            "amount": -1
+          }
+        ]
       }
     ]
   },
@@ -359,7 +369,7 @@
         ]
       }
     ],
-    "weight": 3
+    "weight": 2
   },
   {
     "id": "zj_008",

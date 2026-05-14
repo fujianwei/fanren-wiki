@@ -173,8 +173,18 @@
         ]
       },
       {
-        "text": "转身离开，不参与此事",
-        "effects": []
+        "text": "暂避锋芒，强行抽身",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -300
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 4
+          }
+        ]
       }
     ]
   },
@@ -335,7 +345,7 @@
         ]
       }
     ],
-    "weight": 3
+    "weight": 2
   },
   {
     "id": "jd_007",
@@ -423,7 +433,7 @@
           {
             "type": "emotion",
             "positive": 4,
-            "negative": 0
+            "negative": 1
           }
         ]
       },
@@ -719,7 +729,7 @@
         ]
       }
     ],
-    "weight": 3
+    "weight": 2
   },
   {
     "id": "jd_015",

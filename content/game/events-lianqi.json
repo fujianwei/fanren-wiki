@@ -223,8 +223,14 @@
         ]
       },
       {
-        "text": "转身离开，不参与此事",
-        "effects": []
+        "text": "避开妖兽，消耗灵力撤离",
+        "effects": [
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 2
+          }
+        ]
       }
     ]
   },
@@ -380,7 +386,7 @@
         ]
       }
     ],
-    "weight": 3
+    "weight": 2
   },
   {
     "id": "lq_010",
@@ -512,8 +518,18 @@
         ]
       },
       {
-        "text": "转身离开，不参与此事",
-        "effects": []
+        "text": "绕路离开，暂避锋芒",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -30
+          },
+          {
+            "type": "emotion",
+            "positive": 0,
+            "negative": 2
+          }
+        ]
       }
     ]
   },
@@ -628,6 +644,6 @@
         ]
       }
     ],
-    "weight": 3
+    "weight": 2
   }
 ]
