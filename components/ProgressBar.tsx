@@ -4,7 +4,9 @@ interface ProgressBarProps {
 }
 
 export default function ProgressBar({ current, total }: ProgressBarProps) {
-  const percent = Math.round((current / total) * 100);
+  const safeTotal = total > 0 ? total : 1;
+  const clampedCurrent = Math.max(0, Math.min(current, safeTotal));
+  const percent = Math.round((clampedCurrent / safeTotal) * 100);
   return (
     <div className="w-full">
       <div className="flex justify-between mb-2" style={{ fontSize: "11px", color: "#6a8878", letterSpacing: "0.1em" }}>

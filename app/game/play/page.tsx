@@ -83,10 +83,12 @@ function pickBattleEnemy(realmSlug: string): { name: string; realm: RealmSlug; d
 }
 
 function pickEvent(realmSlug: string, history: string[], sectPath: string | null): GameEvent | null {
+  type EventWithMeta = GameEvent & { requires_sect?: boolean; requires_karma?: string; weight?: number };
   const pool = ALL_EVENTS.filter((e) => {
+    const event = e as EventWithMeta;
     if (e.realmSlug !== realmSlug) return false;
-    if ((e as any).requires_sect && !sectPath) return false;
-    const karma = (e as any).requires_karma as string | undefined;
+    if (event.requires_sect && !sectPath) return false;
+    const karma = event.requires_karma;
     if (karma && !history.includes(karma)) return false;
     return true;
   });
@@ -95,10 +97,10 @@ function pickEvent(realmSlug: string, history: string[], sectPath: string | null
   const candidates = unseen.length > 0 ? unseen : pool;
 
   // 按权重随机抽取（weight 字段，默认 10）
-  const totalWeight = candidates.reduce((s, e) => s + ((e as any).weight ?? 10), 0);
+  const totalWeight = candidates.reduce((s, e) => s + ((e as EventWithMeta).weight ?? 10), 0);
   let rand = Math.random() * totalWeight;
   for (const e of candidates) {
-    rand -= (e as any).weight ?? 10;
+    rand -= (e as EventWithMeta).weight ?? 10;
     if (rand <= 0) return e;
   }
   return candidates[candidates.length - 1];
@@ -396,7 +398,7 @@ const CATEGORY_LABELS = {
 
 function InventoryModal({ onClose }: { onClose: () => void }) {
   const { state, dispatch } = useGame();
-  const { inventory, lingshi } = state;
+  const { inventory } = state;
   const [openCat, setOpenCat] = useState<Record<string, boolean>>({
     mechanism: true,
     breakthrough: true,
@@ -407,8 +409,6 @@ function InventoryModal({ onClose }: { onClose: () => void }) {
     Object.entries(ITEM_META)
       .filter(([, m]) => m.category === cat)
       .map(([id, m]) => ({ id, ...m, count: inventory[id as keyof typeof inventory] ?? 0 }));
-
-  const totalCount = Object.values(ITEM_META).length;
 
   return (
     <div
@@ -459,7 +459,7 @@ function InventoryModal({ onClose }: { onClose: () => void }) {
                       </div>
                       {item.category === "mechanism" && item.id !== "xuming_dan" && item.id !== "yao_dan" && item.count > 0 && (
                         <button
-                          onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as any })}
+                          onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as ItemId })}
                           className="text-xs px-2 py-1 rounded ml-3 whitespace-nowrap"
                           style={{ backgroundColor: "#1a2820", color: "#4ade9a", border: "1px solid #4ade9a33" }}
                         >
@@ -499,7 +499,46 @@ function GamePlay() {
   const [log, setLog] = useState<{ age: number; text: string }[]>([]);
   const [toasts, setToasts] = useState<{ id: number; itemId: string; name: string; count: number }[]>([]);
   const [subRealmNotice, setSubRealmNotice] = useState<{ title: string; desc: string } | null>(null);
+  const [eventResult, setEventResult] = useState<{
+    eventTitle: string;
+    optionText: string;
+    narrative: string;
+    narrativeTone: "good" | "bad" | "mixed" | "neutral";
+    lines: { icon: string; text: string; positive: boolean }[];
+  } | null>(null);
   const prevXpRef = useRef(0);
+
+  useEffect(() => {
+    function handleEsc(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      if (showBattle) {
+        setShowBattle(false);
+        setBattleEnemy(null);
+        return;
+      }
+      if (showSectChoice) {
+        setShowSectChoice(false);
+        return;
+      }
+      if (showMarket) {
+        setShowMarket(false);
+        return;
+      }
+      if (showInventory) {
+        setShowInventory(false);
+        return;
+      }
+      if (eventResult) {
+        setEventResult(null);
+        return;
+      }
+      if (subRealmNotice) {
+        setSubRealmNotice(null);
+      }
+    }
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [showBattle, showSectChoice, showMarket, showInventory, eventResult, subRealmNotice]);
 
   // 监听修为变化，触发小境界突破提示
   useEffect(() => {
@@ -514,21 +553,13 @@ function GamePlay() {
       { at: 100, title: "修为圆满", desc: "此境界修为已至圆满，冲关成功率最高。" },
     ];
 
-    for (const t of thresholds) {
-      if (prev < t.at && curr >= t.at) {
-        setSubRealmNotice({ title: t.title, desc: t.desc });
-        break;
-      }
+    const thresholdReached = thresholds.find((t) => prev < t.at && curr >= t.at);
+    if (thresholdReached) {
+      setTimeout(() => {
+        setSubRealmNotice({ title: thresholdReached.title, desc: thresholdReached.desc });
+      }, 0);
     }
   }, [state.xp]);
-  const [eventResult, setEventResult] = useState<{
-    eventTitle: string;
-    optionText: string;
-    narrative: string;
-    narrativeTone: "good" | "bad" | "mixed" | "neutral";
-    lines: { icon: string; text: string; positive: boolean }[];
-  } | null>(null);
-
   function showItemToast(itemId: string, count: number) {
     const meta = ITEM_META[itemId];
     if (!meta) return;
@@ -707,10 +738,10 @@ function GamePlay() {
   const inventoryCount = Object.values(state.inventory).reduce((s, v) => s + (v ?? 0), 0);
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-6 py-6 flex gap-5" style={{ height: "calc(100vh - 64px)", alignItems: "stretch" }}>
+    <div className="max-w-6xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 flex flex-col lg:flex-row gap-4 lg:gap-5" style={{ minHeight: "calc(100vh - 64px)", alignItems: "stretch" }}>
 
       {/* 左侧：储物袋 */}
-      <div className="w-64 flex-shrink-0 flex flex-col">
+      <div className="hidden lg:flex w-64 flex-shrink-0 flex-col">
         <div className="rounded-2xl overflow-hidden flex flex-col flex-1" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
           <div className="flex items-center justify-between px-4 py-3.5 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
             <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>储物袋</span>
@@ -746,7 +777,7 @@ function GamePlay() {
                             ×{item.count}
                           </span>
                           {item.category === "mechanism" && item.id !== "xuming_dan" && item.id !== "yao_dan" && item.count > 0 && (
-                            <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as any })}
+                            <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as ItemId })}
                               className="text-xs px-2 py-0.5 rounded-full"
                               style={{ backgroundColor: "#1a2820", color: "#4ade9a", border: "1px solid #4ade9a33" }}>
                               用
@@ -771,7 +802,22 @@ function GamePlay() {
       </div>
 
       {/* 中间：主内容 */}
-      <div className="flex-1 min-w-0 flex flex-col gap-4 overflow-y-auto">
+      <div className="flex-1 min-w-0 flex flex-col gap-4">
+
+      <div className="flex lg:hidden gap-2">
+        <button
+          onClick={() => setShowInventory(true)}
+          className="flex-1 py-2.5 rounded-xl text-sm btn-secondary"
+        >
+          储物袋（{inventoryCount}）
+        </button>
+        <button
+          onClick={() => setShowMarket(true)}
+          className="flex-1 py-2.5 rounded-xl text-sm btn-secondary"
+        >
+          灵市
+        </button>
+      </div>
 
       {/* 状态面板 */}
       <StatusPanel />
@@ -791,6 +837,13 @@ function GamePlay() {
           <p className="text-xs leading-relaxed" style={{ color: "#6a4040" }}>
             你已濒临陨落，无法进行任何主动行动。<br />请打开储物袋使用养伤丹治疗。
           </p>
+          <button
+            onClick={() => setShowInventory(true)}
+            className="mt-4 w-full py-2.5 rounded-xl text-sm"
+            style={{ backgroundColor: "#1a2820", border: "1px solid #ef444433", color: "#ef4444" }}
+          >
+            打开储物袋
+          </button>
         </div>
       ) : (
         <div className="rounded-2xl p-5" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
@@ -809,7 +862,6 @@ function GamePlay() {
               {(["short", "mid", "long"] as const).map((d) => {
                 const realm = getRealmConfig(state.realmSlug);
                 const cost = realm.retreatCost[d];
-                const xpGain = realm.retreatXp[d];
                 const label = d === "short" ? "短期" : d === "mid" ? "中期" : "长期";
                 return (
                   <button
@@ -922,6 +974,7 @@ function GamePlay() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center px-4"
           style={{ backgroundColor: "rgba(0,0,0,0.65)" }}
+          onClick={(e) => e.target === e.currentTarget && setEventResult(null)}
         >
           <div
             className="w-full max-w-sm rounded-2xl overflow-hidden"
@@ -1036,7 +1089,7 @@ function GamePlay() {
       </div> {/* 中间主内容结束 */}
 
       {/* 右侧：玩法说明 + 修行记录 */}
-      <div className="w-60 flex-shrink-0 flex flex-col gap-3">
+      <div className="hidden lg:flex w-60 flex-shrink-0 flex-col gap-3">
 
         {/* 上方 2/5：玩法说明 */}
         <div className="rounded-2xl overflow-hidden flex flex-col" style={{ flex: "2", backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
@@ -1093,6 +1146,24 @@ function GamePlay() {
           )}
         </div>
 
+      </div>
+
+      <div className="lg:hidden rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+        <div className="px-4 py-3 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
+          <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>修行记录</span>
+        </div>
+        {log.length === 0 ? (
+          <div className="px-4 py-4 text-xs" style={{ color: "#4a6a58" }}>尚无记录</div>
+        ) : (
+          <div className="max-h-52 overflow-y-auto px-4 py-3 flex flex-col gap-3">
+            {log.slice(0, 10).map((entry, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <span style={{ color: "#4a6a58", fontSize: "10px" }}>寿元第 {entry.age} 年</span>
+                <p className="text-xs leading-relaxed" style={{ color: "#8a9a90" }}>{entry.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
     </div>
