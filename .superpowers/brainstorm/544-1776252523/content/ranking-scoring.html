@@ -1,0 +1,21 @@
+<h2>排序拖拽题如何计分？</h2>
+<p class="subtitle">共3道排序题，每题4个选项让玩家从高到低排列</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>只取第一位（原设计）</h3>
+      <p>只有排在第一位的选项加分（+20），其余位置忽略</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">简单直接，玩家只需考虑"最重要的是什么"</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>递减加分（推荐）</h3>
+      <p>第1位 +20，第2位 +10，第3位 +5，第4位 +0</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">拖拽操作更有意义，结果更细腻，体现玩家的完整价值观排序</p>
+    </div>
+  </div>
+</div>

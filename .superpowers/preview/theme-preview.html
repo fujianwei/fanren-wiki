@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>凡人修仙传 · 视觉预览</title>
+  <style>
+    :root {
+      --ink-950: #0a0e0d;
+      --ink-900: #111a16;
+      --ink-800: #1a2820;
+      --jade-400: #4ade9a;
+      --jade-300: #6fedb5;
+      --jade-200: #a8f5d4;
+      --jade-100: #d4faea;
+      --jade-500: #22c47a;
+      --gold-400: #d4a843;
+      --gold-300: #e8c86a;
+      --gold-200: #f5e4a8;
+      --mist-100: #e8f0ec;
+      --mist-200: #b8ccc2;
+      --mist-400: #6a8878;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--ink-950);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 15% 20%, rgba(74,222,154,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(212,168,67,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 50% 50%, rgba(34,196,122,0.05) 0%, transparent 70%);
+      color: var(--mist-100);
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      padding: 40px 20px;
+    }
+
+    /* 浮动粒子 canvas */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* 标题区 */
+    .site-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .site-title .label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--mist-400);
+      margin-bottom: 12px;
+    }
+    .site-title h1 {
+      font-size: 32px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--jade-300) 0%, var(--jade-200) 50%, var(--gold-300) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .site-title p {
+      font-size: 13px;
+      color: var(--mist-400);
+      letter-spacing: 0.15em;
+    }
+
+    /* 分隔纹饰 */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ink-800), var(--jade-500), var(--ink-800), transparent);
+    }
+    .divider-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--jade-400);
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px var(--jade-400);
+    }
+
+    /* 卡片 */
+    .card {
+      background: var(--ink-900);
+      border: 1px solid var(--ink-800);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(74,222,154,0.15), transparent 50%, rgba(212,168,67,0.08)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .card-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--mist-400);
+      margin-bottom: 16px;
+    }
+    .card h2 {
+      font-size: 20px;
+      color: var(--mist-100);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* 选项按钮 */
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--ink-800);
+      background: rgba(26,40,32,0.6);
+      color: var(--mist-200);
+      font-size: 14px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .option-btn:hover {
+      border-color: var(--jade-500);
+      background: rgba(74,222,154,0.08);
+      color: var(--jade-200);
+      box-shadow: 0 0 16px rgba(74,222,154,0.12), inset 0 0 12px rgba(74,222,154,0.04);
+    }
+    .option-btn.selected {
+      border-color: var(--jade-400);
+      background: rgba(74,222,154,0.12);
+      color: var(--jade-100);
+      box-shadow: 0 0 20px rgba(74,222,154,0.18), inset 0 0 16px rgba(74,222,154,0.06);
+    }
+
+    /* 主按钮 */
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--jade-500), var(--jade-400));
+      color: var(--ink-950);
+      padding: 12px 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      box-shadow: 0 0 24px rgba(74,222,154,0.3), 0 4px 12px rgba(0,0,0,0.4);
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 36px rgba(74,222,154,0.45), 0 4px 16px rgba(0,0,0,0.5);
+      transform: translateY(-1px);
+    }
+
+    /* 次要按钮 */
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--jade-300);
+      padding: 11px 32px;
+      border-radius: 100px;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      border: 1px solid rgba(74,222,154,0.35);
+      font-family: inherit;
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      border-color: var(--jade-400);
+      box-shadow: 0 0 16px rgba(74,222,154,0.15);
+    }
+
+    /* 进度条 */
+    .progress-wrap {
+      margin-bottom: 28px;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--mist-400);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+    }
+    .progress-track {
+      width: 100%;
+      height: 3px;
+      background: var(--ink-800);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 37%;
+      background: linear-gradient(90deg, var(--jade-500), var(--jade-400));
+      border-radius: 100px;
+      box-shadow: 0 0 8px rgba(74,222,154,0.5);
+      transition: width 0.4s ease;
+    }
+
+    /* 结果卡片（金色版） */
+    .result-card {
+      background: var(--ink-900);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(212,168,67,0.25), transparent 50%, rgba(74,222,154,0.12)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .realm-name {
+      font-size: 42px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-400), var(--gold-200));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+      text-shadow: none;
+      filter: drop-shadow(0 0 20px rgba(212,168,67,0.4));
+    }
+    .realm-desc {
+      font-size: 13px;
+      color: var(--mist-400);
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+    .outcome-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(212,168,67,0.2), rgba(212,168,67,0.1));
+      border: 1px solid rgba(212,168,67,0.4);
+      color: var(--gold-200);
+      padding: 6px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      box-shadow: 0 0 16px rgba(212,168,67,0.15);
+      margin-bottom: 16px;
+    }
+    .outcome-text {
+      font-size: 13px;
+      color: var(--mist-200);
+      line-height: 1.8;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* 标签组 */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .tag {
+      background: rgba(74,222,154,0.08);
+      border: 1px solid rgba(74,222,154,0.2);
+      color: var(--jade-200);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    /* 水墨纹饰角落 */
+    .corner-ornament {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.15;
+    }
+    .corner-ornament.tl { top: 12px; left: 12px; }
+    .corner-ornament.br { bottom: 12px; right: 12px; transform: rotate(180deg); }
+
+    /* 导航栏 */
+    .navbar {
+      background: rgba(10,14,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ink-800);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: -40px -20px 48px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .navbar-brand {
+      font-size: 15px;
+      font-weight: bold;
+      background: linear-gradient(90deg, var(--jade-300), var(--gold-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.1em;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 24px;
+    }
+    .navbar-links a {
+      font-size: 13px;
+      color: var(--mist-400);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover { color: var(--jade-300); }
+
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--mist-400);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    /* 灵根标签（轮回门） */
+    .spirit-root {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--jade-400);
+      box-shadow: 0 0 24px rgba(74,222,154,0.3), inset 0 0 16px rgba(74,222,154,0.08);
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--jade-300);
+      margin-bottom: 16px;
+    }
+    .spirit-root.gold {
+      border-color: var(--gold-400);
+      box-shadow: 0 0 24px rgba(212,168,67,0.4), inset 0 0 16px rgba(212,168,67,0.1);
+      color: var(--gold-300);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="content">
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="navbar-brand">凡人修仙传·人界篇</div>
+    <div class="navbar-links">
+      <a href="#">首页</a>
+      <a href="#">命运测试</a>
+      <a href="#">人物测试</a>
+    </div>
+  </nav>
+
+  <!-- 标题 -->
+  <div class="site-title">
+    <div class="label">凡人修仙传 · 命运模拟</div>
+    <h1>你的修仙命运</h1>
+    <p>经历轮回，踏入修仙之路</p>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- 进度条示例 -->
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span>第 6 题</span>
+      <span>共 16 题</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- 答题卡片 -->
+  <div class="card">
+    <!-- 水墨角落纹饰 -->
+    <svg class="corner-ornament tl" viewBox="0 0 60 60" fill="none">
+      <path d="M2 2 L2 30 Q2 58 30 58" stroke="currentColor" stroke-width="1.5" fill="none" color="#4ade9a"/>
+      <circle cx="2" cy="2" r="2" fill="#4ade9a"/>
+      <path d="M10 2 L10 22 Q10 50 38 50" stroke="currentColor" stroke-width="0.8" fill="none" color="#4ade9a" opacity="0.4"/>
+    </svg>
+    <svg class="corner-ornament br" viewBox="0 0 60 60" fill="none">
+      <path d="M2 2 L2 30 Q2 58 30 58" stroke="currentColor" stroke-width="1.5" fill="none" color="#4ade9a"/>
+      <circle cx="2" cy="2" r="2" fill="#4ade9a"/>
+      <path d="M10 2 L10 22 Q10 50 38 50" stroke="currentColor" stroke-width="0.8" fill="none" color="#4ade9a" opacity="0.4"/>
+    </svg>
+
+    <div class="card-label">情景 6</div>
+    <h2>修炼途中，你偶然得到一本残缺的上古功法，威力惊人却暗藏走火入魔之险。你会如何抉择？</h2>
+    <div class="options">
+      <button class="option-btn selected" onclick="toggleOption(this)">秘密修炼，以自身为炉鼎，险中求胜</button>
+      <button class="option-btn" onclick="toggleOption(this)">寻访前辈高人，请求指点破解之法</button>
+      <button class="option-btn" onclick="toggleOption(this)">将功法封存，待境界更高时再行参悟</button>
+      <button class="option-btn" onclick="toggleOption(this)">献给宗门，换取修炼资源与庇护</button>
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- 结果卡片 -->
+  <p class="section-title">结果页预览</p>
+
+  <div class="result-card">
+    <div class="card-label" style="text-align:center">你的修仙人生</div>
+    <div class="realm-name">元婴期</div>
+    <div class="realm-desc">突破重重天劫，凝聚元婴，寿元大增</div>
+    <div class="outcome-badge">飞升仙界</div>
+    <p class="outcome-text">历经千年修炼，你终于在一次偶然的机缘中触摸到了天道的边缘。那一刻，天地为之变色，祥云万里，你踏破虚空，飞升而去。</p>
+    <div class="tags" style="margin-top:20px">
+      <span class="tag">坚韧不拔</span>
+      <span class="tag">道心坚定</span>
+      <span class="tag">天命之人</span>
+    </div>
+  </div>
+
+  <!-- 轮回门灵根展示 -->
+  <p class="section-title">轮回入场 · 灵根展示</p>
+  <div class="card" style="text-align:center">
+    <div style="display:flex; justify-content:center; gap:32px; flex-wrap:wrap">
+      <div>
+        <div class="spirit-root gold">天</div>
+        <div style="font-size:12px;color:var(--gold-300);letter-spacing:0.1em">天灵根</div>
+        <div style="font-size:11px;color:var(--mist-400);margin-top:4px">万中无一</div>
+      </div>
+      <div>
+        <div class="spirit-root">双</div>
+        <div style="font-size:12px;color:var(--jade-300);letter-spacing:0.1em">双灵根</div>
+        <div style="font-size:11px;color:var(--mist-400);margin-top:4px">资质上乘</div>
+      </div>
+      <div>
+        <div class="spirit-root" style="border-color:rgba(74,222,154,0.4);color:rgba(74,222,154,0.5)">三</div>
+        <div style="font-size:12px;color:rgba(74,222,154,0.5);letter-spacing:0.1em">三灵根</div>
+        <div style="font-size:11px;color:var(--mist-400);margin-top:4px">资质中等</div>
+      </div>
+      <div>
+        <div class="spirit-root" style="border-color:rgba(74,222,154,0.2);color:rgba(74,222,154,0.3)">伪</div>
+        <div style="font-size:12px;color:rgba(74,222,154,0.3);letter-spacing:0.1em">伪灵根</div>
+        <div style="font-size:11px;color:var(--mist-400);margin-top:4px">资质平平</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 按钮组 -->
+  <div class="btn-row">
+    <button class="btn-primary">踏入修仙之路</button>
+    <button class="btn-secondary">再入轮回，重塑天资</button>
+  </div>
+
+</div>
+
+<script>
+  // 粒子系统
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+
+  function initParticles() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    particles = Array.from({ length: 80 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.8 + 0.3,
+      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: -(Math.random() * 0.35 + 0.1),
+      opacity: Math.random() * 0.6 + 0.1,
+      opacityDir: Math.random() > 0.5 ? 1 : -1,
+      // 大部分翠绿，少量金色
+      isGold: Math.random() < 0.12,
+    }));
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of particles) {
+      const hue = p.isGold ? 42 : 152;
+      const sat = p.isGold ? 65 : 55;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${hue}, ${sat}%, 65%, ${p.opacity})`;
+      ctx.fill();
+
+      // 光晕
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      grad.addColorStop(0, `hsla(${hue}, ${sat}%, 70%, ${p.opacity * 0.35})`);
+      grad.addColorStop(1, `hsla(${hue}, ${sat}%, 70%, 0)`);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.opacity += p.opacityDir * 0.008;
+      if (p.opacity > 0.75 || p.opacity < 0.05) p.opacityDir *= -1;
+      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+    }
+    requestAnimationFrame(drawParticles);
+  }
+
+  window.addEventListener('resize', initParticles);
+  initParticles();
+  drawParticles();
+
+  // 选项交互
+  function toggleOption(el) {
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+</script>
+</body>
+</html>

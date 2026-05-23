@@ -1,0 +1,6 @@
+{"type":"server-started","port":56229,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:56229","screen_dir":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/content","state_dir":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/state"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/content/branch-structure.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/content/branch-a-questions.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/content/branch-b-questions.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/22336-1776282410/content/finale-outcomes.html"}
+{"type":"server-stopped","reason":"idle timeout"}

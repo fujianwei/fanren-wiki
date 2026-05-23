@@ -11,26 +11,26 @@ export default function HomePage() {
     <div className="max-w-5xl mx-auto px-6 py-12">
       {/* Hero 区域 */}
       <div className="flex flex-col md:flex-row gap-6 mb-16">
-        {/* 左：人物测试入口 */}
+        {/* 左：修仙模拟入口 */}
         <div
           className="md:w-72 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
-          style={{ backgroundColor: "#1a3828" }}
+          style={{ backgroundColor: "#1a2810", border: "1px solid #d4a84333" }}
         >
-          <div className="text-4xl">🗡️</div>
+          <div className="text-4xl">⚔️</div>
           <h2 className="font-serif font-bold text-xl tracking-wide" style={{ color: "#e8f0ec" }}>
-            你最像哪位<br />修仙人物？
+            踏入修仙之路<br />命运由你掌握
           </h2>
           <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
-            十二道修仙情景题<br />
-            映照你的处世心性与道途选择<br />
-            看看你在人界最像谁<br />
-            一测便知
+            轮回转世，获得灵根<br />
+            历经五大境界，积累资源<br />
+            冲关突破，尝试飞升灵界<br />
+            此生能走多远？
           </p>
           <Link
-            href="/quiz"
+            href="/game"
             className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
           >
-            开始人物测试
+            开始修仙
           </Link>
         </div>
 

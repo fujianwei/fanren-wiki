@@ -1,0 +1,67 @@
+<h2>分支 MBTI 覆盖不均怎么处理？</h2>
+<p class="subtitle">走不同分支的玩家，触发的 MBTI 维度票数不同</p>
+
+<div class="section">
+  <p class="label">当前情况（按设计文档统计）</p>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9em;margin-top:8px">
+    <thead>
+      <tr style="background:rgba(0,0,0,0.06)">
+        <th style="padding:8px;text-align:left">维度</th>
+        <th style="padding:8px;text-align:center">公共主干（5题）</th>
+        <th style="padding:8px;text-align:center">分支A（6题）</th>
+        <th style="padding:8px;text-align:center">分支B（6题）</th>
+        <th style="padding:8px;text-align:center">收尾（3题）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px">E/I</td>
+        <td style="padding:8px;text-align:center">✓ Q1/Q2/Q4</td>
+        <td style="padding:8px;text-align:center">✓ QA5</td>
+        <td style="padding:8px;text-align:center">✓ QB1/QB3/QB5</td>
+        <td style="padding:8px;text-align:center">—</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px">S/N</td>
+        <td style="padding:8px;text-align:center">✓ Q2</td>
+        <td style="padding:8px;text-align:center">—</td>
+        <td style="padding:8px;text-align:center">✓ QB1/QB2/QB5/QB6</td>
+        <td style="padding:8px;text-align:center">✓ QF3</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px">T/F</td>
+        <td style="padding:8px;text-align:center">✓ Q3</td>
+        <td style="padding:8px;text-align:center">✓ QA2</td>
+        <td style="padding:8px;text-align:center">✓ QB4</td>
+        <td style="padding:8px;text-align:center">✓ QF3</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px">J/P</td>
+        <td style="padding:8px;text-align:center">✓ Q4/Q5</td>
+        <td style="padding:8px;text-align:center">✓ QA1/QA6</td>
+        <td style="padding:8px;text-align:center">✓ QB3/QB6</td>
+        <td style="padding:8px;text-align:center">✓ QF3</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top:8px;font-size:0.85em;opacity:0.7">⚠️ 走分支A的玩家，S/N 维度只有公共主干1票+收尾1票，分支B有4票</p>
+</div>
+
+<div class="options" style="margin-top:16px">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>接受不均（推荐）</h3>
+      <p>MBTI 只是附属功能，不是核心卖点。覆盖不均不影响游戏体验，无需修正。</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">平票时默认取 I/N/F/P，保持一致性</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>在收尾题补足 S/N 覆盖</h3>
+      <p>在3道收尾题中至少加一道 S/N 维度题，确保分支A玩家也有足够票数</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">改动最小，只需调整收尾题设计</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<h2>滑动条计分方案</h2>
+<p class="subtitle">滑动条范围 0-100，如何把位置转换为维度得分？</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>三段式（推荐）</h3>
+      <p>0-33 = 偏左，34-66 = 居中，67-100 = 偏右<br>
+      每段对应固定加分，简单清晰，易于调试</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">例：偏左情义+15，居中情义+7，偏右智慧+12</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>线性插值</h3>
+      <p>滑动条值直接线性映射到加分范围<br>
+      位置0 = 最大左加分，位置100 = 最大右加分，位置50 = 两边各一半</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">例：情义加分 = (100 - slider) / 100 × 20，精确但结果分散</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>五段式</h3>
+      <p>0-20 / 21-40 / 41-60 / 61-80 / 81-100 五档<br>
+      粒度更细，区分度更高</p>
+      <p style="margin-top:8px;font-size:0.85em;opacity:0.7">例：极左+20，偏左+15，居中+8，偏右+15，极右+20</p>
+    </div>
+  </div>
+</div>

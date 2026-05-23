@@ -1,0 +1,94 @@
+<h2>结果页合法路由组合</h2>
+<p class="subtitle">根据设计文档的触发条件，哪些境界+结局组合实际可达？</p>
+
+<div class="section">
+  <table style="width:100%;border-collapse:collapse;font-size:0.88em">
+    <thead>
+      <tr style="background:rgba(0,0,0,0.06)">
+        <th style="padding:8px;text-align:left">境界</th>
+        <th style="padding:8px;text-align:center">飞升</th>
+        <th style="padding:8px;text-align:center">成魔</th>
+        <th style="padding:8px;text-align:center">守护</th>
+        <th style="padding:8px;text-align:center">隐世</th>
+        <th style="padding:8px;text-align:center">陨落</th>
+        <th style="padding:8px;text-align:center">自然坐化</th>
+        <th style="padding:8px;text-align:center">彩蛋</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px;font-weight:600">炼气期</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓ 彩蛋</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px;font-weight:600">筑基期</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓ 彩蛋</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px;font-weight:600">结丹期</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓ 彩蛋</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px;font-weight:600">元婴期</td>
+        <td style="padding:8px;text-align:center;color:#e05">✗</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓ 彩蛋</td>
+      </tr>
+      <tr style="border-top:1px solid rgba(0,0,0,0.08)">
+        <td style="padding:8px;font-weight:600">化神期</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓</td>
+        <td style="padding:8px;text-align:center;color:#080">✓ 彩蛋</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top:8px;font-size:0.85em;opacity:0.7">合法组合共 <strong>22个</strong>（含7个彩蛋），不合法组合直接由计算逻辑规避，无需单独路由</p>
+</div>
+
+<div class="section" style="margin-top:16px">
+  <p class="label">id 命名方案</p>
+  <div class="options">
+    <div class="option" data-choice="a" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content">
+        <h3>境界-结局（推荐）</h3>
+        <p>如 <code>lianqi-zuohua</code>、<code>yuanying-chengmo</code>、<code>huashen-feisheng</code></p>
+        <p style="margin-top:6px;font-size:0.85em;opacity:0.7">彩蛋：任意境界均用 <code>[境界]-caidan</code>，如 <code>lianqi-caidan</code></p>
+      </div>
+    </div>
+    <div class="option" data-choice="b" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content">
+        <h3>数字 id</h3>
+        <p>如 <code>r01</code>、<code>r02</code>…<code>r22</code></p>
+        <p style="margin-top:6px;font-size:0.85em;opacity:0.7">简短，但可读性差，分享链接无语义</p>
+      </div>
+    </div>
+  </div>
+</div>

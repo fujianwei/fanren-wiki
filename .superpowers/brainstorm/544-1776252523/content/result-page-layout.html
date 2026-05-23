@@ -1,0 +1,63 @@
+<h2>结果页布局方案</h2>
+<p class="subtitle">三层内容如何排列？</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#f2f5f0;font-size:0.82em;line-height:1.6">
+      <div style="background:#7a9e72;color:#fff;padding:8px 12px;border-radius:6px;margin-bottom:8px;text-align:center">
+        <div style="font-size:1.3em;font-weight:700">元婴期</div>
+        <div style="opacity:0.85">你活了 847 岁 · 守护他人牺牲</div>
+      </div>
+      <div style="background:#fff;padding:8px 12px;border-radius:6px;margin-bottom:8px;font-size:0.9em;color:#3a5c32">
+        「你放下了飞升的执念，以身为盾，护住了最重要的人……」
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <div style="flex:1;background:#fff;padding:6px;border-radius:6px;text-align:center;font-size:0.8em">
+          <div style="color:#7a9e72;font-weight:600">雷达图</div>
+          <div style="color:#888">勇/智/情/野</div>
+        </div>
+        <div style="flex:1;background:#fff;padding:6px;border-radius:6px;text-align:center;font-size:0.8em">
+          <div style="color:#7a9e72;font-weight:600">性格关键词</div>
+          <div style="color:#888">重情·守护·坚韧</div>
+        </div>
+      </div>
+      <div style="background:#fff;padding:8px 12px;border-radius:6px;font-size:0.85em;color:#3a5c32">
+        <div style="font-weight:600">你与南宫婉最为相似</div>
+        <div style="color:#888;font-size:0.9em">若你身处人界，大概率走上她的命运</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. 瀑布式（推荐）</h3>
+      <p>三层从上到下依次展开，滚动阅读。沉浸感强，适合手机端。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#f2f5f0;font-size:0.82em;line-height:1.6">
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <div style="flex:1;background:#7a9e72;color:#fff;padding:8px;border-radius:6px;text-align:center">
+          <div style="font-weight:700">元婴期</div>
+          <div style="font-size:0.85em;opacity:0.85">847岁</div>
+        </div>
+        <div style="flex:2;background:#fff;padding:8px;border-radius:6px;color:#3a5c32">
+          <div style="font-weight:600">守护他人牺牲</div>
+          <div style="font-size:0.85em;color:#888">重情·守护·坚韧</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <div style="flex:1;background:#fff;padding:8px;border-radius:6px;text-align:center;font-size:0.8em;color:#7a9e72">雷达图</div>
+        <div style="flex:1;background:#fff;padding:8px;border-radius:6px;font-size:0.8em;color:#3a5c32">
+          <div style="font-weight:600">南宫婉</div>
+          <div style="color:#888">INFJ · 命运镜像</div>
+        </div>
+      </div>
+      <div style="background:#fff;padding:8px 12px;border-radius:6px;font-size:0.85em;color:#888">
+        「你放下了飞升的执念……」
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. 信息卡片式</h3>
+      <p>关键信息用卡片网格展示，一屏内看到全貌。适合桌面端，信息密度高。</p>
+    </div>
+  </div>
+</div>

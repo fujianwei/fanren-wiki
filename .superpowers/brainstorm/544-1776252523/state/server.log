@@ -1,0 +1,7 @@
+{"type":"server-started","port":49716,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:49716","screen_dir":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content","state_dir":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/state"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content/outcome-matrix-v2.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content/ranking-scoring.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content/waiting.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content/result-page-layout.html"}
+{"type":"screen-added","file":"/Users/fujianwei/fanren-wiki/.superpowers/brainstorm/544-1776252523/content/waiting-2.html"}
+{"type":"server-stopped","reason":"idle timeout"}
