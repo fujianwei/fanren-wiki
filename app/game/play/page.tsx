@@ -6,7 +6,6 @@ import StatusPanel from "@/components/game/StatusPanel";
 import EventCard from "@/components/game/EventCard";
 import MarketModal from "@/components/game/MarketModal";
 import SectChoiceModal from "@/components/game/SectChoiceModal";
-import SceneBackground from "@/components/game/SceneBackground";
 import { calcLifespanCost, getRealmConfig, calcBreakthroughRate, calcHeartDemonRate, calcFateAscendRate } from "@/lib/game/engine";
 import type { GameEvent, EventOption, EventEffect, ItemId } from "@/types/game";
 import eventsLianqi from "@/content/game/events-lianqi.json";
@@ -16,6 +15,7 @@ import eventsYuanying from "@/content/game/events-yuanying.json";
 import eventsHuashen from "@/content/game/events-huashen.json";
 import { useRouter } from "next/navigation";
 import BattleModal from "@/components/game/BattleModal";
+import SceneBackground from "@/components/game/SceneBackground";
 import type { RealmSlug } from "@/types/game";
 
 const ALL_EVENTS: GameEvent[] = [
@@ -497,7 +497,6 @@ function GamePlay() {
   const [showBattle, setShowBattle] = useState(false);
   const [battleEnemy, setBattleEnemy] = useState<{ name: string; realm: RealmSlug; desc: string } | null>(null);
   const [showSectChoice, setShowSectChoice] = useState(false);
-  const [showLog, setShowLog] = useState(false);
   const [log, setLog] = useState<{ age: number; text: string }[]>([]);
   const [toasts, setToasts] = useState<{ id: number; itemId: string; name: string; count: number }[]>([]);
   const [subRealmNotice, setSubRealmNotice] = useState<{ title: string; desc: string } | null>(null);
@@ -562,7 +561,6 @@ function GamePlay() {
       }, 0);
     }
   }, [state.xp]);
-
   function showItemToast(itemId: string, count: number) {
     const meta = ITEM_META[itemId];
     if (!meta) return;
@@ -741,135 +739,208 @@ function GamePlay() {
   const inventoryCount = Object.values(state.inventory).reduce((s, v) => s + (v ?? 0), 0);
 
   return (
-    <div className="fixed inset-0 flex flex-col">
-      {/* 背景图层 */}
-      <SceneBackground
-        eventId={currentEvent?.id ?? null}
-        realmSlug={state.realmSlug}
-      />
+    <div className="relative max-w-6xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 flex flex-col lg:flex-row gap-4 lg:gap-5" style={{ minHeight: "calc(100vh - 64px)", alignItems: "stretch" }}>
+      <SceneBackground eventId={currentEvent?.id ?? null} realmSlug={state.realmSlug} />
 
-      {/* HUD 顶部 */}
-      <div className="relative z-10 flex items-center justify-between">
-        <StatusPanel />
-        {/* 右侧工具按钮 */}
-        <div className="flex gap-2 px-4 py-2">
-          <button
-            onClick={() => setShowInventory(true)}
-            className="text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5"
-            style={{ backgroundColor: "rgba(10,14,13,0.8)", border: "1px solid #1a2820", color: "#6a8878" }}
-          >
-            储物袋
-            {inventoryCount > 0 && (
-              <span style={{ color: "#4ade9a" }}>{inventoryCount}</span>
+      {/* 左侧：储物袋 */}
+      <div className="hidden lg:flex w-64 flex-shrink-0 flex-col">
+        <div className="rounded-2xl overflow-hidden flex flex-col flex-1" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+          <div className="flex items-center justify-between px-4 py-3.5 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
+            <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>储物袋</span>
+            <span className="text-xs" style={{ color: "#4ade9a" }}>灵石 {state.lingshi}</span>
+          </div>
+
+          <div className="flex-1 overflow-y-auto">
+            {inventoryCount === 0 && (
+              <div className="px-4 py-6 text-xs text-center" style={{ color: "#4a6a58" }}>空空如也</div>
             )}
-          </button>
-          <button
-            onClick={() => setShowLog(!showLog)}
-            className="text-xs px-3 py-1.5 rounded-full"
-            style={{ backgroundColor: "rgba(10,14,13,0.8)", border: "1px solid #1a2820", color: "#6a8878" }}
-          >
-            记录
-          </button>
+
+            {(["mechanism", "breakthrough", "array"] as const).map((cat) => {
+              const items = Object.entries(ITEM_META)
+                .filter(([, m]) => m.category === cat)
+                .map(([id, m]) => ({ id, ...m, count: state.inventory[id as keyof typeof state.inventory] ?? 0 }));
+              const labels = { mechanism: "机制类丹药", breakthrough: "突破类丹药", array: "阵法" };
+              return (
+                <div key={cat}>
+                  <div className="px-4 py-2 text-xs tracking-wide" style={{ color: "#4a6a58", borderTop: "1px solid #1a2820", backgroundColor: "#0e1610" }}>
+                    {labels[cat]}
+                  </div>
+                  <div className="px-3 py-2 flex flex-col gap-1.5">
+                    {items.map(item => (
+                      <div key={item.id}
+                        className="flex items-center justify-between px-3 py-2 rounded-xl"
+                        style={{ backgroundColor: item.count > 0 ? "#0e1610" : "transparent", opacity: item.count > 0 ? 1 : 0.35 }}>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs truncate" style={{ color: "#e8f0ec" }}>{item.name}</div>
+                          <div className="text-xs mt-0.5" style={{ color: "#4a6a58", fontSize: "10px" }}>{item.desc}</div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-2 flex-shrink-0">
+                          <span className="text-xs font-medium" style={{ color: item.count > 0 ? "#4ade9a" : "#2a3828" }}>
+                            ×{item.count}
+                          </span>
+                          {item.category === "mechanism" && item.id !== "xuming_dan" && item.id !== "yao_dan" && item.count > 0 && (
+                            <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id as ItemId })}
+                              className="text-xs px-2 py-0.5 rounded-full"
+                              style={{ backgroundColor: "#1a2820", color: "#4ade9a", border: "1px solid #4ade9a33" }}>
+                              用
+                            </button>
+                          )}
+                          {item.id === "yao_dan" && item.count > 0 && (
+                            <button onClick={() => dispatch({ type: "USE_ITEM", itemId: "yao_dan" })}
+                              className="text-xs px-2 py-0.5 rounded-full"
+                              style={{ backgroundColor: "#1a2820", color: "#d4a843", border: "1px solid #d4a84333" }}>
+                              用
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* 日志浮层（右侧滑出） */}
-      {showLog && (
-        <div className="fixed top-12 right-0 z-30 w-64 max-h-80 overflow-y-auto rounded-bl-2xl"
-          style={{ backgroundColor: "rgba(10,14,13,0.92)", border: "1px solid #1a2820", borderRight: "none", borderTop: "none" }}>
-          <div className="px-4 py-3 flex flex-col gap-3">
-            {log.length === 0
-              ? <span className="text-xs" style={{ color: "#4a6a58" }}>尚无记录</span>
-              : log.map((entry, i) => (
-                <div key={i} className="flex flex-col gap-0.5">
-                  <span style={{ color: "#4a6a58", fontSize: "10px" }}>寿元第 {entry.age} 年</span>
-                  <p className="text-xs leading-relaxed" style={{ color: i === 0 ? "#8a9a90" : "#3a4a40" }}>
-                    {entry.text}
-                  </p>
-                </div>
-              ))
-            }
+      {/* 中间：主内容 */}
+      <div className="flex-1 min-w-0 flex flex-col gap-4">
+
+      <div className="flex lg:hidden gap-2">
+        <button
+          onClick={() => setShowInventory(true)}
+          className="flex-1 py-2.5 rounded-xl text-sm btn-secondary"
+        >
+          储物袋（{inventoryCount}）
+        </button>
+        <button
+          onClick={() => setShowMarket(true)}
+          className="flex-1 py-2.5 rounded-xl text-sm btn-secondary"
+        >
+          灵市
+        </button>
+      </div>
+
+      {/* 状态面板 */}
+      <StatusPanel />
+
+      {/* 主内容区 */}
+      {state.phase === "breakthrough" ? (
+        <BreakthroughPanel />
+      ) : currentEvent ? (
+        <EventCard event={currentEvent} onChoose={(option) => handleEventChoice(option)} />
+      ) : state.injury === "dying" ? (
+        <div
+          className="rounded-2xl p-6 text-center"
+          style={{ backgroundColor: "#111a16", border: "1px solid #dc262644" }}
+        >
+          <div className="text-2xl mb-3">💀</div>
+          <div className="font-serif font-bold mb-2" style={{ color: "#ef4444" }}>濒死状态</div>
+          <p className="text-xs leading-relaxed" style={{ color: "#6a4040" }}>
+            你已濒临陨落，无法进行任何主动行动。<br />请打开储物袋使用养伤丹治疗。
+          </p>
+          <button
+            onClick={() => setShowInventory(true)}
+            className="mt-4 w-full py-2.5 rounded-xl text-sm"
+            style={{ backgroundColor: "#1a2820", border: "1px solid #ef444433", color: "#ef4444" }}
+          >
+            打开储物袋
+          </button>
+        </div>
+      ) : (
+        <div className="rounded-2xl p-5" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+
+          {/* 主要行动 */}
+          <div className="flex flex-col gap-2.5 mb-4">
+            <button
+              onClick={handleNextEvent}
+              className="btn-primary py-3 rounded-xl text-sm font-medium"
+            >
+              寻求机缘
+            </button>
+
+            {/* 闭关三档 */}
+            <div className="flex gap-2">
+              {(["short", "mid", "long"] as const).map((d) => {
+                const realm = getRealmConfig(state.realmSlug);
+                const cost = realm.retreatCost[d];
+                const label = d === "short" ? "短期" : d === "mid" ? "中期" : "长期";
+                return (
+                  <button
+                    key={d}
+                    onClick={() => handleRetreat(d)}
+                    className="flex-1 py-2.5 rounded-xl text-xs btn-secondary flex flex-col items-center gap-0.5"
+                  >
+                    <span>闭关{label}</span>
+                    <span style={{ color: "#4a6a58" }}>{cost}年</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
+          {/* 分割线 */}
+          <div style={{ borderTop: "1px solid #1a2820", marginBottom: 16 }} />
+
+          {/* 次要行动 */}
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowMarket(true)}
+                className="flex-1 btn-secondary py-2.5 rounded-xl text-sm"
+              >
+                前往灵市
+              </button>
+              <button
+                onClick={() => {
+                  setBattleEnemy(pickBattleEnemy(state.realmSlug));
+                  setShowBattle(true);
+                }}
+                className="flex-1 btn-secondary py-2.5 rounded-xl text-sm"
+              >
+                外出历练
+              </button>
+            </div>
+
+            {state.sectPath === null && (
+              <button
+                onClick={() => setShowSectChoice(true)}
+                className="w-full py-2.5 rounded-xl text-sm"
+                style={{ backgroundColor: "#0e1a14", border: "1px solid #4ade9a33", color: "#4ade9a" }}
+              >
+                选择修仙道路
+              </button>
+            )}
+          </div>
+
+          {/* 冲关/飞升 —— 修为≥90才显示，单独一块 */}
+          {state.xp >= 90 && (
+            <>
+              <div style={{ borderTop: "1px solid #1a2820", margin: "16px 0" }} />
+              {state.realmSlug === "huashen" ? (
+                <button
+                  onClick={handleAscend}
+                  className="w-full py-3.5 rounded-xl text-sm font-bold tracking-widest"
+                  style={{ backgroundColor: "#d4a843", color: "#0a0e0d", letterSpacing: "0.1em" }}
+                >
+                  ✦ 飞升灵界
+                </button>
+              ) : (
+                <button
+                  onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
+                  className="w-full py-3 rounded-xl text-sm font-medium"
+                  style={{ backgroundColor: "#16140a", border: "1px solid #d4a84366", color: "#d4a843" }}
+                >
+                  冲关 → {NEXT_REALM_NAMES[state.realmSlug]}
+                </button>
+              )}
+            </>
+          )}
         </div>
       )}
 
-      {/* 中间空白区域（点击可关闭日志） */}
-      <div className="flex-1 relative z-10" onClick={() => showLog && setShowLog(false)} />
 
-      {/* 底部弹窗 */}
-      <div className="relative z-10 px-6 pb-6">
-        {state.phase === "breakthrough" ? (
-          <BreakthroughPanel />
-        ) : currentEvent ? (
-          /* 事件弹窗 */
-          <div className="rounded-2xl overflow-hidden"
-            style={{ backgroundColor: "rgba(10,14,13,0.92)", border: "1px solid rgba(74,222,154,0.15)" }}>
-            <EventCard event={currentEvent} onChoose={(option) => handleEventChoice(option)} />
-          </div>
-        ) : state.injury === "dying" ? (
-          <div className="rounded-2xl p-5 text-center"
-            style={{ backgroundColor: "rgba(10,14,13,0.92)", border: "1px solid #dc262644" }}>
-            <div className="font-serif font-bold mb-2" style={{ color: "#ef4444" }}>濒死状态</div>
-            <p className="text-xs" style={{ color: "#6a4040" }}>
-              你已濒临陨落，无法进行任何主动行动。请打开储物袋使用养伤丹治疗。
-            </p>
-          </div>
-        ) : (
-          /* 行动弹窗 */
-          <div className="rounded-2xl p-5"
-            style={{ backgroundColor: "rgba(10,14,13,0.92)", border: "1px solid rgba(74,222,154,0.15)" }}>
-            <div className="flex flex-col gap-2.5">
-              {/* 主要行动 */}
-              <div className="flex gap-2">
-                <button onClick={handleNextEvent} className="btn-primary flex-1 py-2.5 rounded-xl text-sm font-medium">
-                  寻求机缘
-                </button>
-                {(["short", "mid", "long"] as const).map((d) => {
-                  const realm = getRealmConfig(state.realmSlug);
-                  const cost = realm.retreatCost[d];
-                  const label = d === "short" ? "短期" : d === "mid" ? "中期" : "长期";
-                  return (
-                    <button key={d} onClick={() => handleRetreat(d)}
-                      className="flex-1 py-2.5 rounded-xl text-xs btn-secondary flex flex-col items-center gap-0.5">
-                      <span>闭关{label}</span>
-                      <span style={{ color: "#4a6a58" }}>{cost}年</span>
-                    </button>
-                  );
-                })}
-              </div>
-              {/* 次要行动 */}
-              <div className="flex gap-2">
-                <button onClick={() => setShowMarket(true)} className="flex-1 btn-secondary py-2 rounded-xl text-sm">前往灵市</button>
-                <button onClick={() => { setBattleEnemy(pickBattleEnemy(state.realmSlug)); setShowBattle(true); }}
-                  className="flex-1 btn-secondary py-2 rounded-xl text-sm">外出历练</button>
-                {state.sectPath === null && (
-                  <button onClick={() => setShowSectChoice(true)} className="flex-1 py-2 rounded-xl text-sm"
-                    style={{ backgroundColor: "#0e1a14", border: "1px solid #4ade9a33", color: "#4ade9a" }}>
-                    选择道路
-                  </button>
-                )}
-              </div>
-              {/* 冲关/飞升 */}
-              {state.xp >= 90 && (
-                <div style={{ borderTop: "1px solid #1a2820", paddingTop: 10 }}>
-                  {state.realmSlug === "huashen" ? (
-                    <button onClick={handleAscend} className="w-full py-3 rounded-xl text-sm font-bold"
-                      style={{ backgroundColor: "#d4a843", color: "#0a0e0d" }}>
-                      ✦ 飞升灵界
-                    </button>
-                  ) : (
-                    <button onClick={() => dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
-                      className="w-full py-3 rounded-xl text-sm font-medium"
-                      style={{ backgroundColor: "#16140a", border: "1px solid #d4a84366", color: "#d4a843" }}>
-                      冲关 → {NEXT_REALM_NAMES[state.realmSlug]}
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+      {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
 
       {/* 小境界突破提示 */}
       {subRealmNotice && (
@@ -1005,8 +1076,6 @@ function GamePlay() {
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
-
-      {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
       {showInventory && <InventoryModal onClose={() => setShowInventory(false)} />}
       {showSectChoice && <SectChoiceModal onClose={() => setShowSectChoice(false)} />}
       {showBattle && battleEnemy && (
@@ -1019,6 +1088,86 @@ function GamePlay() {
           onClose={() => { setShowBattle(false); setBattleEnemy(null); }}
         />
       )}
+      </div> {/* 中间主内容结束 */}
+
+      {/* 右侧：玩法说明 + 修行记录 */}
+      <div className="hidden lg:flex w-60 flex-shrink-0 flex-col gap-3">
+
+        {/* 上方 2/5：玩法说明 */}
+        <div className="rounded-2xl overflow-hidden flex flex-col" style={{ flex: "2", backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+          <div className="px-4 py-3 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
+            <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>玩法说明</span>
+          </div>
+          <div className="overflow-y-auto px-4 py-3 flex flex-col gap-3 flex-1">
+            {[
+              { icon: "◈", title: "寻求机缘", desc: "随机触发一个事件，消耗寿命并增加修为。选择不同选项影响结局。" },
+              { icon: "◎", title: "闭关修炼", desc: "短期可治轻伤。三档消耗不同寿命，增加修为。每年自然获得 20-30 灵石。" },
+              { icon: "⚔", title: "外出历练", desc: "触发战斗，3回合决策定胜负。胜可获灵石，败则受伤。" },
+              { icon: "✦", title: "前往灵市", desc: "随机展示3件商品，刷新免费。稀世丹药偶尔出现，价格极高。" },
+              { icon: "↑", title: "冲关突破", desc: "修为≥90%可冲关。消耗当前寿命上限2%，丹药和阵法可提升成功率。失败积累经验。" },
+              { icon: "∞", title: "因果链", desc: "某些选择会埋下因果，日后触发回报或报复。台词有暗示，留意细节。" },
+            ].map(item => (
+              <div key={item.title} className="flex gap-2">
+                <span className="text-xs flex-shrink-0 mt-0.5" style={{ color: "#4a6a58" }}>{item.icon}</span>
+                <div>
+                  <div className="text-xs font-medium mb-0.5" style={{ color: "#8a9a90" }}>{item.title}</div>
+                  <div className="leading-relaxed" style={{ color: "#4a6a58", fontSize: "10px" }}>{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 下方 3/5：修行记录 */}
+        <div className="rounded-2xl overflow-hidden flex flex-col" style={{ flex: "3", backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+          <div className="px-4 py-3 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
+            <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>修行记录</span>
+          </div>
+          {log.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center">
+              <span className="text-xs" style={{ color: "#4a6a58" }}>尚无记录</span>
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-4">
+              {log.map((entry, i) => (
+                <div key={i} className="flex flex-col gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1 h-1 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: i === 0 ? "#4ade9a" : "#2a3828" }} />
+                    <span style={{ color: "#4a6a58", fontSize: "10px" }}>
+                      寿元第 {entry.age} 年
+                    </span>
+                  </div>
+                  <p className="text-xs leading-relaxed pl-2.5"
+                    style={{ color: i === 0 ? "#8a9a90" : "#3a4a40", borderLeft: `1px solid ${i === 0 ? "#2a3828" : "#1a2820"}` }}>
+                    {entry.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+      </div>
+
+      <div className="lg:hidden rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+        <div className="px-4 py-3 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
+          <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>修行记录</span>
+        </div>
+        {log.length === 0 ? (
+          <div className="px-4 py-4 text-xs" style={{ color: "#4a6a58" }}>尚无记录</div>
+        ) : (
+          <div className="max-h-52 overflow-y-auto px-4 py-3 flex flex-col gap-3">
+            {log.slice(0, 10).map((entry, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <span style={{ color: "#4a6a58", fontSize: "10px" }}>寿元第 {entry.age} 年</span>
+                <p className="text-xs leading-relaxed" style={{ color: "#8a9a90" }}>{entry.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
     </div>
   );
 }
