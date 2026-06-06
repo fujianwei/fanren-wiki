@@ -40,11 +40,11 @@ export default function SceneBackground({ eventId, realmSlug }: Props) {
   }, [eventId, realmSlug]);
 
   if (!src) {
-    // fallback：暗色渐变
     return (
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
+          zIndex: 0,
           background: "radial-gradient(ellipse at 30% 20%, rgba(26,40,32,0.9) 0%, rgba(10,14,13,1) 70%)",
         }}
       />
@@ -54,13 +54,13 @@ export default function SceneBackground({ eventId, realmSlug }: Props) {
   return (
     <>
       <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-        style={{ backgroundImage: `url(${src})` }}
+        className="absolute inset-0 bg-cover bg-center transition-all duration-700 pointer-events-none"
+        style={{ zIndex: 0, backgroundImage: `url(${src})` }}
       />
-      {/* 底部渐变遮罩，让弹窗文字可读 */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
+          zIndex: 0,
           background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.92) 100%)",
         }}
       />

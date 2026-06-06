@@ -743,7 +743,7 @@ function GamePlay() {
       <SceneBackground eventId={currentEvent?.id ?? null} realmSlug={state.realmSlug} />
 
       {/* 左侧：储物袋 */}
-      <div className="hidden lg:flex w-64 flex-shrink-0 flex-col">
+      <div className="relative z-10 hidden lg:flex w-64 flex-shrink-0 flex-col">
         <div className="rounded-2xl overflow-hidden flex flex-col flex-1" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
           <div className="flex items-center justify-between px-4 py-3.5 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
             <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>储物袋</span>
@@ -804,7 +804,7 @@ function GamePlay() {
       </div>
 
       {/* 中间：主内容 */}
-      <div className="flex-1 min-w-0 flex flex-col gap-4">
+      <div className="relative z-10 flex-1 min-w-0 flex flex-col gap-4">
 
       <div className="flex lg:hidden gap-2">
         <button
@@ -1091,7 +1091,7 @@ function GamePlay() {
       </div> {/* 中间主内容结束 */}
 
       {/* 右侧：玩法说明 + 修行记录 */}
-      <div className="hidden lg:flex w-60 flex-shrink-0 flex-col gap-3">
+      <div className="relative z-10 hidden lg:flex w-60 flex-shrink-0 flex-col gap-3">
 
         {/* 上方 2/5：玩法说明 */}
         <div className="rounded-2xl overflow-hidden flex flex-col" style={{ flex: "2", backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
@@ -1150,7 +1150,7 @@ function GamePlay() {
 
       </div>
 
-      <div className="lg:hidden rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
+      <div className="relative z-10 lg:hidden rounded-2xl overflow-hidden flex flex-col" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
         <div className="px-4 py-3 flex-shrink-0" style={{ borderBottom: "1px solid #1a2820" }}>
           <span className="text-sm font-medium font-serif" style={{ color: "#e8f0ec" }}>修行记录</span>
         </div>
