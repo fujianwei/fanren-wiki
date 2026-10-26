@@ -1,0 +1,168 @@
+{
+  "target": 20,
+  "captured": 20,
+  "remaining": 0,
+  "sourceMode": "official-site-only",
+  "slots": [
+    {
+      "index": 1,
+      "sampleId": "official-01",
+      "name": "Salma Rashid",
+      "age": "71岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 2,
+      "sampleId": "official-02",
+      "name": "Erlinda Gonzales",
+      "age": "0岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 3,
+      "sampleId": "official-03",
+      "name": "Farah Hussein",
+      "age": "0岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 4,
+      "sampleId": "official-04",
+      "name": "Nasreen Ansari",
+      "age": "2岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 5,
+      "sampleId": "official-05",
+      "name": "Suresh Das",
+      "age": "88岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 6,
+      "sampleId": "official-06",
+      "name": "Tamar Amar",
+      "age": "89岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TTO-90-F-r-k5",
+      "complete": true
+    },
+    {
+      "index": 7,
+      "sampleId": "official-07",
+      "name": "Maryam Ahmed",
+      "age": "0岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-PAK-0-F-r-k3",
+      "complete": true
+    },
+    {
+      "index": 8,
+      "sampleId": "official-08",
+      "name": "Yash Kamble",
+      "age": "85岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-IND-85-M-r-k3",
+      "complete": true
+    },
+    {
+      "index": 9,
+      "sampleId": "official-09",
+      "name": "Harsimran Kaur",
+      "age": "15岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-IND-15-F-r-k4",
+      "complete": true
+    },
+    {
+      "index": 10,
+      "sampleId": "official-10",
+      "name": "Areeba Chaudhry",
+      "age": "76岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-PAK-76-F-u-k4",
+      "complete": true
+    },
+    {
+      "index": 11,
+      "sampleId": "official-11",
+      "name": "Yonas Eyob",
+      "age": "81岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-ETH-81-M-r-k3",
+      "complete": true
+    },
+    {
+      "index": 12,
+      "sampleId": "official-12",
+      "name": "Kemal Yavuz",
+      "age": "91岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-TUR-91-M-u-k1",
+      "complete": true
+    },
+    {
+      "index": 13,
+      "sampleId": "official-13",
+      "name": "Muhammad Ali Qureshi",
+      "age": "60岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-PAK-60-M-r-k2",
+      "complete": true
+    },
+    {
+      "index": 14,
+      "sampleId": "official-14",
+      "name": "Waqas Memon",
+      "age": "69岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-PAK-69-M-r-k5",
+      "complete": true
+    },
+    {
+      "index": 15,
+      "sampleId": "official-15",
+      "name": "Aya Saleh",
+      "age": "70岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-EGY-70-F-r-k0",
+      "complete": true
+    },
+    {
+      "index": 16,
+      "sampleId": "official-16",
+      "name": "Samira Ahmed",
+      "age": "74岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-DZA-74-F-u-k4",
+      "complete": true
+    },
+    {
+      "index": 17,
+      "sampleId": "official-17",
+      "name": "Rose Morea",
+      "age": "60岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-PNG-60-F-r-k4",
+      "complete": true
+    },
+    {
+      "index": 18,
+      "sampleId": "official-18",
+      "name": "Salma Begum",
+      "age": "87岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-BGD-87-F-r-k3",
+      "complete": true
+    },
+    {
+      "index": 19,
+      "sampleId": "official-19",
+      "name": "周可欣",
+      "age": "84岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-CHN-84-F-u-k2",
+      "complete": true
+    },
+    {
+      "index": 20,
+      "sampleId": "official-20",
+      "name": "Jyoti Kumar",
+      "age": "61岁",
+      "shareUrl": "https://1in8b.life/zh-hans/s/d-IND-61-F-r-k3",
+      "complete": true
+    }
+  ]
+}
