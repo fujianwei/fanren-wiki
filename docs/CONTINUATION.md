@@ -129,6 +129,7 @@
 ## **七、验证命令**
 
 ```bash
+npm ci
 npx tsc --noEmit
 npm run lint
 npm test -- --runInBand
