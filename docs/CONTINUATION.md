@@ -58,6 +58,7 @@
 入口：
 
 - `docs/image-prompts/full-pack-v3/00-README.md`
+- `docs/image-prompts/full-pack-v3/REFERENCE-STYLE-GUIDE.md`：8 款优秀像素游戏的高层设计参考、原创边界与验收标准
 - `docs/image-prompts/full-pack-v3/05-batch-index.md`
 - `docs/image-prompts/full-pack-v3/manifest.jsonl`
 - `docs/image-prompts/full-pack-v3/checklist.csv`
