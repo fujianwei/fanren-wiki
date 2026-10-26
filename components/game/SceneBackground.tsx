@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import type { RealmSlug } from "@/types/game";
 
 interface Props {
@@ -8,61 +7,36 @@ interface Props {
   realmSlug: RealmSlug;
 }
 
+const REALM_GLOW: Record<RealmSlug, string> = {
+  lianqi: "rgba(74,222,154,.10)",
+  zhuji: "rgba(87,175,235,.10)",
+  jiedan: "rgba(212,168,67,.11)",
+  yuanying: "rgba(183,139,255,.11)",
+  huashen: "rgba(232,200,106,.13)",
+};
+
+/**
+ * The repository does not ship raster backgrounds for every event. Rather than
+ * probing missing files on every render, render a stable ink-wash atmosphere.
+ * Event and realm still alter the composition so future content can tune it.
+ */
 export default function SceneBackground({ eventId, realmSlug }: Props) {
-  const [src, setSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    // 依次尝试加载图片
-    const candidates = [
-      eventId ? `/game/events/${eventId}.jpg` : null,
-      `/game/realms/${realmSlug}.jpg`,
-    ].filter(Boolean) as string[];
-
-    let cancelled = false;
-
-    async function tryLoad() {
-      for (const url of candidates) {
-        const ok = await new Promise<boolean>((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(false);
-          img.src = url;
-        });
-        if (cancelled) return;
-        if (ok) { setSrc(url); return; }
-      }
-      if (!cancelled) setSrc(null);
-    }
-
-    void tryLoad();
-    return () => { cancelled = true; };
-  }, [eventId, realmSlug]);
-
-  if (!src) {
-    return (
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 0,
-          background: "radial-gradient(ellipse at 30% 20%, rgba(26,40,32,0.9) 0%, rgba(10,14,13,1) 70%)",
-        }}
-      />
-    );
-  }
+  const glow = REALM_GLOW[realmSlug];
+  const eventShift = eventId
+    ? (eventId.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) % 36) - 18
+    : 0;
 
   return (
-    <>
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700 pointer-events-none"
-        style={{ zIndex: 0, backgroundImage: `url(${src})` }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.92) 100%)",
-        }}
-      />
-    </>
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        zIndex: 0,
+        background: [
+          `radial-gradient(ellipse at ${28 + eventShift}% 18%, ${glow} 0%, transparent 52%)`,
+          "radial-gradient(ellipse at 82% 74%, rgba(212,168,67,.045) 0%, transparent 48%)",
+          "linear-gradient(165deg, rgba(14,22,18,.72), rgba(7,12,10,.96))",
+        ].join(", "),
+      }}
+    />
   );
 }
