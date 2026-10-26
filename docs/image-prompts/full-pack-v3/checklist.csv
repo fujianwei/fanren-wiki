@@ -1,0 +1,516 @@
+﻿完成,编号,类别,名称,输出文件,提示词文件,来源事件,选项编号,选项文本
+[ ],V3-001,event_scene,山中偶遇受伤散修,public/game/scenes/events/lq_001.png,01-base-events.md,lq_001,,
+[ ],V3-002,event_outcome,山中偶遇受伤散修 · 选项A,public/game/scenes/outcomes/events/lq_001-a.png,01-base-events.md,lq_001,1,出手救治，以诚相待
+[ ],V3-003,event_outcome,山中偶遇受伤散修 · 选项B,public/game/scenes/outcomes/events/lq_001-b.png,01-base-events.md,lq_001,2,视而不见，继续赶路
+[ ],V3-004,event_outcome,山中偶遇受伤散修 · 选项C,public/game/scenes/outcomes/events/lq_001-c.png,01-base-events.md,lq_001,3,趁机索要丹药，以武力威胁
+[ ],V3-005,event_scene,宗门任务：采集灵草,public/game/scenes/events/lq_002.png,01-base-events.md,lq_002,,
+[ ],V3-006,event_outcome,宗门任务：采集灵草 · 选项A,public/game/scenes/outcomes/events/lq_002-a.png,01-base-events.md,lq_002,1,接取任务，前往后山
+[ ],V3-007,event_outcome,宗门任务：采集灵草 · 选项B,public/game/scenes/outcomes/events/lq_002-b.png,01-base-events.md,lq_002,2,暂时不接，继续修炼
+[ ],V3-008,event_scene,坊市散活：护送商队,public/game/scenes/events/lq_002b.png,01-base-events.md,lq_002b,,
+[ ],V3-009,event_outcome,坊市散活：护送商队 · 选项A,public/game/scenes/outcomes/events/lq_002b-a.png,01-base-events.md,lq_002b,1,接下这份活计
+[ ],V3-010,event_outcome,坊市散活：护送商队 · 选项B,public/game/scenes/outcomes/events/lq_002b-b.png,01-base-events.md,lq_002b,2,不接，继续修炼
+[ ],V3-011,event_scene,昔日恩情回报,public/game/scenes/events/lq_003.png,01-base-events.md,lq_003,,
+[ ],V3-012,event_outcome,昔日恩情回报 · 选项A,public/game/scenes/outcomes/events/lq_003-a.png,01-base-events.md,lq_003,1,收下丹药，道谢
+[ ],V3-013,event_scene,山洞里发现前人遗留,public/game/scenes/events/lq_004.png,01-base-events.md,lq_004,,
+[ ],V3-014,event_outcome,山洞里发现前人遗留 · 选项A,public/game/scenes/outcomes/events/lq_004-a.png,01-base-events.md,lq_004,1,取走储物袋
+[ ],V3-015,event_outcome,山洞里发现前人遗留 · 选项B,public/game/scenes/outcomes/events/lq_004-b.png,01-base-events.md,lq_004,2,原封不动，留给有缘人
+[ ],V3-016,event_scene,野外遭遇妖兽袭击,public/game/scenes/events/lq_005.png,01-base-events.md,lq_005,,
+[ ],V3-017,event_outcome,野外遭遇妖兽袭击 · 选项A,public/game/scenes/outcomes/events/lq_005-a.png,01-base-events.md,lq_005,1,迎战，正面击杀
+[ ],V3-018,event_outcome,野外遭遇妖兽袭击 · 选项B,public/game/scenes/outcomes/events/lq_005-b.png,01-base-events.md,lq_005,2,施展身法，强行脱身
+[ ],V3-019,event_outcome,野外遭遇妖兽袭击 · 选项C,public/game/scenes/outcomes/events/lq_005-c.png,01-base-events.md,lq_005,3,硬抗，以伤换伤
+[ ],V3-020,event_outcome,野外遭遇妖兽袭击 · 选项D,public/game/scenes/outcomes/events/lq_005-d.png,01-base-events.md,lq_005,4,避开妖兽，消耗灵力撤离
+[ ],V3-021,event_scene,坊市遭遇骗局,public/game/scenes/events/lq_006.png,01-base-events.md,lq_006,,
+[ ],V3-022,event_outcome,坊市遭遇骗局 · 选项A,public/game/scenes/outcomes/events/lq_006-a.png,01-base-events.md,lq_006,1,花200灵石购买
+[ ],V3-023,event_outcome,坊市遭遇骗局 · 选项B,public/game/scenes/outcomes/events/lq_006-b.png,01-base-events.md,lq_006,2,识破骗局，转身离开
+[ ],V3-024,event_scene,拜访坊市老药师,public/game/scenes/events/lq_007.png,01-base-events.md,lq_007,,
+[ ],V3-025,event_outcome,拜访坊市老药师 · 选项A,public/game/scenes/outcomes/events/lq_007-a.png,01-base-events.md,lq_007,1,购买养伤丹（150灵石）
+[ ],V3-026,event_outcome,拜访坊市老药师 · 选项B,public/game/scenes/outcomes/events/lq_007-b.png,01-base-events.md,lq_007,2,购买聚气丹（80灵石）
+[ ],V3-027,event_outcome,拜访坊市老药师 · 选项C,public/game/scenes/outcomes/events/lq_007-c.png,01-base-events.md,lq_007,3,随便聊聊，不买
+[ ],V3-028,event_scene,修炼走火入魔,public/game/scenes/events/lq_008.png,01-base-events.md,lq_008,,
+[ ],V3-029,event_outcome,修炼走火入魔 · 选项A,public/game/scenes/outcomes/events/lq_008-a.png,01-base-events.md,lq_008,1,强行压制，硬撑过去
+[ ],V3-030,event_outcome,修炼走火入魔 · 选项B,public/game/scenes/outcomes/events/lq_008-b.png,01-base-events.md,lq_008,2,立即停止修炼，消耗灵石稳固气息（50灵石）
+[ ],V3-031,event_scene,天降灵雨,public/game/scenes/events/lq_009.png,01-base-events.md,lq_009,,
+[ ],V3-032,event_outcome,天降灵雨 · 选项A,public/game/scenes/outcomes/events/lq_009-a.png,01-base-events.md,lq_009,1,盘坐入定，尽情吸收
+[ ],V3-033,event_scene,同门师兄借钱,public/game/scenes/events/lq_010.png,01-base-events.md,lq_010,,
+[ ],V3-034,event_outcome,同门师兄借钱 · 选项A,public/game/scenes/outcomes/events/lq_010-a.png,01-base-events.md,lq_010,1,借给他
+[ ],V3-035,event_outcome,同门师兄借钱 · 选项B,public/game/scenes/outcomes/events/lq_010-b.png,01-base-events.md,lq_010,2,婉言拒绝
+[ ],V3-036,event_outcome,同门师兄借钱 · 选项C,public/game/scenes/outcomes/events/lq_010-c.png,01-base-events.md,lq_010,3,借给他，但要求加收利息
+[ ],V3-037,event_scene,师兄归还灵石,public/game/scenes/events/lq_011.png,01-base-events.md,lq_011,,
+[ ],V3-038,event_outcome,师兄归还灵石 · 选项A,public/game/scenes/outcomes/events/lq_011-a.png,01-base-events.md,lq_011,1,收下，道声客气
+[ ],V3-039,event_scene,遭遇劫道散修,public/game/scenes/events/lq_012.png,01-base-events.md,lq_012,,
+[ ],V3-040,event_outcome,遭遇劫道散修 · 选项A,public/game/scenes/outcomes/events/lq_012-a.png,01-base-events.md,lq_012,1,交钱了事
+[ ],V3-041,event_outcome,遭遇劫道散修 · 选项B,public/game/scenes/outcomes/events/lq_012-b.png,01-base-events.md,lq_012,2,奋起反抗，与之一战
+[ ],V3-042,event_outcome,遭遇劫道散修 · 选项C,public/game/scenes/outcomes/events/lq_012-c.png,01-base-events.md,lq_012,3,虚张声势，谎称有强援
+[ ],V3-043,event_outcome,遭遇劫道散修 · 选项D,public/game/scenes/outcomes/events/lq_012-d.png,01-base-events.md,lq_012,4,绕路离开，暂避锋芒
+[ ],V3-044,event_scene,深山探宝,public/game/scenes/events/lq_013.png,01-base-events.md,lq_013,,
+[ ],V3-045,event_outcome,深山探宝 · 选项A,public/game/scenes/outcomes/events/lq_013-a.png,01-base-events.md,lq_013,1,大胆前往，搜寻宝物
+[ ],V3-046,event_outcome,深山探宝 · 选项B,public/game/scenes/outcomes/events/lq_013-b.png,01-base-events.md,lq_013,2,谨慎探查，发现危险立刻撤退
+[ ],V3-047,event_outcome,深山探宝 · 选项C,public/game/scenes/outcomes/events/lq_013-c.png,01-base-events.md,lq_013,3,不去，太危险了
+[ ],V3-048,event_scene,宗门惩处,public/game/scenes/events/lq_014.png,01-base-events.md,lq_014,,
+[ ],V3-049,event_outcome,宗门惩处 · 选项A,public/game/scenes/outcomes/events/lq_014-a.png,01-base-events.md,lq_014,1,认罚，乖乖交出灵石
+[ ],V3-050,event_outcome,宗门惩处 · 选项B,public/game/scenes/outcomes/events/lq_014-b.png,01-base-events.md,lq_014,2,据理力争，为自己辩解
+[ ],V3-051,event_scene,偶遇前辈指点,public/game/scenes/events/lq_015.png,01-base-events.md,lq_015,,
+[ ],V3-052,event_outcome,偶遇前辈指点 · 选项A,public/game/scenes/outcomes/events/lq_015-a.png,01-base-events.md,lq_015,1,恭敬聆听，认真领悟
+[ ],V3-053,event_scene,落难的结丹修士,public/game/scenes/events/zj_001.png,01-base-events.md,zj_001,,
+[ ],V3-054,event_outcome,落难的结丹修士 · 选项A,public/game/scenes/outcomes/events/zj_001-a.png,01-base-events.md,zj_001,1,出手相救，消耗灵石治疗
+[ ],V3-055,event_outcome,落难的结丹修士 · 选项B,public/game/scenes/outcomes/events/zj_001-b.png,01-base-events.md,zj_001,2,视而不见，此事与我无关
+[ ],V3-056,event_outcome,落难的结丹修士 · 选项C,public/game/scenes/outcomes/events/zj_001-c.png,01-base-events.md,zj_001,3,趁火打劫，搜走他的储物袋
+[ ],V3-057,event_scene,结丹前辈的回报,public/game/scenes/events/zj_002.png,01-base-events.md,zj_002,,
+[ ],V3-058,event_outcome,结丹前辈的回报 · 选项A,public/game/scenes/outcomes/events/zj_002-a.png,01-base-events.md,zj_002,1,恭敬收下
+[ ],V3-059,event_scene,仇家上门,public/game/scenes/events/zj_003.png,01-base-events.md,zj_003,,
+[ ],V3-060,event_outcome,仇家上门 · 选项A,public/game/scenes/outcomes/events/zj_003-a.png,01-base-events.md,zj_003,1,正面迎战
+[ ],V3-061,event_outcome,仇家上门 · 选项B,public/game/scenes/outcomes/events/zj_003-b.png,01-base-events.md,zj_003,2,消耗灵石布阵防御，以守待攻
+[ ],V3-062,event_outcome,仇家上门 · 选项C,public/game/scenes/outcomes/events/zj_003-c.png,01-base-events.md,zj_003,3,转身逃跑
+[ ],V3-063,event_outcome,仇家上门 · 选项D,public/game/scenes/outcomes/events/zj_003-d.png,01-base-events.md,zj_003,4,先行退避，另寻时机
+[ ],V3-064,event_scene,灵脉采集,public/game/scenes/events/zj_004.png,01-base-events.md,zj_004,,
+[ ],V3-065,event_outcome,灵脉采集 · 选项A,public/game/scenes/outcomes/events/zj_004-a.png,01-base-events.md,zj_004,1,快速采集，尽快离开
+[ ],V3-066,event_outcome,灵脉采集 · 选项B,public/game/scenes/outcomes/events/zj_004-b.png,01-base-events.md,zj_004,2,长期驻守，深度修炼
+[ ],V3-067,event_outcome,灵脉采集 · 选项C,public/game/scenes/outcomes/events/zj_004-c.png,01-base-events.md,zj_004,3,放弃，不想惹麻烦
+[ ],V3-068,event_scene,修炼瓶颈,public/game/scenes/events/zj_005.png,01-base-events.md,zj_005,,
+[ ],V3-069,event_outcome,修炼瓶颈 · 选项A,public/game/scenes/outcomes/events/zj_005-a.png,01-base-events.md,zj_005,1,以战养修，主动出去历练
+[ ],V3-070,event_outcome,修炼瓶颈 · 选项B,public/game/scenes/outcomes/events/zj_005-b.png,01-base-events.md,zj_005,2,静心闭关，厚积薄发
+[ ],V3-071,event_scene,坊市奇遇,public/game/scenes/events/zj_006.png,01-base-events.md,zj_006,,
+[ ],V3-072,event_outcome,坊市奇遇 · 选项A,public/game/scenes/outcomes/events/zj_006-a.png,01-base-events.md,zj_006,1,花500灵石购入
+[ ],V3-073,event_outcome,坊市奇遇 · 选项B,public/game/scenes/outcomes/events/zj_006-b.png,01-base-events.md,zj_006,2,半信半疑，放弃购买
+[ ],V3-074,event_outcome,坊市奇遇 · 选项C,public/game/scenes/outcomes/events/zj_006-c.png,01-base-events.md,zj_006,3,压价，出300灵石
+[ ],V3-075,event_scene,遭遇天劫前兆,public/game/scenes/events/zj_007.png,01-base-events.md,zj_007,,
+[ ],V3-076,event_outcome,遭遇天劫前兆 · 选项A,public/game/scenes/outcomes/events/zj_007-a.png,01-base-events.md,zj_007,1,正面迎接，以此磨砺意志
+[ ],V3-077,event_outcome,遭遇天劫前兆 · 选项B,public/game/scenes/outcomes/events/zj_007-b.png,01-base-events.md,zj_007,2,消耗灵石布阵抵御
+[ ],V3-078,event_scene,同门反目,public/game/scenes/events/zj_008.png,01-base-events.md,zj_008,,
+[ ],V3-079,event_outcome,同门反目 · 选项A,public/game/scenes/outcomes/events/zj_008-a.png,01-base-events.md,zj_008,1,据理力争，当众揭穿他
+[ ],V3-080,event_outcome,同门反目 · 选项B,public/game/scenes/outcomes/events/zj_008-b.png,01-base-events.md,zj_008,2,息事宁人，赔偿了事
+[ ],V3-081,event_outcome,同门反目 · 选项C,public/game/scenes/outcomes/events/zj_008-c.png,01-base-events.md,zj_008,3,找长老评理
+[ ],V3-082,event_scene,废弃矿洞探索,public/game/scenes/events/zj_009.png,01-base-events.md,zj_009,,
+[ ],V3-083,event_outcome,废弃矿洞探索 · 选项A,public/game/scenes/outcomes/events/zj_009-a.png,01-base-events.md,zj_009,1,深入探索，不到最深处不回头
+[ ],V3-084,event_outcome,废弃矿洞探索 · 选项B,public/game/scenes/outcomes/events/zj_009-b.png,01-base-events.md,zj_009,2,浅尝即止，取到就走
+[ ],V3-085,event_outcome,废弃矿洞探索 · 选项C,public/game/scenes/outcomes/events/zj_009-c.png,01-base-events.md,zj_009,3,不去，风险太大
+[ ],V3-086,event_scene,灵兽幼崽,public/game/scenes/events/zj_010.png,01-base-events.md,zj_010,,
+[ ],V3-087,event_outcome,灵兽幼崽 · 选项A,public/game/scenes/outcomes/events/zj_010-a.png,01-base-events.md,zj_010,1,收养它，花灵石照料
+[ ],V3-088,event_outcome,灵兽幼崽 · 选项B,public/game/scenes/outcomes/events/zj_010-b.png,01-base-events.md,zj_010,2,治好它，放归山林
+[ ],V3-089,event_outcome,灵兽幼崽 · 选项C,public/game/scenes/outcomes/events/zj_010-c.png,01-base-events.md,zj_010,3,不管，继续赶路
+[ ],V3-090,event_scene,灵兽报恩,public/game/scenes/events/zj_011.png,01-base-events.md,zj_011,,
+[ ],V3-091,event_outcome,灵兽报恩 · 选项A,public/game/scenes/outcomes/events/zj_011-a.png,01-base-events.md,zj_011,1,花灵石为它治伤
+[ ],V3-092,event_scene,黑市交易,public/game/scenes/events/zj_012.png,01-base-events.md,zj_012,,
+[ ],V3-093,event_outcome,黑市交易 · 选项A,public/game/scenes/outcomes/events/zj_012-a.png,01-base-events.md,zj_012,1,花600灵石购入
+[ ],V3-094,event_outcome,黑市交易 · 选项B,public/game/scenes/outcomes/events/zj_012-b.png,01-base-events.md,zj_012,2,来路不明，拒绝
+[ ],V3-095,event_outcome,黑市交易 · 选项C,public/game/scenes/outcomes/events/zj_012-c.png,01-base-events.md,zj_012,3,举报此人，换取宗门奖励
+[ ],V3-096,event_scene,修炼资源被盗,public/game/scenes/events/zj_013.png,01-base-events.md,zj_013,,
+[ ],V3-097,event_outcome,修炼资源被盗 · 选项A,public/game/scenes/outcomes/events/zj_013-a.png,01-base-events.md,zj_013,1,严惩，追回全部损失
+[ ],V3-098,event_outcome,修炼资源被盗 · 选项B,public/game/scenes/outcomes/events/zj_013-b.png,01-base-events.md,zj_013,2,看他可怜，追回一半，放他离开
+[ ],V3-099,event_outcome,修炼资源被盗 · 选项C,public/game/scenes/outcomes/events/zj_013-c.png,01-base-events.md,zj_013,3,全部追回，再给他一些盘缠
+[ ],V3-100,event_scene,丹药副作用发作,public/game/scenes/events/zj_014.png,01-base-events.md,zj_014,,
+[ ],V3-101,event_outcome,丹药副作用发作 · 选项A,public/game/scenes/outcomes/events/zj_014-a.png,01-base-events.md,zj_014,1,花200灵石购药调理
+[ ],V3-102,event_outcome,丹药副作用发作 · 选项B,public/game/scenes/outcomes/events/zj_014-b.png,01-base-events.md,zj_014,2,硬撑，靠自身调节
+[ ],V3-103,event_scene,坊市散活：护送商队,public/game/scenes/events/zj_015.png,01-base-events.md,zj_015,,
+[ ],V3-104,event_outcome,坊市散活：护送商队 · 选项A,public/game/scenes/outcomes/events/zj_015-a.png,01-base-events.md,zj_015,1,接下任务
+[ ],V3-105,event_outcome,坊市散活：护送商队 · 选项B,public/game/scenes/outcomes/events/zj_015-b.png,01-base-events.md,zj_015,2,不接，风险太高
+[ ],V3-106,event_scene,弱小修士求援,public/game/scenes/events/jd_001.png,01-base-events.md,jd_001,,
+[ ],V3-107,event_outcome,弱小修士求援 · 选项A,public/game/scenes/outcomes/events/jd_001-a.png,01-base-events.md,jd_001,1,出手相救，与魔修正面交锋
+[ ],V3-108,event_outcome,弱小修士求援 · 选项B,public/game/scenes/outcomes/events/jd_001-b.png,01-base-events.md,jd_001,2,暗中协助，制造混乱让他逃脱
+[ ],V3-109,event_outcome,弱小修士求援 · 选项C,public/game/scenes/outcomes/events/jd_001-c.png,01-base-events.md,jd_001,3,此事与我无关，离开
+[ ],V3-110,event_scene,被救者的馈赠,public/game/scenes/events/jd_002.png,01-base-events.md,jd_002,,
+[ ],V3-111,event_outcome,被救者的馈赠 · 选项A,public/game/scenes/outcomes/events/jd_002-a.png,01-base-events.md,jd_002,1,收下谢礼
+[ ],V3-112,event_outcome,被救者的馈赠 · 选项B,public/game/scenes/outcomes/events/jd_002-b.png,01-base-events.md,jd_002,2,婉拒灵石，只收补天丹
+[ ],V3-113,event_scene,强敌突袭,public/game/scenes/events/jd_003.png,01-base-events.md,jd_003,,
+[ ],V3-114,event_outcome,强敌突袭 · 选项A,public/game/scenes/outcomes/events/jd_003-a.png,01-base-events.md,jd_003,1,拼死一战
+[ ],V3-115,event_outcome,强敌突袭 · 选项B,public/game/scenes/outcomes/events/jd_003-b.png,01-base-events.md,jd_003,2,丢出一半灵石，趁乱逃脱
+[ ],V3-116,event_outcome,强敌突袭 · 选项C,public/game/scenes/outcomes/events/jd_003-c.png,01-base-events.md,jd_003,3,消耗护体阵抵御，全力反击
+[ ],V3-117,event_outcome,强敌突袭 · 选项D,public/game/scenes/outcomes/events/jd_003-d.png,01-base-events.md,jd_003,4,暂避锋芒，强行抽身
+[ ],V3-118,event_scene,古修遗迹探索,public/game/scenes/events/jd_004.png,01-base-events.md,jd_004,,
+[ ],V3-119,event_outcome,古修遗迹探索 · 选项A,public/game/scenes/outcomes/events/jd_004-a.png,01-base-events.md,jd_004,1,全力探索，务必找到补天丹
+[ ],V3-120,event_outcome,古修遗迹探索 · 选项B,public/game/scenes/outcomes/events/jd_004-b.png,01-base-events.md,jd_004,2,稳扎稳打，取能拿到的就走
+[ ],V3-121,event_outcome,古修遗迹探索 · 选项C,public/game/scenes/outcomes/events/jd_004-c.png,01-base-events.md,jd_004,3,风险太大，放弃
+[ ],V3-122,event_scene,心魔初现,public/game/scenes/events/jd_005.png,01-base-events.md,jd_005,,
+[ ],V3-123,event_outcome,心魔初现 · 选项A,public/game/scenes/outcomes/events/jd_005-a.png,01-base-events.md,jd_005,1,直面心魔，强行压制
+[ ],V3-124,event_outcome,心魔初现 · 选项B,public/game/scenes/outcomes/events/jd_005-b.png,01-base-events.md,jd_005,2,花灵石请高僧做法，化解心魔
+[ ],V3-125,event_outcome,心魔初现 · 选项C,public/game/scenes/outcomes/events/jd_005-c.png,01-base-events.md,jd_005,3,放下执念，以平常心接受
+[ ],V3-126,event_scene,修仙界大会,public/game/scenes/events/jd_006.png,01-base-events.md,jd_006,,
+[ ],V3-127,event_outcome,修仙界大会 · 选项A,public/game/scenes/outcomes/events/jd_006-a.png,01-base-events.md,jd_006,1,参加切磋，以战会友
+[ ],V3-128,event_outcome,修仙界大会 · 选项B,public/game/scenes/outcomes/events/jd_006-b.png,01-base-events.md,jd_006,2,在交易区寻宝
+[ ],V3-129,event_outcome,修仙界大会 · 选项C,public/game/scenes/outcomes/events/jd_006-c.png,01-base-events.md,jd_006,3,观摩学习，不参与
+[ ],V3-130,event_scene,魔修诱惑,public/game/scenes/events/jd_007.png,01-base-events.md,jd_007,,
+[ ],V3-131,event_outcome,魔修诱惑 · 选项A,public/game/scenes/outcomes/events/jd_007-a.png,01-base-events.md,jd_007,1,断然拒绝
+[ ],V3-132,event_outcome,魔修诱惑 · 选项B,public/game/scenes/outcomes/events/jd_007-b.png,01-base-events.md,jd_007,2,花1000灵石购入
+[ ],V3-133,event_scene,无辜者求助,public/game/scenes/events/jd_008.png,01-base-events.md,jd_008,,
+[ ],V3-134,event_outcome,无辜者求助 · 选项A,public/game/scenes/outcomes/events/jd_008-a.png,01-base-events.md,jd_008,1,出手救人，不要赎金
+[ ],V3-135,event_outcome,无辜者求助 · 选项B,public/game/scenes/outcomes/events/jd_008-b.png,01-base-events.md,jd_008,2,收下200灵石，出手救人
+[ ],V3-136,event_outcome,无辜者求助 · 选项C,public/game/scenes/outcomes/events/jd_008-c.png,01-base-events.md,jd_008,3,凡人之事，与我无关
+[ ],V3-137,event_scene,炼丹失败,public/game/scenes/events/jd_009.png,01-base-events.md,jd_009,,
+[ ],V3-138,event_outcome,炼丹失败 · 选项A,public/game/scenes/outcomes/events/jd_009-a.png,01-base-events.md,jd_009,1,赔偿损失，承担责任
+[ ],V3-139,event_outcome,炼丹失败 · 选项B,public/game/scenes/outcomes/events/jd_009-b.png,01-base-events.md,jd_009,2,悄悄溜走，假装不知道
+[ ],V3-140,event_scene,拍卖会,public/game/scenes/events/jd_010.png,01-base-events.md,jd_010,,
+[ ],V3-141,event_outcome,拍卖会 · 选项A,public/game/scenes/outcomes/events/jd_010-a.png,01-base-events.md,jd_010,1,参与竞拍（需30000灵石）
+[ ],V3-142,event_outcome,拍卖会 · 选项B,public/game/scenes/outcomes/events/jd_010-b.png,01-base-events.md,jd_010,2,观摩，寻找其他机会
+[ ],V3-143,event_scene,旧友背叛,public/game/scenes/events/jd_011.png,01-base-events.md,jd_011,,
+[ ],V3-144,event_outcome,旧友背叛 · 选项A,public/game/scenes/outcomes/events/jd_011-a.png,01-base-events.md,jd_011,1,愤而反击，与之决裂
+[ ],V3-145,event_outcome,旧友背叛 · 选项B,public/game/scenes/outcomes/events/jd_011-b.png,01-base-events.md,jd_011,2,质问他为何背叛，给他机会解释
+[ ],V3-146,event_scene,灵脉争夺,public/game/scenes/events/jd_012.png,01-base-events.md,jd_012,,
+[ ],V3-147,event_outcome,灵脉争夺 · 选项A,public/game/scenes/outcomes/events/jd_012-a.png,01-base-events.md,jd_012,1,强行驱逐，独占灵脉
+[ ],V3-148,event_outcome,灵脉争夺 · 选项B,public/game/scenes/outcomes/events/jd_012-b.png,01-base-events.md,jd_012,2,提议共享，各取所需
+[ ],V3-149,event_outcome,灵脉争夺 · 选项C,public/game/scenes/outcomes/events/jd_012-c.png,01-base-events.md,jd_012,3,礼让，另寻他处
+[ ],V3-150,event_scene,天材地宝现世,public/game/scenes/events/jd_013.png,01-base-events.md,jd_013,,
+[ ],V3-151,event_outcome,天材地宝现世 · 选项A,public/game/scenes/outcomes/events/jd_013-a.png,01-base-events.md,jd_013,1,立刻采摘，快速离开
+[ ],V3-152,event_outcome,天材地宝现世 · 选项B,public/game/scenes/outcomes/events/jd_013-b.png,01-base-events.md,jd_013,2,守株待兔，等它成熟再采
+[ ],V3-153,event_scene,渡劫失败的前辈,public/game/scenes/events/jd_014.png,01-base-events.md,jd_014,,
+[ ],V3-154,event_outcome,渡劫失败的前辈 · 选项A,public/game/scenes/outcomes/events/jd_014-a.png,01-base-events.md,jd_014,1,恭敬接受传承
+[ ],V3-155,event_outcome,渡劫失败的前辈 · 选项B,public/game/scenes/outcomes/events/jd_014-b.png,01-base-events.md,jd_014,2,拒绝，此等传承来路不正
+[ ],V3-156,event_scene,坊市散活：讨伐妖兽,public/game/scenes/events/jd_015.png,01-base-events.md,jd_015,,
+[ ],V3-157,event_outcome,坊市散活：讨伐妖兽 · 选项A,public/game/scenes/outcomes/events/jd_015-a.png,01-base-events.md,jd_015,1,接取任务，前去讨伐
+[ ],V3-158,event_outcome,坊市散活：讨伐妖兽 · 选项B,public/game/scenes/outcomes/events/jd_015-b.png,01-base-events.md,jd_015,2,不接，风险太高
+[ ],V3-159,event_scene,垂死的化神前辈,public/game/scenes/events/yy_001.png,01-base-events.md,yy_001,,
+[ ],V3-160,event_outcome,垂死的化神前辈 · 选项A,public/game/scenes/outcomes/events/yy_001-a.png,01-base-events.md,yy_001,1,答应他，倾听他的心愿
+[ ],V3-161,event_outcome,垂死的化神前辈 · 选项B,public/game/scenes/outcomes/events/yy_001-b.png,01-base-events.md,yy_001,2,拒绝，不想卷入是非
+[ ],V3-162,event_outcome,垂死的化神前辈 · 选项C,public/game/scenes/outcomes/events/yy_001-c.png,01-base-events.md,yy_001,3,趁他神识涣散，夺取宝物
+[ ],V3-163,event_scene,心愿了结,public/game/scenes/events/yy_002.png,01-base-events.md,yy_002,,
+[ ],V3-164,event_outcome,心愿了结 · 选项A,public/game/scenes/outcomes/events/yy_002-a.png,01-base-events.md,yy_002,1,郑重收下
+[ ],V3-165,event_scene,化神修士的刁难,public/game/scenes/events/yy_003.png,01-base-events.md,yy_003,,
+[ ],V3-166,event_outcome,化神修士的刁难 · 选项A,public/game/scenes/outcomes/events/yy_003-a.png,01-base-events.md,yy_003,1,低头认错，奉上灵石
+[ ],V3-167,event_outcome,化神修士的刁难 · 选项B,public/game/scenes/outcomes/events/yy_003-b.png,01-base-events.md,yy_003,2,据理力争，不卑不亢
+[ ],V3-168,event_outcome,化神修士的刁难 · 选项C,public/game/scenes/outcomes/events/yy_003-c.png,01-base-events.md,yy_003,3,拼死一战，以弱搏强
+[ ],V3-169,event_outcome,化神修士的刁难 · 选项D,public/game/scenes/outcomes/events/yy_003-d.png,01-base-events.md,yy_003,4,转身离开，不参与此事
+[ ],V3-170,event_scene,秘境探索,public/game/scenes/events/yy_004.png,01-base-events.md,yy_004,,
+[ ],V3-171,event_outcome,秘境探索 · 选项A,public/game/scenes/outcomes/events/yy_004-a.png,01-base-events.md,yy_004,1,全力闯入，争夺传承
+[ ],V3-172,event_outcome,秘境探索 · 选项B,public/game/scenes/outcomes/events/yy_004-b.png,01-base-events.md,yy_004,2,谨慎探索，浅尝即止
+[ ],V3-173,event_outcome,秘境探索 · 选项C,public/game/scenes/outcomes/events/yy_004-c.png,01-base-events.md,yy_004,3,不去，不值得冒险
+[ ],V3-174,event_scene,渡人成仙,public/game/scenes/events/yy_005.png,01-base-events.md,yy_005,,
+[ ],V3-175,event_outcome,渡人成仙 · 选项A,public/game/scenes/outcomes/events/yy_005-a.png,01-base-events.md,yy_005,1,倾力相助，渡他成仙
+[ ],V3-176,event_outcome,渡人成仙 · 选项B,public/game/scenes/outcomes/events/yy_005-b.png,01-base-events.md,yy_005,2,给些建议，不费太多精力
+[ ],V3-177,event_outcome,渡人成仙 · 选项C,public/game/scenes/outcomes/events/yy_005-c.png,01-base-events.md,yy_005,3,修仙路各凭本事，拒绝
+[ ],V3-178,event_scene,寿命告急,public/game/scenes/events/yy_006.png,01-base-events.md,yy_006,,
+[ ],V3-179,event_outcome,寿命告急 · 选项A,public/game/scenes/outcomes/events/yy_006-a.png,01-base-events.md,yy_006,1,花大量灵石购买延寿丹
+[ ],V3-180,event_outcome,寿命告急 · 选项B,public/game/scenes/outcomes/events/yy_006-b.png,01-base-events.md,yy_006,2,坦然接受，加快冲关步伐
+[ ],V3-181,event_scene,魔道势力威胁,public/game/scenes/events/yy_007.png,01-base-events.md,yy_007,,
+[ ],V3-182,event_outcome,魔道势力威胁 · 选项A,public/game/scenes/outcomes/events/yy_007-a.png,01-base-events.md,yy_007,1,缴纳灵石，暂时妥协
+[ ],V3-183,event_outcome,魔道势力威胁 · 选项B,public/game/scenes/outcomes/events/yy_007-b.png,01-base-events.md,yy_007,2,断然拒绝，以力抗之
+[ ],V3-184,event_outcome,魔道势力威胁 · 选项C,public/game/scenes/outcomes/events/yy_007-c.png,01-base-events.md,yy_007,3,联合正道宗门，共同对抗
+[ ],V3-185,event_scene,天道感悟,public/game/scenes/events/yy_008.png,01-base-events.md,yy_008,,
+[ ],V3-186,event_outcome,天道感悟 · 选项A,public/game/scenes/outcomes/events/yy_008-a.png,01-base-events.md,yy_008,1,全力沉浸，深度领悟
+[ ],V3-187,event_scene,同阶修士挑战,public/game/scenes/events/yy_009.png,01-base-events.md,yy_009,,
+[ ],V3-188,event_outcome,同阶修士挑战 · 选项A,public/game/scenes/outcomes/events/yy_009-a.png,01-base-events.md,yy_009,1,接受挑战
+[ ],V3-189,event_outcome,同阶修士挑战 · 选项B,public/game/scenes/outcomes/events/yy_009-b.png,01-base-events.md,yy_009,2,婉拒，不想无谓消耗
+[ ],V3-190,event_scene,昔日仇人的最后一搏,public/game/scenes/events/yy_010.png,01-base-events.md,yy_010,,
+[ ],V3-191,event_outcome,昔日仇人的最后一搏 · 选项A,public/game/scenes/outcomes/events/yy_010-a.png,01-base-events.md,yy_010,1,与他了结恩怨
+[ ],V3-192,event_outcome,昔日仇人的最后一搏 · 选项B,public/game/scenes/outcomes/events/yy_010-b.png,01-base-events.md,yy_010,2,放他一条生路，化解恩怨
+[ ],V3-193,event_scene,修炼资源枯竭,public/game/scenes/events/yy_011.png,01-base-events.md,yy_011,,
+[ ],V3-194,event_outcome,修炼资源枯竭 · 选项A,public/game/scenes/outcomes/events/yy_011-a.png,01-base-events.md,yy_011,1,花大量灵石购置新洞府
+[ ],V3-195,event_outcome,修炼资源枯竭 · 选项B,public/game/scenes/outcomes/events/yy_011-b.png,01-base-events.md,yy_011,2,将就修炼，节省灵石
+[ ],V3-196,event_scene,拍卖稀世珍宝,public/game/scenes/events/yy_012.png,01-base-events.md,yy_012,,
+[ ],V3-197,event_outcome,拍卖稀世珍宝 · 选项A,public/game/scenes/outcomes/events/yy_012-a.png,01-base-events.md,yy_012,1,出售天罡阵
+[ ],V3-198,event_outcome,拍卖稀世珍宝 · 选项B,public/game/scenes/outcomes/events/yy_012-b.png,01-base-events.md,yy_012,2,出售绛云丹
+[ ],V3-199,event_outcome,拍卖稀世珍宝 · 选项C,public/game/scenes/outcomes/events/yy_012-c.png,01-base-events.md,yy_012,3,什么都不卖
+[ ],V3-200,event_scene,弟子遭难,public/game/scenes/events/yy_013.png,01-base-events.md,yy_013,,
+[ ],V3-201,event_outcome,弟子遭难 · 选项A,public/game/scenes/outcomes/events/yy_013-a.png,01-base-events.md,yy_013,1,立刻赶去救援
+[ ],V3-202,event_outcome,弟子遭难 · 选项B,public/game/scenes/outcomes/events/yy_013-b.png,01-base-events.md,yy_013,2,派人送去灵石，让他自救
+[ ],V3-203,event_outcome,弟子遭难 · 选项C,public/game/scenes/outcomes/events/yy_013-c.png,01-base-events.md,yy_013,3,修仙路各凭本事，不管
+[ ],V3-204,event_scene,天外陨石,public/game/scenes/events/yy_014.png,01-base-events.md,yy_014,,
+[ ],V3-205,event_outcome,天外陨石 · 选项A,public/game/scenes/outcomes/events/yy_014-a.png,01-base-events.md,yy_014,1,强行争夺，以力取之
+[ ],V3-206,event_outcome,天外陨石 · 选项B,public/game/scenes/outcomes/events/yy_014-b.png,01-base-events.md,yy_014,2,提议公平分配
+[ ],V3-207,event_outcome,天外陨石 · 选项C,public/game/scenes/outcomes/events/yy_014-c.png,01-base-events.md,yy_014,3,放弃，不参与争夺
+[ ],V3-208,event_scene,坊市散活：护送稀世丹药,public/game/scenes/events/yy_015.png,01-base-events.md,yy_015,,
+[ ],V3-209,event_outcome,坊市散活：护送稀世丹药 · 选项A,public/game/scenes/outcomes/events/yy_015-a.png,01-base-events.md,yy_015,1,接下任务
+[ ],V3-210,event_outcome,坊市散活：护送稀世丹药 · 选项B,public/game/scenes/outcomes/events/yy_015-b.png,01-base-events.md,yy_015,2,不接
+[ ],V3-211,event_scene,天道试炼,public/game/scenes/events/hs_001.png,01-base-events.md,hs_001,,
+[ ],V3-212,event_outcome,天道试炼 · 选项A,public/game/scenes/outcomes/events/hs_001-a.png,01-base-events.md,hs_001,1,愿意，舍身护道乃修仙本义
+[ ],V3-213,event_outcome,天道试炼 · 选项B,public/game/scenes/outcomes/events/hs_001-b.png,01-base-events.md,hs_001,2,沉默，用行动回答
+[ ],V3-214,event_outcome,天道试炼 · 选项C,public/game/scenes/outcomes/events/hs_001-c.png,01-base-events.md,hs_001,3,拒绝，我修仙只为自己
+[ ],V3-215,event_scene,飞升在即的感悟,public/game/scenes/events/hs_002.png,01-base-events.md,hs_002,,
+[ ],V3-216,event_outcome,飞升在即的感悟 · 选项A,public/game/scenes/outcomes/events/hs_002-a.png,01-base-events.md,hs_002,1,静心感悟，为飞升做准备
+[ ],V3-217,event_outcome,飞升在即的感悟 · 选项B,public/game/scenes/outcomes/events/hs_002-b.png,01-base-events.md,hs_002,2,继续积累资源，万无一失再飞升
+[ ],V3-218,event_scene,天魔入侵,public/game/scenes/events/hs_003.png,01-base-events.md,hs_003,,
+[ ],V3-219,event_outcome,天魔入侵 · 选项A,public/game/scenes/outcomes/events/hs_003-a.png,01-base-events.md,hs_003,1,独自迎战天魔
+[ ],V3-220,event_outcome,天魔入侵 · 选项B,public/game/scenes/outcomes/events/hs_003-b.png,01-base-events.md,hs_003,2,召集周围修士联手对抗
+[ ],V3-221,event_outcome,天魔入侵 · 选项C,public/game/scenes/outcomes/events/hs_003-c.png,01-base-events.md,hs_003,3,撤离，保存实力
+[ ],V3-222,event_outcome,天魔入侵 · 选项D,public/game/scenes/outcomes/events/hs_003-d.png,01-base-events.md,hs_003,4,转身离开，不参与此事
+[ ],V3-223,event_scene,飞升古道探索,public/game/scenes/events/hs_004.png,01-base-events.md,hs_004,,
+[ ],V3-224,event_outcome,飞升古道探索 · 选项A,public/game/scenes/outcomes/events/hs_004-a.png,01-base-events.md,hs_004,1,踏入古道，寻找飞升机缘
+[ ],V3-225,event_outcome,飞升古道探索 · 选项B,public/game/scenes/outcomes/events/hs_004-b.png,01-base-events.md,hs_004,2,在古道入口感悟，不深入
+[ ],V3-226,event_outcome,飞升古道探索 · 选项C,public/game/scenes/outcomes/events/hs_004-c.png,01-base-events.md,hs_004,3,不去，临近飞升不冒险
+[ ],V3-227,event_scene,后辈求道,public/game/scenes/events/hs_005.png,01-base-events.md,hs_005,,
+[ ],V3-228,event_outcome,后辈求道 · 选项A,public/game/scenes/outcomes/events/hs_005-a.png,01-base-events.md,hs_005,1,悉心传授，倾囊相授
+[ ],V3-229,event_outcome,后辈求道 · 选项B,public/game/scenes/outcomes/events/hs_005-b.png,01-base-events.md,hs_005,2,传授基础，让他们自行摸索
+[ ],V3-230,event_outcome,后辈求道 · 选项C,public/game/scenes/outcomes/events/hs_005-c.png,01-base-events.md,hs_005,3,拒绝，飞升在即无暇收徒
+[ ],V3-231,event_scene,旧怨清算,public/game/scenes/events/hs_006.png,01-base-events.md,hs_006,,
+[ ],V3-232,event_outcome,旧怨清算 · 选项A,public/game/scenes/outcomes/events/hs_006-a.png,01-base-events.md,hs_006,1,主动化解，放下恩怨
+[ ],V3-233,event_outcome,旧怨清算 · 选项B,public/game/scenes/outcomes/events/hs_006-b.png,01-base-events.md,hs_006,2,一战了结，胜者无憾
+[ ],V3-234,event_outcome,旧怨清算 · 选项C,public/game/scenes/outcomes/events/hs_006-c.png,01-base-events.md,hs_006,3,放走他，给他一条生路
+[ ],V3-235,event_scene,人界最后的守护,public/game/scenes/events/hs_007.png,01-base-events.md,hs_007,,
+[ ],V3-236,event_outcome,人界最后的守护 · 选项A,public/game/scenes/outcomes/events/hs_007-a.png,01-base-events.md,hs_007,1,挺身而出，守护人界
+[ ],V3-237,event_outcome,人界最后的守护 · 选项B,public/game/scenes/outcomes/events/hs_007-b.png,01-base-events.md,hs_007,2,出力但不出头，暗中协助
+[ ],V3-238,event_outcome,人界最后的守护 · 选项C,public/game/scenes/outcomes/events/hs_007-c.png,01-base-events.md,hs_007,3,飞升在即，不参与
+[ ],V3-239,event_scene,道心动摇,public/game/scenes/events/hs_008.png,01-base-events.md,hs_008,,
+[ ],V3-240,event_outcome,道心动摇 · 选项A,public/game/scenes/outcomes/events/hs_008-a.png,01-base-events.md,hs_008,1,道心坚定，修仙本就是超脱
+[ ],V3-241,event_outcome,道心动摇 · 选项B,public/game/scenes/outcomes/events/hs_008-b.png,01-base-events.md,hs_008,2,陷入迷茫，无法自拔
+[ ],V3-242,event_outcome,道心动摇 · 选项C,public/game/scenes/outcomes/events/hs_008-c.png,01-base-events.md,hs_008,3,接受疑惑，带着问题继续前行
+[ ],V3-243,event_scene,最后的积累,public/game/scenes/events/hs_009.png,01-base-events.md,hs_009,,
+[ ],V3-244,event_outcome,最后的积累 · 选项A,public/game/scenes/outcomes/events/hs_009-a.png,01-base-events.md,hs_009,1,接受馈赠，感谢众人
+[ ],V3-245,event_outcome,最后的积累 · 选项B,public/game/scenes/outcomes/events/hs_009-b.png,01-base-events.md,hs_009,2,婉拒，以清白之身飞升
+[ ],V3-246,event_scene,昔日同门的拜访,public/game/scenes/events/hs_010.png,01-base-events.md,hs_010,,
+[ ],V3-247,event_outcome,昔日同门的拜访 · 选项A,public/game/scenes/outcomes/events/hs_010-a.png,01-base-events.md,hs_010,1,倾尽所有帮他延寿
+[ ],V3-248,event_outcome,昔日同门的拜访 · 选项B,public/game/scenes/outcomes/events/hs_010-b.png,01-base-events.md,hs_010,2,陪他叙旧，送上一些资源
+[ ],V3-249,event_outcome,昔日同门的拜访 · 选项C,public/game/scenes/outcomes/events/hs_010-c.png,01-base-events.md,hs_010,3,道别，各自珍重
+[ ],V3-250,event_scene,天道惩戒,public/game/scenes/events/hs_011.png,01-base-events.md,hs_011,,
+[ ],V3-251,event_outcome,天道惩戒 · 选项A,public/game/scenes/outcomes/events/hs_011-a.png,01-base-events.md,hs_011,1,虔诚认错，做出弥补
+[ ],V3-252,event_outcome,天道惩戒 · 选项B,public/game/scenes/outcomes/events/hs_011-b.png,01-base-events.md,hs_011,2,强行对抗天道压制
+[ ],V3-253,event_scene,灵界的召唤,public/game/scenes/events/hs_012.png,01-base-events.md,hs_012,,
+[ ],V3-254,event_outcome,灵界的召唤 · 选项A,public/game/scenes/outcomes/events/hs_012-a.png,01-base-events.md,hs_012,1,全力感悟，与灵界共鸣
+[ ],V3-255,event_outcome,灵界的召唤 · 选项B,public/game/scenes/outcomes/events/hs_012-b.png,01-base-events.md,hs_012,2,压制感应，继续在人界积累
+[ ],V3-256,event_scene,无辜者的最后守护,public/game/scenes/events/hs_013.png,01-base-events.md,hs_013,,
+[ ],V3-257,event_outcome,无辜者的最后守护 · 选项A,public/game/scenes/outcomes/events/hs_013-a.png,01-base-events.md,hs_013,1,出手相救，不惜寿命
+[ ],V3-258,event_outcome,无辜者的最后守护 · 选项B,public/game/scenes/outcomes/events/hs_013-b.png,01-base-events.md,hs_013,2,出手相救，但保留实力
+[ ],V3-259,event_outcome,无辜者的最后守护 · 选项C,public/game/scenes/outcomes/events/hs_013-c.png,01-base-events.md,hs_013,3,凡人生死，天道自有安排
+[ ],V3-260,event_scene,修仙路的终极叩问,public/game/scenes/events/hs_014.png,01-base-events.md,hs_014,,
+[ ],V3-261,event_outcome,修仙路的终极叩问 · 选项A,public/game/scenes/outcomes/events/hs_014-a.png,01-base-events.md,hs_014,1,我已准备好，飞升是修仙的终极目标
+[ ],V3-262,event_outcome,修仙路的终极叩问 · 选项B,public/game/scenes/outcomes/events/hs_014-b.png,01-base-events.md,hs_014,2,他说得对，我留下来守护人界
+[ ],V3-263,event_outcome,修仙路的终极叩问 · 选项C,public/game/scenes/outcomes/events/hs_014-c.png,01-base-events.md,hs_014,3,沉默，心中已有答案
+[ ],V3-264,event_scene,最后的坊市之行,public/game/scenes/events/hs_015.png,01-base-events.md,hs_015,,
+[ ],V3-265,event_outcome,最后的坊市之行 · 选项A,public/game/scenes/outcomes/events/hs_015-a.png,01-base-events.md,hs_015,1,购入绛云丹，为飞升做最后准备
+[ ],V3-266,event_outcome,最后的坊市之行 · 选项B,public/game/scenes/outcomes/events/hs_015-b.png,01-base-events.md,hs_015,2,将多余的灵石散给坊市中的穷苦修士
+[ ],V3-267,event_outcome,最后的坊市之行 · 选项C,public/game/scenes/outcomes/events/hs_015-c.png,01-base-events.md,hs_015,3,静静感受，不做任何事
+[ ],V3-268,event_scene,师尊问心,public/game/scenes/events/life_master_question.png,01-base-events.md,life_master_question,,
+[ ],V3-269,event_outcome,师尊问心 · 选项A,public/game/scenes/outcomes/events/life_master_question-a.png,01-base-events.md,life_master_question,1,如实回答：已经想不起来了
+[ ],V3-270,event_outcome,师尊问心 · 选项B,public/game/scenes/outcomes/events/life_master_question-b.png,01-base-events.md,life_master_question,2,说一个体面的答案
+[ ],V3-271,event_scene,同门求助,public/game/scenes/events/life_peer_request.png,01-base-events.md,life_peer_request,,
+[ ],V3-272,event_outcome,同门求助 · 选项A,public/game/scenes/outcomes/events/life_peer_request-a.png,01-base-events.md,life_peer_request,1,替他补上，并陪他去执法堂
+[ ],V3-273,event_outcome,同门求助 · 选项B,public/game/scenes/outcomes/events/life_peer_request-b.png,01-base-events.md,life_peer_request,2,只借钱，不替他作证
+[ ],V3-274,event_scene,旧怨堵门,public/game/scenes/events/life_rival_challenge.png,01-base-events.md,life_rival_challenge,,
+[ ],V3-275,event_outcome,旧怨堵门 · 选项A,public/game/scenes/outcomes/events/life_rival_challenge-a.png,01-base-events.md,life_rival_challenge,1,当众应战，不留退路
+[ ],V3-276,event_outcome,旧怨堵门 · 选项B,public/game/scenes/outcomes/events/life_rival_challenge-b.png,01-base-events.md,life_rival_challenge,2,不接战，用一次人情换他闭嘴
+[ ],V3-277,event_scene,故乡来信,public/game/scenes/events/life_family_letter.png,01-base-events.md,life_family_letter,,
+[ ],V3-278,event_outcome,故乡来信 · 选项A,public/game/scenes/outcomes/events/life_family_letter-a.png,01-base-events.md,life_family_letter,1,回去住一段时间
+[ ],V3-279,event_outcome,故乡来信 · 选项B,public/game/scenes/outcomes/events/life_family_letter-b.png,01-base-events.md,life_family_letter,2,寄钱回去，继续闭关
+[ ],V3-280,event_scene,丹炉生纹,public/game/scenes/events/life_furnace_crack.png,01-base-events.md,life_furnace_crack,,
+[ ],V3-281,event_outcome,丹炉生纹 · 选项A,public/game/scenes/outcomes/events/life_furnace_crack-a.png,01-base-events.md,life_furnace_crack,1,稳住火候，花时间慢慢收丹
+[ ],V3-282,event_outcome,丹炉生纹 · 选项B,public/game/scenes/outcomes/events/life_furnace_crack-b.png,01-base-events.md,life_furnace_crack,2,催火抢丹，赌它不会炸
+[ ],V3-283,event_scene,秘境名额,public/game/scenes/events/life_secret_realm.png,01-base-events.md,life_secret_realm,,
+[ ],V3-284,event_outcome,秘境名额 · 选项A,public/game/scenes/outcomes/events/life_secret_realm-a.png,01-base-events.md,life_secret_realm,1,接下旧账，换取名额
+[ ],V3-285,event_outcome,秘境名额 · 选项B,public/game/scenes/outcomes/events/life_secret_realm-b.png,01-base-events.md,life_secret_realm,2,放弃名额，公开质疑分配
+[ ],V3-286,event_scene,潮汐海图,public/game/scenes/events/life_sea_map.png,01-base-events.md,life_sea_map,,
+[ ],V3-287,event_outcome,潮汐海图 · 选项A,public/game/scenes/outcomes/events/life_sea_map-a.png,01-base-events.md,life_sea_map,1,买下海图，开始筹备远行
+[ ],V3-288,event_outcome,潮汐海图 · 选项B,public/game/scenes/outcomes/events/life_sea_map-b.png,01-base-events.md,life_sea_map,2,记住卖家模样，转身离开
+[ ],V3-289,event_scene,黑市禁书,public/game/scenes/events/life_black_market.png,01-base-events.md,life_black_market,,
+[ ],V3-290,event_outcome,黑市禁书 · 选项A,public/game/scenes/outcomes/events/life_black_market-a.png,01-base-events.md,life_black_market,1,买下，只看不练
+[ ],V3-291,event_outcome,黑市禁书 · 选项B,public/game/scenes/outcomes/events/life_black_market-b.png,01-base-events.md,life_black_market,2,记下条文，当场烧掉
+[ ],V3-292,event_scene,山门征召,public/game/scenes/events/life_sect_call.png,01-base-events.md,life_sect_call,,
+[ ],V3-293,event_outcome,山门征召 · 选项A,public/game/scenes/outcomes/events/life_sect_call-a.png,01-base-events.md,life_sect_call,1,主动请行
+[ ],V3-294,event_outcome,山门征召 · 选项B,public/game/scenes/outcomes/events/life_sect_call-b.png,01-base-events.md,life_sect_call,2,称病留在山中
+[ ],V3-295,event_scene,山下荒年,public/game/scenes/events/life_village_famine.png,01-base-events.md,life_village_famine,,
+[ ],V3-296,event_outcome,山下荒年 · 选项A,public/game/scenes/outcomes/events/life_village_famine-a.png,01-base-events.md,life_village_famine,1,亲自下山，替他们找水
+[ ],V3-297,event_outcome,山下荒年 · 选项B,public/game/scenes/outcomes/events/life_village_famine-b.png,01-base-events.md,life_village_famine,2,送去一些灵石，不多停留
+[ ],V3-298,event_scene,夜半心魔,public/game/scenes/events/life_heart_demon.png,01-base-events.md,life_heart_demon,,
+[ ],V3-299,event_outcome,夜半心魔 · 选项A,public/game/scenes/outcomes/events/life_heart_demon-a.png,01-base-events.md,life_heart_demon,1,承认恐惧，停下这一次突破
+[ ],V3-300,event_outcome,夜半心魔 · 选项B,public/game/scenes/outcomes/events/life_heart_demon-b.png,01-base-events.md,life_heart_demon,2,以更强执念压过去
+[ ],V3-301,event_scene,旧伤入骨,public/game/scenes/events/life_old_wound.png,01-base-events.md,life_old_wound,,
+[ ],V3-302,event_outcome,旧伤入骨 · 选项A,public/game/scenes/outcomes/events/life_old_wound-a.png,01-base-events.md,life_old_wound,1,慢慢养，接受修为停滞
+[ ],V3-303,event_outcome,旧伤入骨 · 选项B,public/game/scenes/outcomes/events/life_old_wound-b.png,01-base-events.md,life_old_wound,2,用虎狼药强压伤势
+[ ],V3-304,event_scene,独行夜雨,public/game/scenes/events/life_lonely_rain.png,01-base-events.md,life_lonely_rain,,
+[ ],V3-305,event_outcome,独行夜雨 · 选项A,public/game/scenes/outcomes/events/life_lonely_rain-a.png,01-base-events.md,life_lonely_rain,1,推门去问那个人的下落
+[ ],V3-306,event_outcome,独行夜雨 · 选项B,public/game/scenes/outcomes/events/life_lonely_rain-b.png,01-base-events.md,life_lonely_rain,2,把茶喝完，明天继续赶路
+[ ],V3-307,event_scene,旧友来信,public/game/scenes/events/life_friend_wedding.png,01-base-events.md,life_friend_wedding,,
+[ ],V3-308,event_outcome,旧友来信 · 选项A,public/game/scenes/outcomes/events/life_friend_wedding-a.png,01-base-events.md,life_friend_wedding,1,放下修炼，去赴宴
+[ ],V3-309,event_outcome,旧友来信 · 选项B,public/game/scenes/outcomes/events/life_friend_wedding-b.png,01-base-events.md,life_friend_wedding,2,托人送礼，不亲自去
+[ ],V3-310,event_scene,旧师传召,public/game/scenes/events/life_old_teacher.png,01-base-events.md,life_old_teacher,,
+[ ],V3-311,event_outcome,旧师传召 · 选项A,public/game/scenes/outcomes/events/life_old_teacher-a.png,01-base-events.md,life_old_teacher,1,如实交出功法，听师尊评点
+[ ],V3-312,event_outcome,旧师传召 · 选项B,public/game/scenes/outcomes/events/life_old_teacher-b.png,01-base-events.md,life_old_teacher,2,只交一半，留下后手
+[ ],V3-313,event_scene,雪夜叩门,public/game/scenes/events/life_disciple.png,01-base-events.md,life_disciple,,
+[ ],V3-314,event_outcome,雪夜叩门 · 选项A,public/game/scenes/outcomes/events/life_disciple-a.png,01-base-events.md,life_disciple,1,收下他，从砍柴开始教
+[ ],V3-315,event_outcome,雪夜叩门 · 选项B,public/game/scenes/outcomes/events/life_disciple-b.png,01-base-events.md,life_disciple,2,给他一笔钱，让他下山
+[ ],V3-316,event_scene,乱星海·起航,public/game/scenes/events/life_sea_voyage.png,01-base-events.md,life_sea_voyage,,
+[ ],V3-317,event_outcome,乱星海·起航 · 选项A,public/game/scenes/outcomes/events/life_sea_voyage-a.png,01-base-events.md,life_sea_voyage,1,散尽部分积蓄，独自出海
+[ ],V3-318,event_outcome,乱星海·起航 · 选项B,public/game/scenes/outcomes/events/life_sea_voyage-b.png,01-base-events.md,life_sea_voyage,2,不去。把海图锁进石匣
+[ ],V3-319,event_scene,乱星海·归来,public/game/scenes/events/life_sea_return.png,01-base-events.md,life_sea_return,,
+[ ],V3-320,event_outcome,乱星海·归来 · 选项A,public/game/scenes/outcomes/events/life_sea_return-a.png,01-base-events.md,life_sea_return,1,循着消息再出海一次
+[ ],V3-321,event_outcome,乱星海·归来 · 选项B,public/game/scenes/outcomes/events/life_sea_return-b.png,01-base-events.md,life_sea_return,2,留在岸上，等对方来见你
+[ ],V3-322,event_scene,乱星海·黑潮,public/game/scenes/events/life_sea_storm.png,01-base-events.md,life_sea_storm,,
+[ ],V3-323,event_outcome,乱星海·黑潮 · 选项A,public/game/scenes/outcomes/events/life_sea_storm-a.png,01-base-events.md,life_sea_storm,1,丢掉灵石，保住船和人
+[ ],V3-324,event_outcome,乱星海·黑潮 · 选项B,public/game/scenes/outcomes/events/life_sea_storm-b.png,01-base-events.md,life_sea_storm,2,留下灵石，砍断拖累船速的缆绳
+[ ],V3-325,event_scene,山中无大事,public/game/scenes/events/life_quiet_years.png,01-base-events.md,life_quiet_years,,
+[ ],V3-326,event_outcome,山中无大事 · 选项A,public/game/scenes/outcomes/events/life_quiet_years-a.png,01-base-events.md,life_quiet_years,1,把日子过完
+[ ],V3-327,event_outcome,山中无大事 · 选项B,public/game/scenes/outcomes/events/life_quiet_years-b.png,01-base-events.md,life_quiet_years,2,不甘心，强行寻找机缘
+[ ],V3-328,fate_scene,雨夜旧恩 · 山道上的血,public/game/scenes/fate/wanderer_debt-1.png,02-fate-threads.md,wanderer_debt,,
+[ ],V3-329,fate_outcome,雨夜旧恩 · 山道上的血 · 选项A,public/game/scenes/outcomes/fate/wanderer_debt-1-a.png,02-fate-threads.md,wanderer_debt,1,替他护法疗伤，不问来历
+[ ],V3-330,fate_outcome,雨夜旧恩 · 山道上的血 · 选项B,public/game/scenes/outcomes/fate/wanderer_debt-1-b.png,02-fate-threads.md,wanderer_debt,2,先问价，再决定是否出手
+[ ],V3-331,fate_scene,雨夜旧恩 · 旧人携礼而来,public/game/scenes/fate/wanderer_debt-2.png,02-fate-threads.md,wanderer_debt,,
+[ ],V3-332,fate_outcome,雨夜旧恩 · 旧人携礼而来 · 选项A,public/game/scenes/outcomes/fate/wanderer_debt-2-a.png,02-fate-threads.md,wanderer_debt,1,收下木匣，把旧事揭过
+[ ],V3-333,fate_outcome,雨夜旧恩 · 旧人携礼而来 · 选项B,public/game/scenes/outcomes/fate/wanderer_debt-2-b.png,02-fate-threads.md,wanderer_debt,2,把匣推回去，请他护你一次
+[ ],V3-334,fate_scene,雨夜旧恩 · 一命如何两清,public/game/scenes/fate/wanderer_debt-3.png,02-fate-threads.md,wanderer_debt,,
+[ ],V3-335,fate_outcome,雨夜旧恩 · 一命如何两清 · 选项A,public/game/scenes/outcomes/fate/wanderer_debt-3-a.png,02-fate-threads.md,wanderer_debt,1,下山替他断后
+[ ],V3-336,fate_outcome,雨夜旧恩 · 一命如何两清 · 选项B,public/game/scenes/outcomes/fate/wanderer_debt-3-b.png,02-fate-threads.md,wanderer_debt,2,闭门不见，守住冲关机缘
+[ ],V3-337,fate_scene,山中有灵 · 兽夹中的幼崽,public/game/scenes/fate/beast_bond-1.png,02-fate-threads.md,beast_bond,,
+[ ],V3-338,fate_outcome,山中有灵 · 兽夹中的幼崽 · 选项A,public/game/scenes/outcomes/fate/beast_bond-1-a.png,02-fate-threads.md,beast_bond,1,掰开兽夹，放它回山
+[ ],V3-339,fate_outcome,山中有灵 · 兽夹中的幼崽 · 选项B,public/game/scenes/outcomes/fate/beast_bond-1-b.png,02-fate-threads.md,beast_bond,2,取出妖丹，趁它还活着
+[ ],V3-340,fate_scene,山中有灵 · 山野旧识,public/game/scenes/fate/beast_bond-2.png,02-fate-threads.md,beast_bond,,
+[ ],V3-341,fate_outcome,山中有灵 · 山野旧识 · 选项A,public/game/scenes/outcomes/fate/beast_bond-2-a.png,02-fate-threads.md,beast_bond,1,收下灵草，为它疗旧伤
+[ ],V3-342,fate_outcome,山中有灵 · 山野旧识 · 选项B,public/game/scenes/outcomes/fate/beast_bond-2-b.png,02-fate-threads.md,beast_bond,2,布阵擒下，炼为护山灵兽
+[ ],V3-343,fate_scene,山中有灵 · 兽潮同命,public/game/scenes/fate/beast_bond-3.png,02-fate-threads.md,beast_bond,,
+[ ],V3-344,fate_outcome,山中有灵 · 兽潮同命 · 选项A,public/game/scenes/outcomes/fate/beast_bond-3-a.png,02-fate-threads.md,beast_bond,1,散去护山阵，放兽群过境
+[ ],V3-345,fate_outcome,山中有灵 · 兽潮同命 · 选项B,public/game/scenes/outcomes/fate/beast_bond-3-b.png,02-fate-threads.md,beast_bond,2,守住山门，与兽群决战
+[ ],V3-346,fate_scene,无主古墓 · 裂缝里的旧图,public/game/scenes/fate/ancient_tomb-1.png,02-fate-threads.md,ancient_tomb,,
+[ ],V3-347,fate_outcome,无主古墓 · 裂缝里的旧图 · 选项A,public/game/scenes/outcomes/fate/ancient_tomb-1-a.png,02-fate-threads.md,ancient_tomb,1,拓下地图，不惊动墓门
+[ ],V3-348,fate_outcome,无主古墓 · 裂缝里的旧图 · 选项B,public/game/scenes/outcomes/fate/ancient_tomb-1-b.png,02-fate-threads.md,ancient_tomb,2,把消息卖给坊市，换现成灵石
+[ ],V3-349,fate_scene,无主古墓 · 同道入墓,public/game/scenes/fate/ancient_tomb-2.png,02-fate-threads.md,ancient_tomb,,
+[ ],V3-350,fate_outcome,无主古墓 · 同道入墓 · 选项A,public/game/scenes/outcomes/fate/ancient_tomb-2-a.png,02-fate-threads.md,ancient_tomb,1,与众人订下同进同退之约
+[ ],V3-351,fate_outcome,无主古墓 · 同道入墓 · 选项B,public/game/scenes/outcomes/fate/ancient_tomb-2-b.png,02-fate-threads.md,ancient_tomb,2,趁众人破阵，独自潜入主墓
+[ ],V3-352,fate_scene,无主古墓 · 墓主最后一线神念,public/game/scenes/fate/ancient_tomb-3.png,02-fate-threads.md,ancient_tomb,,
+[ ],V3-353,fate_outcome,无主古墓 · 墓主最后一线神念 · 选项A,public/game/scenes/outcomes/fate/ancient_tomb-3-a.png,02-fate-threads.md,ancient_tomb,1,答应带命牌出去
+[ ],V3-354,fate_outcome,无主古墓 · 墓主最后一线神念 · 选项B,public/game/scenes/outcomes/fate/ancient_tomb-3-b.png,02-fate-threads.md,ancient_tomb,2,逼问出口，再将他彻底磨灭
+[ ],V3-355,fate_scene,山门清洗 · 分派名单,public/game/scenes/fate/sect_purge-1.png,02-fate-threads.md,sect_purge,,
+[ ],V3-356,fate_outcome,山门清洗 · 分派名单 · 选项A,public/game/scenes/outcomes/fate/sect_purge-1-a.png,02-fate-threads.md,sect_purge,1,当面问清，不肯吃暗亏
+[ ],V3-357,fate_outcome,山门清洗 · 分派名单 · 选项B,public/game/scenes/outcomes/fate/sect_purge-1-b.png,02-fate-threads.md,sect_purge,2,把名额让出去，换一份人情
+[ ],V3-358,fate_scene,山门清洗 · 两封密信,public/game/scenes/fate/sect_purge-2.png,02-fate-threads.md,sect_purge,,
+[ ],V3-359,fate_outcome,山门清洗 · 两封密信 · 选项A,public/game/scenes/outcomes/fate/sect_purge-2-a.png,02-fate-threads.md,sect_purge,1,两边都不回信，闭门修炼
+[ ],V3-360,fate_outcome,山门清洗 · 两封密信 · 选项B,public/game/scenes/outcomes/fate/sect_purge-2-b.png,02-fate-threads.md,sect_purge,2,选一边，递上另一边的把柄
+[ ],V3-361,fate_scene,山门清洗 · 山门换主,public/game/scenes/fate/sect_purge-3.png,02-fate-threads.md,sect_purge,,
+[ ],V3-362,fate_outcome,山门清洗 · 山门换主 · 选项A,public/game/scenes/outcomes/fate/sect_purge-3-a.png,02-fate-threads.md,sect_purge,1,留下，护住不愿改名的同门
+[ ],V3-363,fate_outcome,山门清洗 · 山门换主 · 选项B,public/game/scenes/outcomes/fate/sect_purge-3-b.png,02-fate-threads.md,sect_purge,2,连夜下山，从此做散修
+[ ],V3-364,fate_scene,故乡灯火 · 家书,public/game/scenes/fate/mortal_kin-1.png,02-fate-threads.md,mortal_kin,,
+[ ],V3-365,fate_outcome,故乡灯火 · 家书 · 选项A,public/game/scenes/outcomes/fate/mortal_kin-1-a.png,02-fate-threads.md,mortal_kin,1,告假回乡，亲眼看她一次
+[ ],V3-366,fate_outcome,故乡灯火 · 家书 · 选项B,public/game/scenes/outcomes/fate/mortal_kin-1-b.png,02-fate-threads.md,mortal_kin,2,寄回一笔灵石换来的银钱，继续修炼
+[ ],V3-367,fate_scene,故乡灯火 · 白事,public/game/scenes/fate/mortal_kin-2.png,02-fate-threads.md,mortal_kin,,
+[ ],V3-368,fate_outcome,故乡灯火 · 白事 · 选项A,public/game/scenes/outcomes/fate/mortal_kin-2-a.png,02-fate-threads.md,mortal_kin,1,放下手中冲关，赶回去守灵
+[ ],V3-369,fate_outcome,故乡灯火 · 白事 · 选项B,public/game/scenes/outcomes/fate/mortal_kin-2-b.png,02-fate-threads.md,mortal_kin,2,留在洞府，遥祭一场
+[ ],V3-370,fate_scene,故乡灯火 · 仙凡一别,public/game/scenes/fate/mortal_kin-3.png,02-fate-threads.md,mortal_kin,,
+[ ],V3-371,fate_outcome,故乡灯火 · 仙凡一别 · 选项A,public/game/scenes/outcomes/fate/mortal_kin-3-a.png,02-fate-threads.md,mortal_kin,1,下山除妖，再把凡俗因果斩断
+[ ],V3-372,fate_outcome,故乡灯火 · 仙凡一别 · 选项B,public/game/scenes/outcomes/fate/mortal_kin-3-b.png,02-fate-threads.md,mortal_kin,2,只赐一道符，不见后人
+[ ],V3-373,fate_scene,黑市禁术 · 无字黑册,public/game/scenes/fate/demonic_bargain-1.png,02-fate-threads.md,demonic_bargain,,
+[ ],V3-374,fate_outcome,黑市禁术 · 无字黑册 · 选项A,public/game/scenes/outcomes/fate/demonic_bargain-1-a.png,02-fate-threads.md,demonic_bargain,1,买下黑册，只用其中一页
+[ ],V3-375,fate_outcome,黑市禁术 · 无字黑册 · 选项B,public/game/scenes/outcomes/fate/demonic_bargain-1-b.png,02-fate-threads.md,demonic_bargain,2,记下摊主的脸，转身离开
+[ ],V3-376,fate_scene,黑市禁术 · 反噬之夜,public/game/scenes/fate/demonic_bargain-2.png,02-fate-threads.md,demonic_bargain,,
+[ ],V3-377,fate_outcome,黑市禁术 · 反噬之夜 · 选项A,public/game/scenes/outcomes/fate/demonic_bargain-2-a.png,02-fate-threads.md,demonic_bargain,1,散去这部分修为，强行拔除魔气
+[ ],V3-378,fate_outcome,黑市禁术 · 反噬之夜 · 选项B,public/game/scenes/outcomes/fate/demonic_bargain-2-b.png,02-fate-threads.md,demonic_bargain,2,放任它生长，换取更快突破
+[ ],V3-379,fate_scene,黑市禁术 · 一念成魔,public/game/scenes/fate/demonic_bargain-3.png,02-fate-threads.md,demonic_bargain,,
+[ ],V3-380,fate_outcome,黑市禁术 · 一念成魔 · 选项A,public/game/scenes/outcomes/fate/demonic_bargain-3-a.png,02-fate-threads.md,demonic_bargain,1,烧掉黑册，以自身道心渡劫
+[ ],V3-381,fate_outcome,黑市禁术 · 一念成魔 · 选项B,public/game/scenes/outcomes/fate/demonic_bargain-3-b.png,02-fate-threads.md,demonic_bargain,2,按下血印，让黑册替你挡劫
+[ ],V3-382,fate_scene,夜半剑鸣 · 无名旧剑,public/game/scenes/fate/sword_grave-1.png,02-fate-threads.md,sword_grave,,
+[ ],V3-383,fate_outcome,夜半剑鸣 · 无名旧剑 · 选项A,public/game/scenes/outcomes/fate/sword_grave-1-a.png,02-fate-threads.md,sword_grave,1,为旧剑磨去锈迹，日日以灵力温养
+[ ],V3-384,fate_outcome,夜半剑鸣 · 无名旧剑 · 选项B,public/game/scenes/outcomes/fate/sword_grave-1-b.png,02-fate-threads.md,sword_grave,2,把剑卖掉，免得招惹来历不明的东西
+[ ],V3-385,fate_scene,夜半剑鸣 · 剑冢试锋,public/game/scenes/fate/sword_grave-2.png,02-fate-threads.md,sword_grave,,
+[ ],V3-386,fate_outcome,夜半剑鸣 · 剑冢试锋 · 选项A,public/game/scenes/outcomes/fate/sword_grave-2-a.png,02-fate-threads.md,sword_grave,1,向所有断剑行礼，再拔中心一剑
+[ ],V3-387,fate_outcome,夜半剑鸣 · 剑冢试锋 · 选项B,public/game/scenes/outcomes/fate/sword_grave-2-b.png,02-fate-threads.md,sword_grave,2,强行破阵，夺剑就走
+[ ],V3-388,fate_scene,夜半剑鸣 · 剑心归处,public/game/scenes/fate/sword_grave-3.png,02-fate-threads.md,sword_grave,,
+[ ],V3-389,fate_outcome,夜半剑鸣 · 剑心归处 · 选项A,public/game/scenes/outcomes/fate/sword_grave-3-a.png,02-fate-threads.md,sword_grave,1,拒绝斩缘，带着牵挂飞升
+[ ],V3-390,fate_outcome,夜半剑鸣 · 剑心归处 · 选项B,public/game/scenes/outcomes/fate/sword_grave-3-b.png,02-fate-threads.md,sword_grave,2,斩断旧缘，取真正的剑心
+[ ],V3-391,fate_scene,丹炉余烬 · 炉边捷径,public/game/scenes/fate/pill_toxin-1.png,02-fate-threads.md,pill_toxin,,
+[ ],V3-392,fate_outcome,丹炉余烬 · 炉边捷径 · 选项A,public/game/scenes/outcomes/fate/pill_toxin-1-a.png,02-fate-threads.md,pill_toxin,1,按古方补全灵草，稳稳重炼
+[ ],V3-393,fate_outcome,丹炉余烬 · 炉边捷径 · 选项B,public/game/scenes/outcomes/fate/pill_toxin-1-b.png,02-fate-threads.md,pill_toxin,2,直接服下，赌它不会出事
+[ ],V3-394,fate_scene,丹炉余烬 · 药毒入骨,public/game/scenes/fate/pill_toxin-2.png,02-fate-threads.md,pill_toxin,,
+[ ],V3-395,fate_outcome,丹炉余烬 · 药毒入骨 · 选项A,public/game/scenes/outcomes/fate/pill_toxin-2-a.png,02-fate-threads.md,pill_toxin,1,停修三年，把丹毒一点点化掉
+[ ],V3-396,fate_outcome,丹炉余烬 · 药毒入骨 · 选项B,public/game/scenes/outcomes/fate/pill_toxin-2-b.png,02-fate-threads.md,pill_toxin,2,用洗髓法强逼丹毒，抢回时间
+[ ],V3-397,fate_scene,丹炉余烬 · 医人还是医己,public/game/scenes/fate/pill_toxin-3.png,02-fate-threads.md,pill_toxin,,
+[ ],V3-398,fate_outcome,丹炉余烬 · 医人还是医己 · 选项A,public/game/scenes/outcomes/fate/pill_toxin-3-a.png,02-fate-threads.md,pill_toxin,1,把成丹给最危重的人，再试新方
+[ ],V3-399,fate_outcome,丹炉余烬 · 医人还是医己 · 选项B,public/game/scenes/outcomes/fate/pill_toxin-3-b.png,02-fate-threads.md,pill_toxin,2,封住药库，先保住自己的洞府
+[ ],V3-400,fate_scene,残阵山河 · 山腹残阵,public/game/scenes/fate/array_legacy-1.png,02-fate-threads.md,array_legacy,,
+[ ],V3-401,fate_outcome,残阵山河 · 山腹残阵 · 选项A,public/game/scenes/outcomes/fate/array_legacy-1-a.png,02-fate-threads.md,array_legacy,1,试着补全阵纹，不动阵心
+[ ],V3-402,fate_outcome,残阵山河 · 山腹残阵 · 选项B,public/game/scenes/outcomes/fate/array_legacy-1-b.png,02-fate-threads.md,array_legacy,2,拆走阵心，换一门可靠的保命手段
+[ ],V3-403,fate_scene,残阵山河 · 护山大阵,public/game/scenes/fate/array_legacy-2.png,02-fate-threads.md,array_legacy,,
+[ ],V3-404,fate_outcome,残阵山河 · 护山大阵 · 选项A,public/game/scenes/outcomes/fate/array_legacy-2-a.png,02-fate-threads.md,array_legacy,1,接下阵眼，守到最后一刻
+[ ],V3-405,fate_outcome,残阵山河 · 护山大阵 · 选项B,public/game/scenes/outcomes/fate/array_legacy-2-b.png,02-fate-threads.md,array_legacy,2,交出一套改良阵图，自己不入阵眼
+[ ],V3-406,fate_scene,残阵山河 · 阵心即人心,public/game/scenes/fate/array_legacy-3.png,02-fate-threads.md,array_legacy,,
+[ ],V3-407,fate_outcome,残阵山河 · 阵心即人心 · 选项A,public/game/scenes/outcomes/fate/array_legacy-3-a.png,02-fate-threads.md,array_legacy,1,独自入阵，把自己留在阵心
+[ ],V3-408,fate_outcome,残阵山河 · 阵心即人心 · 选项B,public/game/scenes/outcomes/fate/array_legacy-3-b.png,02-fate-threads.md,array_legacy,2,留下最有用的同门，保全山门
+[ ],V3-409,fate_scene,同门旧怨 · 试炼抽签,public/game/scenes/fate/rival_brother-1.png,02-fate-threads.md,rival_brother,,
+[ ],V3-410,fate_outcome,同门旧怨 · 试炼抽签 · 选项A,public/game/scenes/outcomes/fate/rival_brother-1-a.png,02-fate-threads.md,rival_brother,1,堂堂正正打一场，不留暗手
+[ ],V3-411,fate_outcome,同门旧怨 · 试炼抽签 · 选项B,public/game/scenes/outcomes/fate/rival_brother-1-b.png,02-fate-threads.md,rival_brother,2,事先在他的灵剑上做手脚
+[ ],V3-412,fate_scene,同门旧怨 · 旧怨重逢,public/game/scenes/fate/rival_brother-2.png,02-fate-threads.md,rival_brother,,
+[ ],V3-413,fate_outcome,同门旧怨 · 旧怨重逢 · 选项A,public/game/scenes/outcomes/fate/rival_brother-2-a.png,02-fate-threads.md,rival_brother,1,提出合作，平分秘境里的东西
+[ ],V3-414,fate_outcome,同门旧怨 · 旧怨重逢 · 选项B,public/game/scenes/outcomes/fate/rival_brother-2-b.png,02-fate-threads.md,rival_brother,2,先下手为强，把旧怨一并清算
+[ ],V3-415,fate_scene,同门旧怨 · 胜负之外,public/game/scenes/fate/rival_brother-3.png,02-fate-threads.md,rival_brother,,
+[ ],V3-416,fate_outcome,同门旧怨 · 胜负之外 · 选项A,public/game/scenes/outcomes/fate/rival_brother-3-a.png,02-fate-threads.md,rival_brother,1,与他喝完这坛酒，不再论输赢
+[ ],V3-417,fate_outcome,同门旧怨 · 胜负之外 · 选项B,public/game/scenes/outcomes/fate/rival_brother-3-b.png,02-fate-threads.md,rival_brother,2,不答，只请他记住今日的山门
+[ ],V3-418,fate_scene,师尊旧案 · 禁地残卷,public/game/scenes/fate/master_secret-1.png,02-fate-threads.md,master_secret,,
+[ ],V3-419,fate_outcome,师尊旧案 · 禁地残卷 · 选项A,public/game/scenes/outcomes/fate/master_secret-1-a.png,02-fate-threads.md,master_secret,1,原样放回，不追查师尊过去
+[ ],V3-420,fate_outcome,师尊旧案 · 禁地残卷 · 选项B,public/game/scenes/outcomes/fate/master_secret-1-b.png,02-fate-threads.md,master_secret,2,悄悄抄录旧案，留作后手
+[ ],V3-421,fate_scene,师尊旧案 · 师尊的旧名,public/game/scenes/fate/master_secret-2.png,02-fate-threads.md,master_secret,,
+[ ],V3-422,fate_outcome,师尊旧案 · 师尊的旧名 · 选项A,public/game/scenes/outcomes/fate/master_secret-2-a.png,02-fate-threads.md,master_secret,1,去后山问师尊，要一个亲口答案
+[ ],V3-423,fate_outcome,师尊旧案 · 师尊的旧名 · 选项B,public/game/scenes/outcomes/fate/master_secret-2-b.png,02-fate-threads.md,master_secret,2,把幸存者赶走，守住师门名声
+[ ],V3-424,fate_scene,师尊旧案 · 欺师还是救师,public/game/scenes/fate/master_secret-3.png,02-fate-threads.md,master_secret,,
+[ ],V3-425,fate_outcome,师尊旧案 · 欺师还是救师 · 选项A,public/game/scenes/outcomes/fate/master_secret-3-a.png,02-fate-threads.md,master_secret,1,交出抄本，让师尊自己面对旧案
+[ ],V3-426,fate_outcome,师尊旧案 · 欺师还是救师 · 选项B,public/game/scenes/outcomes/fate/master_secret-3-b.png,02-fate-threads.md,master_secret,2,毁掉抄本，替师尊隐瞒到底
+[ ],V3-427,fate_scene,器中之魂 · 会说话的旧器,public/game/scenes/fate/lost_soul-1.png,02-fate-threads.md,lost_soul,,
+[ ],V3-428,fate_outcome,器中之魂 · 会说话的旧器 · 选项A,public/game/scenes/outcomes/fate/lost_soul-1-a.png,02-fate-threads.md,lost_soul,1,回答她，并试着听她讲完
+[ ],V3-429,fate_outcome,器中之魂 · 会说话的旧器 · 选项B,public/game/scenes/outcomes/fate/lost_soul-1-b.png,02-fate-threads.md,lost_soul,2,以灵力封住铜镜，不让她再开口
+[ ],V3-430,fate_scene,器中之魂 · 不属于你的记忆,public/game/scenes/fate/lost_soul-2.png,02-fate-threads.md,lost_soul,,
+[ ],V3-431,fate_outcome,器中之魂 · 不属于你的记忆 · 选项A,public/game/scenes/outcomes/fate/lost_soul-2-a.png,02-fate-threads.md,lost_soul,1,追查这些记忆，哪怕动摇本心
+[ ],V3-432,fate_outcome,器中之魂 · 不属于你的记忆 · 选项B,public/game/scenes/outcomes/fate/lost_soul-2-b.png,02-fate-threads.md,lost_soul,2,封闭识海，把陌生记忆全部压回去
+[ ],V3-433,fate_scene,器中之魂 · 谁在借你的手,public/game/scenes/fate/lost_soul-3.png,02-fate-threads.md,lost_soul,,
+[ ],V3-434,fate_outcome,器中之魂 · 谁在借你的手 · 选项A,public/game/scenes/outcomes/fate/lost_soul-3-a.png,02-fate-threads.md,lost_soul,1,砸碎铜镜，守住这一世的自己
+[ ],V3-435,fate_outcome,器中之魂 · 谁在借你的手 · 选项B,public/game/scenes/outcomes/fate/lost_soul-3-b.png,02-fate-threads.md,lost_soul,2,听她说完，主动让出一段识海
+[ ],V3-436,fate_scene,坊市账簿 · 商队急单,public/game/scenes/fate/merchant_ledger-1.png,02-fate-threads.md,merchant_ledger,,
+[ ],V3-437,fate_outcome,坊市账簿 · 商队急单 · 选项A,public/game/scenes/outcomes/fate/merchant_ledger-1-a.png,02-fate-threads.md,merchant_ledger,1,接下这趟急单，按时送到
+[ ],V3-438,fate_outcome,坊市账簿 · 商队急单 · 选项B,public/game/scenes/outcomes/fate/merchant_ledger-1-b.png,02-fate-threads.md,merchant_ledger,2,提出加价，否则不接
+[ ],V3-439,fate_scene,坊市账簿 · 一本旧账,public/game/scenes/fate/merchant_ledger-2.png,02-fate-threads.md,merchant_ledger,,
+[ ],V3-440,fate_outcome,坊市账簿 · 一本旧账 · 选项A,public/game/scenes/outcomes/fate/merchant_ledger-2-a.png,02-fate-threads.md,merchant_ledger,1,按散修旧名寻访后人，把账结清
+[ ],V3-441,fate_outcome,坊市账簿 · 一本旧账 · 选项B,public/game/scenes/outcomes/fate/merchant_ledger-2-b.png,02-fate-threads.md,merchant_ledger,2,以无人认领为由，把灵石收入囊中
+[ ],V3-442,fate_scene,坊市账簿 · 坊市尽头,public/game/scenes/fate/merchant_ledger-3.png,02-fate-threads.md,merchant_ledger,,
+[ ],V3-443,fate_outcome,坊市账簿 · 坊市尽头 · 选项A,public/game/scenes/outcomes/fate/merchant_ledger-3-a.png,02-fate-threads.md,merchant_ledger,1,照常开张，用自己的修为稳住灵脉
+[ ],V3-444,fate_outcome,坊市账簿 · 坊市尽头 · 选项B,public/game/scenes/outcomes/fate/merchant_ledger-3-b.png,02-fate-threads.md,merchant_ledger,2,把灵脉消息高价卖给大宗门
+[ ],V3-445,fate_scene,边地狼烟 · 征召令,public/game/scenes/fate/border_war-1.png,02-fate-threads.md,border_war,,
+[ ],V3-446,fate_outcome,边地狼烟 · 征召令 · 选项A,public/game/scenes/outcomes/fate/border_war-1-a.png,02-fate-threads.md,border_war,1,应征前往边城
+[ ],V3-447,fate_outcome,边地狼烟 · 征召令 · 选项B,public/game/scenes/outcomes/fate/border_war-1-b.png,02-fate-threads.md,border_war,2,绕开征召，躲进深山闭关
+[ ],V3-448,fate_scene,边地狼烟 · 城破之前,public/game/scenes/fate/border_war-2.png,02-fate-threads.md,border_war,,
+[ ],V3-449,fate_outcome,边地狼烟 · 城破之前 · 选项A,public/game/scenes/outcomes/fate/border_war-2-a.png,02-fate-threads.md,border_war,1,留下守门，替凡人争取时间
+[ ],V3-450,fate_outcome,边地狼烟 · 城破之前 · 选项B,public/game/scenes/outcomes/fate/border_war-2-b.png,02-fate-threads.md,border_war,2,先传走守将与精锐，保存反攻力量
+[ ],V3-451,fate_scene,边地狼烟 · 守土或独生,public/game/scenes/fate/border_war-3.png,02-fate-threads.md,border_war,,
+[ ],V3-452,fate_outcome,边地狼烟 · 守土或独生 · 选项A,public/game/scenes/outcomes/fate/border_war-3-a.png,02-fate-threads.md,border_war,1,留下帮忙重建，直到边城重新有灯
+[ ],V3-453,fate_outcome,边地狼烟 · 守土或独生 · 选项B,public/game/scenes/outcomes/fate/border_war-3-b.png,02-fate-threads.md,border_war,2,不争名声，独自离开边地
+[ ],V3-454,fate_scene,执法堂旧案 · 一纸传唤,public/game/scenes/fate/false_accusation-1.png,02-fate-threads.md,false_accusation,,
+[ ],V3-455,fate_outcome,执法堂旧案 · 一纸传唤 · 选项A,public/game/scenes/outcomes/fate/false_accusation-1-a.png,02-fate-threads.md,false_accusation,1,坦然配合调查，要求公开审理
+[ ],V3-456,fate_outcome,执法堂旧案 · 一纸传唤 · 选项B,public/game/scenes/outcomes/fate/false_accusation-1-b.png,02-fate-threads.md,false_accusation,2,花钱打点，尽早脱身
+[ ],V3-457,fate_scene,执法堂旧案 · 旧案重审,public/game/scenes/fate/false_accusation-2.png,02-fate-threads.md,false_accusation,,
+[ ],V3-458,fate_outcome,执法堂旧案 · 旧案重审 · 选项A,public/game/scenes/outcomes/fate/false_accusation-2-a.png,02-fate-threads.md,false_accusation,1,当众揭发，哪怕牵出更大的旧案
+[ ],V3-459,fate_outcome,执法堂旧案 · 旧案重审 · 选项B,public/game/scenes/outcomes/fate/false_accusation-2-b.png,02-fate-threads.md,false_accusation,2,用卷宗换一次冲关资源
+[ ],V3-460,fate_scene,执法堂旧案 · 清白值几条命,public/game/scenes/fate/false_accusation-3.png,02-fate-threads.md,false_accusation,,
+[ ],V3-461,fate_outcome,执法堂旧案 · 清白值几条命 · 选项A,public/game/scenes/outcomes/fate/false_accusation-3-a.png,02-fate-threads.md,false_accusation,1,站出来替他作证，哪怕旧事重提
+[ ],V3-462,fate_outcome,执法堂旧案 · 清白值几条命 · 选项B,public/game/scenes/outcomes/fate/false_accusation-3-b.png,02-fate-threads.md,false_accusation,2,保持沉默，让旧案停在上一代
+[ ],V3-463,fate_scene,一条灵脉 · 无主灵脉,public/game/scenes/fate/spirit_vein-1.png,02-fate-threads.md,spirit_vein,,
+[ ],V3-464,fate_outcome,一条灵脉 · 无主灵脉 · 选项A,public/game/scenes/outcomes/fate/spirit_vein-1-a.png,02-fate-threads.md,spirit_vein,1,只在灵脉旁开洞府，不惊动山下
+[ ],V3-465,fate_outcome,一条灵脉 · 无主灵脉 · 选项B,public/game/scenes/outcomes/fate/spirit_vein-1-b.png,02-fate-threads.md,spirit_vein,2,布阵封山，把灵脉据为己有
+[ ],V3-466,fate_scene,一条灵脉 · 宗门索地,public/game/scenes/fate/spirit_vein-2.png,02-fate-threads.md,spirit_vein,,
+[ ],V3-467,fate_outcome,一条灵脉 · 宗门索地 · 选项A,public/game/scenes/outcomes/fate/spirit_vein-2-a.png,02-fate-threads.md,spirit_vein,1,接受名额，让灵脉归宗门管辖
+[ ],V3-468,fate_outcome,一条灵脉 · 宗门索地 · 选项B,public/game/scenes/outcomes/fate/spirit_vein-2-b.png,02-fate-threads.md,spirit_vein,2,拒绝宗门，联合散修共守灵脉
+[ ],V3-469,fate_scene,一条灵脉 · 灵脉之下,public/game/scenes/fate/spirit_vein-3.png,02-fate-threads.md,spirit_vein,,
+[ ],V3-470,fate_outcome,一条灵脉 · 灵脉之下 · 选项A,public/game/scenes/outcomes/fate/spirit_vein-3-a.png,02-fate-threads.md,spirit_vein,1,封脉，另寻修炼之地
+[ ],V3-471,fate_outcome,一条灵脉 · 灵脉之下 · 选项B,public/game/scenes/outcomes/fate/spirit_vein-3-b.png,02-fate-threads.md,spirit_vein,2,继续开采，把地脉震压下去
+[ ],V3-472,fate_scene,器灵开价 · 沉睡古器,public/game/scenes/fate/ancient_artifact-1.png,02-fate-threads.md,ancient_artifact,,
+[ ],V3-473,fate_outcome,器灵开价 · 沉睡古器 · 选项A,public/game/scenes/outcomes/fate/ancient_artifact-1-a.png,02-fate-threads.md,ancient_artifact,1,先问它是什么，再决定是否带走
+[ ],V3-474,fate_outcome,器灵开价 · 沉睡古器 · 选项B,public/game/scenes/outcomes/fate/ancient_artifact-1-b.png,02-fate-threads.md,ancient_artifact,2,以灵力强行炼化，抹去器灵
+[ ],V3-475,fate_scene,器灵开价 · 器灵索价,public/game/scenes/fate/ancient_artifact-2.png,02-fate-threads.md,ancient_artifact,,
+[ ],V3-476,fate_outcome,器灵开价 · 器灵索价 · 选项A,public/game/scenes/outcomes/fate/ancient_artifact-2-a.png,02-fate-threads.md,ancient_artifact,1,拒绝交易，另找丹方
+[ ],V3-477,fate_outcome,器灵开价 · 器灵索价 · 选项B,public/game/scenes/outcomes/fate/ancient_artifact-2-b.png,02-fate-threads.md,ancient_artifact,2,交出十年记忆，换一次破境机会
+[ ],V3-478,fate_scene,器灵开价 · 人器一体,public/game/scenes/fate/ancient_artifact-3.png,02-fate-threads.md,ancient_artifact,,
+[ ],V3-479,fate_outcome,器灵开价 · 人器一体 · 选项A,public/game/scenes/outcomes/fate/ancient_artifact-3-a.png,02-fate-threads.md,ancient_artifact,1,同意共生，接受被它看见
+[ ],V3-480,fate_outcome,器灵开价 · 人器一体 · 选项B,public/game/scenes/outcomes/fate/ancient_artifact-3-b.png,02-fate-threads.md,ancient_artifact,2,把古鼎留在洞府，独自上路
+[ ],V3-481,fate_scene,天门之前 · 天门初现,public/game/scenes/fate/ascension_choice-1.png,02-fate-threads.md,ascension_choice,,
+[ ],V3-482,fate_outcome,天门之前 · 天门初现 · 选项A,public/game/scenes/outcomes/fate/ascension_choice-1-a.png,02-fate-threads.md,ascension_choice,1,记住此景，不急着追求飞升
+[ ],V3-483,fate_outcome,天门之前 · 天门初现 · 选项B,public/game/scenes/outcomes/fate/ascension_choice-1-b.png,02-fate-threads.md,ascension_choice,2,以全部灵力推门，试试能否提前进入
+[ ],V3-484,fate_scene,天门之前 · 旧人拦路,public/game/scenes/fate/ascension_choice-2.png,02-fate-threads.md,ascension_choice,,
+[ ],V3-485,fate_outcome,天门之前 · 旧人拦路 · 选项A,public/game/scenes/outcomes/fate/ascension_choice-2-a.png,02-fate-threads.md,ascension_choice,1,留下三日，陪旧人把最后一程走完
+[ ],V3-486,fate_outcome,天门之前 · 旧人拦路 · 选项B,public/game/scenes/outcomes/fate/ascension_choice-2-b.png,02-fate-threads.md,ascension_choice,2,留下一道延寿符，继续准备飞升
+[ ],V3-487,fate_scene,天门之前 · 飞升或留下,public/game/scenes/fate/ascension_choice-3.png,02-fate-threads.md,ascension_choice,,
+[ ],V3-488,fate_outcome,天门之前 · 飞升或留下 · 选项A,public/game/scenes/outcomes/fate/ascension_choice-3-a.png,02-fate-threads.md,ascension_choice,1,踏入天门，带着此世所有因果
+[ ],V3-489,fate_outcome,天门之前 · 飞升或留下 · 选项B,public/game/scenes/outcomes/fate/ascension_choice-3-b.png,02-fate-threads.md,ascension_choice,2,转身回山，留在人间守到下个时代
+[ ],V3-490,intent_scene,求长生,public/game/scenes/opening/longevity.png,03-ui-scenes.md,,,
+[ ],V3-491,intent_scene,求复仇,public/game/scenes/opening/revenge.png,03-ui-scenes.md,,,
+[ ],V3-492,intent_scene,求守护,public/game/scenes/opening/guard.png,03-ui-scenes.md,,,
+[ ],V3-493,intent_scene,求自在,public/game/scenes/opening/freedom.png,03-ui-scenes.md,,,
+[ ],V3-494,focus_scene,苦修,public/game/scenes/focus/cultivate.png,03-ui-scenes.md,,,
+[ ],V3-495,focus_scene,游历,public/game/scenes/focus/roam.png,03-ui-scenes.md,,,
+[ ],V3-496,focus_scene,炼丹阵法,public/game/scenes/focus/craft.png,03-ui-scenes.md,,,
+[ ],V3-497,focus_scene,宗门事务,public/game/scenes/focus/sect.png,03-ui-scenes.md,,,
+[ ],V3-498,focus_scene,人情往来,public/game/scenes/focus/bond.png,03-ui-scenes.md,,,
+[ ],V3-499,focus_scene,养伤隐居,public/game/scenes/focus/heal.png,03-ui-scenes.md,,,
+[ ],V3-500,ending_scene,飞升灵界,public/game/scenes/ending/ascend.png,03-ui-scenes.md,ascend,,
+[ ],V3-501,ending_scene,天门遗恨,public/game/scenes/ending/ascend_fail.png,03-ui-scenes.md,ascend_fail,,
+[ ],V3-502,ending_scene,寿尽归尘,public/game/scenes/ending/natural.png,03-ui-scenes.md,natural,,
+[ ],V3-503,ending_scene,斗法陨落,public/game/scenes/ending/death_battle.png,03-ui-scenes.md,death_battle,,
+[ ],V3-504,ending_scene,心魔坐化,public/game/scenes/ending/death_heart.png,03-ui-scenes.md,death_heart,,
+[ ],V3-505,ending_scene,渡劫成灰,public/game/scenes/ending/death_break.png,03-ui-scenes.md,death_break,,
+[ ],V3-506,action_icon,交谈,public/game/actions/talk.png,04-action-icons.md,,,
+[ ],V3-507,action_icon,争斗,public/game/actions/fight.png,04-action-icons.md,,,
+[ ],V3-508,action_icon,远行,public/game/actions/travel.png,04-action-icons.md,,,
+[ ],V3-509,action_icon,修行,public/game/actions/cultivate.png,04-action-icons.md,,,
+[ ],V3-510,action_icon,交易,public/game/actions/trade.png,04-action-icons.md,,,
+[ ],V3-511,action_icon,结缘,public/game/actions/bond.png,04-action-icons.md,,,
+[ ],V3-512,action_icon,疗愈,public/game/actions/heal.png,04-action-icons.md,,,
+[ ],V3-513,action_icon,涉险,public/game/actions/risk.png,04-action-icons.md,,,
+[ ],V3-514,action_icon,拒绝,public/game/actions/refuse.png,04-action-icons.md,,,
+[ ],V3-515,action_icon,观察,public/game/actions/observe.png,04-action-icons.md,,,
