@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 凡人修仙人生模拟
 
-## Getting Started
+一个以“命格、阶段重心与长期因果”为核心的修仙人生模拟器。
 
-First, run the development server:
+## 核心体验
+
+- 抽灵根，得一句待验证的命格谶语。
+- 立下本心，决定这一世最初想追求什么。
+- 每 5–80 年选择一个阶段重心，让时间真正流逝。
+- 经历世情、宗门、亲族、冒险与命运线。
+- 死亡后获得组合命盘，并留下一个带入下一世的执念。
+- 连续三世后，由“三生镜”照见你反复做出的选择。
+
+灵根只决定起点、修炼效率与风格，不限制机缘、禁术、乱海与飞升。
+冒险与平淡都能形成完整人生。
+
+## 开发
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm test -- --runInBand
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 技术结构
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `lib/game/reducer.ts`：主状态机
+- `lib/game/lifecycle.ts`：年龄、阶段、重心与结算
+- `lib/game/event-pool.ts`：条件事件池与命运线抽取
+- `lib/game/narrative.ts`：叙事轴、命运线、命盘与执念
+- `lib/game/relations.ts`：关系生成与漂移
+- `lib/game/mirror.ts`：三生镜
+- `lib/game/simulation.ts`：1000 局平衡模拟

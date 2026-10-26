@@ -10,6 +10,19 @@ export type LifespanEventType =
 export type RetreatDuration = "short" | "mid" | "long";
 export type SectPath = "zhengdao" | "modao" | "sanxiu";
 export type InjuryLevel = "none" | "light" | "heavy" | "dying";
+export type HeartIntent = "longevity" | "revenge" | "guard" | "freedom";
+export type FocusId = "cultivate" | "roam" | "craft" | "sect" | "bond" | "heal";
+export type RelationKind = "master" | "peer" | "rival" | "kin" | "companion" | "disciple";
+export type ProphecyVerdict = "fulfilled" | "defied" | "unanswered";
+export type NarrativeAxis =
+  | "dao"
+  | "compassion"
+  | "ambition"
+  | "guile"
+  | "ruthless"
+  | "freedom"
+  | "loyalty"
+  | "attachment";
 export type ItemId =
   | "yangshang_dan" | "huixue_dan" | "juqi_dan" | "yanshou_dan"
   | "dixin_dan" | "xuming_dan"
@@ -74,6 +87,176 @@ export interface Enemy {
   sourceEventId: string;
 }
 
+export interface NarrativeTag {
+  id: string;
+  label: string;
+  strength: number;
+  sourceEventId: string;
+  sinceTurn: number;
+}
+
+export interface FateThreadState {
+  threadId: string;
+  stage: number;
+  status: "open" | "resolved" | "broken";
+  startedTurn: number;
+  lastAdvancedTurn: number;
+  resolution?: string;
+}
+
+export interface ChoiceMemory {
+  turn: number;
+  eventId: string;
+  optionIndex: number;
+  eventTitle: string;
+  optionText: string;
+  outcomeText: string;
+  realmSlug: RealmSlug;
+}
+
+export interface NarrativeState {
+  axes: Record<NarrativeAxis, number>;
+  tags: Record<string, NarrativeTag>;
+  threads: Record<string, FateThreadState>;
+  memories: ChoiceMemory[];
+  titles: string[];
+  scars: string[];
+}
+
+export interface EndingSummary {
+  archetypeId: string;
+  family: GameState["endingType"];
+  title: string;
+  subtitle: string;
+  narrative: string;
+  epitaph: string;
+  dominantAxes: NarrativeAxis[];
+  resolvedThreads: string[];
+  openThreads: string[];
+  keyMemory?: string;
+  signature: string;
+  finalAge?: number;
+  realmSlug?: RealmSlug;
+  heartIntent?: HeartIntent | null;
+  prophecyText?: string;
+  prophecyVerdict?: ProphecyVerdict;
+  textureAxes?: Record<string, string>;
+  relationEpitaphs?: string[];
+  brokenThreads?: string[];
+  achievements?: string[];
+  obsessions?: ObsessionOption[];
+  lifeNumber?: number;
+}
+
+export interface RelationState {
+  id: string;
+  name: string;
+  kind: RelationKind;
+  title: string;
+  affinity: number;
+  trust: number;
+  status: "active" | "estranged" | "dead" | "lost";
+  lastInteractionStage: number;
+  tags: string[];
+  memory?: string;
+}
+
+export type TimelineKind =
+  | "life"
+  | "focus"
+  | "choice"
+  | "relation"
+  | "thread"
+  | "breakthrough"
+  | "death";
+
+export interface TimelineEntry {
+  id: string;
+  stage: number;
+  age: number;
+  kind: TimelineKind;
+  title: string;
+  text: string;
+  accent?: "jade" | "gold" | "red" | "mist";
+  eventId?: string;
+  threadId?: string;
+  relationId?: string;
+}
+
+export interface StageSettlement {
+  stage: number;
+  fromAge: number;
+  toAge: number;
+  years: number;
+  focusId: FocusId;
+  headline: string;
+  lines: string[];
+  eventDue: boolean;
+  breakthroughReady: boolean;
+}
+
+export interface ProphecyConfig {
+  id: string;
+  text: string;
+  axis: NarrativeAxis;
+  title: string;
+}
+
+export interface FocusConfig {
+  id: FocusId;
+  name: string;
+  short: string;
+  description: string;
+  benefit: string;
+  cost: string;
+  color: string;
+  icon: string;
+  xpMult: number;
+  stoneMult: number;
+  fateDelta: number;
+  heal: number;
+  risk: number;
+  relationDrift: Partial<Record<RelationKind, number>>;
+}
+
+export interface ObsessionOption {
+  id: string;
+  title: string;
+  text: string;
+  kind: "person" | "place" | "truth" | "power" | "dao";
+}
+
+export interface LifeArchive {
+  id: string;
+  lifeNumber: number;
+  completedAt: string;
+  name: string;
+  finalAge: number;
+  realmSlug: RealmSlug;
+  endingType: GameState["endingType"];
+  endingTitle: string;
+  heartIntent: HeartIntent | null;
+  prophecyId: string;
+  prophecyText: string;
+  prophecyVerdict: ProphecyVerdict;
+  dominantAxes: NarrativeAxis[];
+  textureAxes: Record<string, string>;
+  resolvedThreadIds: string[];
+  brokenThreadIds: string[];
+  relationEpitaphs: string[];
+  keyMemories: string[];
+  karmaMarks: string[];
+  obsessions: ObsessionOption[];
+  selectedObsession?: ObsessionOption;
+  signature: string;
+}
+
+export interface MetaState {
+  schemaVersion: number;
+  lives: LifeArchive[];
+  selectedObsession?: ObsessionOption;
+}
+
 export interface GameState {
   fortune: number;
   spiritRoot: SpiritRoot;
@@ -94,10 +277,32 @@ export interface GameState {
   phase: "gate" | "playing" | "breakthrough" | "ended";
   endingType: "ascend" | "death_battle" | "death_heart" | "death_break" | "natural" | "ascend_fail" | null;
   eventHistory: string[];
+  runSeed: number;
+  turn: number;
+  lastThreadTurn: number;
+  narrative: NarrativeState;
+  choiceHistory: ChoiceMemory[];
+  endingSummary: EndingSummary | null;
+  age: number;
+  stage: number;
+  stageFocus: FocusId | null;
+  focusHistory: Array<{ stage: number; focusId: FocusId; fromAge: number; toAge: number }>;
+  lastSettlement: StageSettlement | null;
+  resolvedEventStage: number | null;
+  relations: Record<string, RelationState>;
+  timeline: TimelineEntry[];
+  flags: Record<string, boolean | number | string>;
+  lifeThreads: string[];
+  heartIntent: HeartIntent | null;
+  prophecy: ProphecyConfig;
+  meta: MetaState;
+  archived: boolean;
+  lifeNumber: number;
+  characterName: string;
 }
 
 export type GameAction =
-  | { type: "START_GAME"; spiritRoot: SpiritRoot; fortune: number }
+  | { type: "START_GAME"; spiritRoot: SpiritRoot; fortune: number; seed?: number }
   | { type: "CONSUME_LIFESPAN"; years: number }
   | { type: "ADD_XP"; points: number }
   | { type: "ADD_LINGSHI"; amount: number }
@@ -106,15 +311,65 @@ export type GameAction =
   | { type: "REMOVE_ITEM"; itemId: ItemId }
   | { type: "SET_INJURY"; level: InjuryLevel }
   | { type: "ADD_EMOTION"; positive: number; negative: number }
+  | { type: "ADD_FATE"; amount: number }
   | { type: "ADD_ENEMY"; enemy: Enemy }
   | { type: "REMOVE_ENEMY"; enemyId: string }
-  | { type: "RECORD_EVENT"; eventId: string }
+  | { type: "RECORD_EVENT"; eventId: string; threadId?: string }
+  | {
+      type: "APPLY_NARRATIVE";
+      record: ChoiceMemory;
+      axes?: Partial<Record<NarrativeAxis, number>>;
+      tags?: Array<{ id: string; label: string; strength?: number }>;
+      threadUpdate?: {
+        threadId: string;
+        action: "advance" | "resolve" | "break";
+        resolution?: string;
+      };
+    }
   | { type: "ATTEMPT_BREAKTHROUGH" }
+  | { type: "CANCEL_BREAKTHROUGH" }
   | { type: "BREAKTHROUGH_SUCCESS" }
   | { type: "BREAKTHROUGH_FAIL" }
   | { type: "END_GAME"; endingType: GameState["endingType"] }
+  | { type: "SET_ENDING_SUMMARY"; summary: EndingSummary }
   | { type: "SET_SECT_PATH"; sectPath: SectPath }
-  | { type: "APPLY_MODAO_PENALTY" };
+  | { type: "APPLY_MODAO_PENALTY" }
+  | { type: "HYDRATE_RUN"; state: GameState }
+  | { type: "SET_HEART_INTENT"; intent: HeartIntent }
+  | { type: "SET_STAGE_FOCUS"; focusId: FocusId }
+  | { type: "ADVANCE_STAGE" }
+  | { type: "ADD_TIMELINE"; entry: Omit<TimelineEntry, "id" | "stage" | "age"> & { id?: string; stage?: number; age?: number } }
+  | { type: "UPDATE_RELATION"; kind: RelationKind; affinity?: number; trust?: number; status?: RelationState["status"]; memory?: string; tag?: string }
+  | { type: "SET_FLAG"; key: string; value: boolean | number | string }
+  | { type: "COMMIT_LIFE" }
+  | { type: "SET_OBSESSION"; obsession: ObsessionOption }
+  | { type: "RESET_RUN" };
+
+export interface FateThreadOption {
+  text: string;
+  outcomeText: string;
+  effects: EventEffect[];
+  narrative?: {
+    axes?: Partial<Record<NarrativeAxis, number>>;
+    tags?: Array<{ id: string; label: string; strength?: number }>;
+    memory?: string;
+    threadResult?: string;
+    threadAction?: "advance" | "resolve" | "break";
+  };
+}
+
+export interface FateThreadStage {
+  description: string;
+  options: FateThreadOption[];
+}
+
+export interface FateThreadConfig {
+  id: string;
+  title: string;
+  theme: string;
+  stageTitles: string[];
+  stages: FateThreadStage[];
+}
 
 export interface GameEvent {
   id: string;
@@ -124,12 +379,47 @@ export interface GameEvent {
   title: string;
   description: string;
   options: EventOption[];
+  story?: {
+    threadId: string;
+    threadTitle: string;
+    stage: number;
+    stageCount: number;
+  };
+  condition?: EventCondition;
+  weight?: number;
+  once?: boolean;
+  cooldownStages?: number;
+  priority?: number;
+  source?: "base" | "life" | "fate";
+}
+
+export interface EventCondition {
+  minAge?: number;
+  maxAge?: number;
+  minStage?: number;
+  maxStage?: number;
+  realms?: RealmSlug[];
+  focusAny?: FocusId[];
+  axes?: Partial<Record<NarrativeAxis, { min?: number; max?: number }>>;
+  tagsAny?: string[];
+  tagsAll?: string[];
+  scarsAny?: string[];
+  relationsAny?: Array<{ kind: RelationKind; minAffinity?: number; maxAffinity?: number; minTrust?: number; maxTrust?: number; status?: RelationState["status"] }>;
+  flags?: Record<string, boolean | number | string>;
 }
 
 export interface EventOption {
   text: string;
   requires?: { itemId?: ItemId; lingshi?: number };
   effects: EventEffect[];
+  outcomeText?: string;
+  narrative?: {
+    axes?: Partial<Record<NarrativeAxis, number>>;
+    tags?: Array<{ id: string; label: string; strength?: number }>;
+    memory?: string;
+    threadResult?: string;
+    threadAction?: "advance" | "resolve" | "break";
+  };
 }
 
 export type EventEffect =
@@ -139,5 +429,8 @@ export type EventEffect =
   | { type: "injury"; level: InjuryLevel }
   | { type: "emotion"; positive?: number; negative?: number }
   | { type: "fate"; amount: number }
-  | { type: "add_enemy"; enemyId: string }
-  | { type: "trigger_karma"; karmaId: string };
+  | { type: "add_enemy"; enemyId: string; name?: string }
+  | { type: "trigger_karma"; karmaId: string }
+  | { type: "relation"; kind: RelationKind; affinity?: number; trust?: number; status?: RelationState["status"]; memory?: string; tag?: string }
+  | { type: "set_flag"; key: string; value: boolean | number | string }
+  | { type: "age"; years: number };

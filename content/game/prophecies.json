@@ -1,0 +1,10 @@
+[
+  { "id": "attachment_longevity", "title": "情字难断", "text": "你会为一个人，放弃一次长生。", "axis": "attachment" },
+  { "id": "dao_pull", "title": "道心照夜", "text": "你越说自己不求飞升，越会在无人处仰望天门。", "axis": "dao" },
+  { "id": "compassion_save", "title": "渡人自渡", "text": "你救下的人会改变你的命，而你会后悔救过他一次。", "axis": "compassion" },
+  { "id": "ambition_fall", "title": "登高见渊", "text": "你终会站到高处，也会在那里失去一个名字。", "axis": "ambition" },
+  { "id": "guile_mask", "title": "镜里藏刀", "text": "你最信任的人，会从你教他的那一步里学会背叛。", "axis": "guile" },
+  { "id": "ruthless_peace", "title": "杀尽方静", "text": "你以为杀尽阻碍就能安静，最后只剩寂静。", "axis": "ruthless" },
+  { "id": "freedom_return", "title": "远行归处", "text": "你会离开所有人一次，再为了某个人回来。", "axis": "freedom" },
+  { "id": "loyalty_tomb", "title": "守山无碑", "text": "你会替一座山守到最后，而那座山不会记住你的名字。", "axis": "loyalty" }
+]

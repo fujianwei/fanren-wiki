@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import ParticleBackground from "@/components/ParticleBackground";
 
 export const metadata: Metadata = {
-  title: "凡人修仙传·人界篇 | 人物测试与修仙模拟",
-  description: "凡人修仙传人界篇主题网站，包含人物性格测试与修仙模拟玩法。",
+  title: "凡人修仙传·人界篇 | 修仙人生模拟",
+  description: "一场从灵根、命格与选择开始的修仙人生模拟。灵根只决定起点，不决定你能走到哪里。",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,0 +1,1552 @@
+[
+  {
+    "id": "life_master_question",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "师尊问心",
+    "description": "师尊没有问你的修为，只问你最近一次真心想笑，是在什么时候。",
+    "options": [
+      {
+        "text": "如实回答：已经想不起来了",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 8
+          },
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": 3,
+            "trust": 4
+          },
+          {
+            "type": "emotion",
+            "positive": 2
+          }
+        ],
+        "outcomeText": "师尊沉默良久，把自己的旧茶盏留给了你。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "attachment": 1
+          },
+          "tags": [
+            {
+              "id": "bond.honest_master",
+              "label": "对师尊说过真话",
+              "strength": 2
+            }
+          ],
+          "memory": "你第一次承认，修行已经让你忘了许多普通人的感受。"
+        }
+      },
+      {
+        "text": "说一个体面的答案",
+        "effects": [
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": -2,
+            "trust": -4
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ],
+        "outcomeText": "师尊没有拆穿，只是从此很少再问你私事。",
+        "narrative": {
+          "axes": {
+            "guile": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 1,
+      "focusAny": [
+        "cultivate",
+        "sect"
+      ]
+    }
+  },
+  {
+    "id": "life_peer_request",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "同门求助",
+    "description": "同门抱着一只破损的储物袋来找你，说若不补上这笔亏空，他会被逐出山门。",
+    "options": [
+      {
+        "text": "替他补上，并陪他去执法堂",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -120
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 8,
+            "trust": 10
+          }
+        ],
+        "outcomeText": "他没有说谢，只在多年后替你挡下了一剑。",
+        "narrative": {
+          "axes": {
+            "loyalty": 3,
+            "compassion": 2
+          },
+          "tags": [
+            {
+              "id": "bond.peer_debt",
+              "label": "替同门担过一次责",
+              "strength": 3
+            }
+          ],
+          "memory": "你替一个同门补上了亏空。"
+        }
+      },
+      {
+        "text": "只借钱，不替他作证",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -80
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 2,
+            "trust": -3
+          }
+        ],
+        "outcomeText": "他活过了那一关，但看你的眼神多了一层距离。",
+        "narrative": {
+          "axes": {
+            "guile": 1
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 1,
+      "focusAny": [
+        "sect",
+        "bond"
+      ]
+    }
+  },
+  {
+    "id": "life_rival_challenge",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "旧怨堵门",
+    "description": "宿敌站在山门外，扬言若你不敢应战，就把你当年的事讲给所有新弟子听。",
+    "options": [
+      {
+        "text": "当众应战，不留退路",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "relation",
+            "kind": "rival",
+            "affinity": 10,
+            "trust": 2
+          }
+        ],
+        "outcomeText": "你赢了半步，也失去了半年的修行。",
+        "narrative": {
+          "axes": {
+            "ruthless": 2,
+            "ambition": 2
+          },
+          "tags": [
+            {
+              "id": "deed.public_duel",
+              "label": "与宿敌当众一战",
+              "strength": 2
+            }
+          ],
+          "memory": "山门外那一战，让所有人记住了你。"
+        }
+      },
+      {
+        "text": "不接战，用一次人情换他闭嘴",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -180
+          },
+          {
+            "type": "relation",
+            "kind": "rival",
+            "affinity": 5,
+            "trust": -2
+          }
+        ],
+        "outcomeText": "他收了灵石，却笑得更冷。",
+        "narrative": {
+          "axes": {
+            "guile": 3
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "relationsAny": [
+        {
+          "kind": "rival",
+          "maxAffinity": -20
+        }
+      ]
+    }
+  },
+  {
+    "id": "life_family_letter",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "故乡来信",
+    "description": "凡人亲族托人捎来一封信，说家中老屋漏水，母亲近来常常忘记你的名字。",
+    "options": [
+      {
+        "text": "回去住一段时间",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": -6
+          },
+          {
+            "type": "relation",
+            "kind": "kin",
+            "affinity": 10,
+            "trust": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 6
+          }
+        ],
+        "outcomeText": "你在老屋住了三个月，离开时母亲又把你的名字忘了。",
+        "narrative": {
+          "axes": {
+            "attachment": 4,
+            "compassion": 2
+          },
+          "tags": [
+            {
+              "id": "bond.returned_home",
+              "label": "在亲族老去前回过家",
+              "strength": 3
+            }
+          ],
+          "memory": "你回过一次故乡，那时母亲已经快记不得你了。"
+        }
+      },
+      {
+        "text": "寄钱回去，继续闭关",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -90
+          },
+          {
+            "type": "relation",
+            "kind": "kin",
+            "affinity": -3
+          },
+          {
+            "type": "emotion",
+            "negative": 4
+          }
+        ],
+        "outcomeText": "信被你压在书案下，很久没有拆第二遍。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "attachment": -2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "cultivate",
+        "bond",
+        "heal"
+      ]
+    }
+  },
+  {
+    "id": "life_furnace_crack",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "丹炉生纹",
+    "description": "丹炉内壁裂开一道细纹，炉中那枚丹药已到成败边缘。",
+    "options": [
+      {
+        "text": "稳住火候，花时间慢慢收丹",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -140
+          },
+          {
+            "type": "item",
+            "itemId": "juqi_dan",
+            "count": 1
+          },
+          {
+            "type": "xp",
+            "amount": 5
+          }
+        ],
+        "outcomeText": "丹成时炉身裂成两半，但药香极稳。",
+        "narrative": {
+          "axes": {
+            "dao": 2
+          }
+        }
+      },
+      {
+        "text": "催火抢丹，赌它不会炸",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ],
+        "outcomeText": "炉火照亮整间石室。成与不成，都在一瞬。",
+        "narrative": {
+          "axes": {
+            "ambition": 3,
+            "ruthless": 1
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 1,
+      "focusAny": [
+        "craft"
+      ]
+    }
+  },
+  {
+    "id": "life_secret_realm",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "秘境名额",
+    "description": "宗门只分到一个秘境名额。执事暗示，若你愿意替他处理一份旧账，这个名额可以归你。",
+    "options": [
+      {
+        "text": "接下旧账，换取名额",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": -4
+          },
+          {
+            "type": "set_flag",
+            "key": "sect_debt",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你走进秘境时，背后多了一双不肯闭上的眼睛。",
+        "narrative": {
+          "axes": {
+            "guile": 3,
+            "ambition": 2
+          },
+          "tags": [
+            {
+              "id": "scar.sect_debt",
+              "label": "为名额接过一桩旧账",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾为一个秘境名额，替人压下过一桩旧事。"
+        }
+      },
+      {
+        "text": "放弃名额，公开质疑分配",
+        "effects": [
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": -6
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 8
+          },
+          {
+            "type": "emotion",
+            "positive": 2
+          }
+        ],
+        "outcomeText": "你失去了机缘，却意外得到不少同门的敬意。",
+        "narrative": {
+          "axes": {
+            "loyalty": 3,
+            "compassion": 2
+          },
+          "tags": [
+            {
+              "id": "title.principled",
+              "label": "不肯吃暗亏的人",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾当众拒绝过一次不干净的分配。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "sect",
+        "roam"
+      ]
+    }
+  },
+  {
+    "id": "life_sea_map",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "潮汐海图",
+    "description": "坊市里有人兜售半张海图，说是乱星海外围的旧航路。卖家不保证它能带你回来。",
+    "options": [
+      {
+        "text": "买下海图，开始筹备远行",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -220
+          },
+          {
+            "type": "set_flag",
+            "key": "sea_map",
+            "value": 1
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          }
+        ],
+        "outcomeText": "你把海图展开，看见一条没有归途标记的线。",
+        "narrative": {
+          "axes": {
+            "freedom": 3,
+            "ambition": 2
+          },
+          "tags": [
+            {
+              "id": "deed.sea_map",
+              "label": "得到一张乱星海旧图",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾把半张乱星海旧图藏在洞府石壁里。"
+        }
+      },
+      {
+        "text": "记住卖家模样，转身离开",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 1
+          }
+        ],
+        "outcomeText": "你走出坊市时，听见身后有人收起摊子。",
+        "narrative": {
+          "axes": {
+            "guile": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "roam",
+        "craft"
+      ],
+      "minAge": 24
+    }
+  },
+  {
+    "id": "life_black_market",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "黑市禁书",
+    "description": "黑市摊主把一册无字书推到你面前，说只要一滴血，就能看见别人不肯教的法门。",
+    "options": [
+      {
+        "text": "买下，只看不练",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -160
+          },
+          {
+            "type": "set_flag",
+            "key": "forbidden_book",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你把书藏在床下，此后每晚都觉得洞府里多了一个人的呼吸。",
+        "narrative": {
+          "axes": {
+            "guile": 3,
+            "dao": -1
+          },
+          "tags": [
+            {
+              "id": "scar.forbidden_book",
+              "label": "藏有一册禁书",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾买下一册无字禁书。"
+        }
+      },
+      {
+        "text": "记下条文，当场烧掉",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 2
+          },
+          {
+            "type": "xp",
+            "amount": 4
+          },
+          {
+            "type": "emotion",
+            "negative": 2
+          }
+        ],
+        "outcomeText": "火光里，你记住了第一页，也记住了摊主的脸。",
+        "narrative": {
+          "axes": {
+            "dao": 3
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "craft",
+        "roam"
+      ]
+    }
+  },
+  {
+    "id": "life_sect_call",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "山门征召",
+    "description": "边地传来警讯，宗门召集弟子前往守城。执事说这不是强制，但每个人都知道谁会先被记住。",
+    "options": [
+      {
+        "text": "主动请行",
+        "effects": [
+          {
+            "type": "injury",
+            "level": "light"
+          },
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": 8,
+            "trust": 7
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "set_flag",
+            "key": "war_merit",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你在城头守了七天，回来时山门敲了钟。",
+        "narrative": {
+          "axes": {
+            "loyalty": 4,
+            "compassion": 3
+          },
+          "tags": [
+            {
+              "id": "deed.border_war",
+              "label": "在边地守过城",
+              "strength": 3
+            }
+          ],
+          "memory": "你曾在边城守过七天七夜。"
+        }
+      },
+      {
+        "text": "称病留在山中",
+        "effects": [
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": -5,
+            "trust": -5
+          },
+          {
+            "type": "xp",
+            "amount": 6
+          }
+        ],
+        "outcomeText": "你的修为涨了，山门里却少了几张熟悉的脸。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "loyalty": -2
+          },
+          "tags": [
+            {
+              "id": "scar.missed_war",
+              "label": "山门征召时留在山中",
+              "strength": 2
+            }
+          ],
+          "memory": "征召那一年，你留在山中闭关。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 3,
+      "focusAny": [
+        "sect",
+        "cultivate"
+      ]
+    }
+  },
+  {
+    "id": "life_village_famine",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "山下荒年",
+    "description": "山下村庄遭了灾，村民把最后一点粮食送到山门，只求有人替他们去查看水源。",
+    "options": [
+      {
+        "text": "亲自下山，替他们找水",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": -4
+          },
+          {
+            "type": "fate",
+            "amount": 5
+          },
+          {
+            "type": "relation",
+            "kind": "kin",
+            "affinity": 6
+          },
+          {
+            "type": "set_flag",
+            "key": "village_saved",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你带回一条地下水脉，村庄在后山给你立了一块没有名字的石碑。",
+        "narrative": {
+          "axes": {
+            "compassion": 5,
+            "loyalty": 2
+          },
+          "tags": [
+            {
+              "id": "deed.saved_village",
+              "label": "救过一座村庄",
+              "strength": 3
+            }
+          ],
+          "memory": "荒年里，你替一座村庄找到水。"
+        }
+      },
+      {
+        "text": "送去一些灵石，不多停留",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -60
+          },
+          {
+            "type": "relation",
+            "kind": "kin",
+            "affinity": 2
+          }
+        ],
+        "outcomeText": "你尽了力，但没有回头看那些人的眼睛。",
+        "narrative": {
+          "axes": {
+            "compassion": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 3,
+      "focusAny": [
+        "bond",
+        "roam",
+        "sect"
+      ]
+    }
+  },
+  {
+    "id": "life_heart_demon",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "夜半心魔",
+    "description": "闭关至深夜，你听见自己的声音在问：若这一生终究无人记得，你还修什么道？",
+    "options": [
+      {
+        "text": "承认恐惧，停下这一次突破",
+        "effects": [
+          {
+            "type": "emotion",
+            "negative": -3,
+            "positive": 2
+          },
+          {
+            "type": "xp",
+            "amount": 5
+          }
+        ],
+        "outcomeText": "你没有冲过去，却在第二天看见窗外新开的花。",
+        "narrative": {
+          "axes": {
+            "dao": 3,
+            "freedom": 2
+          },
+          "tags": [
+            {
+              "id": "trait.accepted_fear",
+              "label": "承认过自己的恐惧",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾在心魔前停下来。"
+        }
+      },
+      {
+        "text": "以更强执念压过去",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 10
+          },
+          {
+            "type": "emotion",
+            "negative": 5
+          },
+          {
+            "type": "fate",
+            "amount": 3
+          }
+        ],
+        "outcomeText": "你赢了这一夜，也把另一样东西关进了心里。",
+        "narrative": {
+          "axes": {
+            "ambition": 4,
+            "ruthless": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 3,
+      "focusAny": [
+        "cultivate",
+        "heal"
+      ]
+    }
+  },
+  {
+    "id": "life_old_wound",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "旧伤入骨",
+    "description": "多年旧伤在潮雨里发作，连吐纳都带着血腥味。药王谷的人说，有两种治法令。",
+    "options": [
+      {
+        "text": "慢慢养，接受修为停滞",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": -5
+          },
+          {
+            "type": "injury",
+            "level": "none"
+          },
+          {
+            "type": "emotion",
+            "positive": 3
+          }
+        ],
+        "outcomeText": "你花了很久才重新站稳。那几年没有机缘，但也没有再受伤。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "freedom": 2
+          }
+        }
+      },
+      {
+        "text": "用虎狼药强压伤势",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 8
+          },
+          {
+            "type": "emotion",
+            "negative": 4
+          },
+          {
+            "type": "set_flag",
+            "key": "wound_roots",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你重新握住了剑，手腕里却像藏着一根钉子。",
+        "narrative": {
+          "axes": {
+            "ambition": 3,
+            "ruthless": 1
+          },
+          "tags": [
+            {
+              "id": "scar.harsh_cure",
+              "label": "用猛药压过旧伤",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾用猛药强压旧伤。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 4,
+      "minAge": 35
+    }
+  },
+  {
+    "id": "life_lonely_rain",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "独行夜雨",
+    "description": "你在一座陌生小城的客栈里听雨。隔壁桌的修士谈论着某个你曾经认识的人。",
+    "options": [
+      {
+        "text": "推门去问那个人的下落",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 4
+          },
+          {
+            "type": "xp",
+            "amount": -2
+          }
+        ],
+        "outcomeText": "你追着一条旧消息走了很远，最后只看见一座没有名字的坟。",
+        "narrative": {
+          "axes": {
+            "attachment": 4,
+            "freedom": -1
+          },
+          "tags": [
+            {
+              "id": "bond.chased_old_news",
+              "label": "追过一条旧人的消息",
+              "strength": 2
+            }
+          ],
+          "memory": "你在雨夜里追过一个旧人的名字。"
+        }
+      },
+      {
+        "text": "把茶喝完，明天继续赶路",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 5
+          },
+          {
+            "type": "emotion",
+            "positive": 2
+          }
+        ],
+        "outcomeText": "雨停时，你已经忘了那个人的名字。",
+        "narrative": {
+          "axes": {
+            "freedom": 4,
+            "attachment": -2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "roam"
+      ]
+    }
+  },
+  {
+    "id": "life_friend_wedding",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "旧友来信",
+    "description": "多年不联络的道友寄来一张婚宴请帖，落款处仍然是当年那个难看的字。",
+    "options": [
+      {
+        "text": "放下修炼，去赴宴",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": -5
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 9,
+            "trust": 7
+          },
+          {
+            "type": "emotion",
+            "positive": 5
+          }
+        ],
+        "outcomeText": "你在席间喝醉了，第二天醒来时，朋友替你把剑擦得很亮。",
+        "narrative": {
+          "axes": {
+            "attachment": 3,
+            "loyalty": 3
+          },
+          "tags": [
+            {
+              "id": "bond.old_friend_wedding",
+              "label": "赴过旧友的婚宴",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾为一场旧友婚宴放下修炼。"
+        }
+      },
+      {
+        "text": "托人送礼，不亲自去",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -70
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 1,
+            "trust": -1
+          }
+        ],
+        "outcomeText": "礼送到了，人没到。你后来听说那场婚礼办得很热闹。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "attachment": -1
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 2,
+      "focusAny": [
+        "bond",
+        "sect"
+      ]
+    }
+  },
+  {
+    "id": "life_old_teacher",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "旧师传召",
+    "description": "师尊已经很多年没有主动召见你。这一次，他让你带上自己最得意的功法。",
+    "options": [
+      {
+        "text": "如实交出功法，听师尊评点",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 7
+          },
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": 7,
+            "trust": 8
+          }
+        ],
+        "outcomeText": "师尊只说了一句：你没有走偏。",
+        "narrative": {
+          "axes": {
+            "dao": 3,
+            "loyalty": 2
+          },
+          "tags": [
+            {
+              "id": "bond.master_affirmed",
+              "label": "得到师尊亲口认可",
+              "strength": 3
+            }
+          ],
+          "memory": "师尊曾亲口说你没有走偏。"
+        }
+      },
+      {
+        "text": "只交一半，留下后手",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "relation",
+            "kind": "master",
+            "affinity": -3,
+            "trust": -5
+          }
+        ],
+        "outcomeText": "师尊翻到最后一页时停了很久，没有抬头。",
+        "narrative": {
+          "axes": {
+            "guile": 3
+          },
+          "tags": [
+            {
+              "id": "scar.hid_from_master",
+              "label": "对师尊留过一手",
+              "strength": 2
+            }
+          ],
+          "memory": "你曾对最敬重的人留过一手。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 3,
+      "relationsAny": [
+        {
+          "kind": "master",
+          "minTrust": 20
+        }
+      ]
+    }
+  },
+  {
+    "id": "life_disciple",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "雪夜叩门",
+    "description": "一个衣衫单薄的少年在洞府外跪了整夜，说自己没有灵根，却想学剑。",
+    "options": [
+      {
+        "text": "收下他，从砍柴开始教",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": -6
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 8,
+            "trust": 8,
+            "tag": "门下记名弟子"
+          },
+          {
+            "type": "emotion",
+            "positive": 5
+          },
+          {
+            "type": "set_flag",
+            "key": "disciple",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你没有给他灵根，只给了他一把木剑。多年后，这把剑挂在山门正堂。",
+        "narrative": {
+          "axes": {
+            "compassion": 4,
+            "loyalty": 4
+          },
+          "tags": [
+            {
+              "id": "title.took_disciple",
+              "label": "收下过一个没有灵根的弟子",
+              "strength": 3
+            }
+          ],
+          "memory": "雪夜里，你收下过一个没有灵根的少年。"
+        }
+      },
+      {
+        "text": "给他一笔钱，让他下山",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -50
+          },
+          {
+            "type": "fate",
+            "amount": 2
+          }
+        ],
+        "outcomeText": "他叩了三个头，走进雪里。后来你偶尔会想起那双眼睛。",
+        "narrative": {
+          "axes": {
+            "attachment": 1,
+            "compassion": 1
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 5,
+      "minAge": 50
+    }
+  },
+  {
+    "id": "life_sea_voyage",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "乱星海·起航",
+    "description": "海图指向一片没有宗门庇护的海域。你可以继续等，也可以趁寿元尚足去看一眼。",
+    "options": [
+      {
+        "text": "散尽部分积蓄，独自出海",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -260
+          },
+          {
+            "type": "fate",
+            "amount": 8
+          },
+          {
+            "type": "set_flag",
+            "key": "voyaged",
+            "value": 1
+          },
+          {
+            "type": "injury",
+            "level": "light"
+          }
+        ],
+        "outcomeText": "船离岸时，你第一次感到自己不是在逃，而是在选。",
+        "narrative": {
+          "axes": {
+            "freedom": 5,
+            "ambition": 3
+          },
+          "tags": [
+            {
+              "id": "deed.went_to_sea",
+              "label": "曾向乱星海出海",
+              "strength": 3
+            }
+          ],
+          "memory": "你曾独自驶向乱星海。"
+        }
+      },
+      {
+        "text": "不去。把海图锁进石匣",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 4
+          },
+          {
+            "type": "emotion",
+            "positive": 1
+          }
+        ],
+        "outcomeText": "你把海图锁好，继续过山中的日子。每年雨季，石匣里都会传出一点潮声。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "freedom": -2
+          },
+          "tags": [
+            {
+              "id": "regret.sea_map_unused",
+              "label": "一辈子没有打开的海图",
+              "strength": 3
+            }
+          ],
+          "memory": "有一张海图，你一辈子没有打开。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 4,
+      "minAge": 40,
+      "flags": {
+        "sea_map": 1
+      }
+    }
+  },
+  {
+    "id": "life_sea_return",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "乱星海·归来",
+    "description": "多年后，一艘没有旗号的船靠岸。船上的人说，海外有一座岛，岛主曾提过你的名字。",
+    "options": [
+      {
+        "text": "循着消息再出海一次",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 10
+          },
+          {
+            "type": "injury",
+            "level": "heavy"
+          },
+          {
+            "type": "set_flag",
+            "key": "sea_returned",
+            "value": 1
+          },
+          {
+            "type": "xp",
+            "amount": 12
+          }
+        ],
+        "outcomeText": "你没有找到那座岛，却带回了一枚不属于人界的贝壳。",
+        "narrative": {
+          "axes": {
+            "freedom": 5,
+            "attachment": 2
+          },
+          "tags": [
+            {
+              "id": "deed.returned_from_sea",
+              "label": "从乱星海活着回来",
+              "strength": 4
+            }
+          ],
+          "memory": "你从乱星海活着回来，带回了一枚不属于人界的贝壳。"
+        }
+      },
+      {
+        "text": "留在岸上，等对方来见你",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "emotion",
+            "positive": 2
+          }
+        ],
+        "outcomeText": "船开走了。你每天傍晚都去岸边坐一会儿，直到那座岛的消息再也没有传来。",
+        "narrative": {
+          "axes": {
+            "attachment": 3,
+            "dao": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 5,
+      "minAge": 50,
+      "flags": {
+        "voyaged": 1
+      }
+    }
+  },
+  {
+    "id": "life_sea_storm",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "乱星海·黑潮",
+    "description": "黑色潮水从海平线压来，船上所有人都被要求把最重的东西丢进海里。",
+    "options": [
+      {
+        "text": "丢掉灵石，保住船和人",
+        "effects": [
+          {
+            "type": "lingshi",
+            "amount": -300
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": 6
+          },
+          {
+            "type": "set_flag",
+            "key": "sea_crew_saved",
+            "value": 1
+          }
+        ],
+        "outcomeText": "你活着回到甲板上，船舱里只剩足够撑到下个港口的粮食。",
+        "narrative": {
+          "axes": {
+            "compassion": 3,
+            "loyalty": 3
+          },
+          "tags": [
+            {
+              "id": "deed.sea_saved_crew",
+              "label": "在黑潮里保住一船人",
+              "strength": 3
+            }
+          ],
+          "memory": "黑潮来临时，你丢掉灵石，保住了一船人。"
+        }
+      },
+      {
+        "text": "留下灵石，砍断拖累船速的缆绳",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 6
+          },
+          {
+            "type": "relation",
+            "kind": "peer",
+            "affinity": -12
+          },
+          {
+            "type": "set_flag",
+            "key": "sea_crew_lost",
+            "value": 1
+          }
+        ],
+        "outcomeText": "船冲出了黑潮。你没有回头看那些断掉的绳子。",
+        "narrative": {
+          "axes": {
+            "ruthless": 4,
+            "guile": 2
+          },
+          "tags": [
+            {
+              "id": "scar.sea_crew_lost",
+              "label": "在黑潮中割断过别人的绳子",
+              "strength": 4
+            }
+          ],
+          "memory": "黑潮里，你割断过一根绳子。"
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 5,
+      "flags": {
+        "voyaged": 1
+      }
+    }
+  },
+  {
+    "id": "life_quiet_years",
+    "realmSlug": "lianqi",
+    "type": "active",
+    "category": "normal",
+    "title": "山中无大事",
+    "description": "这一年没有秘境，没有仇家，也没有值得写进史书的机缘。只有春草、旧书和偶尔来访的人。",
+    "options": [
+      {
+        "text": "把日子过完",
+        "effects": [
+          {
+            "type": "xp",
+            "amount": 3
+          },
+          {
+            "type": "emotion",
+            "positive": 4
+          },
+          {
+            "type": "relation",
+            "kind": "kin",
+            "affinity": 3
+          }
+        ],
+        "outcomeText": "你后来想起这一年，发现记住的全是不重要的小事。",
+        "narrative": {
+          "axes": {
+            "dao": 2,
+            "attachment": 2
+          },
+          "tags": [
+            {
+              "id": "memory.quiet_year",
+              "label": "记得一个没有大事的春天",
+              "strength": 2
+            }
+          ],
+          "memory": "有一年什么也没发生，你却记了很久。"
+        }
+      },
+      {
+        "text": "不甘心，强行寻找机缘",
+        "effects": [
+          {
+            "type": "fate",
+            "amount": 3
+          },
+          {
+            "type": "emotion",
+            "negative": 2
+          }
+        ],
+        "outcomeText": "你在山里转了七天，只找到一块长得像人脸的石头。",
+        "narrative": {
+          "axes": {
+            "ambition": 2,
+            "freedom": 2
+          }
+        }
+      }
+    ],
+    "source": "life",
+    "weight": 10,
+    "priority": 0,
+    "once": false,
+    "condition": {
+      "minStage": 3,
+      "focusAny": [
+        "heal",
+        "bond"
+      ],
+      "weight": 6
+    }
+  }
+]

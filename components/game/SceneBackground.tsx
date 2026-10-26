@@ -34,8 +34,7 @@ export default function SceneBackground({ eventId, realmSlug }: Props) {
       if (!cancelled) setSrc(null);
     }
 
-    setSrc(null);
-    tryLoad();
+    void tryLoad();
     return () => { cancelled = true; };
   }, [eventId, realmSlug]);
 

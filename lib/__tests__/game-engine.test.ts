@@ -14,7 +14,7 @@ describe("getSpiritRoot", () => {
   it("fortune=95 -> 天灵根", () => {
     const r = getSpiritRoot(95);
     expect(r.type).toBe("tianling");
-    expect(r.cultivationMult).toBe(2.0);
+    expect(r.cultivationMult).toBe(1.3);
   });
   it("fortune=85 -> 双灵根", () => {
     expect(getSpiritRoot(85).type).toBe("shuang");
@@ -49,15 +49,15 @@ describe("calcXpGain", () => {
   it("三灵根普通事件+10", () => {
     expect(calcXpGain(10, 1.0)).toBe(10);
   });
-  it("天灵根普通事件+20", () => {
-    expect(calcXpGain(10, 2.0)).toBe(20);
+  it("天灵根普通事件+13", () => {
+    expect(calcXpGain(10, 1.3)).toBe(13);
   });
-  it("伪灵根普通事件+5", () => {
-    expect(calcXpGain(10, 0.5)).toBe(5);
+  it("伪灵根普通事件+9", () => {
+    expect(calcXpGain(10, 0.85)).toBe(9);
   });
   it("不超过100 cap", () => {
     // currentXp=95, gain=20 -> would be 115, but capped at 100, so actual gain=5
-    const gain = calcXpGain(10, 2.0, 95);
+    const gain = calcXpGain(10, 1.3, 95);
     expect(gain).toBe(5);
   });
   it("已满修为gain=0", () => {
@@ -319,7 +319,6 @@ describe("calcRetreatXp", () => {
     expect(result).toBe(Math.round(5 * 0.5));
   });
   it("聚灵阵+10%", () => {
-    const base = calcRetreatXp("lianqi", "short", 1.0, 0);
     const withArray = calcRetreatXp("lianqi", "short", 1.0, 0.10);
     expect(withArray).toBe(Math.round(5 * 1.0 * 1.10));
   });

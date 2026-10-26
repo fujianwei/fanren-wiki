@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useGame } from "@/components/game/GameProvider";
 import { getSpiritRoot } from "@/lib/game/engine";
+import { buildThreeLifeMirror } from "@/lib/game/mirror";
+import { AXIS_LABELS } from "@/lib/game/narrative";
 import type { SpiritRoot } from "@/types/game";
 
 interface Props {
@@ -146,6 +150,8 @@ function BlueFlame() {
 }
 
 export default function SpiritRootGate({ onComplete }: Props) {
+  const { state } = useGame();
+  const router = useRouter();
   const [phase, setPhase] = useState<"spinning" | "revealed">("spinning");
   const [cycles, setCycles] = useState(0);
   const [fortune, setFortune] = useState(0);
@@ -233,7 +239,38 @@ export default function SpiritRootGate({ onComplete }: Props) {
               <p className="text-xs mt-1" style={{ color: "#6a8878" }}>{root.desc}</p>
             </div>
 
-            <button onClick={handleStart} className="btn-primary">
+            <div className="rounded-xl px-4 py-3 text-center" style={{ backgroundColor: "#0e1610", border: "1px solid #1a2820" }}>
+              <p className="text-[10px] leading-relaxed" style={{ color: "#6a8878" }}>
+                灵根决定起步快慢与擅长的路，不封死秘境、禁术、乱星海与飞升。此后能走多远，交给选择。
+              </p>
+            </div>
+
+            {state.phase === "playing" && (
+              <button onClick={() => router.push("/game/play")} className="btn-secondary w-full">
+                继续第 {state.lifeNumber} 世 · {state.age}岁
+              </button>
+            )}
+
+            {(() => {
+              const mirror = buildThreeLifeMirror(state.meta.lives);
+              return mirror ? (
+                <div className="w-full rounded-xl px-4 py-4 text-left" style={{ backgroundColor: "#101915", border: "1px solid #26352d" }}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-[10px]" style={{ color: "#d4a843" }}>三生镜 · 前 {Math.min(3, state.meta.lives.length)} 世</div>
+                    <div className="text-[9px]" style={{ color: "#4a6a58" }}>{mirror.selectionBias}</div>
+                  </div>
+                  <p className="font-serif text-sm leading-6 mb-1" style={{ color: "#e8f0ec" }}>{mirror.headline}</p>
+                  <p className="text-[10px] leading-relaxed" style={{ color: "#6a8878" }}>{mirror.insight}</p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {Object.entries(mirror.axisCounts).sort((a,b)=>b[1]-a[1]).map(([axis,count]) => (
+                      <span key={axis} className="text-[9px] px-2 py-0.5 rounded-full" style={{ color: "#d4a843", backgroundColor: "#16140a" }}>{AXIS_LABELS[axis as keyof typeof AXIS_LABELS]} ×{count}</span>
+                    ))}
+                  </div>
+                </div>
+              ) : null;
+            })()}
+
+            <button onClick={handleStart} className="btn-primary w-full">
               踏入修仙之路
             </button>
 

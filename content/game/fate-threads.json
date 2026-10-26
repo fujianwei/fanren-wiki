@@ -1,0 +1,524 @@
+[
+  {
+    "id": "wanderer_debt",
+    "title": "雨夜旧恩",
+    "theme": "恩义与偿还",
+    "stageTitles": ["山道上的血", "旧人携礼而来", "一命如何两清"],
+    "stages": [
+      {
+        "description": "雨后的山道积着碎叶。一个散修靠在石壁下，胸口有三道未愈的剑伤，仍死死护着储物袋。他看见你，没有求救，只问附近可有水源。",
+        "options": [
+          { "text": "替他护法疗伤，不问来历", "outcomeText": "你耗去半瓶伤药。天亮时，他只留下半枚旧玉和一句“此恩会还”，便走进雾里。", "effects": [{ "type": "lingshi", "amount": -80 }, { "type": "fate", "amount": 3 }], "narrative": { "axes": { "compassion": 3, "loyalty": 1 }, "tags": [{ "id": "deed.saved_wanderer", "label": "救过一名散修", "strength": 2 }], "memory": "雨夜里，你救下一个不知姓名的散修。" } },
+          { "text": "先问价，再决定是否出手", "outcomeText": "他沉默片刻，把储物袋里唯一一枚灵石推给你。你收了灵石，也替他止住了血。", "effects": [{ "type": "lingshi", "amount": 120 }], "narrative": { "axes": { "guile": 2, "ambition": 1 }, "tags": [{ "id": "deed.bargained_wanderer", "label": "与人做过一笔冷交易", "strength": 1 }], "memory": "你曾向一个垂死的人先问价。" } }
+        ]
+      },
+      {
+        "description": "多年后，你在坊市听见有人提起半枚旧玉。一个已经筑基的修士寻到你，递上一只木匣。他说当年那条命，今日终于有机会还。",
+        "options": [
+          { "text": "收下木匣，把旧事揭过", "outcomeText": "匣中是一枚筑基丹。他向你行了一礼，从此两不相欠。", "effects": [{ "type": "item", "itemId": "zhuji_dan", "count": 1 }, { "type": "fate", "amount": 5 }], "narrative": { "axes": { "compassion": 2, "freedom": 0 }, "tags": [{ "id": "bond.old_debt_paid", "label": "旧恩已偿", "strength": 2 }], "memory": "旧玉换成一枚筑基丹，你没有问它值不值得。" } },
+          { "text": "把匣推回去，请他护你一次", "outcomeText": "他愣了很久，最后答应。你们没有立誓，但这句话此后比灵石更重。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "loyalty": 3, "attachment": 1 }, "tags": [{ "id": "bond.wanderer_ally", "label": "与旧散修结为盟友", "strength": 2 }], "memory": "你没有要谢礼，只要了一次并肩的机会。" } }
+        ]
+      },
+      {
+        "description": "你冲关前夜，那名散修满身是血地找上门。他曾替你挡过一次暗算，如今被仇家围在山下。远处灯火连成一线，正在往山上搜。",
+        "options": [
+          { "text": "下山替他断后", "outcomeText": "你把追兵引向相反的方向。三日后你回到洞府，衣袍上全是别人的血，却再也没有见过他。", "effects": [{ "type": "injury", "level": "heavy" }, { "type": "fate", "amount": 12 }], "narrative": { "axes": { "compassion": 5, "loyalty": 4 }, "tags": [{ "id": "deed.saved_ally_life", "label": "以命还过一命", "strength": 3 }], "memory": "你曾为一个旧人，把追兵引向自己。" } },
+          { "text": "闭门不见，守住冲关机缘", "outcomeText": "山下的声音响了一夜。第二日，你在门槛外捡到那半枚旧玉，裂纹已经贯到底。", "effects": [{ "type": "fate", "amount": -8 }], "narrative": { "axes": { "dao": 2, "attachment": -3 }, "tags": [{ "id": "scar.abandoned_ally", "label": "弃旧人于门外", "strength": 3 }], "memory": "冲关前夜，你听见旧人在山下呼救，却没有开门。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "beast_bond",
+    "title": "山中有灵",
+    "theme": "灵兽与共生",
+    "stageTitles": ["兽夹中的幼崽", "山野旧识", "兽潮同命"],
+    "stages": [
+      {
+        "description": "猎户的兽夹夹住了一只灰白幼兽。它没有叫，只把前爪压在身下，眼睛一直盯着山雾深处。血气引来了第一只乌鸦。",
+        "options": [
+          { "text": "掰开兽夹，放它回山", "outcomeText": "幼兽一瘸一拐地走了几步，又回头看你。此后每次入山，你总觉得有什么远远跟着。", "effects": [{ "type": "fate", "amount": 3 }], "narrative": { "axes": { "compassion": 2, "freedom": 1 }, "tags": [{ "id": "bond.beast_unknown", "label": "山中灵兽记得你", "strength": 1 }], "memory": "你掰开兽夹，放走了一只灰白幼兽。" } },
+          { "text": "取出妖丹，趁它还活着", "outcomeText": "妖丹只有豆粒大小，却足够换十日修行。幼兽至死都没有叫。当夜，山里的兽声停得很早。", "effects": [{ "type": "lingshi", "amount": 160 }, { "type": "xp", "amount": 6 }], "narrative": { "axes": { "ruthless": 2, "ambition": 1 }, "tags": [{ "id": "scar.killed_beast_young", "label": "取过幼兽妖丹", "strength": 2 }], "memory": "你用一只幼兽的命，换了十日修行。" } }
+        ]
+      },
+      {
+        "description": "一只灰白色的灵兽在洞府外等你。它已经长到半人高，前爪有旧伤，嘴里衔着一株百年灵草。它放下灵草，又谨慎地退开三步。",
+        "options": [
+          { "text": "收下灵草，为它疗旧伤", "outcomeText": "它没有靠近，只在你收手后低低叫了一声。之后每当你闭关，洞口总有一串新的兽爪印。", "effects": [{ "type": "lingshi", "amount": 300 }, { "type": "fate", "amount": 4 }], "narrative": { "axes": { "compassion": 2, "loyalty": 2 }, "tags": [{ "id": "bond.beast_friend", "label": "与山中灵兽结缘", "strength": 2 }], "memory": "一只灰白灵兽曾衔灵草来换你一次疗伤。" } },
+          { "text": "布阵擒下，炼为护山灵兽", "outcomeText": "它挣断了一条腿，终于在阵中伏下。从此洞府多了一道守门的身影，却再没有主动靠近过你。", "effects": [{ "type": "fate", "amount": -3 }], "narrative": { "axes": { "ambition": 2, "guile": 2 }, "tags": [{ "id": "bond.captive_beast", "label": "以阵法拘住灵兽", "strength": 2 }], "memory": "你用阵法留住了一只本可以自由来去的灵兽。" } }
+        ]
+      },
+      {
+        "description": "兽潮越过三道山脊，宗门弟子已经退到内门。那只灰白灵兽站在兽群最前方，隔着雨幕看你。它的旧伤在发光，像是给整个兽群引路。",
+        "options": [
+          { "text": "散去护山阵，放兽群过境", "outcomeText": "兽群绕开凡人村落，直奔灵脉深处。宗门震怒，你却在那天夜里听见洞府外传来一声很轻的兽鸣。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "compassion": 4, "freedom": 3 }, "tags": [{ "id": "deed.beast_path_saved", "label": "为兽群让出一条生路", "strength": 3 }], "memory": "兽潮过境时，你亲手打开了护山阵。" } },
+          { "text": "守住山门，与兽群决战", "outcomeText": "灵兽没有冲向你。它被阵光贯穿，倒下时仍朝你这边望着。兽潮退去，山门保住了。", "effects": [{ "type": "injury", "level": "heavy" }, { "type": "fate", "amount": 4 }], "narrative": { "axes": { "loyalty": 3, "ruthless": 2 }, "tags": [{ "id": "scar.killed_beast_friend", "label": "亲手断送旧兽", "strength": 3 }], "memory": "你守住了山门，也亲手断送了一只旧兽。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ancient_tomb",
+    "title": "无主古墓",
+    "theme": "传承与代价",
+    "stageTitles": ["裂缝里的旧图", "同道入墓", "墓主最后一线神念"],
+    "stages": [
+      {
+        "description": "山洪冲开一座无名古墓，石缝里散出极淡的檀香。半张兽皮地图卡在墓门上，边角被香灰烫出几个洞。",
+        "options": [
+          { "text": "拓下地图，不惊动墓门", "outcomeText": "你回到洞府才发现，拓印背面多了一行不属于你的字：来者自负其果。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "guile": 2, "dao": 1 }, "tags": [{ "id": "secret.ancient_map", "label": "持有古墓残图", "strength": 2 }], "memory": "你带走了一张无名古墓的残图。" } },
+          { "text": "把消息卖给坊市，换现成灵石", "outcomeText": "来买消息的人不少，出价最高的那位没有留下姓名。三日后，古墓外多了十几具尸体。", "effects": [{ "type": "lingshi", "amount": 300 }], "narrative": { "axes": { "guile": 3, "attachment": -1 }, "tags": [{ "id": "deed.sold_ancient_map", "label": "卖过古墓消息", "strength": 2 }], "memory": "你曾把一座古墓的位置卖给出价最高的人。" } }
+        ]
+      },
+      {
+        "description": "墓门开启时，七八名散修已经等在石阶下。残图只够找到入口，里面真正的禁制没人认得。有人提议结盟，也有人已经把法器藏在袖中。",
+        "options": [
+          { "text": "与众人订下同进同退之约", "outcomeText": "你们在墓门前立誓。禁制破开后，活着走出来的只剩三人，但没有人先对同伴出手。", "effects": [{ "type": "fate", "amount": 5 }], "narrative": { "axes": { "loyalty": 3, "compassion": 1 }, "tags": [{ "id": "bond.tomb_oath", "label": "古墓同进同退之约", "strength": 2 }], "memory": "你曾在古墓前与人立下同进同退之约。" } },
+          { "text": "趁众人破阵，独自潜入主墓", "outcomeText": "你拿到了最完整的传承，也听见身后禁制合拢的声音。那些人的名字，你一个都不知道。", "effects": [{ "type": "xp", "amount": 14 }, { "type": "fate", "amount": -4 }], "narrative": { "axes": { "guile": 4, "ruthless": 2, "ambition": 3 }, "tags": [{ "id": "deed.abandoned_tomb_group", "label": "封死同道退路", "strength": 3 }], "memory": "你独自拿走传承，把其他人留在合拢的禁制里。" } }
+        ]
+      },
+      {
+        "description": "主墓深处只剩一缕残魂。他说自己不是墓主，而是当年被墓主困在这里的守阵人。只要你替他带出一枚命牌，他愿意告诉你真正的出口。",
+        "options": [
+          { "text": "答应带命牌出去", "outcomeText": "命牌离墓时裂成两半。残魂没有骗你，出口确实打开；只是牌上那个名字，从此也落在了你的命数里。", "effects": [{ "type": "fate", "amount": 7 }], "narrative": { "axes": { "compassion": 2, "loyalty": 3 }, "tags": [{ "id": "oath.carried_soul_token", "label": "应下残魂之托", "strength": 3 }], "memory": "你曾把一枚残魂命牌带出古墓。" } },
+          { "text": "逼问出口，再将他彻底磨灭", "outcomeText": "残魂散得很慢。出口开启时，你听见他最后笑了一声，说这墓终于有了新的守阵人。", "effects": [{ "type": "xp", "amount": 10 }, { "type": "fate", "amount": -6 }], "narrative": { "axes": { "ruthless": 3, "ambition": 2 }, "tags": [{ "id": "scar.erased_tomb_soul", "label": "磨灭墓中残魂", "strength": 2 }], "memory": "你逼问出口，并抹去了古墓里最后一缕残魂。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sect_purge",
+    "title": "山门清洗",
+    "theme": "势力与立场",
+    "stageTitles": ["分派名单", "两封密信", "山门换主"],
+    "stages": [
+      {
+        "description": "宗门重新分派灵脉名额，你的名字被划去又添上。执事说这是长老的意思，却不肯说是哪一位长老。",
+        "options": [
+          { "text": "当面问清，不肯吃暗亏", "outcomeText": "执事被你逼得脸色发白，终于说出一个名字。你记住了这个人，也让他记住了你。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "freedom": 2, "guile": -1 }, "tags": [{ "id": "rep.asked_too_much", "label": "追问过长老的名讳", "strength": 1 }], "memory": "分派名单前，你当众追问了一个不该问的名字。" } },
+          { "text": "把名额让出去，换一份人情", "outcomeText": "对方收下名额时很意外。半年后，他在药园里替你留了一株本不属于你的灵草。", "effects": [{ "type": "item", "itemId": "juqi_dan", "count": 1 }], "narrative": { "axes": { "guile": 2, "loyalty": 1 }, "tags": [{ "id": "bond.quota_favor", "label": "让出灵脉名额换来人情", "strength": 2 }], "memory": "你曾让出灵脉名额，换了一份没有说破的人情。" } }
+        ]
+      },
+      {
+        "description": "宗门内斗终于摆到明面上。两名长老各自送来一封密信，都请你站在他们一边。信末都没有署名，只盖着相同的旧印。",
+        "options": [
+          { "text": "两边都不回信，闭门修炼", "outcomeText": "你躲过了最凶险的三个月。出关时，宗门已经换了半数执事，没人再提那两封信。", "effects": [{ "type": "xp", "amount": 8 }, { "type": "fate", "amount": 1 }], "narrative": { "axes": { "dao": 2, "freedom": 2 }, "tags": [{ "id": "deed.stayed_neutral", "label": "宗门清洗时闭门不出", "strength": 2 }], "memory": "宗门清洗时，你烧掉两封密信，闭门不出。" } },
+          { "text": "选一边，递上另一边的把柄", "outcomeText": "你选的那位长老赢了。新执事上任第一日，就把你调去了最偏的山峰。", "effects": [{ "type": "lingshi", "amount": 400 }, { "type": "fate", "amount": -3 }], "narrative": { "axes": { "guile": 3, "ambition": 3 }, "tags": [{ "id": "rep.sect_side_chosen", "label": "曾在宗门内斗中押注", "strength": 3 }], "memory": "你曾把一封密信交给另一位长老，换来一场胜利。" } }
+        ]
+      },
+      {
+        "description": "旧掌门重伤闭关，新的执法长老封了山门。所有弟子都要在玉册上重新留名。有人连夜逃走，也有人把剑横在名单前。",
+        "options": [
+          { "text": "留下，护住不愿改名的同门", "outcomeText": "你没有当上任何职位，只在山门前守了七天。后来宗门换了名字，守门的人却还记得你。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "loyalty": 4, "compassion": 2 }, "tags": [{ "id": "deed.guarded_sect_people", "label": "清洗中护住同门", "strength": 3 }], "memory": "宗门换主那夜，你站在山门前，护住了一批不肯改名的人。" } },
+          { "text": "连夜下山，从此做散修", "outcomeText": "你走时没有回头。一个月后，山门的新钟声传到坊市，和你再无关系。", "effects": [{ "type": "lingshi", "amount": -100 }], "narrative": { "axes": { "freedom": 4, "attachment": -2 }, "tags": [{ "id": "path.rogue_after_purge", "label": "宗门清洗后离山", "strength": 3 }], "memory": "宗门清洗时，你连夜下山，从此不再提旧山门。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mortal_kin",
+    "title": "故乡灯火",
+    "theme": "仙凡与亲缘",
+    "stageTitles": ["家书", "白事", "仙凡一别"],
+    "stages": [
+      {
+        "description": "一封从凡俗故乡辗转送来的家书，纸边沾着灶灰。信里说母亲病了一场，已经能下床，不必回。最后一行被水晕开，看不清写的是什么。",
+        "options": [
+          { "text": "告假回乡，亲眼看她一次", "outcomeText": "你带着凡间买不到的药材回去。母亲认了你很久，最后只问你路上饿不饿。", "effects": [{ "type": "lingshi", "amount": -120 }, { "type": "fate", "amount": 2 }], "narrative": { "axes": { "attachment": 3, "compassion": 2 }, "tags": [{ "id": "bond.mortal_mother", "label": "回乡看过母亲", "strength": 2 }], "memory": "你曾为封家书，专程回凡俗故乡看过母亲。" } },
+          { "text": "寄回一笔灵石换来的银钱，继续修炼", "outcomeText": "银钱送到了，信却再没有来。你把这件事压进闭关的静默里，只在出关时偶尔想起。", "effects": [{ "type": "xp", "amount": 8 }], "narrative": { "axes": { "dao": 2, "attachment": -2 }, "tags": [{ "id": "scar.mortal_letter_unanswered", "label": "没有回那封家书", "strength": 2 }], "memory": "你寄回银钱，却没有回那封沾着灶灰的家书。" } }
+        ]
+      },
+      {
+        "description": "第二次家书换成白纸。村里人走了三天的路，才找到能递信的人。他们说老人没有受苦，只是临终前一直坐在门口。",
+        "options": [
+          { "text": "放下手中冲关，赶回去守灵", "outcomeText": "你回到家时，棺木已经封好。你守了三夜，没有用任何法术，只像凡人一样添灯。", "effects": [{ "type": "fate", "amount": 5 }], "narrative": { "axes": { "attachment": 4, "compassion": 2 }, "tags": [{ "id": "deed.mourned_family", "label": "为凡俗亲人守过灵", "strength": 3 }], "memory": "你放下冲关，回村为一个凡人守了三夜灵。" } },
+          { "text": "留在洞府，遥祭一场", "outcomeText": "你在洞府外点了一盏灯，灯烧到天亮。第二日，你继续冲关，像什么都没有发生。", "effects": [{ "type": "xp", "amount": 10 }, { "type": "fate", "amount": -4 }], "narrative": { "axes": { "dao": 3, "attachment": -3 }, "tags": [{ "id": "scar.distant_funeral", "label": "没有回去奔丧", "strength": 3 }], "memory": "亲人下葬那天，你只在洞府外点了一盏灯。" } }
+        ]
+      },
+      {
+        "description": "你已活过故乡几代人的寿命。一个自称你侄孙的年轻人跪在山门外，说村里闹妖，已经没有能主事的人。他带来的信物，是当年母亲用过的木梳。",
+        "options": [
+          { "text": "下山除妖，再把凡俗因果斩断", "outcomeText": "你救下村子，也在村口留下最后一道护符。年轻人追出很远，你没有回头。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "compassion": 3, "attachment": 2 }, "tags": [{ "id": "deed.saved_home_village", "label": "最后一次护住故乡", "strength": 3 }], "memory": "你最后一次回到故乡，替后人除去了山里作乱的妖。" } },
+          { "text": "只赐一道符，不见后人", "outcomeText": "符纸拦住了妖，也拦住了那个年轻人。他在门外跪到天黑，最后把木梳留在石阶上。", "effects": [{ "type": "fate", "amount": -2 }], "narrative": { "axes": { "dao": 2, "attachment": -2 }, "tags": [{ "id": "scar.refused_descendant", "label": "隔门拒绝了凡俗后人", "strength": 2 }], "memory": "后人带着母亲旧物来求见，你只从门缝递出一道符。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "demonic_bargain",
+    "title": "黑市禁术",
+    "theme": "捷径与代价",
+    "stageTitles": ["无字黑册", "反噬之夜", "一念成魔"],
+    "stages": [
+      {
+        "description": "坊市最深处有人卖一本没有封皮的黑册。摊主不报价格，只看你寿元还剩多少。册页翻开时，里面浮出一行和你笔迹一模一样的字。",
+        "options": [
+          { "text": "买下黑册，只用其中一页", "outcomeText": "你撕下一页，修为确实涨得很快。剩下的册页却在夜里自己翻动，像在数你还有多少年。", "effects": [{ "type": "xp", "amount": 16 }, { "type": "fate", "amount": -3 }], "narrative": { "axes": { "ambition": 3, "guile": 2 }, "tags": [{ "id": "secret.demonic_page", "label": "修过禁术残页", "strength": 2 }], "memory": "你买下一本禁术黑册，只撕走了其中一页。" } },
+          { "text": "记下摊主的脸，转身离开", "outcomeText": "你没有回头。走出三条街后，才发现袖口里多了一角黑纸，上面只有一个“等”字。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "freedom": 2, "dao": 1 }, "tags": [{ "id": "secret.black_market_mark", "label": "被黑市记住", "strength": 1 }], "memory": "你拒绝了一本禁术，却带着一角黑纸离开坊市。" } }
+        ]
+      },
+      {
+        "description": "禁术开始反噬。每到子时，经脉里便有另一股灵力逆流而上，替你做出一些你本不会做的决定。镜中的影子偶尔会比你先眨眼。",
+        "options": [
+          { "text": "散去这部分修为，强行拔除魔气", "outcomeText": "你自断一截经脉，痛得三日不能起身。修为退了不少，镜中的影子却终于和你同步。", "effects": [{ "type": "xp", "amount": -10 }, { "type": "injury", "level": "heavy" }], "narrative": { "axes": { "dao": 4, "freedom": 2 }, "tags": [{ "id": "scar.burned_demonic_root", "label": "拔除过一截魔气", "strength": 3 }], "memory": "你曾自断经脉，只为拔掉一截不属于自己的魔气。" } },
+          { "text": "放任它生长，换取更快突破", "outcomeText": "你听见经络里传来细小的笑声。修为暴涨的那一夜，洞府外的鸟一只也没有叫。", "effects": [{ "type": "xp", "amount": 20 }, { "type": "fate", "amount": -8 }], "narrative": { "axes": { "ambition": 4, "ruthless": 2 }, "tags": [{ "id": "path.demonic_heart", "label": "任由魔气生根", "strength": 3 }], "memory": "你放任魔气生根，用更快突破换来一场长夜。" } }
+        ]
+      },
+      {
+        "description": "渡劫前夜，黑册自己翻到最后一页。那个与你笔迹相同的名字已经在页脚写好，只差你亲手按下一道血印。血印成，劫云会散；血印不成，它会替你按。",
+        "options": [
+          { "text": "烧掉黑册，以自身道心渡劫", "outcomeText": "黑册烧了整整一夜，火光里有人说你愚蠢。天亮时，灰烬中只剩一枚没有字的玉扣。", "effects": [{ "type": "fate", "amount": 10 }], "narrative": { "axes": { "dao": 5, "freedom": 3 }, "tags": [{ "id": "deed.burned_demonic_book", "label": "焚尽禁术黑册", "strength": 3 }], "memory": "渡劫前夜，你烧掉了那本一直替你写名字的黑册。" } },
+          { "text": "按下血印，让黑册替你挡劫", "outcomeText": "劫云散了，你却忘了自己为何要渡劫。此后每次照镜，你都要先想一想镜里的人是谁。", "effects": [{ "type": "fate", "amount": -10 }, { "type": "injury", "level": "dying" }], "narrative": { "axes": { "ambition": 4, "dao": -4 }, "tags": [{ "id": "scar.blood_seal", "label": "以血印换过天劫", "strength": 3 }], "memory": "你用自己的血印换散了劫云，也丢掉了一段记忆。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sword_grave",
+    "title": "夜半剑鸣",
+    "theme": "剑心与锋芒",
+    "stageTitles": ["无名旧剑", "剑冢试锋", "剑心归处"],
+    "stages": [
+      {
+        "description": "你在废弃洞府里找到一柄没有铭文的旧剑。剑鞘锈死，剑身却会在子时自行轻鸣。握住它时，你听见一句极轻的话：还差一个名字。",
+        "options": [
+          { "text": "为旧剑磨去锈迹，日日以灵力温养", "outcomeText": "剑鸣越来越清。第七夜，剑身上浮出一道浅白纹路，像一个尚未写完的字。", "effects": [{ "type": "xp", "amount": 6 }], "narrative": { "axes": { "dao": 2, "attachment": 1 }, "tags": [{ "id": "bond.unnamed_sword", "label": "温养一柄无名旧剑", "strength": 2 }], "memory": "你曾在每个子夜为一柄无名旧剑温养剑身。" } },
+          { "text": "把剑卖掉，免得招惹来历不明的东西", "outcomeText": "收剑的人给了不低的价钱。三天后，坊市里传来消息，那人被自己的剑割断了喉咙。", "effects": [{ "type": "lingshi", "amount": 260 }, { "type": "fate", "amount": -2 }], "narrative": { "axes": { "freedom": 2, "guile": 1 }, "tags": [{ "id": "deed.sold_haunted_sword", "label": "卖出一柄有灵的旧剑", "strength": 2 }], "memory": "你卖掉了那柄夜半自鸣的旧剑，也听见了买主的死讯。" } }
+        ]
+      },
+      {
+        "description": "剑鸣把你引到一处废弃剑冢。上千柄断剑插在土里，只有中心那柄完整。你刚走近，四面断剑同时转向你，像是在等一个能拔剑的人。",
+        "options": [
+          { "text": "向所有断剑行礼，再拔中心一剑", "outcomeText": "断剑没有阻拦。剑冢认了你，也把历代剑主的执念一并压进你的识海。", "effects": [{ "type": "xp", "amount": 12 }, { "type": "fate", "amount": 3 }], "narrative": { "axes": { "dao": 3, "loyalty": 2 }, "tags": [{ "id": "legacy.sword_grave", "label": "得剑冢残剑认可", "strength": 3 }], "memory": "你曾向剑冢千柄断剑行礼，再拔出中心那一柄。" } },
+          { "text": "强行破阵，夺剑就走", "outcomeText": "你拿走剑，也带走了满身剑伤。身后千柄断剑同时落地，声音像一场迟来的葬礼。", "effects": [{ "type": "injury", "level": "heavy" }, { "type": "xp", "amount": 18 }], "narrative": { "axes": { "ruthless": 3, "ambition": 3 }, "tags": [{ "id": "scar.sword_grave_robbed", "label": "强夺剑冢主剑", "strength": 3 }], "memory": "你强闯剑冢，夺走主剑，也带走了一身剑伤。" } }
+        ]
+      },
+      {
+        "description": "飞升前，旧剑终于开口。它说自己是历代剑主留下的最后一道试炼，只要你斩断最挂念的那段因果，就能得到真正的剑心。",
+        "options": [
+          { "text": "拒绝斩缘，带着牵挂飞升", "outcomeText": "旧剑没有出鞘。天门开启时，你听见剑身里传来许多人的风声，像旧友们替你送行。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "attachment": 4, "compassion": 2 }, "tags": [{ "id": "title.sword_heart_bound", "label": "有情剑心", "strength": 3 }], "memory": "飞升前，你拒绝用旧情换一柄无情的剑。" } },
+          { "text": "斩断旧缘，取真正的剑心", "outcomeText": "剑光落下时，你听见什么东西比剑更先断了。旧剑归鞘，你再也没有梦见过故乡。", "effects": [{ "type": "fate", "amount": -4 }, { "type": "xp", "amount": 20 }], "narrative": { "axes": { "dao": 5, "attachment": -5 }, "tags": [{ "id": "title.sword_heart_cold", "label": "无情剑心", "strength": 3 }], "memory": "为了真正的剑心，你亲手斩断了最后一段旧缘。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pill_toxin",
+    "title": "丹炉余烬",
+    "theme": "捷径与医道",
+    "stageTitles": ["炉边捷径", "药毒入骨", "医人还是医己"],
+    "stages": [
+      {
+        "description": "丹房只剩最后一炉失败丹药。按规矩应当倒掉，可其中一枚已经凝出丹纹。老药师说它能涨修为，但缺了一味收束药性的灵草。",
+        "options": [
+          { "text": "按古方补全灵草，稳稳重炼", "outcomeText": "你花掉大半积蓄，终于炼成一炉真正可用的丹药。药香很淡，却让人心里安定。", "effects": [{ "type": "lingshi", "amount": -180 }, { "type": "xp", "amount": 9 }], "narrative": { "axes": { "dao": 2, "guile": -1 }, "tags": [{ "id": "path.steady_alchemy", "label": "坚持按方炼丹", "strength": 2 }], "memory": "你宁可多花灵石，也没有服用那枚缺药的丹。" } },
+          { "text": "直接服下，赌它不会出事", "outcomeText": "修为涨得很快，丹田里却留下一点洗不掉的苦味。此后每逢阴雨，经脉都会轻轻发疼。", "effects": [{ "type": "xp", "amount": 18 }, { "type": "fate", "amount": -3 }], "narrative": { "axes": { "ambition": 3, "ruthless": 1 }, "tags": [{ "id": "scar.pill_toxin", "label": "体内潜伏丹毒", "strength": 2 }], "memory": "你服下一枚缺药的丹，从此丹田里多了一点苦味。" } }
+        ]
+      },
+      {
+        "description": "多年服丹让丹毒积在骨里。药师把脉之后只说，要么停下修行三年，要么换一套更凶险的洗髓法。窗外正下着今年第一场雪。",
+        "options": [
+          { "text": "停修三年，把丹毒一点点化掉", "outcomeText": "三年里你没有碰过一枚丹药。出关那天，雪已经化了三回，经脉却终于干净。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "dao": 4, "ambition": -2 }, "tags": [{ "id": "deed.cleansed_pill_toxin", "label": "以三年清尽丹毒", "strength": 3 }], "memory": "你曾停修三年，只为把丹毒从骨头里化掉。" } },
+          { "text": "用洗髓法强逼丹毒，抢回时间", "outcomeText": "丹毒被逼到一处，修为也险些散尽。你熬了过来，但右手从此在冬天握不稳剑。", "effects": [{ "type": "xp", "amount": 15 }, { "type": "injury", "level": "light" }], "narrative": { "axes": { "ambition": 4, "dao": 1 }, "tags": [{ "id": "scar.cleansed_by_force", "label": "强行洗髓留下旧伤", "strength": 3 }], "memory": "为了抢回时间，你用最凶险的洗髓法逼出了丹毒。" } }
+        ]
+      },
+      {
+        "description": "宗门疫病爆发，药库只够救一半人。你手里有一枚能稳住心脉的成丹，也有一个尚未验证的方子。所有人都在等你开口。",
+        "options": [
+          { "text": "把成丹给最危重的人，再试新方", "outcomeText": "新方救回了大半人，成丹却只够救一个。你记住了那个活下来的人，也记住了门外没有等到药的脚步声。", "effects": [{ "type": "fate", "amount": 9 }], "narrative": { "axes": { "compassion": 5, "guile": 2 }, "tags": [{ "id": "deed.plague_rescue", "label": "疫病中亲自试药", "strength": 3 }], "memory": "宗门疫病时，你把最后一枚成丹给了一个陌生人。" } },
+          { "text": "封住药库，先保住自己的洞府", "outcomeText": "疫病没有进你的门。三日后，山门外堆起了新坟，新执事开始追查是谁关的药库。", "effects": [{ "type": "lingshi", "amount": 500 }, { "type": "fate", "amount": -8 }], "narrative": { "axes": { "ruthless": 4, "freedom": 2 }, "tags": [{ "id": "scar.sealed_medicine_store", "label": "疫病时封过药库", "strength": 3 }], "memory": "疫病蔓延时，你封住药库，只保住了自己那扇门。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "array_legacy",
+    "title": "残阵山河",
+    "theme": "阵法与守护",
+    "stageTitles": ["山腹残阵", "护山大阵", "阵心即人心"],
+    "stages": [
+      {
+        "description": "你在山腹发现一座仍在运转的残阵。阵纹已经缺了三分之一，阵心却还亮着，像有人从很久以前一直守在这里。",
+        "options": [
+          { "text": "试着补全阵纹，不动阵心", "outcomeText": "你耗了七日才补上一角。阵心没有反应，但山腹里的灵气比来时平稳了许多。", "effects": [{ "type": "xp", "amount": 7 }], "narrative": { "axes": { "dao": 2, "guile": 1 }, "tags": [{ "id": "path.array_apprentice", "label": "补过上古残阵", "strength": 2 }], "memory": "你曾花七日补上一座上古残阵的一角。" } },
+          { "text": "拆走阵心，换一门可靠的保命手段", "outcomeText": "阵心离位时，整座山腹暗了一瞬。你带着它离开，身后的残阵再也没有亮过。", "effects": [{ "type": "lingshi", "amount": 320 }], "narrative": { "axes": { "guile": 3, "ambition": 2 }, "tags": [{ "id": "deed.took_array_core", "label": "取走山腹阵心", "strength": 3 }], "memory": "你拆走了一座残阵的阵心，身后的山腹从此不再发光。" } }
+        ]
+      },
+      {
+        "description": "宗门请你主持护山大阵。这不是荣耀，而是一个几乎必死的差事：阵成之前，敌宗随时可能攻山；阵成之后，主持者也要留在阵眼里。",
+        "options": [
+          { "text": "接下阵眼，守到最后一刻", "outcomeText": "你在阵眼里坐了四十天。敌宗退去时，山门无人伤亡，你的寿元却少了整整十年。", "effects": [{ "type": "fate", "amount": 10 }, { "type": "xp", "amount": 5 }], "narrative": { "axes": { "loyalty": 5, "compassion": 2 }, "tags": [{ "id": "title.array_guardian", "label": "护山大阵主持者", "strength": 3 }], "memory": "你曾在护山大阵的阵眼里坐了四十天。" } },
+          { "text": "交出一套改良阵图，自己不入阵眼", "outcomeText": "阵图确实有效，宗门也记住了你的贡献。只是此后每次提到护山大阵，别人都会先提另一个名字。", "effects": [{ "type": "lingshi", "amount": 600 }], "narrative": { "axes": { "guile": 3, "attachment": -1 }, "tags": [{ "id": "deed.sold_array_diagram", "label": "献过护山阵图", "strength": 2 }], "memory": "你把护山大阵的阵图交出去，却没有走进阵眼。" } }
+        ]
+      },
+      {
+        "description": "阵心终于和你心意相通。它告诉你，若要让它发挥最后一次力量，就必须把一个最重要的人留在阵里。阵外，敌军已经撞上第三道山门。",
+        "options": [
+          { "text": "独自入阵，把自己留在阵心", "outcomeText": "大阵重启，山河震动。敌军退去后，阵眼只剩一盏没有熄灭的灯。", "effects": [{ "type": "fate", "amount": 12 }], "narrative": { "axes": { "dao": 4, "compassion": 4 }, "tags": [{ "id": "title.array_sacrifice", "label": "以己身镇守阵心", "strength": 3 }], "memory": "最后一战，你独自走进阵心，让护山大阵重新亮起。" } },
+          { "text": "留下最有用的同门，保全山门", "outcomeText": "阵成了，山门也保住了。那人的名字被刻在阵碑上，而你每次经过都不敢停太久。", "effects": [{ "type": "fate", "amount": -5 }], "narrative": { "axes": { "ruthless": 4, "loyalty": 1 }, "tags": [{ "id": "scar.array_sacrificed_ally", "label": "以同门镇过阵心", "strength": 3 }], "memory": "你选择让一位同门留在阵心，换整座山门无恙。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rival_brother",
+    "title": "同门旧怨",
+    "theme": "竞争与输赢",
+    "stageTitles": ["试炼抽签", "旧怨重逢", "胜负之外"],
+    "stages": [
+      {
+        "description": "宗门试炼抽签，你偏偏抽中了最不想遇见的那个人。他曾在众人面前揭你的短，也曾在无人时替你挡过一鞭。",
+        "options": [
+          { "text": "堂堂正正打一场，不留暗手", "outcomeText": "你输了半招，也赢得了他的正视。走下擂台时，他第一次没有再嘲讽你。", "effects": [{ "type": "xp", "amount": 8 }], "narrative": { "axes": { "freedom": 2, "ruthless": -1 }, "tags": [{ "id": "bond.rival_respect", "label": "与旧对手交手一次", "strength": 2 }], "memory": "宗门试炼上，你与最不想见的人堂堂正正打了一场。" } },
+          { "text": "事先在他的灵剑上做手脚", "outcomeText": "你赢得很快。他握剑的手滴着血，看你的眼神却没有愤怒，只有一种终于确认的失望。", "effects": [{ "type": "lingshi", "amount": 200 }, { "type": "fate", "amount": -4 }], "narrative": { "axes": { "guile": 4, "loyalty": -2 }, "tags": [{ "id": "scar.sabotaged_rival", "label": "在试炼中暗算同门", "strength": 3 }], "memory": "你曾在一场试炼前，偷偷动过同门的剑。" } }
+        ]
+      },
+      {
+        "description": "多年后你们在秘境入口重逢。他已成一方散修头领，仍记得旧事，却没有立刻拔剑。他说前面有一株灵药，只够一人用。",
+        "options": [
+          { "text": "提出合作，平分秘境里的东西", "outcomeText": "你们各取一半，出门时还互相留了伤药。那份信任没有维持太久，却足够走出秘境。", "effects": [{ "type": "fate", "amount": 4 }], "narrative": { "axes": { "loyalty": 3, "compassion": 1 }, "tags": [{ "id": "bond.rival_truce", "label": "与旧对手短暂合作", "strength": 2 }], "memory": "你和旧对手在秘境里合作了一次，各取一半。" } },
+          { "text": "先下手为强，把旧怨一并清算", "outcomeText": "灵药归你，他也活着离开。此后每次听到他的消息，你都觉得那把旧剑还悬在背后。", "effects": [{ "type": "xp", "amount": 12 }, { "type": "fate", "amount": -3 }], "narrative": { "axes": { "ruthless": 3, "guile": 2 }, "tags": [{ "id": "enemy.rival_unfinished", "label": "与旧对手彻底结仇", "strength": 3 }], "memory": "你在秘境里先向旧对手出手，却没有真正了结他。" } }
+        ]
+      },
+      {
+        "description": "飞升前最后一夜，他独自来到山门。没有带弟子，也没有带剑，只带了一坛很旧的酒。他说这一生与你争了太久，想问你一句：若重来一次，还会不会选同一条路？",
+        "options": [
+          { "text": "与他喝完这坛酒，不再论输赢", "outcomeText": "天亮时，酒坛空了。你们没有回答那个问题，却都把剑留在了门外。", "effects": [{ "type": "fate", "amount": 7 }], "narrative": { "axes": { "attachment": 4, "compassion": 2 }, "tags": [{ "id": "title.rival_peace", "label": "与旧对手把酒言和", "strength": 3 }], "memory": "飞升前夜，你和一生的旧对手喝完了一坛酒。" } },
+          { "text": "不答，只请他记住今日的山门", "outcomeText": "他没有留你。很多年后，山门外的碑上多了一行陌生的字：此人曾来过。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "dao": 3, "attachment": -1 }, "tags": [{ "id": "title.rival_unanswered", "label": "把旧问留在人间", "strength": 3 }], "memory": "旧对手最后问你后不后悔，你没有回答。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "master_secret",
+    "title": "师尊旧案",
+    "theme": "师承与真相",
+    "stageTitles": ["禁地残卷", "师尊的旧名", "欺师还是救师"],
+    "stages": [
+      {
+        "description": "你在师尊洞府里发现一卷被灵力封住的旧案。封皮上的宗门印记已经磨平，只剩你师尊的道号，和一个你不认识的本名。",
+        "options": [
+          { "text": "原样放回，不追查师尊过去", "outcomeText": "你把旧案放回原处，连灰都没有拂。此后师尊看你的眼神却似乎多了一点试探。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "loyalty": 3, "guile": -1 }, "tags": [{ "id": "bond.master_trust", "label": "没有追问师尊旧事", "strength": 2 }], "memory": "你曾发现师尊隐藏的旧案，却原样放了回去。" } },
+          { "text": "悄悄抄录旧案，留作后手", "outcomeText": "旧案里记着一场灭门案，师尊的名字出现在最末一行。你把抄本藏进储物袋最深处。", "effects": [{ "type": "fate", "amount": -2 }], "narrative": { "axes": { "guile": 4, "ambition": 1 }, "tags": [{ "id": "secret.master_old_case", "label": "握有师尊旧案抄本", "strength": 3 }], "memory": "你抄下一份师尊旧案，知道他曾与一场灭门案有关。" } }
+        ]
+      },
+      {
+        "description": "旧案中的幸存者找上门来。他已经等了百年，只想要一个名字。师尊就在后山闭关，你若现在去问，师徒之间或许再也不能回头。",
+        "options": [
+          { "text": "去后山问师尊，要一个亲口答案", "outcomeText": "师尊沉默了很久，最后承认自己当年确实在场。他没有辩解，只把宗门传承的钥匙交给你。", "effects": [{ "type": "xp", "amount": 8 }, { "type": "fate", "amount": 3 }], "narrative": { "axes": { "dao": 3, "loyalty": 2 }, "tags": [{ "id": "bond.master_confession", "label": "听过师尊亲口认罪", "strength": 3 }], "memory": "你曾去后山追问师尊，听他亲口承认一桩百年前旧案。" } },
+          { "text": "把幸存者赶走，守住师门名声", "outcomeText": "那人走前只说，旧案不会因为没人听就消失。师尊出关后赏了你一枚丹药，没有问发生了什么。", "effects": [{ "type": "item", "itemId": "jucheng_dan", "count": 1 }, { "type": "fate", "amount": -5 }], "narrative": { "axes": { "loyalty": 4, "ruthless": 2 }, "tags": [{ "id": "scar.silenced_old_case", "label": "赶走过旧案苦主", "strength": 3 }], "memory": "你曾把一位旧案苦主赶出山门，只为守住师尊名声。" } }
+        ]
+      },
+      {
+        "description": "师尊被执法堂带走，罪名正是百年前那桩旧案。他传音给你，只要毁掉那份抄本，宗门传承就仍会留在你手里。执法长老已经等在门外。",
+        "options": [
+          { "text": "交出抄本，让师尊自己面对旧案", "outcomeText": "师尊没有被处死，却被永远逐出山门。他离开那天没有看你，只在雪地上留下一串很慢的脚印。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "dao": 4, "loyalty": -2 }, "tags": [{ "id": "title.master_truth", "label": "以真相送别师尊", "strength": 3 }], "memory": "你把师尊旧案交给执法堂，看着他被逐出山门。" } },
+          { "text": "毁掉抄本，替师尊隐瞒到底", "outcomeText": "执法堂查无实证，师尊保住了性命。可你再也没有用过他教的任何法术。", "effects": [{ "type": "xp", "amount": -8 }, { "type": "fate", "amount": -4 }], "narrative": { "axes": { "loyalty": 5, "guile": 3 }, "tags": [{ "id": "scar.burned_master_case", "label": "毁掉师尊旧案", "strength": 3 }], "memory": "为了保师尊一命，你亲手烧掉了那份旧案。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lost_soul",
+    "title": "器中之魂",
+    "theme": "记忆与自我",
+    "stageTitles": ["会说话的旧器", "不属于你的记忆", "谁在借你的手"],
+    "stages": [
+      {
+        "description": "你从古战场捡到一枚温热的铜镜。镜中没有你的脸，只有一个比你年轻许多的女子，隔着雾气问你：现在是什么年月？",
+        "options": [
+          { "text": "回答她，并试着听她讲完", "outcomeText": "她说了很久，直到镜面重新暗下去。你记住了她最后一个问题：我的名字还在吗？", "effects": [{ "type": "fate", "amount": 3 }], "narrative": { "axes": { "compassion": 2, "attachment": 1 }, "tags": [{ "id": "bond.mirror_soul", "label": "听镜中残魂讲过旧事", "strength": 2 }], "memory": "你曾对着一面古镜，听完一个陌生女子的一生。" } },
+          { "text": "以灵力封住铜镜，不让她再开口", "outcomeText": "镜面暗下去，洞府安静了。可每次夜半醒来，你都觉得有人刚刚在耳边说完一句话。", "effects": [{ "type": "fate", "amount": -1 }], "narrative": { "axes": { "guile": 2, "freedom": 1 }, "tags": [{ "id": "secret.sealed_mirror", "label": "封住过一面古镜", "strength": 1 }], "memory": "你曾用灵力封住一面会说话的古镜。" } }
+        ]
+      },
+      {
+        "description": "你开始记起不属于自己的事：一条从未走过的长街、一场没有下过的雨、一个你从未见过却极熟悉的人。镜中女子说，这些记忆原本都属于你。",
+        "options": [
+          { "text": "追查这些记忆，哪怕动摇本心", "outcomeText": "你找到一座早已沉入湖底的旧城。城门的名字，与镜中女子最后说的那个字一模一样。", "effects": [{ "type": "xp", "amount": 8 }, { "type": "fate", "amount": 2 }], "narrative": { "axes": { "dao": 2, "attachment": 3 }, "tags": [{ "id": "secret.past_life_city", "label": "找到前尘旧城", "strength": 3 }], "memory": "你曾循着不属于自己的记忆，找到一座沉在湖底的旧城。" } },
+          { "text": "封闭识海，把陌生记忆全部压回去", "outcomeText": "记忆被封住了，铜镜也裂开一道缝。此后你偶尔会忘记自己刚做过什么，却不再梦见那座旧城。", "effects": [{ "type": "injury", "level": "light" }], "narrative": { "axes": { "dao": 3, "attachment": -2 }, "tags": [{ "id": "scar.sealed_memories", "label": "强封过陌生记忆", "strength": 2 }], "memory": "为了守住本心，你曾强封一整段陌生记忆。" } }
+        ]
+      },
+      {
+        "description": "镜中残魂终于承认，她不是被困在镜里，而是在等你把身体还给她。她说你如今修成的每一分灵力，本就该属于她。铜镜开始与你的心跳同步。",
+        "options": [
+          { "text": "砸碎铜镜，守住这一世的自己", "outcomeText": "镜碎时，有一个人在很远的地方轻轻叹了口气。你活了下来，却再也想不起自己的乳名。", "effects": [{ "type": "fate", "amount": 5 }], "narrative": { "axes": { "freedom": 5, "dao": 2 }, "tags": [{ "id": "title.self_kept", "label": "守住此世自我", "strength": 3 }], "memory": "你砸碎铜镜，把另一个人的执念和自己一起割开。" } },
+          { "text": "听她说完，主动让出一段识海", "outcomeText": "她没有夺走全部，只拿回那座旧城。此后你的记忆里多了一个陌生名字，也多了一双偶尔替你看路过的眼睛。", "effects": [{ "type": "fate", "amount": 2 }, { "type": "xp", "amount": 6 }], "narrative": { "axes": { "compassion": 3, "attachment": 3 }, "tags": [{ "id": "bond.shared_soul", "label": "与残魂共居一识海", "strength": 3 }], "memory": "你主动让出一段识海，与一个残魂共用了此后的人生。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "merchant_ledger",
+    "title": "坊市账簿",
+    "theme": "利益与人情",
+    "stageTitles": ["商队急单", "一本旧账", "坊市尽头"],
+    "stages": [
+      {
+        "description": "商队管事在雨中拦住你，说有一批灵草必须在三日内送到边地。酬劳不低，但沿路最近常有劫修出没。",
+        "options": [
+          { "text": "接下这趟急单，按时送到", "outcomeText": "你按时赶到，也遇见了两拨劫修。管事验货后多给了一笔钱，说以后还有生意。", "effects": [{ "type": "lingshi", "amount": 350 }, { "type": "injury", "level": "light" }], "narrative": { "axes": { "loyalty": 2, "ambition": 1 }, "tags": [{ "id": "bond.caravan_trust", "label": "替商队押过急单", "strength": 2 }], "memory": "你曾在三日内穿过劫修出没的山路，替商队送到一批灵草。" } },
+          { "text": "提出加价，否则不接", "outcomeText": "管事咬牙答应。这趟你赚得更多，也从此被记成一个不好相与的人。", "effects": [{ "type": "lingshi", "amount": 500 }], "narrative": { "axes": { "guile": 3, "ambition": 2 }, "tags": [{ "id": "rep.hard_bargainer", "label": "坊市里出了名的会讲价", "strength": 2 }], "memory": "你曾趁着商队急单坐地起价，赚到一笔快钱。" } }
+        ]
+      },
+      {
+        "description": "你在旧账本里发现一笔没有结清的账：数十年前，一位散修把全部身家托给商队保管，后来人死了，灵石却还在。账本上没有受益人。",
+        "options": [
+          { "text": "按散修旧名寻访后人，把账结清", "outcomeText": "你找到一座荒村，把灵石交给一个不知道自己有仙缘的孩子。账本终于合上。", "effects": [{ "type": "lingshi", "amount": -300 }, { "type": "fate", "amount": 7 }], "narrative": { "axes": { "compassion": 3, "loyalty": 3 }, "tags": [{ "id": "deed.settled_old_ledger", "label": "结清一笔无名旧账", "strength": 3 }], "memory": "你花了几十年前的旧灵石，替一个陌生散修寻到了后人。" } },
+          { "text": "以无人认领为由，把灵石收入囊中", "outcomeText": "灵石确实无人认领。只是那本账从你收进去以后，每到夜里就自己翻到同一页。", "effects": [{ "type": "lingshi", "amount": 700 }, { "type": "fate", "amount": -3 }], "narrative": { "axes": { "guile": 4, "attachment": -1 }, "tags": [{ "id": "deed.pocketed_ledger", "label": "吞过无人认领的旧账", "strength": 2 }], "memory": "你收走一笔无人认领的旧账，账本从此总在夜里自己翻开。" } }
+        ]
+      },
+      {
+        "description": "你终于盘下坊市尽头最大的一间铺子。开张前夜，旧管事告诉你，这块地底下压着一条废弃灵脉，谁占着铺子，谁就要替整条街挡下灵脉反噬。",
+        "options": [
+          { "text": "照常开张，用自己的修为稳住灵脉", "outcomeText": "铺子成了坊市最热闹的地方。没人知道每逢灵潮，你都要在后院独自压下地底的震荡。", "effects": [{ "type": "lingshi", "amount": 900 }, { "type": "fate", "amount": 5 }], "narrative": { "axes": { "loyalty": 3, "dao": 2 }, "tags": [{ "id": "title.market_keeper", "label": "坊市守脉人", "strength": 3 }], "memory": "你在坊市尽头盘下一间铺子，也接下了地底灵脉的反噬。" } },
+          { "text": "把灵脉消息高价卖给大宗门", "outcomeText": "宗门接手了灵脉，也接手了整条街。你的铺子换了更大的门面，却再没有真正属于自己的地方。", "effects": [{ "type": "lingshi", "amount": 1400 }, { "type": "fate", "amount": -4 }], "narrative": { "axes": { "ambition": 4, "guile": 3 }, "tags": [{ "id": "deed.sold_spirit_vein", "label": "卖过坊市地底灵脉", "strength": 3 }], "memory": "你把坊市地底的灵脉卖给了大宗门，换了一间更大的铺子。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "border_war",
+    "title": "边地狼烟",
+    "theme": "战争与守护",
+    "stageTitles": ["征召令", "城破之前", "守土或独生"],
+    "stages": [
+      {
+        "description": "边地送来征召令。凡有修为者，都须前往灵脉边城抵御兽潮。征召令上写着你的名字，落款却是三年前已经死去的一位旧将。",
+        "options": [
+          { "text": "应征前往边城", "outcomeText": "边城比传闻更冷。你到的那天，城墙外的兽骨已经堆到一人高。", "effects": [{ "type": "xp", "amount": 6 }], "narrative": { "axes": { "loyalty": 3, "compassion": 2 }, "tags": [{ "id": "deed.answered_border_call", "label": "应召去过边城", "strength": 2 }], "memory": "你曾接到一纸死去旧将署名的征召令，仍去了边城。" } },
+          { "text": "绕开征召，躲进深山闭关", "outcomeText": "闭关的半年里，你的修为涨了。出关后才知道，边城换了三次旗，山外已经没有人记得你的名字。", "effects": [{ "type": "xp", "amount": 12 }], "narrative": { "axes": { "dao": 3, "freedom": 2 }, "tags": [{ "id": "scar.avoided_border_call", "label": "避过一次边地征召", "strength": 2 }], "memory": "边地征召那半年，你躲在深山里闭关，没有下山。" } }
+        ]
+      },
+      {
+        "description": "边城即将失守。城门只能再撑一个时辰，身后还有三千凡人尚未撤完。守将把最后一道传送符交给你，让你先走。",
+        "options": [
+          { "text": "留下守门，替凡人争取时间", "outcomeText": "你守到最后一个凡人出城。传送符在手里化掉时，城门也正好塌下来。", "effects": [{ "type": "injury", "level": "heavy" }, { "type": "fate", "amount": 9 }], "narrative": { "axes": { "compassion": 4, "loyalty": 4 }, "tags": [{ "id": "deed.held_border_gate", "label": "在边城死守过城门", "strength": 3 }], "memory": "边城城破前，你留下来守门，直到最后一个凡人撤走。" } },
+          { "text": "先传走守将与精锐，保存反攻力量", "outcomeText": "你做了最理性的选择。后来反攻成功，史书里写着守将的名字，城门下的三千人只写成一个数字。", "effects": [{ "type": "fate", "amount": -3 }], "narrative": { "axes": { "guile": 4, "ruthless": 2 }, "tags": [{ "id": "scar.left_border_civilians", "label": "城破时放弃过凡人", "strength": 3 }], "memory": "城破之前，你选择先送走守将，把三千凡人留在门内。" } }
+        ]
+      },
+      {
+        "description": "战争结束后，边城重建。有人在城门口立了一块碑，碑上没有你的名字。幸存的凡人却记得那个在最危险时出现过的修士。",
+        "options": [
+          { "text": "留下帮忙重建，直到边城重新有灯", "outcomeText": "你在边城住了三年，教孩子识字，也替新守将修好最后一道阵。离开时，城里第一次亮起了整夜的灯。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "compassion": 4, "attachment": 2 }, "tags": [{ "id": "title.border_guardian", "label": "边城守灯人", "strength": 3 }], "memory": "战争结束后，你在边城留了三年，只为让城门重新亮灯。" } },
+          { "text": "不争名声，独自离开边地", "outcomeText": "你没有回头。后来有人说，城外那座无字碑，其实是为一个不肯留名的修士立的。", "effects": [{ "type": "fate", "amount": 3 }], "narrative": { "axes": { "freedom": 3, "dao": 2 }, "tags": [{ "id": "title.anonymous_guardian", "label": "边城无名守碑人", "strength": 3 }], "memory": "边城重建后，你没有留下名字，只留下了一座无字碑。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "false_accusation",
+    "title": "执法堂旧案",
+    "theme": "清白与代价",
+    "stageTitles": ["一纸传唤", "旧案重审", "清白值几条命"],
+    "stages": [
+      {
+        "description": "执法堂传你问话，说一桩灵石失窃案与你有关。唯一的证物是一枚和你常用的灵牌一模一样的木牌，边缘却多了一道新刻痕。",
+        "options": [
+          { "text": "坦然配合调查，要求公开审理", "outcomeText": "你被关了七日。审理那天，真凶没有出现，但你的灵牌被证明是伪造的。", "effects": [{ "type": "fate", "amount": 3 }], "narrative": { "axes": { "dao": 2, "freedom": 2 }, "tags": [{ "id": "deed.demanded_trial", "label": "要求过公开审理", "strength": 2 }], "memory": "你曾被执法堂误指偷窃，仍要求公开审理。" } },
+          { "text": "花钱打点，尽早脱身", "outcomeText": "你很快出来了，案子却永远没有结。此后执法堂每次清点灵石，都会多看你一眼。", "effects": [{ "type": "lingshi", "amount": -500 }], "narrative": { "axes": { "guile": 3, "freedom": 1 }, "tags": [{ "id": "secret.bribed_discipline", "label": "打点过执法堂", "strength": 2 }], "memory": "你曾花钱打点执法堂，只为尽快从一桩旧案里脱身。" } }
+        ]
+      },
+      {
+        "description": "旧案重审时，你发现真正的窃贼是当年替你作证的人。他如今已经成了执法堂执事，手里还握着能证明你清白的唯一卷宗。",
+        "options": [
+          { "text": "当众揭发，哪怕牵出更大的旧案", "outcomeText": "执事被拿下，宗门里却有一半人开始怕你。你洗清了罪名，也失去了很多本来可以走近的人。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "dao": 4, "loyalty": -1 }, "tags": [{ "id": "title.truth_seeker", "label": "揭开过执法堂旧案", "strength": 3 }], "memory": "你曾当众揭发执法堂执事，洗清了一桩多年前的冤案。" } },
+          { "text": "用卷宗换一次冲关资源", "outcomeText": "卷宗换了资源，你的名字也从案卷上消失。真相留在了别人手里，而你再也没有问过。", "effects": [{ "type": "lingshi", "amount": 700 }, { "type": "fate", "amount": -5 }], "narrative": { "axes": { "guile": 4, "attachment": -2 }, "tags": [{ "id": "scar.buried_truth", "label": "用真相换过资源", "strength": 3 }], "memory": "你曾用一桩旧案的真相，换了一笔冲关资源。" } }
+        ]
+      },
+      {
+        "description": "多年后，一名年轻弟子被指认犯了与你当年相同的罪。他跪在执法堂外，说没有人相信他。你手里有能证明清白的东西，也有能保住自己的沉默。",
+        "options": [
+          { "text": "站出来替他作证，哪怕旧事重提", "outcomeText": "旧案被彻底翻开，你的名字再次被人议论。年轻弟子离开执法堂时，向你行了最重的一礼。", "effects": [{ "type": "fate", "amount": 9 }], "narrative": { "axes": { "compassion": 4, "loyalty": 3 }, "tags": [{ "id": "title.cleared_another", "label": "替后来者洗清过冤屈", "strength": 3 }], "memory": "你曾站出来替一个年轻弟子作证，就像当年没有人替你一样。" } },
+          { "text": "保持沉默，让旧案停在上一代", "outcomeText": "年轻弟子最终没有被处死，却被逐出山门。你偶尔会在坊市看见他，彼此都没有停下脚步。", "effects": [{ "type": "fate", "amount": -3 }], "narrative": { "axes": { "dao": 2, "attachment": -3 }, "tags": [{ "id": "scar.ignored_new_case", "label": "对后来者保持沉默", "strength": 2 }], "memory": "一个年轻弟子被冤屈时，你选择了沉默。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spirit_vein",
+    "title": "一条灵脉",
+    "theme": "资源与众生",
+    "stageTitles": ["无主灵脉", "宗门索地", "灵脉之下"],
+    "stages": [
+      {
+        "description": "你在荒山发现一条刚苏醒的小灵脉。灵脉不大，却足够支撑一个散修安稳修炼百年。山下的村子也在同一天打出了第一口甜水井。",
+        "options": [
+          { "text": "只在灵脉旁开洞府，不惊动山下", "outcomeText": "你与村子隔着一道山脊，各自安静地过日子。偶尔有孩子上山捡柴，会在洞口放一把野果。", "effects": [{ "type": "xp", "amount": 6 }, { "type": "fate", "amount": 3 }], "narrative": { "axes": { "freedom": 2, "compassion": 6 }, "tags": [{ "id": "bond.mountain_village", "label": "与山下村子相安无事", "strength": 2 }], "memory": "你发现一条小灵脉，却没有赶走山下的村子。" } },
+          { "text": "布阵封山，把灵脉据为己有", "outcomeText": "灵脉确实成了你的。村子失去了唯一的水源，一年后只剩几户人家。", "effects": [{ "type": "xp", "amount": 14 }, { "type": "fate", "amount": -5 }], "narrative": { "axes": { "ambition": 4, "ruthless": 2 }, "tags": [{ "id": "scar.seized_spirit_vein", "label": "为灵脉封过山", "strength": 3 }], "memory": "你为一条灵脉封了山，也断掉了山下村子的水源。" } }
+        ]
+      },
+      {
+        "description": "宗门发现这条灵脉，派人来谈。他们愿意给你一个内门名额，条件是灵脉归宗门所有。随行弟子已经在山下丈量地界。",
+        "options": [
+          { "text": "接受名额，让灵脉归宗门管辖", "outcomeText": "你成了内门弟子，山下的村子也得到宗门庇护。只是每次回山，你都要先在牌坊前验明身份。", "effects": [{ "type": "fate", "amount": 4 }], "narrative": { "axes": { "loyalty": 3, "freedom": -2 }, "tags": [{ "id": "path.sect_inner_quota", "label": "以灵脉换内门名额", "strength": 2 }], "memory": "你曾用一条灵脉，换来宗门内门的名额。" } },
+          { "text": "拒绝宗门，联合散修共守灵脉", "outcomeText": "你们守住了灵脉，也从此被宗门记在心上。散修们推你做主事，你第一次有了自己的山头。", "effects": [{ "type": "lingshi", "amount": 300 }, { "type": "fate", "amount": 5 }], "narrative": { "axes": { "freedom": 4, "loyalty": 3 }, "tags": [{ "id": "title.rogue_vein_leader", "label": "散修灵脉主事", "strength": 3 }], "memory": "你曾联合一群散修，从宗门手里守住一条灵脉。" } }
+        ]
+      },
+      {
+        "description": "灵脉深处醒来一条地脉意识。它说若继续开采，山下会地动三年；若封脉，你的洞府也会一同废弃。宗门和村子的代表都在等你决定。",
+        "options": [
+          { "text": "封脉，另寻修炼之地", "outcomeText": "灵脉重新沉入地底，村子保住了。你背着行囊离开荒山，身后有人一直送到山口。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "compassion": 5, "dao": 3 }, "tags": [{ "id": "title.vein_sealed", "label": "亲手封过一条灵脉", "strength": 3 }], "memory": "你曾亲手封掉一条灵脉，只为让山下的人不必流离。" } },
+          { "text": "继续开采，把地脉震压下去", "outcomeText": "灵脉支撑你突破，山下的地动却持续了三年。你离开时，村口那口甜水井已经干了。", "effects": [{ "type": "xp", "amount": 18 }, { "type": "fate", "amount": -7 }], "narrative": { "axes": { "ambition": 5, "ruthless": 3 }, "tags": [{ "id": "scar.drained_spirit_vein", "label": "采空过一条灵脉", "strength": 3 }], "memory": "你采空了一条灵脉，也听见山下地动持续了三年。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ancient_artifact",
+    "title": "器灵开价",
+    "theme": "力量与自我",
+    "stageTitles": ["沉睡古器", "器灵索价", "人器一体"],
+    "stages": [
+      {
+        "description": "一尊残破古鼎从河底浮出。鼎身没有纹饰，内壁却刻满了细小的牙印。你把手放上去时，听见一个孩子般的声音说：终于有人来了。",
+        "options": [
+          { "text": "先问它是什么，再决定是否带走", "outcomeText": "它说自己记不得名字，只记得曾替很多人炼过药。你答应带它走，它便安静地缩成一枚小鼎。", "effects": [{ "type": "fate", "amount": 2 }], "narrative": { "axes": { "compassion": 2, "guile": 1 }, "tags": [{ "id": "bond.ancient_cauldron", "label": "带走一尊有灵古鼎", "strength": 2 }], "memory": "你从河底带走一尊会说话的残破古鼎。" } },
+          { "text": "以灵力强行炼化，抹去器灵", "outcomeText": "器灵的声音断在鼎里。你得到一件很听话的法器，却再也没能在里面炼出有药香的丹。", "effects": [{ "type": "xp", "amount": 10 }], "narrative": { "axes": { "ruthless": 3, "guile": 2 }, "tags": [{ "id": "scar.erased_artifact_soul", "label": "抹去过器灵神智", "strength": 2 }], "memory": "你强行炼化一尊古鼎，抹去了里面孩子般的器灵。" } }
+        ]
+      },
+      {
+        "description": "器灵愿意帮你炼一枚破境丹，但它要你的十年记忆作价。它说那十年里没有大事，只是一些很普通的日子。你甚至想不起具体丢了什么。",
+        "options": [
+          { "text": "拒绝交易，另找丹方", "outcomeText": "器灵没有再劝。你自己花了很久才炼成丹药，期间错过了不止一次机缘。", "effects": [{ "type": "lingshi", "amount": -300 }, { "type": "fate", "amount": 4 }], "narrative": { "axes": { "dao": 3, "attachment": 2 }, "tags": [{ "id": "deed.kept_memories", "label": "拒绝用记忆换丹药", "strength": 3 }], "memory": "器灵要你的十年记忆换一枚丹药，你拒绝了。" } },
+          { "text": "交出十年记忆，换一次破境机会", "outcomeText": "丹药确实成了。此后你总觉得人生少了一截，却连少了哪一截都不知道。", "effects": [{ "type": "xp", "amount": 22 }, { "type": "fate", "amount": -6 }], "narrative": { "axes": { "ambition": 4, "attachment": -3 }, "tags": [{ "id": "scar.memory_for_pill", "label": "用十年记忆换过丹药", "strength": 3 }], "memory": "你曾把十年普通日子交给器灵，换了一枚破境丹。" } }
+        ]
+      },
+      {
+        "description": "古鼎终于恢复完整。器灵说它可以与你合为一体，从此你丹药不愁、法器不坏，但它也会看见你每一次犹豫和恐惧。它问你，是否愿意让它住进识海。",
+        "options": [
+          { "text": "同意共生，接受被它看见", "outcomeText": "古鼎化成一道温热的纹路落在心口。你从此不再独自做决定，也再没有真正孤独过。", "effects": [{ "type": "fate", "amount": 6 }, { "type": "xp", "amount": 8 }], "narrative": { "axes": { "attachment": 4, "loyalty": 2 }, "tags": [{ "id": "title.artifact_symbiosis", "label": "与器灵共生", "strength": 3 }], "memory": "你让一尊古鼎住进识海，从此每一次犹豫都有另一个声音听见。" } },
+          { "text": "把古鼎留在洞府，独自上路", "outcomeText": "器灵没有挽留，只说它会记得你。你走出很远，还能感觉到洞府里有一点微弱的光。", "effects": [{ "type": "fate", "amount": 4 }], "narrative": { "axes": { "freedom": 4, "dao": 2 }, "tags": [{ "id": "title.artifact_farewell", "label": "与器灵各自上路", "strength": 3 }], "memory": "你最终没有让古鼎住进识海，而是把它留在洞府，独自上路。" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ascension_choice",
+    "title": "天门之前",
+    "theme": "飞升与人间",
+    "stageTitles": ["天门初现", "旧人拦路", "飞升或留下"],
+    "stages": [
+      {
+        "description": "你第一次看见天门，是在一次普通打坐中。门缝里透出不属于人界的风，吹得洞府石壁生出一层白霜。门没有开，只是让你知道它一直在。",
+        "options": [
+          { "text": "记住此景，不急着追求飞升", "outcomeText": "天门渐渐隐去。你继续修炼，却从此知道头顶还有一道更高的门。", "effects": [{ "type": "fate", "amount": 3 }], "narrative": { "axes": { "dao": 3, "freedom": 1 }, "tags": [{ "id": "vision.heaven_gate", "label": "见过天门一角", "strength": 2 }], "memory": "你曾在一次普通打坐中，看见天门开过一线。" } },
+          { "text": "以全部灵力推门，试试能否提前进入", "outcomeText": "门缝大了一寸，你也被反震得吐血。此后天门记住了你的气息，比原定时间更早开始注视你。", "effects": [{ "type": "injury", "level": "heavy" }, { "type": "xp", "amount": 8 }], "narrative": { "axes": { "ambition": 4, "dao": 2 }, "tags": [{ "id": "scar.heaven_gate_marked", "label": "被天门提前注视", "strength": 3 }], "memory": "你曾用全部灵力强推天门，被它提前记住了气息。" } }
+        ]
+      },
+      {
+        "description": "飞升之日将近，你在山门前遇见一位旧人。他/她没有修为，已经老得认不清人，却仍守着当年你们一起坐过的那块石头。",
+        "options": [
+          { "text": "留下三日，陪旧人把最后一程走完", "outcomeText": "你错过了一个飞升窗口。旧人走后的第七日，天门才重新出现，门后的风比之前柔和。", "effects": [{ "type": "fate", "amount": 8 }], "narrative": { "axes": { "attachment": 5, "compassion": 3 }, "tags": [{ "id": "title.waited_for_mortal", "label": "为旧人误过天门", "strength": 3 }], "memory": "飞升前，你为一个没有修为的旧人，多留了三天。" } },
+          { "text": "留下一道延寿符，继续准备飞升", "outcomeText": "旧人活了下来，却再也没有认出你。你飞升前回头看了一眼，那块石头上已经没有人。", "effects": [{ "type": "lingshi", "amount": -400 }, { "type": "fate", "amount": -2 }], "narrative": { "axes": { "dao": 3, "attachment": -2 }, "tags": [{ "id": "scar.left_mortal_before_ascension", "label": "带着旧人未了缘飞升", "strength": 2 }], "memory": "飞升前，你只给旧人留了一道延寿符，没有留下自己。" } }
+        ]
+      },
+      {
+        "description": "天门终于完全开启。你可以踏入灵界，也可以转身回到人间。门后传来无数强大的气息，门内则是你守过的山门、旧人和一草一木。",
+        "options": [
+          { "text": "踏入天门，带着此世所有因果", "outcomeText": "你没有斩断任何记忆。天门合上时，人间留下了一阵没有来处的风。", "effects": [{ "type": "fate", "amount": 12 }], "narrative": { "axes": { "dao": 4, "attachment": 3 }, "tags": [{ "id": "title.ascended_with_memory", "label": "带着因果飞升", "strength": 3 }], "memory": "飞升那一刻，你选择把整个人间都带进天门。" } },
+          { "text": "转身回山，留在人间守到下个时代", "outcomeText": "天门在你身后合上。你走回山门，听见新弟子正在念你写下的第一句口诀。", "effects": [{ "type": "fate", "amount": 6 }], "narrative": { "axes": { "compassion": 5, "loyalty": 4 }, "tags": [{ "id": "title.stayed_in_mortal_realm", "label": "留在人间守山", "strength": 3 }], "memory": "天门开启时，你转身回了山门，从此不再问灵界。" } }
+        ]
+      }
+    ]
+  }
+]

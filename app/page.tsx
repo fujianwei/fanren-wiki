@@ -21,16 +21,16 @@ export default function HomePage() {
             踏入修仙之路<br />命运由你掌握
           </h2>
           <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
-            轮回转世，获得灵根<br />
-            历经五大境界，积累资源<br />
-            冲关突破，尝试飞升灵界<br />
-            此生能走多远？
+            抽灵根，得一句命格谶语<br />
+            选择本心，在时间中活过一生<br />
+            守山、远行、结缘、逆命，皆可成道<br />
+            这一世，你会成为谁？
           </p>
           <Link
             href="/game"
             className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
           >
-            开始修仙
+            开始这一世
           </Link>
         </div>
 
