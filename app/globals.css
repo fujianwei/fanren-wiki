@@ -239,3 +239,21 @@ input[type="range"].jade-slider::-moz-range-thumb {
 input[type="range"].jade-slider:disabled {
   opacity: 0.4;
 }
+
+/* 游戏 HUD 工具按钮 */
+.game-tool-button {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid #23382e;
+  background: #0c1511;
+  color: #8faf9f;
+  font-size: 10px;
+  transition: color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.game-tool-button:hover {
+  color: #dff2e7;
+  border-color: #4ade9a66;
+  transform: translateY(-1px);
+}

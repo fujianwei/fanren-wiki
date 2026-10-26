@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <nav
-      className="w-full border-b px-6 py-3 sticky top-0"
+      className="w-full border-b px-3 py-3 sticky top-0 md:px-6"
       style={{
         backgroundColor: "rgba(10,14,13,0.85)",
         backdropFilter: "blur(12px)",
@@ -16,7 +16,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         <Link
           href="/"
-          className="font-serif font-bold text-lg tracking-widest"
+          className="whitespace-nowrap font-serif font-bold text-base tracking-widest md:text-lg"
           style={{
             background: "linear-gradient(90deg, #6fedb5, #d4a843)",
             WebkitBackgroundClip: "text",
@@ -24,12 +24,12 @@ export default function Navbar() {
             backgroundClip: "text",
           }}
         >
-          凡人修仙传·人界篇
+          凡人修仙传<span className="hidden sm:inline">· 人界篇</span>
         </Link>
-        <div className="flex gap-6 text-sm" style={{ color: "#6a8878" }}>
-          <span className="cursor-not-allowed opacity-50" title="敬请期待">人物百科</span>
-          <span className="cursor-not-allowed opacity-50" title="敬请期待">地图势力</span>
-          <span className="cursor-not-allowed opacity-50" title="敬请期待">剧情时间线</span>
+        <div className="flex items-center gap-3 text-sm md:gap-6" style={{ color: "#6a8878" }}>
+          <span className="hidden cursor-not-allowed opacity-50 md:inline" title="敬请期待">人物百科</span>
+          <span className="hidden cursor-not-allowed opacity-50 md:inline" title="敬请期待">地图势力</span>
+          <span className="hidden cursor-not-allowed opacity-50 md:inline" title="敬请期待">剧情时间线</span>
           <Link
             href="/game"
             className="font-medium transition-colors"

@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGame } from "@/components/game/GameProvider";
-import StatusPanel from "@/components/game/StatusPanel";
 import EventCard from "@/components/game/EventCard";
 import MarketModal from "@/components/game/MarketModal";
 import BattleModal from "@/components/game/BattleModal";
@@ -11,8 +11,11 @@ import SectChoiceModal from "@/components/game/SectChoiceModal";
 import SceneBackground from "@/components/game/SceneBackground";
 import FateOpening from "@/components/game/FateOpening";
 import StageFocusPanel from "@/components/game/StageFocusPanel";
-import RelationsPanel from "@/components/game/RelationsPanel";
-import LifeTimeline from "@/components/game/LifeTimeline";
+import GameHud from "@/components/game/GameHud";
+import LifeDrawer from "@/components/game/LifeDrawer";
+import PixelScene from "@/components/game/PixelScene";
+import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
+import { getActionArt, getSceneById, getSceneForEvent } from "@/lib/game/scene-art";
 import itemsData from "@/content/game/items.json";
 import { calcBreakthroughRate, calcFateAscendRate, calcHeartDemonRate, getRealmConfig } from "@/lib/game/engine";
 import { pickStageEvent } from "@/lib/game/event-pool";
@@ -95,6 +98,7 @@ function BreakthroughPanel() {
     ? Math.min(1, calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + ((state.inventory.jiuqu_dan ?? 0) > 0 ? 0.2 : 0))
     : 1;
   const finalRate = details.total * heartRate;
+  const scene = getSceneById(state.realmSlug === "huashen" ? "ascension_choice" : "tribulation");
 
   function attempt() {
     dispatch({ type: "CONSUME_LIFESPAN", years: lifespanCost });
@@ -114,76 +118,51 @@ function BreakthroughPanel() {
     }
   }
 
-  if (result === "success") {
-    return (
-      <div className="rounded-2xl p-7 text-center" style={{ backgroundColor: "#111a16", border: "1px solid #d4a84366" }}>
-        <div className="text-3xl mb-3" style={{ color: "#d4a843" }}>✦</div>
-        <h2 className="font-serif text-xl font-bold mb-2" style={{ color: "#e8c86a" }}>冲关成功</h2>
-        <p className="text-sm leading-7 mb-5" style={{ color: "#b8ccc2" }}>你从这一关活了下来。过去那些年里做错和做对的事，都成了此刻的一部分。</p>
-        <button onClick={() => dispatch({ type: "BREAKTHROUGH_SUCCESS" })} className="btn-primary w-full py-3 rounded-xl text-sm">踏入{REALM_NEXT[state.realmSlug]}</button>
-      </div>
-    );
-  }
-
-  if (result === "fail") {
-    return (
-      <div className="rounded-2xl p-7 text-center" style={{ backgroundColor: "#111a16", border: "1px solid #ef444466" }}>
-        <div className="text-2xl mb-3" style={{ color: "#ef4444" }}>◆</div>
-        <h2 className="font-serif text-xl font-bold mb-2" style={{ color: "#ef8d8d" }}>冲关失败</h2>
-        <p className="text-sm leading-7 mb-5" style={{ color: "#b8ccc2" }}>你退回了原来的境界。失败不会抹掉这一生，但会改变下一次面对天劫时的姿态。</p>
-        <button onClick={() => { dispatch({ type: "BREAKTHROUGH_FAIL" }); dispatch({ type: "ADD_EMOTION", positive: 0, negative: 6 }); setResult(null); }} className="btn-secondary w-full py-3 rounded-xl text-sm">继续活下去</button>
-      </div>
-    );
-  }
-
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#111a16", border: "1px solid #d4a84344" }}>
-      <div className="px-5 py-4" style={{ borderBottom: "1px solid #1a2820" }}>
-        <div className="flex items-center justify-between">
-          <span className="font-serif font-bold" style={{ color: "#d4a843" }}>冲关 · {REALM_NEXT[state.realmSlug]}</span>
-          <span className="text-xs" style={{ color: "#6a8878" }}>寿元消耗 {lifespanCost} 年</span>
+    <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: `1px solid ${result === "fail" ? "#ef6b6255" : "#d4a84355"}`, boxShadow: "0 28px 100px rgba(0,0,0,.34)" }}>
+      <PixelScene scene={scene} priority compact>
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-4 md:px-6 md:pb-5">
+          <div className="mb-1 text-[8px] tracking-[.28em]" style={{ color: "rgba(221,231,225,.55)" }}>{state.realmSlug === "huashen" ? "THE FINAL GATE" : "TRIBULATION"}</div>
+          <h2 className="font-serif text-2xl font-bold" style={{ color: result === "fail" ? "#ff9d95" : "#f1f7f4", textShadow: "0 2px 20px rgba(0,0,0,.9)" }}>
+            {result === "success" ? "冲关成功" : result === "fail" ? "冲关失败" : `冲关 · ${REALM_NEXT[state.realmSlug]}`}
+          </h2>
+          <p className="mt-1 max-w-2xl text-[10px] leading-5 md:text-xs" style={{ color: "rgba(225,235,229,.72)" }}>
+            {result === "success" ? "你从这一关活了下来。过去那些年里做错和做对的事，都成了此刻的一部分。" : result === "fail" ? "你退回了原来的境界。失败不会抹掉这一生，但会改变下一次面对天劫时的姿态。" : "失败不一定死亡。冲关不是唯一的路，换一条路继续走，也许更接近你真正想要的东西。"}
+          </p>
         </div>
-      </div>
-      <div className="p-5">
-        <div className="flex items-baseline justify-between mb-4">
-          <span className="text-xs" style={{ color: "#6a8878" }}>成功率</span>
-          <span className="font-serif text-3xl font-bold" style={{ color: "#f0c96b" }}>{Math.round(finalRate * 100)}%</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2 text-xs mb-5" style={{ color: "#6a8878" }}>
-          <div className="flex justify-between rounded-lg px-3 py-2" style={{ backgroundColor: "#0e1610" }}><span>基础</span><span>{Math.round(details.baseRate * 100)}%</span></div>
-          <div className="flex justify-between rounded-lg px-3 py-2" style={{ backgroundColor: "#0e1610" }}><span>外物</span><span>+{Math.round((details.arrayBonus + details.pillBonus) * 100)}%</span></div>
-          <div className="flex justify-between rounded-lg px-3 py-2" style={{ backgroundColor: "#0e1610" }}><span>根基</span><span>{state.rootIntact ? "+15%" : `-${state.rootDamageCount * 5}%`}</span></div>
-          <div className="flex justify-between rounded-lg px-3 py-2" style={{ backgroundColor: "#0e1610" }}><span>心魔</span><span>×{Math.round(heartRate * 100)}%</span></div>
-        </div>
-        <p className="text-xs leading-relaxed mb-4" style={{ color: "#5f786a" }}>失败不一定死亡，但失败会留下痕迹。冲关不是唯一的路，换一条路继续走，也许更接近你真正想要的东西。</p>
-        <div className="flex gap-2">
-          <button onClick={attempt} className="btn-primary flex-1 py-3 rounded-xl text-sm">渡劫</button>
-          <button onClick={() => dispatch({ type: "CANCEL_BREAKTHROUGH" })} className="btn-secondary flex-1 py-3 rounded-xl text-sm">再等等</button>
-        </div>
-      </div>
-    </div>
-  );
-}
+      </PixelScene>
 
-function InventoryPanel({ onOpen }: { onOpen: () => void }) {
-  const { state } = useGame();
-  return (
-    <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
-      <div className="px-4 py-3 flex items-center justify-between" style={{ borderBottom: "1px solid #1a2820" }}>
-        <span className="font-serif text-sm font-medium" style={{ color: "#e8f0ec" }}>随身之物</span>
-        <span className="text-[10px]" style={{ color: "#4ade9a" }}>灵石 {state.lingshi}</span>
+      <div className="p-4 md:p-5">
+        {result === "success" ? (
+          <button onClick={() => dispatch({ type: "BREAKTHROUGH_SUCCESS" })} className="w-full rounded-xl py-3.5 font-serif text-sm font-bold" style={{ color: "#09110d", backgroundColor: "#d4a843", boxShadow: "0 10px 32px rgba(212,168,67,.18)" }}>踏入{REALM_NEXT[state.realmSlug]}</button>
+        ) : result === "fail" ? (
+          <button onClick={() => { dispatch({ type: "BREAKTHROUGH_FAIL" }); dispatch({ type: "ADD_EMOTION", positive: 0, negative: 6 }); setResult(null); }} className="w-full rounded-xl py-3.5 font-serif text-sm font-bold" style={{ color: "#ffaaa3", border: "1px solid #ef6b6266", backgroundColor: "#1b1010" }}>继续活下去</button>
+        ) : (
+          <>
+            <div className="flex items-end justify-between gap-3">
+              <div>
+                <div className="text-[9px] tracking-[.2em]" style={{ color: "#617f70" }}>成功概率</div>
+                <div className="mt-1 font-serif text-3xl font-bold" style={{ color: "#f0c96b" }}>{Math.round(finalRate * 100)}%</div>
+              </div>
+              <div className="text-right text-[9px] leading-5" style={{ color: "#668375" }}>
+                <div>寿元消耗 {lifespanCost} 年</div>
+                <div>{state.realmSlug === "jiedan" ? "心魔会直接干扰此关" : "失败未必陨落"}</div>
+              </div>
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-2 text-[10px]">
+              <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>基础</span><span>{Math.round(details.baseRate * 100)}%</span></div>
+              <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>外物</span><span>+{Math.round((details.arrayBonus + details.pillBonus) * 100)}%</span></div>
+              <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>根基</span><span>{state.rootIntact ? "+15%" : `-${state.rootDamageCount * 5}%`}</span></div>
+              <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>心魔</span><span>×{Math.round(heartRate * 100)}%</span></div>
+            </div>
+            <div className="mt-3 flex gap-2">
+              <button onClick={attempt} className="flex-1 rounded-xl py-3 font-serif text-sm font-bold" style={{ color: "#0b110d", backgroundColor: "#d4a843" }}>渡劫</button>
+              <button onClick={() => dispatch({ type: "CANCEL_BREAKTHROUGH" })} className="flex-1 rounded-xl py-3 font-serif text-sm" style={{ color: "#91aa9d", border: "1px solid #30453a" }}>再等等</button>
+            </div>
+          </>
+        )}
       </div>
-      <div className="p-3 flex flex-col gap-1.5">
-        {ITEMS.filter((item) => (state.inventory[item.id] ?? 0) > 0).slice(0, 8).map((item) => (
-          <div key={item.id} className="flex items-center justify-between text-xs rounded-lg px-2.5 py-2" style={{ backgroundColor: "#0e1610" }}>
-            <span className="truncate" style={{ color: "#b8ccc2" }}>{item.name}</span>
-            <span style={{ color: "#4ade9a" }}>×{state.inventory[item.id]}</span>
-          </div>
-        ))}
-        {Object.values(state.inventory).every((count) => !count) && <div className="text-xs text-center py-5" style={{ color: "#4a6a58" }}>身无长物</div>}
-      </div>
-      <button onClick={onOpen} className="w-full text-xs py-2.5" style={{ color: "#6a8878", borderTop: "1px solid #1a2820" }}>查看全部</button>
-    </div>
+    </section>
   );
 }
 
@@ -216,22 +195,73 @@ function InventoryModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function PastLifeMirror({ state }: { state: GameState }) {
-  const last = state.meta.lives.at(-1);
-  if (!last) {
-    return <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}><div className="font-serif text-sm mb-2" style={{ color: "#e8f0ec" }}>三生镜</div><div className="text-xs leading-relaxed" style={{ color: "#4a6a58" }}>还没有前世的痕迹。第一世结束后，这里会留下你反复走的那一步。</div></div>;
-  }
-  const verdict = last.prophecyVerdict === "fulfilled" ? "谶语应验" : last.prophecyVerdict === "defied" ? "逆命而行" : "命格未答";
+function JourneyCompanion({ state, onOpenLife }: { state: GameState; onOpenLife: () => void }) {
+  const axes = getDominantAxes(state.narrative, 3);
+  const relation = Object.values(state.relations)
+    .filter((item) => item.status === "active" || item.status === "estranged")
+    .sort((a, b) => (b.affinity + b.trust) - (a.affinity + a.trust))[0];
+  const threads = Object.values(state.narrative.threads)
+    .filter((thread) => thread.status === "open")
+    .slice(0, 3);
+  const lastLife = state.meta.lives.at(-1);
+  const maxAxis = Math.max(1, ...axes.map((axis) => state.narrative.axes[axis]));
+
   return (
-    <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: "#111a16", border: "1px solid #26352d" }}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="font-serif text-sm" style={{ color: "#e8f0ec" }}>三生镜</span>
-        <span className="text-[10px]" style={{ color: "#6a8878" }}>第 {last.lifeNumber} 世</span>
-      </div>
-      <div className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>{last.name} · {last.finalAge}岁 · {last.endingTitle}</div>
-      <div className="text-[10px] mt-2" style={{ color: "#d4a843" }}>{verdict} · {last.prophecyText}</div>
-      {last.karmaMarks[0] && <div className="text-[10px] mt-2" style={{ color: "#6a8878" }}>前世因果：{last.karmaMarks[0]}</div>}
-    </div>
+    <aside className="relative z-10 hidden w-[272px] flex-shrink-0 flex-col gap-3 xl:flex">
+      <section className="overflow-hidden rounded-2xl" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
+        <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid #1d2e26" }}>
+          <span className="font-serif text-sm font-bold" style={{ color: "#e8f0ec" }}>此生正在成为</span>
+          <span className="text-[8px] tracking-[.18em]" style={{ color: "#587466" }}>INNER COMPASS</span>
+        </div>
+        <div className="space-y-3 px-4 py-4">
+          {axes.map((axis, index) => (
+            <div key={axis}>
+              <div className="mb-1 flex items-center justify-between text-[10px]">
+                <span style={{ color: index === 0 ? "#d4a843" : "#9cb1a5" }}>{AXIS_LABELS[axis]}</span>
+                <span style={{ color: "#526e60" }}>{state.narrative.axes[axis] > 0 ? "+" : ""}{state.narrative.axes[axis]}</span>
+              </div>
+              <div className="h-1 overflow-hidden rounded-full" style={{ backgroundColor: "#1a2922" }}>
+                <div className="h-full rounded-full" style={{ width: `${Math.max(4, Math.abs(state.narrative.axes[axis]) / maxAxis * 100)}%`, backgroundColor: index === 0 ? "#d4a843" : "#4f8b70" }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
+        <div className="mb-2 text-[8px] tracking-[.2em]" style={{ color: "#587466" }}>NEAREST BOND</div>
+        {relation ? (
+          <>
+            <div className="font-serif text-sm font-bold" style={{ color: "#dfece5" }}>{relation.name}</div>
+            <div className="mt-1 text-[10px]" style={{ color: relation.affinity < 0 ? "#ef8d8d" : "#7fa08e" }}>{relation.title} · {relation.affinity >= 0 ? "亲近" : "疏离"}</div>
+          </>
+        ) : <div className="text-xs" style={{ color: "#5d786a" }}>此世尚无牵挂之人</div>}
+      </section>
+
+      <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[8px] tracking-[.2em]" style={{ color: "#587466" }}>OPEN THREADS</span>
+          <span className="text-[9px]" style={{ color: "#8a7442" }}>{threads.length} 条</span>
+        </div>
+        {threads.length ? threads.map((thread) => (
+          <div key={thread.threadId} className="mb-1.5 flex items-center gap-2 text-[10px]" style={{ color: "#9fb4a8" }}>
+            <span className="h-1 w-1 rounded-full" style={{ backgroundColor: "#d4a843" }} />
+            {getThreadTitle(thread.threadId)}
+          </div>
+        )) : <div className="text-[10px] leading-5" style={{ color: "#587466" }}>尚无旧事悬在身后。</div>}
+      </section>
+
+      {lastLife && (
+        <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(16,14,8,.8)", border: "1px solid #493a1f" }}>
+          <div className="mb-1 text-[8px] tracking-[.2em]" style={{ color: "#786334" }}>THREE-LIFE MIRROR</div>
+          <div className="text-[11px] leading-5" style={{ color: "#b9aa7a" }}>前世：{lastLife.endingTitle} · {lastLife.finalAge}岁</div>
+        </section>
+      )}
+
+      <button onClick={onOpenLife} className="mt-auto w-full rounded-2xl px-4 py-3 text-center font-serif text-xs" style={{ color: "#a3b8ab", backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #2b4136" }}>
+        查看完整人生档案
+      </button>
+    </aside>
   );
 }
 
@@ -239,7 +269,16 @@ export default function GamePlayPage() {
   const { state, dispatch } = useGame();
   const router = useRouter();
   const [currentEvent, setCurrentEvent] = useState<GameEvent | null>(null);
-  const [eventResult, setEventResult] = useState<{ title: string; choice: string; outcome: string; lines: string[]; story?: string } | null>(null);
+  const [eventResult, setEventResult] = useState<{
+    title: string;
+    choice: string;
+    outcome: string;
+    lines: string[];
+    story?: string;
+    sceneId: string;
+    action: ReturnType<typeof getActionArt>;
+  } | null>(null);
+  const [showLife, setShowLife] = useState(false);
   const [showMarket, setShowMarket] = useState(false);
   const [showInventory, setShowInventory] = useState(false);
   const [showBattle, setShowBattle] = useState(false);
@@ -368,7 +407,15 @@ export default function GamePlayPage() {
       },
     });
 
-    setEventResult({ title: activeEvent.title, choice: option.text, outcome: toneText, lines, story: storyLabel });
+    setEventResult({
+      title: activeEvent.title,
+      choice: option.text,
+      outcome: toneText,
+      lines,
+      story: storyLabel,
+      sceneId: getSceneForEvent(activeEvent, state.realmSlug).id,
+      action: getActionArt(option.text),
+    });
     setCurrentEvent(null);
   }
 
@@ -384,119 +431,142 @@ export default function GamePlayPage() {
   if (state.phase === "gate" || state.phase === "ended") return null;
 
   const isDying = state.injury === "dying";
+  const focusSceneMap: Record<string, string> = {
+    cultivate: "cave",
+    roam: "wilderness",
+    craft: "medicine",
+    sect: "sect",
+    bond: "bonds",
+    heal: "sea",
+  };
+  const latestFocus = state.stageFocus ?? state.focusHistory.at(-1)?.focusId;
+  const currentScene = currentEvent
+    ? getSceneForEvent(currentEvent, state.realmSlug)
+    : state.phase === "breakthrough"
+      ? getSceneById(state.realmSlug === "huashen" ? "ascension_choice" : "tribulation")
+      : isDying
+        ? getSceneById("battle")
+        : getSceneById(latestFocus ? focusSceneMap[latestFocus] ?? "cave" : "cave");
 
   return (
-    <div className="relative max-w-[1380px] mx-auto w-full px-4 md:px-6 py-4 md:py-6 flex flex-col lg:flex-row gap-4" style={{ minHeight: "calc(100vh - 64px)", alignItems: "stretch" }}>
-      <SceneBackground eventId={currentEvent?.id ?? null} realmSlug={state.realmSlug} />
+    <div className="relative min-h-[calc(100vh-64px)] overflow-hidden px-2.5 pb-10 pt-2.5 md:px-4 md:pt-4">
+      <SceneBackground scene={currentScene} />
 
-      <aside className="relative z-10 hidden lg:flex w-56 flex-shrink-0 flex-col gap-3">
-        <InventoryPanel onOpen={() => setShowInventory(true)} />
-        <div className="rounded-2xl p-4" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
-          <div className="text-xs font-medium mb-2" style={{ color: "#e8f0ec" }}>可选去处</div>
-          <button onClick={() => setShowMarket(true)} className="w-full text-xs py-2.5 mb-2 rounded-lg btn-secondary">前往灵市</button>
-          <button onClick={() => { setBattleEnemy(pickBattleEnemy(state.realmSlug)); setShowBattle(true); }} className="w-full text-xs py-2.5 rounded-lg btn-secondary">外出历练</button>
-          {!state.sectPath && <button onClick={() => setShowSectChoice(true)} className="w-full text-xs py-2.5 mt-2 rounded-lg" style={{ color: "#4ade9a", border: "1px solid #4ade9a33" }}>选择道路</button>}
-        </div>
-        <div className="rounded-2xl p-4 flex-1" style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}>
-          <div className="text-xs font-medium mb-2" style={{ color: "#e8f0ec" }}>玩家提示</div>
-          <div className="text-[10px] leading-relaxed" style={{ color: "#4a6a58" }}>阶段重心会影响你会遇见什么。灵根决定起步，不决定终点。</div>
-        </div>
-      </aside>
+      <div className="relative z-10 mx-auto w-full max-w-[1440px]">
+        <GameHud
+          onOpenLife={() => setShowLife(true)}
+          onOpenInventory={() => setShowInventory(true)}
+          onOpenMarket={() => setShowMarket(true)}
+          onBattle={() => { setBattleEnemy(pickBattleEnemy(state.realmSlug)); setShowBattle(true); }}
+        />
 
-      <main className="relative z-10 flex-1 min-w-0 flex flex-col gap-4">
-        <div className="lg:hidden flex gap-2">
-          <button onClick={() => setShowInventory(true)} className="flex-1 py-2.5 rounded-xl text-xs btn-secondary">储物袋</button>
-          <button onClick={() => setShowMarket(true)} className="flex-1 py-2.5 rounded-xl text-xs btn-secondary">灵市</button>
-        </div>
-
-        <StatusPanel />
-
-        {!state.heartIntent ? (
-          <FateOpening state={state} onChoose={(intent) => dispatch({ type: "SET_HEART_INTENT", intent })} />
-        ) : currentEvent ? (
-          <EventCard event={currentEvent} onChoose={chooseOption} />
-        ) : state.phase === "breakthrough" ? (
-          <BreakthroughPanel />
-        ) : isDying ? (
-          <div className="rounded-2xl p-6 text-center" style={{ backgroundColor: "#111a16", border: "1px solid #dc262644" }}>
-            <div className="font-serif text-xl mb-2" style={{ color: "#ef8d8d" }}>你已濒临陨落</div>
-            <p className="text-sm leading-7 mb-5" style={{ color: "#8f6d6d" }}>这一次，先活下来。你可以散财求医，也可以拿寿元换一条命。</p>
-            <div className="flex flex-col sm:flex-row gap-2 justify-center">
-              <button
-                onClick={() => {
-                  if (state.lingshi < 120) return;
-                  dispatch({ type: "ADD_LINGSHI", amount: -120 });
-                  dispatch({ type: "SET_INJURY", level: "heavy" });
-                }}
-                disabled={state.lingshi < 120}
-                className="btn-secondary px-5 py-2.5 rounded-xl text-sm"
-                style={{ opacity: state.lingshi < 120 ? .35 : 1 }}
-              >
-                散尽 120 灵石求医
-              </button>
-              <button
-                onClick={() => {
-                  dispatch({ type: "CONSUME_LIFESPAN", years: 10 });
-                  if (state.lifespan > 10) dispatch({ type: "SET_INJURY", level: "heavy" });
-                }}
-                className="px-5 py-2.5 rounded-xl text-sm"
-                style={{ color: "#ef8d8d", border: "1px solid #ef444444", backgroundColor: "#160d0d" }}
-              >
-                以 10 年寿元换命
-              </button>
-              <button onClick={() => setShowInventory(true)} className="btn-secondary px-5 py-2.5 rounded-xl text-sm">打开储物袋</button>
-            </div>
-          </div>
-        ) : (
-          <>
-            {state.lastSettlement && (
-              <div className="rounded-2xl px-5 py-4" style={{ backgroundColor: "#0e1610", border: "1px solid #26352d" }}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-serif text-sm font-bold" style={{ color: state.lastSettlement.breakthroughReady ? "#d4a843" : "#b8ccc2" }}>{state.lastSettlement.headline}</span>
-                  <span className="text-[10px]" style={{ color: "#4a6a58" }}>{state.lastSettlement.fromAge}–{state.lastSettlement.toAge}岁</span>
+        <div className="flex items-start gap-4">
+          <main className="min-w-0 flex-1">
+            {!state.heartIntent ? (
+              <FateOpening state={state} onChoose={(intent) => dispatch({ type: "SET_HEART_INTENT", intent })} />
+            ) : currentEvent ? (
+              <EventCard event={currentEvent} onChoose={chooseOption} />
+            ) : state.phase === "breakthrough" ? (
+              <BreakthroughPanel />
+            ) : isDying ? (
+              <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #ef6b6266", boxShadow: "0 28px 100px rgba(0,0,0,.38)" }}>
+                <PixelScene scene={getSceneById("battle")} priority compact>
+                  <div className="absolute inset-x-0 bottom-0 px-5 pb-5 md:px-6">
+                    <div className="mb-1 text-[8px] tracking-[.3em]" style={{ color: "rgba(255,190,184,.6)" }}>BETWEEN LIFE AND DEATH</div>
+                    <h1 className="font-serif text-2xl font-bold" style={{ color: "#ff9f96", textShadow: "0 2px 20px rgba(0,0,0,.9)" }}>你已濒临陨落</h1>
+                    <p className="mt-1 text-[10px] leading-5 md:text-xs" style={{ color: "rgba(239,205,200,.72)" }}>这一次，先活下来。你可以散财求医，也可以拿寿元换一条命。</p>
+                  </div>
+                </PixelScene>
+                <div className="flex flex-col gap-2 p-4 sm:flex-row md:p-5">
+                  <button
+                    onClick={() => {
+                      if (state.lingshi < 120) return;
+                      dispatch({ type: "ADD_LINGSHI", amount: -120 });
+                      dispatch({ type: "SET_INJURY", level: "heavy" });
+                    }}
+                    disabled={state.lingshi < 120}
+                    className="flex-1 rounded-xl px-4 py-3 font-serif text-xs"
+                    style={{ opacity: state.lingshi < 120 ? .35 : 1, color: "#f0c96b", border: "1px solid #d4a84355", backgroundColor: "#191409" }}
+                  >
+                    散尽 120 灵石求医
+                  </button>
+                  <button
+                    onClick={() => {
+                      dispatch({ type: "CONSUME_LIFESPAN", years: 10 });
+                      if (state.lifespan > 10) dispatch({ type: "SET_INJURY", level: "heavy" });
+                    }}
+                    className="flex-1 rounded-xl px-4 py-3 font-serif text-xs"
+                    style={{ color: "#ff9f96", border: "1px solid #ef6b6255", backgroundColor: "#1b0e0e" }}
+                  >
+                    以 10 年寿元换命
+                  </button>
+                  <button onClick={() => setShowInventory(true)} className="rounded-xl px-4 py-3 font-serif text-xs" style={{ color: "#94ad9f", border: "1px solid #31473a" }}>打开储物袋</button>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {state.lastSettlement.lines.map((line) => <span key={line} className="text-[10px] px-2 py-1 rounded-full" style={{ color: "#6a8878", backgroundColor: "#111a16" }}>{line}</span>)}
-                </div>
-                {state.lastSettlement.breakthroughReady && <div className="text-[10px] mt-2" style={{ color: "#d4a843" }}>修为已至后期巅峰，可以冲关。</div>}
+              </section>
+            ) : (
+              <div className="space-y-3">
+                {state.lastSettlement && (
+                  <section className="flex flex-col gap-2 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:justify-between" style={{ backgroundColor: "rgba(13,23,18,.90)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-lg font-serif text-[11px]" style={{ color: state.lastSettlement.breakthroughReady ? "#d4a843" : "#6fedb5", backgroundColor: "#111d17", border: "1px solid #2b4236" }}>
+                        {state.lastSettlement.breakthroughReady ? "破" : "岁"}
+                      </span>
+                      <div>
+                        <div className="font-serif text-xs font-bold" style={{ color: state.lastSettlement.breakthroughReady ? "#e8c86a" : "#d8e6df" }}>{state.lastSettlement.headline}</div>
+                        <div className="mt-0.5 text-[9px]" style={{ color: "#678274" }}>{state.lastSettlement.fromAge}–{state.lastSettlement.toAge}岁 · {state.lastSettlement.lines.join(" · ")}</div>
+                      </div>
+                    </div>
+                    {state.lastSettlement.breakthroughReady && <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#d4a843", backgroundColor: "#1a160b", border: "1px solid #d4a84333" }}>修为已至巅峰</span>}
+                  </section>
+                )}
+                <StageFocusPanel state={state} onSelect={(focusId) => dispatch({ type: "SET_STAGE_FOCUS", focusId })} onAdvance={() => dispatch({ type: "ADVANCE_STAGE" })} />
+                {state.xp >= 90 && (
+                  <button
+                    onClick={() => state.realmSlug === "huashen" ? handleAscend() : dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
+                    className="w-full rounded-2xl py-3.5 font-serif text-sm font-bold tracking-[.16em]"
+                    style={{ background: "linear-gradient(135deg, #d4a843, #f0cf78)", color: "#0a0e0d", boxShadow: "0 12px 40px rgba(212,168,67,.16)" }}
+                  >
+                    {state.realmSlug === "huashen" ? "✦ 飞升灵界" : `冲关 · ${REALM_NEXT[state.realmSlug]}`}
+                  </button>
+                )}
               </div>
             )}
-            <StageFocusPanel state={state} onSelect={(focusId) => dispatch({ type: "SET_STAGE_FOCUS", focusId })} onAdvance={() => dispatch({ type: "ADVANCE_STAGE" })} />
-            {state.xp >= 90 && (
-              <button onClick={() => state.realmSlug === "huashen" ? handleAscend() : dispatch({ type: "ATTEMPT_BREAKTHROUGH" })} className="w-full py-3 rounded-xl text-sm font-bold tracking-wider" style={{ backgroundColor: "#d4a843", color: "#0a0e0d" }}>
-                {state.realmSlug === "huashen" ? "✦ 飞升灵界" : `冲关 · ${REALM_NEXT[state.realmSlug]}`}
-              </button>
-            )}
-          </>
-        )}
-      </main>
+          </main>
 
-      <aside className="relative z-10 w-full lg:w-72 flex-shrink-0 flex flex-col gap-3">
-        <PastLifeMirror state={state} />
-        <RelationsPanel state={state} />
-        <LifeTimeline state={state} />
-      </aside>
+          <JourneyCompanion state={state} onOpenLife={() => setShowLife(true)} />
+        </div>
+      </div>
 
+      <LifeDrawer open={showLife} onClose={() => setShowLife(false)} />
       {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
       {showInventory && <InventoryModal onClose={() => setShowInventory(false)} />}
       {showSectChoice && <SectChoiceModal onClose={() => setShowSectChoice(false)} />}
       {showBattle && battleEnemy && <BattleModal enemyName={battleEnemy.name} enemyRealm={battleEnemy.realm} enemyDesc={battleEnemy.desc} onWin={() => {}} onLose={() => {}} onClose={() => { setShowBattle(false); setBattleEnemy(null); }} />}
 
       {eventResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(0,0,0,.72)" }} onClick={(event) => event.target === event.currentTarget && closeResult()}>
-          <div className="w-full max-w-md rounded-2xl overflow-hidden" style={{ backgroundColor: "#111a16", border: "1px solid #26352d" }}>
-            <div className="px-5 py-4" style={{ borderBottom: "1px solid #1a2820" }}>
-              <div className="text-[10px] mb-1" style={{ color: "#6a8878" }}>{eventResult.title}</div>
-              <div className="font-serif text-lg" style={{ color: "#e8f0ec" }}>「{eventResult.choice}」</div>
-              {eventResult.story && <div className="text-[10px] mt-2" style={{ color: "#d4a843" }}>{eventResult.story}</div>}
-            </div>
-            <div className="px-5 py-5">
-              <p className="text-sm leading-7 mb-4" style={{ color: "#b8ccc2" }}>{eventResult.outcome}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {eventResult.lines.map((line) => <span key={line} className="text-[10px] px-2 py-1 rounded-full" style={{ color: "#8fa79a", backgroundColor: "#0e1610" }}>{line}</span>)}
+        <div className="fixed inset-0 z-[70] flex items-center justify-center px-3 py-6" style={{ backgroundColor: "rgba(0,0,0,.76)", backdropFilter: "blur(8px)" }} onClick={(event) => event.target === event.currentTarget && closeResult()}>
+          <div className="w-full max-w-lg overflow-hidden rounded-[24px]" style={{ backgroundColor: "#0d1712", border: "1px solid #30473b", boxShadow: "0 32px 120px rgba(0,0,0,.55)" }}>
+            <PixelScene scene={getSceneById(eventResult.sceneId)} compact>
+              <div className="absolute inset-x-0 bottom-0 flex items-end gap-3 px-4 pb-4 md:px-5">
+                <span className="grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-xl backdrop-blur-md" style={{ color: eventResult.action.accent, backgroundColor: "rgba(7,13,10,.75)", border: `1px solid ${eventResult.action.accent}55` }}>
+                  <Image src={eventResult.action.src} alt="" width={30} height={30} unoptimized style={{ imageRendering: "pixelated" }} />
+                </span>
+                <div className="min-w-0">
+                  <div className="mb-1 flex items-center gap-2 text-[8px] tracking-[.2em]" style={{ color: "rgba(218,232,224,.55)" }}>
+                    <span>{eventResult.title}</span><span>·</span><span style={{ color: eventResult.action.accent }}>{eventResult.action.label}</span>
+                  </div>
+                  <div className="font-serif text-lg font-bold leading-6" style={{ color: "#edf5f1", textShadow: "0 2px 18px rgba(0,0,0,.8)" }}>「{eventResult.choice}」</div>
+                  {eventResult.story && <div className="mt-1 text-[9px]" style={{ color: "#d4a843" }}>{eventResult.story}</div>}
+                </div>
               </div>
+            </PixelScene>
+            <div className="p-4 md:p-5">
+              <p className="mb-4 text-[13px] leading-7" style={{ color: "#b8ccc2" }}>{eventResult.outcome}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {eventResult.lines.map((line) => <span key={line} className="rounded-full px-2 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#0b130f", border: "1px solid #1e3027" }}>{line}</span>)}
+              </div>
+              <button onClick={closeResult} className="mt-4 w-full rounded-xl py-3 font-serif text-xs font-bold tracking-[.12em]" style={{ color: "#07100c", backgroundColor: "#62dca0", boxShadow: "0 8px 28px rgba(74,222,154,.14)" }}>继续活下去</button>
             </div>
-            <div className="px-5 pb-5"><button onClick={closeResult} className="btn-secondary w-full py-3 rounded-xl text-sm">继续活下去</button></div>
           </div>
         </div>
       )}

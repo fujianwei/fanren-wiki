@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useGame } from "@/components/game/GameProvider";
+import PixelScene from "@/components/game/PixelScene";
+import { getSceneById } from "@/lib/game/scene-art";
 import { AXIS_LABELS, buildEndingSummary, getThreadTitle } from "@/lib/game/narrative";
 import type { HeartIntent } from "@/types/game";
 
@@ -40,6 +42,15 @@ function EndingContent() {
   const lastLife = state.meta.lives.at(-1);
   const obsession = lastLife?.selectedObsession ?? state.meta.selectedObsession;
   const color = endingType === "ascend" ? "#d4a843" : fallback.color;
+  const scene = getSceneById(
+    endingType === "ascend" || endingType === "ascend_fail"
+      ? "ascension_choice"
+      : endingType === "death_battle"
+        ? "battle"
+        : endingType === "natural"
+          ? "wilderness"
+          : "tribulation"
+  );
 
   useEffect(() => {
     if (state.phase === "ended" && summary && !state.archived) dispatch({ type: "COMMIT_LIFE" });
@@ -58,22 +69,26 @@ function EndingContent() {
   }
 
   return (
-    <div className="min-h-screen px-4 md:px-6 py-8 md:py-12">
+    <div className="min-h-screen px-3 py-5 md:px-6 md:py-9">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-7">
-          <div className="text-[10px] tracking-[0.4em] mb-3" style={{ color: "#6a8878" }}>THE LEDGER OF A LIFE</div>
-          <h1 className="font-serif text-3xl md:text-5xl font-bold mb-3" style={{ color }}>{summary.title}</h1>
-          <p className="text-sm" style={{ color: "#d4a843" }}>{summary.subtitle}</p>
-        </div>
+        <section className="mb-4 overflow-hidden rounded-[26px]" style={{ border: `1px solid ${color}55`, boxShadow: `0 28px 100px ${color}12` }}>
+          <PixelScene scene={scene} priority>
+            <div className="absolute inset-x-0 bottom-0 px-5 pb-6 text-center md:px-8 md:pb-8">
+              <div className="mb-2 text-[9px] tracking-[0.4em]" style={{ color: "rgba(231,239,234,.55)" }}>THE LEDGER OF A LIFE</div>
+              <h1 className="font-serif text-3xl font-bold md:text-5xl" style={{ color, textShadow: "0 3px 28px rgba(0,0,0,.9)" }}>{summary.title}</h1>
+              <p className="mt-2 text-[11px] md:text-sm" style={{ color: "#ead597", textShadow: "0 1px 12px rgba(0,0,0,.8)" }}>{summary.subtitle}</p>
+            </div>
+          </PixelScene>
+          <div className="flex flex-wrap items-center justify-center gap-2 px-4 py-3" style={{ backgroundColor: "#0c1510", borderTop: "1px solid #263a30" }}>
+            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#d4a843", backgroundColor: "#181408" }}>第 {state.lifeNumber} 世</span>
+            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.characterName} · {state.age}岁</span>
+            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.heartIntent ? INTENTS[state.heartIntent] : "本心未明"}</span>
+          </div>
+        </section>
 
         <div className="grid lg:grid-cols-[1.2fr_.8fr] gap-4">
           <div className="flex flex-col gap-4">
             <section className="rounded-2xl p-6" style={{ backgroundColor: "#111a16", border: `1px solid ${color}44`, boxShadow: `0 24px 90px ${color}0d` }}>
-              <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
-                <span className="text-[10px] px-2.5 py-1 rounded-full" style={{ color: "#d4a843", backgroundColor: "#16140a" }}>第 {state.lifeNumber} 世</span>
-                <span className="text-[10px] px-2.5 py-1 rounded-full" style={{ color: "#8fa79a", backgroundColor: "#0e1610" }}>{state.characterName} · {state.age}岁</span>
-                <span className="text-[10px] px-2.5 py-1 rounded-full" style={{ color: "#8fa79a", backgroundColor: "#0e1610" }}>{state.heartIntent ? INTENTS[state.heartIntent] : "本心未明"}</span>
-              </div>
               <p className="text-sm md:text-base leading-8 text-center mb-6" style={{ color: "#b8ccc2" }}>{summary.narrative}</p>
               <div className="rounded-xl px-5 py-4 mb-4" style={{ backgroundColor: "#0e1610", border: "1px solid #1a2820" }}>
                 <div className="text-[10px] mb-1" style={{ color: "#6a8878" }}>命格谶语 · {state.prophecy.title}</div>
