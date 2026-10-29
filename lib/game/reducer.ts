@@ -1,4 +1,6 @@
 import { calcXpGain, getRealmConfig } from "@/lib/game/engine";
+import { recordLifeInAtlas } from "@/lib/game/atlas";
+import { getDailyCelestial } from "@/lib/game/daily";
 import { getAutoSaveItem, ITEM_MAP } from "@/lib/game/items";
 import { REALM_ORDER } from "@/lib/game/labels";
 import { advanceStage, applyHeartIntent } from "@/lib/game/lifecycle";
@@ -21,7 +23,7 @@ import type { GameAction, GameState, LifeArchive, MetaState, SpiritRoot } from "
 type RealmOrderSlug = (typeof REALM_ORDER)[number];
 
 export const META_SCHEMA_VERSION = 3;
-export const EMPTY_META: MetaState = { schemaVersion: META_SCHEMA_VERSION, lives: [] };
+export const EMPTY_META: MetaState = { schemaVersion: META_SCHEMA_VERSION, lives: [], fateAtlas: {} };
 
 function nextRealm(current: string): RealmOrderSlug | null {
   const idx = REALM_ORDER.indexOf(current as RealmOrderSlug);
@@ -55,10 +57,12 @@ export function createInitialState(
   spiritRoot: SpiritRoot,
   fortune: number,
   meta: MetaState = EMPTY_META,
-  seed?: number
+  seed?: number,
+  options: { runMode?: GameState["runMode"]; dailyKey?: string; celestialId?: string } = {}
 ): GameState {
   const realm = getRealmConfig("lianqi");
   const runSeed = seed != null ? seed >>> 0 : (Date.now() ^ Math.floor(Math.random() * 0x7fffffff)) >>> 0;
+  const celestialId = options.celestialId ?? getDailyCelestial(options.dailyKey).id;
   const age = 12;
   const prophecy = pickProphecy(runSeed);
   const inheritedTag = meta.selectedObsession?.kind === "person" ? `前世执念 · ${meta.selectedObsession.title}` : undefined;
@@ -101,6 +105,11 @@ export function createInitialState(
     turn: 0,
     narrative: createEmptyNarrativeState(),
     endingSummary: null,
+    runMode: options.runMode ?? "free",
+    dailyKey: options.dailyKey,
+    celestialId,
+    lifeOathId: null,
+    lifeOathSkipped: false,
     age,
     stage: 0,
     stageFocus: null,
@@ -117,6 +126,7 @@ export function createInitialState(
       ...meta,
       schemaVersion: META_SCHEMA_VERSION,
       lives: [...meta.lives],
+      fateAtlas: { ...(meta.fateAtlas ?? {}) },
     },
     archived: false,
     lifeNumber,
@@ -165,7 +175,12 @@ function rehydrateRelations(state: GameState): GameState {
     resolvedEventStage: state.resolvedEventStage ?? null,
     flags: state.flags ?? {},
     focusHistory: state.focusHistory ?? [],
-    meta: state.meta ?? EMPTY_META,
+    runMode: state.runMode ?? "free",
+    dailyKey: state.dailyKey,
+    celestialId: state.celestialId ?? getDailyCelestial().id,
+    lifeOathId: state.lifeOathId ?? null,
+    lifeOathSkipped: state.lifeOathSkipped ?? false,
+    meta: state.meta ? { ...state.meta, fateAtlas: state.meta.fateAtlas ?? {} } : EMPTY_META,
     lifeThreads: state.lifeThreads ?? pickLifeThreads(state.runSeed, 4),
     archived: state.archived ?? false,
   };
@@ -174,13 +189,30 @@ function rehydrateRelations(state: GameState): GameState {
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "START_GAME":
-      return createInitialState(action.spiritRoot, action.fortune, state.meta, action.seed);
+      return createInitialState(action.spiritRoot, action.fortune, state.meta, action.seed, {
+        runMode: action.runMode,
+        dailyKey: action.dailyKey,
+        celestialId: action.celestialId,
+      });
 
     case "HYDRATE_RUN":
       return rehydrateRelations(action.state);
 
     case "SET_HEART_INTENT":
       return applyHeartIntent(state, action.intent);
+
+    case "SET_LIFE_OATH":
+      return {
+        ...state,
+        lifeOathId: action.oathId,
+        lifeOathSkipped: action.oathId === null,
+        timeline: appendTimeline(state, {
+          kind: "life",
+          title: action.oathId ? "立下命誓" : "不立命誓",
+          text: action.oathId ? "你把一个愿望留在了这一世，至于能不能做到，要看往后的选择。" : "你没有立誓。此后的路，只凭当下的本心。",
+          accent: action.oathId ? "gold" : "mist",
+        }),
+      };
 
     case "SET_STAGE_FOCUS":
       if (state.phase !== "playing") return state;
@@ -408,7 +440,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         archived: true,
-        meta: { ...state.meta, schemaVersion: META_SCHEMA_VERSION, lives },
+        meta: {
+          ...state.meta,
+          schemaVersion: META_SCHEMA_VERSION,
+          lives,
+          fateAtlas: recordLifeInAtlas(state.meta.fateAtlas, state.narrative.threads, state.lifeNumber),
+        },
       };
     }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { getCelestialById } from "@/lib/game/daily";
 import { getSceneById } from "@/lib/game/scene-art";
 import type { GameState, HeartIntent } from "@/types/game";
 import PixelScene from "./PixelScene";
@@ -13,6 +14,7 @@ const INTENTS: Array<{ id: HeartIntent; icon: string; title: string; text: strin
 
 export default function FateOpening({ state, onChoose }: { state: GameState; onChoose: (intent: HeartIntent) => void }) {
   const lastLife = state.meta.lives.at(-1);
+  const celestial = getCelestialById(state.celestialId);
   const scene = getSceneById("cave");
   return (
     <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #2d4438", boxShadow: "0 28px 100px rgba(0,0,0,.35)" }}>
@@ -25,6 +27,14 @@ export default function FateOpening({ state, onChoose }: { state: GameState; onC
       </PixelScene>
 
       <div className="p-4 md:p-6">
+        <div className="mb-3 rounded-xl px-4 py-3" style={{ backgroundColor: "#101915", border: `1px solid ${celestial.color}33` }}>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-[9px] tracking-[.16em]" style={{ color: celestial.color }}>今日天象 · {celestial.name}</span>
+            <span className="text-[9px]" style={{ color: "#5d786a" }}>{celestial.epithet}</span>
+          </div>
+          <p className="mt-1 text-[10px] leading-5" style={{ color: "#708d7e" }}>{celestial.description}</p>
+        </div>
+
         <div className="mb-4 rounded-2xl px-5 py-4 text-center" style={{ backgroundColor: "#17150b", border: "1px solid #d4a8433d" }}>
           <div className="mb-2 text-[9px] tracking-[.24em]" style={{ color: "#8e7440" }}>你的命格谶语 · {state.prophecy.title}</div>
           <p className="font-serif text-base leading-7 md:text-lg" style={{ color: "#e9d79f" }}>「{state.prophecy.text}」</p>

@@ -19,6 +19,9 @@
 - 死亡后生成组合人生账本、墓志铭、执念和下一世回响。
 - 三世后通过三生镜复盘重复选择。
 - 相同种子重开时保留灵根、命格、命运线和关系，但允许走出不同结果。
+- 每日天象按上海日期确定性变化，首页/出生页可进入“今日同命”。
+- 死亡时显示未见命运线索，并持久化命途图鉴。
+- 出生后可选择命誓，死亡时结算得偿、背弃或未竟。
 
 必须继续保留：
 
@@ -63,6 +66,8 @@
 - `docs/image-prompts/full-pack-v3/batches/`：45 个可直接交给 GPT 的 Markdown 批次
 - `docs/image-prompts/full-pack-v3/manifest.jsonl`
 - `docs/image-prompts/full-pack-v3/checklist.csv`
+- `docs/image-prompts/full-pack-v3/OUTPUT-PATHS.md`：515 张正式图片的目标路径
+- `docs/image-prompts/full-pack-v3/OUTPUT-PATHS.txt`：纯路径清单
 
 ## **三、当前运行时如何选图**
 
@@ -107,6 +112,9 @@
 | 内容结构校验 | `lib/__tests__/content-integrity.test.ts` |
 | 三生镜 | `lib/game/mirror.ts` |
 | 平衡模拟 | `lib/game/simulation.ts` |
+| 每日天象与同命 | `lib/game/daily.ts` |
+| 命誓生成与结算 | `lib/game/oaths.ts` |
+| 命途图鉴与未见命运 | `lib/game/atlas.ts` |
 | 当前场景映射 | `lib/game/scene-art.ts` |
 | 主游戏页面 | `app/game/play/page.tsx` |
 | 结局页面 | `app/game/ending/page.tsx` |
@@ -115,6 +123,8 @@
 | 命途抽屉 | `components/game/LifeDrawer.tsx` |
 | 事件与选项卡片 | `components/game/EventCard.tsx` |
 | 出生灵根页 | `components/game/SpiritRootGate.tsx` |
+| 命誓选择 | `components/game/LifeOathPanel.tsx` |
+| 命途图鉴 | `app/game/atlas/page.tsx` |
 
 ## **六、内容规模**
 

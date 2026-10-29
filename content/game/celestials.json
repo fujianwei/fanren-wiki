@@ -1,0 +1,58 @@
+[
+  {
+    "id": "spirit_tide",
+    "name": "灵潮复苏",
+    "epithet": "山中灵气比往日更盛",
+    "description": "洞府与秘境更容易显出生机，闭关和探索都更值得一试。",
+    "color": "#6fedb5",
+    "categoryWeights": { "normal": 1.3, "dungeon": 1.2, "battle": 0.8, "karma": 1.0 }
+  },
+  {
+    "id": "demon_calamity",
+    "name": "魔劫将至",
+    "epithet": "夜色里的因果更重",
+    "description": "旧怨、禁术与争斗更容易被牵动，保命手段比平日更重要。",
+    "color": "#ef6b62",
+    "categoryWeights": { "normal": 0.95, "dungeon": 1.1, "battle": 1.45, "karma": 1.3 }
+  },
+  {
+    "id": "sect_gathering",
+    "name": "宗门大比",
+    "epithet": "山门钟声传得很远",
+    "description": "同门、长老与竞争关系更容易进入你的这一世。",
+    "color": "#6ea8fe",
+    "categoryWeights": { "normal": 1.15, "dungeon": 0.9, "battle": 1.1, "karma": 1.4 }
+  },
+  {
+    "id": "sea_open",
+    "name": "海禁初开",
+    "epithet": "远方的潮声比平时清楚",
+    "description": "乱星海与海外机缘更容易靠近，留在岸上的人也会听见消息。",
+    "color": "#8bc4ff",
+    "categoryWeights": { "normal": 1.2, "dungeon": 1.25, "battle": 0.95, "karma": 1.0 }
+  },
+  {
+    "id": "mortal_war",
+    "name": "凡世烽烟",
+    "epithet": "山下灯火一夜少了一半",
+    "description": "边城、亲族与凡人的命运更容易被战火牵连。",
+    "color": "#d97a58",
+    "categoryWeights": { "normal": 1.0, "dungeon": 0.85, "battle": 1.35, "karma": 1.25 }
+  },
+  {
+    "id": "quiet_years",
+    "name": "太平年月",
+    "epithet": "山中很久没有陌生人的脚步",
+    "description": "日子更像日子，旧友、亲族和寻常生活更常出现。",
+    "color": "#d4a843",
+    "categoryWeights": { "normal": 1.3, "dungeon": 0.75, "battle": 0.65, "karma": 1.2 }
+  },
+  {
+    "id": "heaven_gaze",
+    "name": "天门垂照",
+    "epithet": "今晚的星子都朝着同一个方向",
+    "description": "古老遗迹、命格与天门相关的因果更容易显现。",
+    "color": "#cdb0ff",
+    "categoryWeights": { "normal": 1.05, "dungeon": 1.25, "battle": 0.9, "karma": 1.25 }
+  }
+]

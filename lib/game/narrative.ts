@@ -1,5 +1,7 @@
 import fateThreadsData from "@/content/game/fate-threads.json";
 import propheciesData from "@/content/game/prophecies.json";
+import { getCelestialById } from "@/lib/game/daily";
+import { evaluateLifeOath, getLifeOath } from "@/lib/game/oaths";
 import { shuffle } from "@/lib/game/random";
 import { relationMood } from "@/lib/game/relations";
 import type {
@@ -369,6 +371,8 @@ export function buildEndingSummary(state: GameState): EndingSummary {
   const open = Object.values(state.narrative.threads).filter((thread) => thread.status === "open");
   const broken = Object.values(state.narrative.threads).filter((thread) => thread.status === "broken");
   const keyMemory = state.narrative.memories.at(-1)?.outcomeText;
+  const oath = getLifeOath(state.lifeOathId);
+  const oathStatus = evaluateLifeOath(state, state.endingType);
   const threadLine =
     resolved.length + broken.length > 0
       ? `有 ${resolved.length + broken.length} 条命运线走到尽头，其中 ${resolved.length} 条得偿，${broken.length} 条断裂。`
@@ -412,5 +416,9 @@ export function buildEndingSummary(state: GameState): EndingSummary {
     achievements: state.narrative.titles,
     obsessions: buildObsessions(state),
     lifeNumber: state.lifeNumber,
+    lifeOathTitle: oath?.title,
+    lifeOathText: oath?.text,
+    lifeOathStatus: oathStatus,
+    celestialName: getCelestialById(state.celestialId).name,
   };
 }

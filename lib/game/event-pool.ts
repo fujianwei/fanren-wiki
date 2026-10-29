@@ -4,6 +4,7 @@ import eventsLianqi from "@/content/game/events-lianqi.json";
 import eventsYuanying from "@/content/game/events-yuanying.json";
 import eventsZhuji from "@/content/game/events-zhuji.json";
 import eventsLife from "@/content/game/events-life.json";
+import { getCelestialWeight } from "@/lib/game/daily";
 import { pickFateThreadEvent } from "@/lib/game/narrative";
 import { createRandom } from "@/lib/game/random";
 import type { EventCondition, GameEvent, GameState } from "@/types/game";
@@ -137,10 +138,11 @@ export function pickStageEvent(state: GameState): GameEvent | null {
   const sorted = [...sourcePool].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
   const topPriority = sorted[0]?.priority ?? 0;
   const priorityPool = sorted.filter((event) => (event.priority ?? 0) === topPriority);
-  const totalWeight = priorityPool.reduce((sum, event) => sum + (event.weight ?? 10), 0);
+  const weightOf = (event: GameEvent) => (event.weight ?? 10) * getCelestialWeight(state.celestialId, event.category);
+  const totalWeight = priorityPool.reduce((sum, event) => sum + weightOf(event), 0);
   let roll = random() * totalWeight;
   for (const event of priorityPool) {
-    roll -= event.weight ?? 10;
+    roll -= weightOf(event);
     if (roll <= 0) return event;
   }
   return priorityPool.at(-1) ?? null;

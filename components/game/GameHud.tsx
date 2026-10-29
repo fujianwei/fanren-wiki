@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useGame } from "./GameProvider";
 import { INTENT_LABELS, REALM_NAMES } from "@/lib/game/labels";
 
@@ -79,6 +80,9 @@ export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onB
               <span className="text-[13px]">道</span><span className="hidden xl:inline">择道</span>
             </button>
           )}
+          <Link href="/game/atlas" className="game-tool-button hidden items-center justify-center gap-1 lg:flex" title="命途图鉴">
+            <span className="text-[13px]">卷</span><span className="hidden xl:inline">图鉴</span>
+          </Link>
           <button onClick={onOpenMarket} className="game-tool-button hidden items-center justify-center gap-1 sm:flex" title="前往灵市">
             <span className="text-[13px]">市</span><span className="hidden xl:inline">灵市</span>
           </button>

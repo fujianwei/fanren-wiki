@@ -6,6 +6,8 @@ export type HeartIntent = "longevity" | "revenge" | "guard" | "freedom";
 export type FocusId = "cultivate" | "roam" | "craft" | "sect" | "bond" | "heal";
 export type RelationKind = "master" | "peer" | "rival" | "kin" | "companion" | "disciple";
 export type ProphecyVerdict = "fulfilled" | "defied" | "unanswered";
+export type RunMode = "free" | "daily";
+export type LifeOathStatus = "fulfilled" | "broken" | "unfinished";
 export type NarrativeAxis =
   | "dao"
   | "compassion"
@@ -132,6 +134,10 @@ export interface EndingSummary {
   achievements?: string[];
   obsessions?: ObsessionOption[];
   lifeNumber?: number;
+  lifeOathTitle?: string;
+  lifeOathText?: string;
+  lifeOathStatus?: LifeOathStatus;
+  celestialName?: string;
 }
 
 export interface RelationState {
@@ -235,12 +241,44 @@ export interface LifeArchive {
   obsessions: ObsessionOption[];
   selectedObsession?: ObsessionOption;
   signature: string;
+  lifeOathId?: string;
+  lifeOathStatus?: LifeOathStatus;
+  celestialName?: string;
+  runMode?: RunMode;
+}
+
+export interface FateAtlasEntry {
+  threadId: string;
+  encountered: boolean;
+  resolved: boolean;
+  broken: boolean;
+  lastLife: number;
+  resolution?: string;
 }
 
 export interface MetaState {
   schemaVersion: number;
   lives: LifeArchive[];
   selectedObsession?: ObsessionOption;
+  fateAtlas?: Record<string, FateAtlasEntry>;
+}
+
+export interface CelestialConfig {
+  id: string;
+  name: string;
+  epithet: string;
+  description: string;
+  color: string;
+  categoryWeights: Partial<Record<GameEvent["category"], number>>;
+}
+
+export interface LifeOathConfig {
+  id: string;
+  title: string;
+  text: string;
+  short: string;
+  icon: string;
+  color: string;
 }
 
 export interface GameState {
@@ -267,6 +305,11 @@ export interface GameState {
   turn: number;
   narrative: NarrativeState;
   endingSummary: EndingSummary | null;
+  runMode: RunMode;
+  dailyKey?: string;
+  celestialId: string;
+  lifeOathId: string | null;
+  lifeOathSkipped: boolean;
   age: number;
   stage: number;
   stageFocus: FocusId | null;
@@ -286,7 +329,7 @@ export interface GameState {
 }
 
 export type GameAction =
-  | { type: "START_GAME"; spiritRoot: SpiritRoot; fortune: number; seed?: number }
+  | { type: "START_GAME"; spiritRoot: SpiritRoot; fortune: number; seed?: number; runMode?: RunMode; dailyKey?: string; celestialId?: string }
   | { type: "CONSUME_LIFESPAN"; years: number }
   | { type: "ADD_XP"; points: number }
   | { type: "ADD_LINGSHI"; amount: number }
@@ -319,6 +362,7 @@ export type GameAction =
   | { type: "APPLY_MODAO_PENALTY" }
   | { type: "HYDRATE_RUN"; state: GameState }
   | { type: "SET_HEART_INTENT"; intent: HeartIntent }
+  | { type: "SET_LIFE_OATH"; oathId: string | null }
   | { type: "SET_STAGE_FOCUS"; focusId: FocusId }
   | { type: "ADVANCE_STAGE" }
   | { type: "ADD_TIMELINE"; entry: Omit<TimelineEntry, "id" | "stage" | "age"> & { id?: string; stage?: number; age?: number } }

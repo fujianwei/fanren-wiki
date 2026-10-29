@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import StatusPanel from "./StatusPanel";
 import RelationsPanel from "./RelationsPanel";
@@ -75,6 +76,9 @@ export default function LifeDrawer({ open, onClose }: { open: boolean; onClose: 
             </div>
           )}
           {tab === "timeline" && <LifeTimeline state={state} />}
+          <Link href="/game/atlas" className="mt-3 block rounded-xl px-4 py-3 text-center text-[10px]" style={{ color: "#d4a843", border: "1px solid #d4a84333", backgroundColor: "#16140a" }} onClick={onClose}>
+            打开命途图鉴
+          </Link>
         </div>
       </aside>
     </div>

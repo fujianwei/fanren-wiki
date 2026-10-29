@@ -13,6 +13,7 @@ import FateOpening from "@/components/game/FateOpening";
 import StageFocusPanel from "@/components/game/StageFocusPanel";
 import GameHud from "@/components/game/GameHud";
 import LifeDrawer from "@/components/game/LifeDrawer";
+import LifeOathPanel from "@/components/game/LifeOathPanel";
 import PixelScene from "@/components/game/PixelScene";
 import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
 import { getActionArt, getSceneById, getSceneForEvent } from "@/lib/game/scene-art";
@@ -465,6 +466,8 @@ export default function GamePlayPage() {
           <main className="min-w-0 flex-1">
             {!state.heartIntent ? (
               <FateOpening state={state} onChoose={(intent) => dispatch({ type: "SET_HEART_INTENT", intent })} />
+            ) : !state.lifeOathId && !state.lifeOathSkipped ? (
+              <LifeOathPanel state={state} onChoose={(oathId) => dispatch({ type: "SET_LIFE_OATH", oathId })} />
             ) : currentEvent ? (
               <EventCard event={currentEvent} onChoose={chooseOption} />
             ) : state.phase === "breakthrough" ? (

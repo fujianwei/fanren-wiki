@@ -1,15 +1,26 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useGame } from "@/components/game/GameProvider";
 import { getSpiritRoot } from "@/lib/game/engine";
+import { getAtlasSummary } from "@/lib/game/atlas";
+import { getDailyContext, getDailyCelestial } from "@/lib/game/daily";
 import { buildThreeLifeMirror } from "@/lib/game/mirror";
 import { AXIS_LABELS } from "@/lib/game/narrative";
-import type { SpiritRoot } from "@/types/game";
+import type { RunMode, SpiritRoot } from "@/types/game";
+
+interface CompleteOptions {
+  runMode?: RunMode;
+  dailyKey?: string;
+  celestialId?: string;
+  seed?: number;
+}
 
 interface Props {
-  onComplete: (spiritRoot: SpiritRoot, fortune: number) => void;
+  onComplete: (spiritRoot: SpiritRoot, fortune: number, options?: CompleteOptions) => void;
+  dailyKey?: string;
 }
 
 function getRootStyle(fortune: number) {
@@ -149,7 +160,7 @@ function BlueFlame() {
   return <canvas ref={canvasRef} style={{ width: 260, height: 150, display: "block" }} />;
 }
 
-export default function SpiritRootGate({ onComplete }: Props) {
+export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
   const { state } = useGame();
   const router = useRouter();
   const [phase, setPhase] = useState<"spinning" | "revealed">("spinning");
@@ -175,9 +186,21 @@ export default function SpiritRootGate({ onComplete }: Props) {
 
   const root = getRootStyle(fortune);
   const spiritRoot = fortune > 0 ? getSpiritRoot(fortune) : null;
+  const daily = getDailyContext(dailyKey);
+  const todayCelestial = getDailyCelestial(dailyKey);
+  const atlas = getAtlasSummary(state.meta);
 
   function handleStart() {
-    if (spiritRoot) onComplete(spiritRoot, fortune);
+    if (spiritRoot) onComplete(spiritRoot, fortune, { runMode: "free", celestialId: todayCelestial.id });
+  }
+
+  function handleDailyStart() {
+    onComplete(daily.spiritRoot, daily.fortune, {
+      runMode: "daily",
+      dailyKey: daily.dateKey,
+      celestialId: daily.celestial.id,
+      seed: daily.seed,
+    });
   }
 
   function handleReroll() {
@@ -270,9 +293,25 @@ export default function SpiritRootGate({ onComplete }: Props) {
               ) : null;
             })()}
 
+            <div className="w-full rounded-xl px-4 py-3 text-left" style={{ backgroundColor: "#101915", border: `1px solid ${todayCelestial.color}35` }}>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[9px] tracking-[.18em]" style={{ color: todayCelestial.color }}>今日天象 · {todayCelestial.name}</span>
+                <span className="text-[9px]" style={{ color: "#5c786a" }}>{daily.dateKey} · {daily.spiritRoot.name}</span>
+              </div>
+              <p className="mt-1 text-[10px] leading-5" style={{ color: "#779285" }}>{todayCelestial.epithet}。{todayCelestial.description}</p>
+            </div>
+
             <button onClick={handleStart} className="btn-primary w-full">
               踏入修仙之路
             </button>
+
+            <button onClick={handleDailyStart} className="btn-secondary w-full">
+              今日同命 · 直接看看这一世
+            </button>
+
+            <Link href="/game/atlas" className="text-[10px]" style={{ color: "#7d998a" }}>
+              命途图鉴 · 已见 {atlas.seen}/{atlas.total} · 未见 {atlas.unseen}
+            </Link>
 
             <button onClick={handleReroll} className="btn-secondary">
               再入轮回，重塑天资

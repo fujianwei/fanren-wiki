@@ -2,7 +2,9 @@
 
 import { useGame } from "./GameProvider";
 import { calcBreakthroughRate } from "@/lib/game/engine";
+import { getCelestialById } from "@/lib/game/daily";
 import { getBreakthroughBonuses } from "@/lib/game/items";
+import { getLifeOath } from "@/lib/game/oaths";
 import { INTENT_LABELS, REALM_NAMES, SECT_LABELS } from "@/lib/game/labels";
 import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
 import { getFocusConfig, getStageYears } from "@/lib/game/lifecycle";
@@ -31,6 +33,8 @@ export default function StatusPanel() {
   const activeThreads = Object.values(narrative.threads).filter((thread) => thread.status === "open");
   const endedThreads = Object.values(narrative.threads).filter((thread) => thread.status !== "open");
   const { arrayBonus, pillBonus } = getBreakthroughBonuses(realmSlug, inventory);
+  const celestial = getCelestialById(state.celestialId);
+  const oath = getLifeOath(state.lifeOathId);
   const rate = calcBreakthroughRate({
     realmSlug,
     xp,
@@ -58,6 +62,10 @@ export default function StatusPanel() {
               {REALM_NAMES[realmSlug]} · {getSubRealm(xp)}
               {heartIntent ? ` · ${INTENT_LABELS[heartIntent]}` : " · 尚未立心"}
               {state.sectPath ? ` · ${SECT_LABELS[state.sectPath]}` : " · 尚未择道"}
+            </div>
+            <div className="mt-1 flex flex-wrap items-center gap-1.5">
+              <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ color: celestial.color, backgroundColor: "#0e1610" }}>{celestial.name}</span>
+              {oath && <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ color: oath.color, backgroundColor: "#0e1610" }}>命誓 · {oath.short}</span>}
             </div>
           </div>
           <div className="text-right">

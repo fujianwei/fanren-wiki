@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useGame } from "@/components/game/GameProvider";
 import PixelScene from "@/components/game/PixelScene";
 import { getSceneById } from "@/lib/game/scene-art";
+import { getAtlasSummary, getUnseenWhisper } from "@/lib/game/atlas";
+import { getDailyContext, getCelestialById } from "@/lib/game/daily";
 import { AXIS_LABELS, buildEndingSummary, getThreadTitle } from "@/lib/game/narrative";
 import { INTENT_LABELS } from "@/lib/game/labels";
 
@@ -35,6 +37,11 @@ function EndingContent() {
   const lastLife = state.meta.lives.at(-1);
   const obsession = lastLife?.selectedObsession ?? state.meta.selectedObsession;
   const color = endingType === "ascend" ? "#d4a843" : fallback.color;
+  const celestial = getCelestialById(state.celestialId);
+  const atlas = getAtlasSummary(state.meta);
+  const unseen = getUnseenWhisper(state.meta, state.runSeed);
+  const daily = getDailyContext();
+  const [shareState, setShareState] = useState("");
   const scene = getSceneById(
     endingType === "ascend" || endingType === "ascend_fail"
       ? "ascension_choice"
@@ -76,6 +83,7 @@ function EndingContent() {
             <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#d4a843", backgroundColor: "#181408" }}>第 {state.lifeNumber} 世</span>
             <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.characterName} · {state.age}岁</span>
             <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.heartIntent ? INTENT_LABELS[state.heartIntent] : "本心未明"}</span>
+            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: celestial.color, backgroundColor: "#101a14" }}>{celestial.name}</span>
           </div>
         </section>
 
@@ -90,6 +98,17 @@ function EndingContent() {
                   {summary.prophecyVerdict === "fulfilled" ? "应验 · 你活成了谶语" : summary.prophecyVerdict === "defied" ? "逆命 · 你走了相反的路" : "未答 · 这句话到最后也没有答案"}
                 </div>
               </div>
+              {summary.lifeOathTitle && (
+                <div className="mb-4 rounded-xl px-5 py-4" style={{ backgroundColor: "#101915", border: "1px solid #26352d" }}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px]" style={{ color: "#8fa79a" }}>命誓 · {summary.lifeOathTitle}</span>
+                    <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ color: summary.lifeOathStatus === "fulfilled" ? "#6fedb5" : summary.lifeOathStatus === "broken" ? "#ef6b62" : "#8fa79a", backgroundColor: "#0e1610" }}>
+                      {summary.lifeOathStatus === "fulfilled" ? "已得偿" : summary.lifeOathStatus === "broken" ? "已背弃" : "未走完"}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-xs leading-6" style={{ color: "#8fa79a" }}>{summary.lifeOathText}</p>
+                </div>
+              )}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {Object.entries(summary.textureAxes ?? {}).map(([key, value]) => (
                   <div key={key} className="rounded-xl px-3 py-3 text-center" style={{ backgroundColor: "#0e1610", border: "1px solid #1a2820" }}>
@@ -166,16 +185,72 @@ function EndingContent() {
               <div className="text-[9px] tracking-widest mt-4" style={{ color: "#3a4a40" }}>{summary.signature}</div>
             </section>
 
+            {unseen && (
+              <section className="rounded-2xl p-5" style={{ backgroundColor: "#101915", border: "1px solid #d4a84333" }}>
+                <div className="text-[9px] tracking-[.25em] mb-2" style={{ color: "#8a7442" }}>未见命运</div>
+                <h2 className="font-serif text-base font-bold" style={{ color: "#e8d79b" }}>你这一世没有走近那条路</h2>
+                <p className="mt-2 text-xs leading-6" style={{ color: "#a7b9ae" }}>{unseen.hint}</p>
+                <Link href="/game/atlas" className="mt-3 inline-block text-[10px]" style={{ color: "#d4a843" }}>命途图鉴 · 已见 {atlas.seen}/{atlas.total} →</Link>
+              </section>
+            )}
+
             <div className="rounded-2xl p-5 text-center" style={{ backgroundColor: "#0e1610", border: "1px solid #26352d" }}>
               <p className="font-serif text-base leading-7 mb-5" style={{ color: "#d9e5de" }}>{summary.epitaph}</p>
               <button
                 onClick={() => {
-                  dispatch({ type: "START_GAME", spiritRoot: state.spiritRoot, fortune: state.fortune, seed: state.runSeed });
+                  dispatch({
+                    type: "START_GAME",
+                    spiritRoot: state.spiritRoot,
+                    fortune: state.fortune,
+                    seed: state.runSeed,
+                    runMode: state.runMode,
+                    dailyKey: state.dailyKey,
+                    celestialId: state.celestialId,
+                  });
                   router.push("/game/play");
                 }}
                 className="btn-primary w-full py-3 rounded-full text-sm"
               >
                 同命重开 · 这次换一条路
+              </button>
+              <button
+                onClick={() => {
+                  const daily = getDailyContext();
+                  dispatch({
+                    type: "START_GAME",
+                    spiritRoot: daily.spiritRoot,
+                    fortune: daily.fortune,
+                    seed: daily.seed,
+                    runMode: "daily",
+                    dailyKey: daily.dateKey,
+                    celestialId: daily.celestial.id,
+                  });
+                  router.push("/game/play");
+                }}
+                className="btn-secondary mt-2 block w-full py-2.5 rounded-full text-sm"
+              >
+                今日同命 · 再活一世
+              </button>
+              <button
+                onClick={async () => {
+                  const text = `《凡人修仙传·修仙人生》
+${summary.title} · ${state.age}岁
+${summary.epitaph}
+${summary.lifeOathTitle ? `命誓：${summary.lifeOathTitle}（${summary.lifeOathStatus === "fulfilled" ? "得偿" : "未竟"}）` : ""}
+同命重开：${window.location.origin}/game?daily=${daily.dateKey}`;
+                  try {
+                    const canShare = "share" in navigator && typeof navigator.share === "function";
+                    if (canShare) await navigator.share({ title: "我这一世的修仙结局", text, url: `${window.location.origin}/game?daily=${daily.dateKey}` });
+                    else await navigator.clipboard.writeText(text);
+                    setShareState(canShare ? "已打开分享" : "分享文案已复制");
+                  } catch {
+                    setShareState("分享已取消");
+                  }
+                }}
+                className="mt-2 block w-full rounded-full py-2.5 text-xs"
+                style={{ color: "#8bc4ff", border: "1px solid #6ea8fe44" }}
+              >
+                {shareState || "分享这一世"}
               </button>
               <Link href="/game" className="btn-secondary block py-2.5 rounded-full text-sm mt-2">重新抽灵根，再入轮回</Link>
               <Link href="/" className="block py-2 text-xs mt-1" style={{ color: "#4a6a58" }}>回到现世</Link>

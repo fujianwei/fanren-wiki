@@ -9,6 +9,8 @@
 - [45 个分批生成索引](full-pack-v3/05-batch-index.md)
 - [515 条机器可读任务](full-pack-v3/manifest.jsonl)
 - [515 行完成清单](full-pack-v3/checklist.csv)
+- [515 张图片输出路径](full-pack-v3/OUTPUT-PATHS.md)
+- [纯路径清单，方便交给 GPT](full-pack-v3/OUTPUT-PATHS.txt)
 
 ## **当前范围**
 

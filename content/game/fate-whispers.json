@@ -1,0 +1,20 @@
+[
+  { "threadId": "wanderer_debt", "hint": "有一条命运，始终从一场雨夜里的旧恩开始。" },
+  { "threadId": "beast_bond", "hint": "山里有一双眼睛记得你，但你从未走近。" },
+  { "threadId": "ancient_tomb", "hint": "山洪冲开过一扇门，门后有人在等一个名字。" },
+  { "threadId": "sect_purge", "hint": "有一张被划去又添上的名单，你一直没有看见。" },
+  { "threadId": "mortal_kin", "hint": "有一封家书没有等到回音，纸边已经发黄。" },
+  { "threadId": "demonic_bargain", "hint": "黑市最深处的册页上，空着一个与你笔迹相同的名字。" },
+  { "threadId": "sword_grave", "hint": "某个子时，一柄没有主人的剑曾经轻轻鸣过。" },
+  { "threadId": "pill_toxin", "hint": "有一炉丹药差一点炼成，炉边的人却先离开了。" },
+  { "threadId": "array_legacy", "hint": "一座残阵仍在等最后一个阵心。" },
+  { "threadId": "rival_brother", "hint": "有人一直在练剑，只为了有一天能站在你面前。" },
+  { "threadId": "master_secret", "hint": "你叫过很多年的那声师尊，背后还有一个旧名。" },
+  { "threadId": "lost_soul", "hint": "镜子里曾有一道不属于你的影子，先于你眨了一次眼。" },
+  { "threadId": "merchant_ledger", "hint": "一本旧账没有结清，收账的人却早已不在。" },
+  { "threadId": "border_war", "hint": "边城的烽火没有烧到你脚下，但有人在那里等过援军。" },
+  { "threadId": "false_accusation", "hint": "执法堂的门曾经为你开过一次，只是你走得太快。" },
+  { "threadId": "spirit_vein", "hint": "地底有一条灵脉醒来过，山下的井水因此甜了一夜。" },
+  { "threadId": "ancient_artifact", "hint": "河底有一尊古鼎，曾用孩童般的声音问‘终于有人来了’。" },
+  { "threadId": "ascension_choice", "hint": "天门曾在你头顶开过一线，你却不知道门后是谁在等。" }
+]
