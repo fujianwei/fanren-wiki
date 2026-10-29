@@ -17,8 +17,8 @@
 ## 交接与美术生产
 
 - 当前状态、未完成项和续接步骤：[`docs/CONTINUATION.md`](docs/CONTINUATION.md)
-- 当前线上占位美术说明：[`docs/image-prompts/pixel-placeholder-replacement-checklist.md`](docs/image-prompts/pixel-placeholder-replacement-checklist.md)
 - 515 张正式美术提示词总入口：[`docs/image-prompts/full-pack-v3/00-README.md`](docs/image-prompts/full-pack-v3/00-README.md)
+- 优秀像素游戏参考与原创边界：[`docs/image-prompts/full-pack-v3/REFERENCE-STYLE-GUIDE.md`](docs/image-prompts/full-pack-v3/REFERENCE-STYLE-GUIDE.md)
 - 分批生成索引：[`docs/image-prompts/full-pack-v3/05-batch-index.md`](docs/image-prompts/full-pack-v3/05-batch-index.md)
 
 > 当前线上仍是 29 张场景占位图和 10 个动作占位图标。正式 515 张图片尚未生成。
