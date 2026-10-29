@@ -59,14 +59,12 @@
 | `batches/26-fate-*.md` 到 `batches/43-fate-*.md` | 每条命运线一个批次，每批 3 个幕次图 + 6 个选项结果图 |
 | `batches/44-ui-scenes.md` | 4 个本心、6 个年度重心、6 个结局 |
 | `batches/45-action-icons.md` | 10 个动作图标 |
-| `03-ui-scenes.md` | UI 场景汇总版 |
-| `04-action-icons.md` | 动作图标汇总版 |
 | `05-batch-index.md` | 45 个批次索引与每批数量 |
 | `manifest.jsonl` | 515 条机器可读任务，含输出路径、来源事件、选项编号与完整提示词 |
 | `checklist.csv` | 515 行逐图完成状态表 |
 | `REFERENCE-STYLE-GUIDE.md` | 优秀像素游戏研究、原创边界与验收标准 |
 
-每个批次同时提供 Markdown 和 JSONL 两种格式。
+每个批次提供直接可读的 Markdown；`manifest.jsonl` 是唯一机器可读总表。
 
 ## **五、推荐生成顺序**
 

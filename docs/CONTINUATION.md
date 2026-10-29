@@ -1,6 +1,6 @@
 # 项目交接与继续开发说明
 
-> 最后更新：2026-10-26。本文是切换对话或更换开发者时的首要入口。
+> 最后更新：2026-10-29。本文是切换对话或更换开发者时的首要入口。
 
 ## **一、当前仓库状态**
 
@@ -60,9 +60,9 @@
 - `docs/image-prompts/full-pack-v3/00-README.md`
 - `docs/image-prompts/full-pack-v3/REFERENCE-STYLE-GUIDE.md`：8 款优秀像素游戏的高层设计参考、原创边界与验收标准
 - `docs/image-prompts/full-pack-v3/05-batch-index.md`
+- `docs/image-prompts/full-pack-v3/batches/`：45 个可直接交给 GPT 的 Markdown 批次
 - `docs/image-prompts/full-pack-v3/manifest.jsonl`
 - `docs/image-prompts/full-pack-v3/checklist.csv`
-- `output/image-prompts/fanren-pixel-pack-v3-full.zip`
 
 ## **三、当前运行时如何选图**
 
@@ -102,6 +102,9 @@
 | 命运线与结局文本 | `lib/game/narrative.ts` |
 | 确定性随机 | `lib/game/random.ts` |
 | 关系生成与漂移 | `lib/game/relations.ts` |
+| 物品效果单一数据源 | `lib/game/items.ts` |
+| 境界、本心与关系标签 | `lib/game/labels.ts` |
+| 内容结构校验 | `lib/__tests__/content-integrity.test.ts` |
 | 三生镜 | `lib/game/mirror.ts` |
 | 平衡模拟 | `lib/game/simulation.ts` |
 | 当前场景映射 | `lib/game/scene-art.ts` |
@@ -148,6 +151,7 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 5. 部分基础事件缺少专属结果文案，仍使用通用兜底。
 6. 乱星海目前是 4 个事件组成的短链，还不是完整大型区域。
 7. 关系事件目前主要以四类初始关系存在，还没有大量专属分支。
+8. 宗门、仇敌、丹药、阵法和条件事件已完成本轮兼容修复，后续改动必须通过 `content-integrity.test.ts`，避免再次出现内容字段被静默忽略。
 
 ## **九、产品材料**
 
@@ -161,11 +165,6 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 ### **验收截图**
 
-- `docs/acceptance/fanren-wiki-life-v2-opening.jpg`
-- `docs/acceptance/fanren-wiki-life-v2-mobile.jpg`
-- `docs/acceptance/fanren-wiki-life-v2-ending.jpg`
-- `docs/acceptance/fanren-wiki-ending-acceptance.jpg`
-- `docs/acceptance/fanren-wiki-production.jpg`
 - `docs/acceptance/fanren-wiki-pixel-redesign.jpg`
 - `docs/acceptance/fanren-wiki-pixel-mobile.png`
 
