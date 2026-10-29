@@ -1,16 +1,8 @@
 "use client";
 
 import { relationMood } from "@/lib/game/relations";
-import type { GameState, RelationKind } from "@/types/game";
-
-const KIND_LABELS: Record<RelationKind, string> = {
-  master: "师门",
-  peer: "道友",
-  rival: "仇怨",
-  kin: "亲族",
-  companion: "道侣",
-  disciple: "弟子",
-};
+import type { GameState } from "@/types/game";
+import { RELATION_KIND_LABELS } from "@/lib/game/labels";
 
 export default function RelationsPanel({ state }: { state: GameState }) {
   const relations = Object.values(state.relations);
@@ -27,7 +19,7 @@ export default function RelationsPanel({ state }: { state: GameState }) {
             <div key={relation.id} className="rounded-xl px-3 py-3" style={{ backgroundColor: "#0e1610", border: "1px solid #1a2820" }}>
               <div className="flex items-center justify-between gap-2 mb-1">
                 <div className="min-w-0">
-                  <span className="text-[9px] px-1.5 py-0.5 rounded-full mr-1.5" style={{ color: relation.kind === "rival" ? "#ef4444" : "#6a8878", backgroundColor: "#111a16" }}>{KIND_LABELS[relation.kind]}</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full mr-1.5" style={{ color: relation.kind === "rival" ? "#ef4444" : "#6a8878", backgroundColor: "#111a16" }}>{RELATION_KIND_LABELS[relation.kind]}</span>
                   <span className="text-xs font-medium" style={{ color: "#d6e2db" }}>{relation.name}</span>
                 </div>
                 <span className="text-[10px] flex-shrink-0" style={{ color: relation.affinity < 0 ? "#ef8d8d" : relation.affinity > 40 ? "#4ade9a" : "#6a8878" }}>{mood}</span>

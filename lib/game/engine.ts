@@ -1,12 +1,6 @@
 import realmsData from "@/content/game/realms.json";
 import spiritRootsData from "@/content/game/spirit-roots.json";
-import type {
-  RealmSlug,
-  SpiritRoot,
-  RealmConfig,
-  LifespanEventType,
-  RetreatDuration,
-} from "@/types/game";
+import type { RealmSlug, SpiritRoot, RealmConfig, SectPath } from "@/types/game";
 
 const realms = realmsData as RealmConfig[];
 const spiritRoots = spiritRootsData as SpiritRoot[];
@@ -43,42 +37,6 @@ export function calcXpGain(
   return Math.max(0, capped);
 }
 
-export function calcLifespanCost(
-  realmSlug: RealmSlug,
-  eventType: LifespanEventType,
-  isModao: boolean = false
-): number {
-  const realm = getRealmConfig(realmSlug);
-  let min: number, max: number;
-
-  if (eventType === "event") { min = realm.eventCost.min; max = realm.eventCost.max; }
-  else if (eventType === "dungeon") { min = realm.dungeonCost.min; max = realm.dungeonCost.max; }
-  else if (eventType === "battle") { min = realm.battleCost.min; max = realm.battleCost.max; }
-  else if (eventType === "retreat_short") { min = max = realm.retreatCost.short; }
-  else if (eventType === "retreat_mid") { min = max = realm.retreatCost.mid; }
-  else { min = max = realm.retreatCost.long; }
-
-  const modaoReduction: Record<RealmSlug, number> = {
-    lianqi: 0.30,
-    zhuji: 0.25,
-    jiedan: 0.20,
-    yuanying: 0.10,
-    huashen: 0.05,
-  };
-
-  const rawCost = min === max ? min : Math.floor(Math.random() * (max - min + 1)) + min;
-
-  if (!isModao) return rawCost;
-
-  // Modao reduction is applied to the range minimum to guarantee the result
-  // is always strictly below the minimum possible non-modao cost
-  return Math.floor(min * (1 - modaoReduction[realmSlug]));
-}
-
-export function isBreakthroughUnlocked(xp: number): boolean {
-  return xp >= 90;
-}
-
 function xpMultiplier(xp: number): number {
   if (xp >= 100) return 1.0;
   if (xp >= 99) return 0.85;
@@ -92,7 +50,7 @@ function toNonNegativeFinite(value: number): number {
   return Math.max(0, value);
 }
 
-export interface BreakthroughParams {
+interface BreakthroughParams {
   realmSlug: RealmSlug;
   xp: number;
   itemBonus: number;
@@ -100,6 +58,7 @@ export interface BreakthroughParams {
   rootIntact: boolean;
   rootDamageCount: number;
   breakthroughExp: number;
+  sectPath?: SectPath | null;
 }
 
 export function calcBreakthroughRate(params: BreakthroughParams): number {
@@ -118,7 +77,8 @@ export function calcBreakthroughRate(params: BreakthroughParams): number {
   const rootDamage = normalizedRootDamage * 0.05;
   const expBonus = Math.min(0.15, normalizedBreakthroughExp / 100);
 
-  const total = base + normalizedItemBonus + lingshiBonus + rootBonus - rootDamage + expBonus;
+  const sectBonus = params.sectPath === "zhengdao" ? 0.05 : 0;
+  const total = base + normalizedItemBonus + lingshiBonus + rootBonus - rootDamage + expBonus + sectBonus;
   return Math.min(0.99, Math.max(0.01, total));
 }
 
@@ -137,15 +97,4 @@ export function calcFateAscendRate(fate: number): number {
   if (fate >= 41) return 0.45;
   if (fate >= 21) return 0.25;
   return 0.10;
-}
-
-export function calcRetreatXp(
-  realmSlug: RealmSlug,
-  duration: RetreatDuration,
-  cultivationMult: number,
-  arrayMult: number = 0
-): number {
-  const realm = getRealmConfig(realmSlug);
-  const base = realm.retreatXp[duration];
-  return Math.round(base * cultivationMult * (1 + arrayMult));
 }

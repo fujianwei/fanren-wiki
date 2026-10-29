@@ -1,6 +1,6 @@
 import type { GameEvent, RealmSlug } from "@/types/game";
 
-export type ActionArtId =
+type ActionArtId =
   | "talk"
   | "fight"
   | "travel"
@@ -51,7 +51,7 @@ const SCENES: Record<string, Omit<SceneArt, "src">> = {
   wilderness: { id: "wilderness", label: "山野独行", accent: "#a4b8ca" },
 };
 
-export const ACTION_ART: Record<ActionArtId, { src: string; label: string; accent: string }> = {
+const ACTION_ART: Record<ActionArtId, { src: string; label: string; accent: string }> = {
   talk: { src: "/game/actions/talk.png", label: "交谈", accent: "#d4a843" },
   fight: { src: "/game/actions/fight.png", label: "争斗", accent: "#ef6b62" },
   travel: { src: "/game/actions/travel.png", label: "远行", accent: "#6ea8fe" },

@@ -16,8 +16,9 @@ import LifeDrawer from "@/components/game/LifeDrawer";
 import PixelScene from "@/components/game/PixelScene";
 import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
 import { getActionArt, getSceneById, getSceneForEvent } from "@/lib/game/scene-art";
-import itemsData from "@/content/game/items.json";
 import { calcBreakthroughRate, calcFateAscendRate, calcHeartDemonRate, getRealmConfig } from "@/lib/game/engine";
+import { getBreakthroughBonuses, getHeartDemonBonus, ITEM_MAP, ITEMS } from "@/lib/game/items";
+import { NEXT_REALM_NAMES } from "@/lib/game/labels";
 import { pickStageEvent } from "@/lib/game/event-pool";
 import type {
   ChoiceMemory,
@@ -25,13 +26,8 @@ import type {
   EventOption,
   GameEvent,
   GameState,
-  ItemConfig,
-  ItemId,
   RealmSlug,
 } from "@/types/game";
-
-const ITEMS = itemsData as ItemConfig[];
-const ITEM_MAP = Object.fromEntries(ITEMS.map((item) => [item.id, item])) as Record<string, ItemConfig>;
 
 const BATTLE_POOL: Record<RealmSlug, Array<{ name: string; desc: string }>> = {
   lianqi: [
@@ -64,10 +60,7 @@ function pickBattleEnemy(realmSlug: RealmSlug) {
 
 function calcBreakthroughDetails(state: GameState) {
   const realm = getRealmConfig(state.realmSlug);
-  const arrayBonus = (state.inventory.tiangang_zhen ?? 0) > 0 ? 0.2 : (state.inventory.huti_zhen ?? 0) > 0 ? 0.12 : (state.inventory.juling_zhen ?? 0) > 0 ? 0.08 : 0;
-  const pillMap: Record<string, ItemId> = { lianqi: "zhuji_dan", zhuji: "jucheng_dan", jiedan: "butian_dan", yuanying: "jiangyun_dan" };
-  const pillId = pillMap[state.realmSlug];
-  const pillBonus = pillId && (state.inventory[pillId] ?? 0) > 0 ? 0.25 : 0;
+  const { pill, array, pillBonus, arrayBonus } = getBreakthroughBonuses(state.realmSlug, state.inventory);
   const total = calcBreakthroughRate({
     realmSlug: state.realmSlug,
     xp: state.xp,
@@ -76,17 +69,10 @@ function calcBreakthroughDetails(state: GameState) {
     rootIntact: state.rootIntact,
     rootDamageCount: state.rootDamageCount,
     breakthroughExp: state.breakthroughExp,
+    sectPath: state.sectPath,
   });
-  return { baseRate: realm.breakthroughRate, arrayBonus, pillBonus, total };
+  return { baseRate: realm.breakthroughRate, arrayBonus, pillBonus, pill, array, total };
 }
-
-const REALM_NEXT: Record<string, string> = {
-  lianqi: "筑基期",
-  zhuji: "结丹期",
-  jiedan: "元婴期",
-  yuanying: "化神期",
-  huashen: "飞升",
-};
 
 function BreakthroughPanel() {
   const { state, dispatch } = useGame();
@@ -95,18 +81,15 @@ function BreakthroughPanel() {
   const [result, setResult] = useState<"success" | "fail" | null>(null);
   const lifespanCost = Math.max(1, Math.round((state.lifespanMax - state.age) * 0.02));
   const heartRate = state.realmSlug === "jiedan"
-    ? Math.min(1, calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + ((state.inventory.jiuqu_dan ?? 0) > 0 ? 0.2 : 0))
+    ? Math.min(1, calcHeartDemonRate(state.emotion.positive, state.emotion.negative) + getHeartDemonBonus(state.inventory))
     : 1;
   const finalRate = details.total * heartRate;
   const scene = getSceneById(state.realmSlug === "huashen" ? "ascension_choice" : "tribulation");
 
   function attempt() {
     dispatch({ type: "CONSUME_LIFESPAN", years: lifespanCost });
-    const pillMap: Record<string, ItemId> = { lianqi: "zhuji_dan", zhuji: "jucheng_dan", jiedan: "butian_dan", yuanying: "jiangyun_dan" };
-    const pill = pillMap[state.realmSlug];
-    if (pill && (state.inventory[pill] ?? 0) > 0) dispatch({ type: "REMOVE_ITEM", itemId: pill });
-    if ((state.inventory.tiangang_zhen ?? 0) > 0) dispatch({ type: "REMOVE_ITEM", itemId: "tiangang_zhen" });
-    else if ((state.inventory.huti_zhen ?? 0) > 0) dispatch({ type: "REMOVE_ITEM", itemId: "huti_zhen" });
+    if (details.pill) dispatch({ type: "REMOVE_ITEM", itemId: details.pill.id });
+    if (details.array) dispatch({ type: "REMOVE_ITEM", itemId: details.array.id });
     if (Math.random() < finalRate) {
       setResult("success");
       return;
@@ -124,7 +107,7 @@ function BreakthroughPanel() {
         <div className="absolute inset-x-0 bottom-0 px-5 pb-4 md:px-6 md:pb-5">
           <div className="mb-1 text-[8px] tracking-[.28em]" style={{ color: "rgba(221,231,225,.55)" }}>{state.realmSlug === "huashen" ? "THE FINAL GATE" : "TRIBULATION"}</div>
           <h2 className="font-serif text-2xl font-bold" style={{ color: result === "fail" ? "#ff9d95" : "#f1f7f4", textShadow: "0 2px 20px rgba(0,0,0,.9)" }}>
-            {result === "success" ? "冲关成功" : result === "fail" ? "冲关失败" : `冲关 · ${REALM_NEXT[state.realmSlug]}`}
+            {result === "success" ? "冲关成功" : result === "fail" ? "冲关失败" : `冲关 · ${NEXT_REALM_NAMES[state.realmSlug]}`}
           </h2>
           <p className="mt-1 max-w-2xl text-[10px] leading-5 md:text-xs" style={{ color: "rgba(225,235,229,.72)" }}>
             {result === "success" ? "你从这一关活了下来。过去那些年里做错和做对的事，都成了此刻的一部分。" : result === "fail" ? "你退回了原来的境界。失败不会抹掉这一生，但会改变下一次面对天劫时的姿态。" : "失败不一定死亡。冲关不是唯一的路，换一条路继续走，也许更接近你真正想要的东西。"}
@@ -134,7 +117,7 @@ function BreakthroughPanel() {
 
       <div className="p-4 md:p-5">
         {result === "success" ? (
-          <button onClick={() => dispatch({ type: "BREAKTHROUGH_SUCCESS" })} className="w-full rounded-xl py-3.5 font-serif text-sm font-bold" style={{ color: "#09110d", backgroundColor: "#d4a843", boxShadow: "0 10px 32px rgba(212,168,67,.18)" }}>踏入{REALM_NEXT[state.realmSlug]}</button>
+          <button onClick={() => dispatch({ type: "BREAKTHROUGH_SUCCESS" })} className="w-full rounded-xl py-3.5 font-serif text-sm font-bold" style={{ color: "#09110d", backgroundColor: "#d4a843", boxShadow: "0 10px 32px rgba(212,168,67,.18)" }}>踏入{NEXT_REALM_NAMES[state.realmSlug]}</button>
         ) : result === "fail" ? (
           <button onClick={() => { dispatch({ type: "BREAKTHROUGH_FAIL" }); dispatch({ type: "ADD_EMOTION", positive: 0, negative: 6 }); setResult(null); }} className="w-full rounded-xl py-3.5 font-serif text-sm font-bold" style={{ color: "#ffaaa3", border: "1px solid #ef6b6266", backgroundColor: "#1b1010" }}>继续活下去</button>
         ) : (
@@ -185,7 +168,9 @@ function InventoryModal({ onClose }: { onClose: () => void }) {
                   <span className="text-xs" style={{ color: "#4ade9a" }}>×{count}</span>
                 </div>
                 <div className="text-[10px] leading-relaxed mt-1" style={{ color: "#4a6a58" }}>{item.description}</div>
-                {count > 0 && item.category !== "breakthrough" && <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id })} className="text-[10px] mt-2 px-2 py-1 rounded-full" style={{ color: "#4ade9a", border: "1px solid #4ade9a33" }}>使用</button>}
+                {count > 0 && item.effect.type === "auto_save" && <div className="mt-2 text-[10px]" style={{ color: "#d4a843" }}>濒死时自动使用</div>}
+                {count > 0 && item.category === "array" && <div className="mt-2 text-[10px]" style={{ color: "#62dca0" }}>持有期间自动生效</div>}
+                {count > 0 && item.category === "mechanism" && item.effect.type !== "auto_save" && <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id })} className="text-[10px] mt-2 px-2 py-1 rounded-full" style={{ color: "#4ade9a", border: "1px solid #4ade9a33" }}>使用</button>}
               </div>
             );
           })}
@@ -282,7 +267,7 @@ export default function GamePlayPage() {
   const [showMarket, setShowMarket] = useState(false);
   const [showInventory, setShowInventory] = useState(false);
   const [showBattle, setShowBattle] = useState(false);
-  const [battleEnemy, setBattleEnemy] = useState<{ name: string; realm: RealmSlug; desc: string } | null>(null);
+  const [battleEnemy, setBattleEnemy] = useState<{ id?: string; name: string; realm: RealmSlug; desc: string } | null>(null);
   const [showSectChoice, setShowSectChoice] = useState(false);
   const processedStage = useRef(-1);
 
@@ -423,6 +408,21 @@ export default function GamePlayPage() {
     setEventResult(null);
   }
 
+  function startBattle() {
+    const knownEnemy = state.enemies[0];
+    if (knownEnemy) {
+      setBattleEnemy({
+        id: knownEnemy.id,
+        name: knownEnemy.name,
+        realm: knownEnemy.realmSlug,
+        desc: "这是你此前结下的一段仇怨。它终于追到了你面前。",
+      });
+    } else {
+      setBattleEnemy(pickBattleEnemy(state.realmSlug));
+    }
+    setShowBattle(true);
+  }
+
   function handleAscend() {
     const random = (Math.sin(state.runSeed + state.stage) + 1) / 2;
     dispatch({ type: "END_GAME", endingType: random < calcFateAscendRate(state.fate) ? "ascend" : "ascend_fail" });
@@ -457,7 +457,8 @@ export default function GamePlayPage() {
           onOpenLife={() => setShowLife(true)}
           onOpenInventory={() => setShowInventory(true)}
           onOpenMarket={() => setShowMarket(true)}
-          onBattle={() => { setBattleEnemy(pickBattleEnemy(state.realmSlug)); setShowBattle(true); }}
+          onBattle={startBattle}
+          onOpenSect={() => setShowSectChoice(true)}
         />
 
         <div className="flex items-start gap-4">
@@ -526,7 +527,7 @@ export default function GamePlayPage() {
                     className="w-full rounded-2xl py-3.5 font-serif text-sm font-bold tracking-[.16em]"
                     style={{ background: "linear-gradient(135deg, #d4a843, #f0cf78)", color: "#0a0e0d", boxShadow: "0 12px 40px rgba(212,168,67,.16)" }}
                   >
-                    {state.realmSlug === "huashen" ? "✦ 飞升灵界" : `冲关 · ${REALM_NEXT[state.realmSlug]}`}
+                    {state.realmSlug === "huashen" ? "✦ 飞升灵界" : `冲关 · ${NEXT_REALM_NAMES[state.realmSlug]}`}
                   </button>
                 )}
               </div>
@@ -541,7 +542,7 @@ export default function GamePlayPage() {
       {showMarket && <MarketModal onClose={() => setShowMarket(false)} />}
       {showInventory && <InventoryModal onClose={() => setShowInventory(false)} />}
       {showSectChoice && <SectChoiceModal onClose={() => setShowSectChoice(false)} />}
-      {showBattle && battleEnemy && <BattleModal enemyName={battleEnemy.name} enemyRealm={battleEnemy.realm} enemyDesc={battleEnemy.desc} onWin={() => {}} onLose={() => {}} onClose={() => { setShowBattle(false); setBattleEnemy(null); }} />}
+      {showBattle && battleEnemy && <BattleModal enemyName={battleEnemy.name} enemyRealm={battleEnemy.realm} enemyDesc={battleEnemy.desc} onWin={() => { if (battleEnemy.id) dispatch({ type: "REMOVE_ENEMY", enemyId: battleEnemy.id }); }} onLose={() => {}} onClose={() => { setShowBattle(false); setBattleEnemy(null); }} />}
 
       {eventResult && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center px-3 py-6" style={{ backgroundColor: "rgba(0,0,0,.76)", backdropFilter: "blur(8px)" }} onClick={(event) => event.target === event.currentTarget && closeResult()}>

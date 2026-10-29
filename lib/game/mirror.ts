@@ -1,7 +1,7 @@
 import { AXIS_LABELS } from "@/lib/game/narrative";
 import type { LifeArchive, NarrativeAxis } from "@/types/game";
 
-export interface MirrorInsight {
+interface MirrorInsight {
   headline: string;
   insight: string;
   axisCounts: Record<string, number>;

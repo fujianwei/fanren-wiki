@@ -82,7 +82,7 @@ const EPITAPHS: Partial<Record<`${NarrativeAxis}:${NarrativeAxis}`, string>> = {
 };
 
 export const FATE_THREADS = fateThreadsData as FateThreadConfig[];
-export const PROPHECIES = propheciesData as ProphecyConfig[];
+const PROPHECIES = propheciesData as ProphecyConfig[];
 
 export function createEmptyNarrativeState(): NarrativeState {
   return {
@@ -113,16 +113,12 @@ export function pickLifeThreads(seed: number, count = 4): string[] {
   return shuffled.slice(0, count).map((thread) => thread.id);
 }
 
-export function getFateThread(threadId: string): FateThreadConfig | undefined {
+function getFateThread(threadId: string): FateThreadConfig | undefined {
   return FATE_THREADS.find((thread) => thread.id === threadId);
 }
 
 export function getThreadTitle(threadId: string): string {
   return getFateThread(threadId)?.title ?? threadId;
-}
-
-export function getThreadStageTitle(threadId: string, stage: number): string {
-  return getFateThread(threadId)?.stageTitles[stage] ?? `第 ${stage + 1} 段`;
 }
 
 export function buildFateThreadEvent(
@@ -136,7 +132,6 @@ export function buildFateThreadEvent(
   return {
     id: `fate:${thread.id}:${stageIndex + 1}`,
     realmSlug,
-    type: "passive",
     category: "karma",
     title: thread.stageTitles[stageIndex] ?? thread.title,
     description: stage.description,
@@ -210,7 +205,6 @@ export function registerThread(
 
 export function applyNarrativeUpdate(
   narrative: NarrativeState,
-  choices: ChoiceMemory[],
   turn: number,
   record: ChoiceMemory,
   axes?: Partial<Record<NarrativeAxis, number>>,
@@ -221,7 +215,7 @@ export function applyNarrativeUpdate(
     resolution?: string;
   },
   storyTurn: number = turn
-): Pick<GameState, "narrative" | "choiceHistory" | "lastThreadTurn"> {
+): Pick<GameState, "narrative"> {
   const nextAxes = { ...narrative.axes };
   for (const axis of NARRATIVE_AXES) {
     nextAxes[axis] = Math.max(-99, Math.min(99, nextAxes[axis] + (axes?.[axis] ?? 0)));
@@ -244,7 +238,6 @@ export function applyNarrativeUpdate(
   }
 
   const nextThreads = { ...narrative.threads };
-  let lastThreadTurn = 0;
   if (threadUpdate) {
     const current = nextThreads[threadUpdate.threadId];
     const stage = (current?.stage ?? 0) + 1;
@@ -263,7 +256,6 @@ export function applyNarrativeUpdate(
       lastAdvancedTurn: storyTurn,
       resolution: threadUpdate.resolution,
     };
-    lastThreadTurn = storyTurn;
   }
 
   const memory = record.outcomeText?.trim() || record.optionText;
@@ -280,8 +272,6 @@ export function applyNarrativeUpdate(
       titles: nextTitles,
       scars: nextScars,
     },
-    choiceHistory: [...choices, nextMemory].slice(-60),
-    lastThreadTurn,
   };
 }
 

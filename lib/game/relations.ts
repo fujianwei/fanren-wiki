@@ -19,7 +19,6 @@ export function createCharacterName(random: () => number): string {
 }
 
 export function createInitialRelations(
-  seed: number,
   random: () => number,
   inheritedTag?: string
 ): Record<string, RelationState> {
@@ -49,10 +48,6 @@ export function createInitialRelations(
     };
   });
   return relations;
-}
-
-export function relationLabel(relation: RelationState): string {
-  return `${relation.title} · ${relation.name}`;
 }
 
 export function relationMood(affinity: number, trust: number): string {
@@ -86,8 +81,4 @@ export function driftRelations(
     };
   }
   return next;
-}
-
-export function activeRelations(relations: Record<string, RelationState>): RelationState[] {
-  return Object.values(relations).filter((relation) => relation.status === "active" || relation.status === "estranged");
 }

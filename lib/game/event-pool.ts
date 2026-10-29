@@ -6,9 +6,9 @@ import eventsZhuji from "@/content/game/events-zhuji.json";
 import eventsLife from "@/content/game/events-life.json";
 import { pickFateThreadEvent } from "@/lib/game/narrative";
 import { createRandom } from "@/lib/game/random";
-import type { EventCondition, GameEvent, GameState, RelationKind } from "@/types/game";
+import type { EventCondition, GameEvent, GameState } from "@/types/game";
 
-export const BASE_EVENTS = [
+const BASE_EVENTS = [
   ...(eventsLianqi as GameEvent[]),
   ...(eventsZhuji as GameEvent[]),
   ...(eventsJiedan as GameEvent[]),
@@ -23,6 +23,8 @@ function flagsMatch(condition: EventCondition["flags"], state: GameState): boole
 }
 
 export function eventMatches(event: GameEvent, state: GameState): boolean {
+  if (event.requiresKarma && !state.eventHistory.includes(event.requiresKarma)) return false;
+  if (event.requiresSect && !state.sectPath) return false;
   const condition = event.condition;
   if (!condition) {
     return event.realmSlug === state.realmSlug;
@@ -69,7 +71,6 @@ function buildObsessionEcho(state: GameState): GameEvent | null {
   return {
     id: `obsession:${obsession.id}`,
     realmSlug: state.realmSlug,
-    type: "passive",
     category: "karma",
     title: "似曾相识",
     description: `你第一次听见“${obsession.title}”这几个字时，心里莫名停了一拍。${obsession.text} 这件事按理说与你无关，可你总觉得，自己曾经错过它一次。`,
@@ -143,8 +144,4 @@ export function pickStageEvent(state: GameState): GameEvent | null {
     if (roll <= 0) return event;
   }
   return priorityPool.at(-1) ?? null;
-}
-
-export function relationOptions(state: GameState): Array<{ kind: RelationKind; name: string }> {
-  return Object.values(state.relations).map((relation) => ({ kind: relation.kind, name: relation.name }));
 }

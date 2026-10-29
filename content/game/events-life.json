@@ -2,7 +2,6 @@
   {
     "id": "life_master_question",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "师尊问心",
     "description": "师尊没有问你的修为，只问你最近一次真心想笑，是在什么时候。",
@@ -78,7 +77,6 @@
   {
     "id": "life_peer_request",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "同门求助",
     "description": "同门抱着一只破损的储物袋来找你，说若不补上这笔亏空，他会被逐出山门。",
@@ -150,7 +148,6 @@
   {
     "id": "life_rival_challenge",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "旧怨堵门",
     "description": "宿敌站在山门外，扬言若你不敢应战，就把你当年的事讲给所有新弟子听。",
@@ -228,7 +225,6 @@
   {
     "id": "life_family_letter",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "故乡来信",
     "description": "凡人亲族托人捎来一封信，说家中老屋漏水，母亲近来常常忘记你的名字。",
@@ -309,7 +305,6 @@
   {
     "id": "life_furnace_crack",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "丹炉生纹",
     "description": "丹炉内壁裂开一道细纹，炉中那枚丹药已到成败边缘。",
@@ -369,7 +364,6 @@
   {
     "id": "life_secret_realm",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "秘境名额",
     "description": "宗门只分到一个秘境名额。执事暗示，若你愿意替他处理一份旧账，这个名额可以归你。",
@@ -385,11 +379,6 @@
             "type": "relation",
             "kind": "master",
             "affinity": -4
-          },
-          {
-            "type": "set_flag",
-            "key": "sect_debt",
-            "value": 1
           }
         ],
         "outcomeText": "你走进秘境时，背后多了一双不肯闭上的眼睛。",
@@ -458,7 +447,6 @@
   {
     "id": "life_sea_map",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "潮汐海图",
     "description": "坊市里有人兜售半张海图，说是乱星海外围的旧航路。卖家不保证它能带你回来。",
@@ -528,7 +516,6 @@
   {
     "id": "life_black_market",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "黑市禁书",
     "description": "黑市摊主把一册无字书推到你面前，说只要一滴血，就能看见别人不肯教的法门。",
@@ -539,11 +526,6 @@
           {
             "type": "lingshi",
             "amount": -160
-          },
-          {
-            "type": "set_flag",
-            "key": "forbidden_book",
-            "value": 1
           }
         ],
         "outcomeText": "你把书藏在床下，此后每晚都觉得洞府里多了一个人的呼吸。",
@@ -601,7 +583,6 @@
   {
     "id": "life_sect_call",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "山门征召",
     "description": "边地传来警讯，宗门召集弟子前往守城。执事说这不是强制，但每个人都知道谁会先被记住。",
@@ -622,11 +603,6 @@
           {
             "type": "fate",
             "amount": 5
-          },
-          {
-            "type": "set_flag",
-            "key": "war_merit",
-            "value": 1
           }
         ],
         "outcomeText": "你在城头守了七天，回来时山门敲了钟。",
@@ -691,7 +667,6 @@
   {
     "id": "life_village_famine",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "山下荒年",
     "description": "山下村庄遭了灾，村民把最后一点粮食送到山门，只求有人替他们去查看水源。",
@@ -711,11 +686,6 @@
             "type": "relation",
             "kind": "kin",
             "affinity": 6
-          },
-          {
-            "type": "set_flag",
-            "key": "village_saved",
-            "value": 1
           }
         ],
         "outcomeText": "你带回一条地下水脉，村庄在后山给你立了一块没有名字的石碑。",
@@ -771,7 +741,6 @@
   {
     "id": "life_heart_demon",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "夜半心魔",
     "description": "闭关至深夜，你听见自己的声音在问：若这一生终究无人记得，你还修什么道？",
@@ -845,7 +814,6 @@
   {
     "id": "life_old_wound",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "旧伤入骨",
     "description": "多年旧伤在潮雨里发作，连吐纳都带着血腥味。药王谷的人说，有两种治法令。",
@@ -884,11 +852,6 @@
           {
             "type": "emotion",
             "negative": 4
-          },
-          {
-            "type": "set_flag",
-            "key": "wound_roots",
-            "value": 1
           }
         ],
         "outcomeText": "你重新握住了剑，手腕里却像藏着一根钉子。",
@@ -920,7 +883,6 @@
   {
     "id": "life_lonely_rain",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "独行夜雨",
     "description": "你在一座陌生小城的客栈里听雨。隔壁桌的修士谈论着某个你曾经认识的人。",
@@ -988,7 +950,6 @@
   {
     "id": "life_friend_wedding",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "旧友来信",
     "description": "多年不联络的道友寄来一张婚宴请帖，落款处仍然是当年那个难看的字。",
@@ -1065,7 +1026,6 @@
   {
     "id": "life_old_teacher",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "旧师传召",
     "description": "师尊已经很多年没有主动召见你。这一次，他让你带上自己最得意的功法。",
@@ -1147,7 +1107,6 @@
   {
     "id": "life_disciple",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "雪夜叩门",
     "description": "一个衣衫单薄的少年在洞府外跪了整夜，说自己没有灵根，却想学剑。",
@@ -1169,11 +1128,6 @@
           {
             "type": "emotion",
             "positive": 5
-          },
-          {
-            "type": "set_flag",
-            "key": "disciple",
-            "value": 1
           }
         ],
         "outcomeText": "你没有给他灵根，只给了他一把木剑。多年后，这把剑挂在山门正堂。",
@@ -1225,7 +1179,6 @@
   {
     "id": "life_sea_voyage",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "乱星海·起航",
     "description": "海图指向一片没有宗门庇护的海域。你可以继续等，也可以趁寿元尚足去看一眼。",
@@ -1311,7 +1264,6 @@
   {
     "id": "life_sea_return",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "乱星海·归来",
     "description": "多年后，一艘没有旗号的船靠岸。船上的人说，海外有一座岛，岛主曾提过你的名字。",
@@ -1326,11 +1278,6 @@
           {
             "type": "injury",
             "level": "heavy"
-          },
-          {
-            "type": "set_flag",
-            "key": "sea_returned",
-            "value": 1
           },
           {
             "type": "xp",
@@ -1389,7 +1336,6 @@
   {
     "id": "life_sea_storm",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "乱星海·黑潮",
     "description": "黑色潮水从海平线压来，船上所有人都被要求把最重的东西丢进海里。",
@@ -1405,11 +1351,6 @@
             "type": "relation",
             "kind": "peer",
             "affinity": 6
-          },
-          {
-            "type": "set_flag",
-            "key": "sea_crew_saved",
-            "value": 1
           }
         ],
         "outcomeText": "你活着回到甲板上，船舱里只剩足够撑到下个港口的粮食。",
@@ -1439,11 +1380,6 @@
             "type": "relation",
             "kind": "peer",
             "affinity": -12
-          },
-          {
-            "type": "set_flag",
-            "key": "sea_crew_lost",
-            "value": 1
           }
         ],
         "outcomeText": "船冲出了黑潮。你没有回头看那些断掉的绳子。",
@@ -1477,7 +1413,6 @@
   {
     "id": "life_quiet_years",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "山中无大事",
     "description": "这一年没有秘境，没有仇家，也没有值得写进史书的机缘。只有春草、旧书和偶尔来访的人。",
@@ -1537,7 +1472,7 @@
       }
     ],
     "source": "life",
-    "weight": 10,
+    "weight": 6,
     "priority": 0,
     "once": false,
     "condition": {
@@ -1545,8 +1480,7 @@
       "focusAny": [
         "heal",
         "bond"
-      ],
-      "weight": 6
+      ]
     }
   }
 ]

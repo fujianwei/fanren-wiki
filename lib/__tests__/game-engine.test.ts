@@ -1,13 +1,10 @@
 import {
   getSpiritRoot,
   calcXpGain,
-  calcLifespanCost,
   calcBreakthroughRate,
   calcHeartDemonRate,
   calcFateAscendRate,
   getRealmConfig,
-  isBreakthroughUnlocked,
-  calcRetreatXp,
 } from "@/lib/game/engine";
 
 describe("getSpiritRoot", () => {
@@ -65,59 +62,6 @@ describe("calcXpGain", () => {
   });
 });
 
-describe("calcLifespanCost", () => {
-  it("炼气期普通事件4-5年范围内", () => {
-    for (let i = 0; i < 50; i++) {
-      const cost = calcLifespanCost("lianqi", "event");
-      expect(cost).toBeGreaterThanOrEqual(4);
-      expect(cost).toBeLessThanOrEqual(5);
-    }
-  });
-  it("结丹期副本50-80年", () => {
-    for (let i = 0; i < 20; i++) {
-      const cost = calcLifespanCost("jiedan", "dungeon");
-      expect(cost).toBeGreaterThanOrEqual(50);
-      expect(cost).toBeLessThanOrEqual(80);
-    }
-  });
-  it("炼气期闭关短期固定3年", () => {
-    expect(calcLifespanCost("lianqi", "retreat_short")).toBe(3);
-  });
-  it("魔道路线炼气期事件消耗-30%", () => {
-    // base is 4-5, modao reduces by 30%
-    // so modao cost should be <= base * 0.7
-    const baseMin = 4, baseMax = 5;
-    for (let i = 0; i < 50; i++) {
-      const modaoCost = calcLifespanCost("lianqi", "event", true);
-      expect(modaoCost).toBeLessThanOrEqual(Math.ceil(baseMax * 0.7));
-      expect(modaoCost).toBeGreaterThanOrEqual(Math.floor(baseMin * 0.7));
-    }
-  });
-  it("魔道路线化神期事件消耗-5%", () => {
-    for (let i = 0; i < 20; i++) {
-      const base = calcLifespanCost("huashen", "event", false);
-      const modao = calcLifespanCost("huashen", "event", true);
-      // modao should be ~5% less, allow for rounding
-      expect(modao).toBeLessThanOrEqual(base);
-    }
-  });
-});
-
-describe("isBreakthroughUnlocked", () => {
-  it("修为<90不可冲关", () => {
-    expect(isBreakthroughUnlocked(89)).toBe(false);
-  });
-  it("修为=90可冲关", () => {
-    expect(isBreakthroughUnlocked(90)).toBe(true);
-  });
-  it("修为=100可冲关", () => {
-    expect(isBreakthroughUnlocked(100)).toBe(true);
-  });
-  it("修为=0不可冲关", () => {
-    expect(isBreakthroughUnlocked(0)).toBe(false);
-  });
-});
-
 describe("calcBreakthroughRate", () => {
   it("炼气期修为100%基础30%", () => {
     const rate = calcBreakthroughRate({
@@ -155,16 +99,16 @@ describe("calcBreakthroughRate", () => {
     });
     expect(rate).toBeCloseTo(0.21, 2);
   });
-  it("筑基丹+15%", () => {
+  it("物品加成+25%", () => {
     const base = calcBreakthroughRate({
       realmSlug: "lianqi", xp: 100, itemBonus: 0,
       lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
     });
     const withDan = calcBreakthroughRate({
-      realmSlug: "lianqi", xp: 100, itemBonus: 0.15,
+      realmSlug: "lianqi", xp: 100, itemBonus: 0.25,
       lingshi: 0, rootIntact: false, rootDamageCount: 0, breakthroughExp: 0,
     });
-    expect(withDan - base).toBeCloseTo(0.15, 2);
+    expect(withDan - base).toBeCloseTo(0.25, 2);
   });
   it("根基稳固+15%", () => {
     const base = calcBreakthroughRate({
@@ -304,23 +248,6 @@ describe("calcFateAscendRate", () => {
   it("天命81-100 -> 85%", () => {
     expect(calcFateAscendRate(90)).toBeCloseTo(0.85);
     expect(calcFateAscendRate(100)).toBeCloseTo(0.85);
-  });
-});
-
-describe("calcRetreatXp", () => {
-  it("炼气期短期三灵根+5", () => {
-    expect(calcRetreatXp("lianqi", "short", 1.0)).toBe(5);
-  });
-  it("炼气期长期天灵根+36", () => {
-    expect(calcRetreatXp("lianqi", "long", 2.0)).toBe(36);
-  });
-  it("炼气期短期伪灵根+2.5->round to 3 or 2", () => {
-    const result = calcRetreatXp("lianqi", "short", 0.5);
-    expect(result).toBe(Math.round(5 * 0.5));
-  });
-  it("聚灵阵+10%", () => {
-    const withArray = calcRetreatXp("lianqi", "short", 1.0, 0.10);
-    expect(withArray).toBe(Math.round(5 * 1.0 * 1.10));
   });
 });
 

@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { useGame } from "./GameProvider";
 import type { RealmSlug } from "@/types/game";
-
-const REALM_ORDER: RealmSlug[] = ["lianqi", "zhuji", "jiedan", "yuanying", "huashen"];
+import { REALM_ORDER } from "@/lib/game/labels";
 
 interface BattleOption {
   text: string;
   score: number; // +1, 0, -1
-  cost?: { lingshi?: number; itemId?: string };
+  cost?: { lingshi?: number };
   desc: string;
 }
 

@@ -1,15 +1,7 @@
-export type SpiritRootType = "tianling" | "shuang" | "san" | "wei";
+type SpiritRootType = "tianling" | "shuang" | "san" | "wei";
 export type RealmSlug = "lianqi" | "zhuji" | "jiedan" | "yuanying" | "huashen";
-export type LifespanEventType =
-  | "event"
-  | "dungeon"
-  | "battle"
-  | "retreat_short"
-  | "retreat_mid"
-  | "retreat_long";
-export type RetreatDuration = "short" | "mid" | "long";
 export type SectPath = "zhengdao" | "modao" | "sanxiu";
-export type InjuryLevel = "none" | "light" | "heavy" | "dying";
+type InjuryLevel = "none" | "light" | "heavy" | "dying";
 export type HeartIntent = "longevity" | "revenge" | "guard" | "freedom";
 export type FocusId = "cultivate" | "roam" | "craft" | "sect" | "bond" | "heal";
 export type RelationKind = "master" | "peer" | "rival" | "kin" | "companion" | "disciple";
@@ -42,14 +34,8 @@ export interface RealmConfig {
   name: string;
   normalLifespan: number;
   limitLifespan: number;
-  eventCost: { min: number; max: number };
-  dungeonCost: { min: number; max: number };
-  battleCost: { min: number; max: number };
-  retreatCost: { short: number; mid: number; long: number };
-  retreatXp: { short: number; mid: number; long: number };
   breakthroughRate: number;
   failDeathRate: number;
-  breakthroughCost: number;
 }
 
 export interface ItemConfig {
@@ -62,7 +48,7 @@ export interface ItemConfig {
   effect: ItemEffect;
 }
 
-export type ItemEffect =
+type ItemEffect =
   | { type: "heal_injury" }
   | { type: "add_xp"; amount: number }
   | { type: "add_xp_flat"; amount: number }
@@ -71,11 +57,11 @@ export type ItemEffect =
   | { type: "auto_save" }
   | { type: "breakthrough_bonus"; realmFrom: RealmSlug; bonus: number }
   | { type: "heart_demon_bonus"; bonus: number }
-  | { type: "retreat_xp_bonus"; mult: number; breakthrough_bonus: number; dungeon_safe: boolean };
+  | { type: "retreat_xp_bonus"; mult: number; breakthrough_bonus: number };
 
 export type Inventory = Partial<Record<ItemId, number>>;
 
-export interface EmotionState {
+interface EmotionState {
   positive: number;
   negative: number;
 }
@@ -161,7 +147,7 @@ export interface RelationState {
   memory?: string;
 }
 
-export type TimelineKind =
+type TimelineKind =
   | "life"
   | "focus"
   | "choice"
@@ -279,9 +265,7 @@ export interface GameState {
   eventHistory: string[];
   runSeed: number;
   turn: number;
-  lastThreadTurn: number;
   narrative: NarrativeState;
-  choiceHistory: ChoiceMemory[];
   endingSummary: EndingSummary | null;
   age: number;
   stage: number;
@@ -331,7 +315,6 @@ export type GameAction =
   | { type: "BREAKTHROUGH_SUCCESS" }
   | { type: "BREAKTHROUGH_FAIL" }
   | { type: "END_GAME"; endingType: GameState["endingType"] }
-  | { type: "SET_ENDING_SUMMARY"; summary: EndingSummary }
   | { type: "SET_SECT_PATH"; sectPath: SectPath }
   | { type: "APPLY_MODAO_PENALTY" }
   | { type: "HYDRATE_RUN"; state: GameState }
@@ -342,10 +325,9 @@ export type GameAction =
   | { type: "UPDATE_RELATION"; kind: RelationKind; affinity?: number; trust?: number; status?: RelationState["status"]; memory?: string; tag?: string }
   | { type: "SET_FLAG"; key: string; value: boolean | number | string }
   | { type: "COMMIT_LIFE" }
-  | { type: "SET_OBSESSION"; obsession: ObsessionOption }
-  | { type: "RESET_RUN" };
+  | { type: "SET_OBSESSION"; obsession: ObsessionOption };
 
-export interface FateThreadOption {
+interface FateThreadOption {
   text: string;
   outcomeText: string;
   effects: EventEffect[];
@@ -358,7 +340,7 @@ export interface FateThreadOption {
   };
 }
 
-export interface FateThreadStage {
+interface FateThreadStage {
   description: string;
   options: FateThreadOption[];
 }
@@ -374,7 +356,6 @@ export interface FateThreadConfig {
 export interface GameEvent {
   id: string;
   realmSlug: RealmSlug;
-  type: "passive" | "active";
   category: "normal" | "karma" | "dungeon" | "battle";
   title: string;
   description: string;
@@ -391,6 +372,8 @@ export interface GameEvent {
   cooldownStages?: number;
   priority?: number;
   source?: "base" | "life" | "fate";
+  requiresKarma?: string;
+  requiresSect?: boolean;
 }
 
 export interface EventCondition {

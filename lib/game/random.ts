@@ -1,4 +1,4 @@
-export function hashString(value: string): number {
+function hashString(value: string): number {
   let hash = 2166136261;
   for (let index = 0; index < value.length; index += 1) {
     hash ^= value.charCodeAt(index);
@@ -20,11 +20,6 @@ export function createRandom(seed: number, stream: string | number = "global") {
 
 export function randomPick<T>(items: readonly T[], random: () => number): T {
   return items[Math.floor(random() * items.length)];
-}
-
-export function randomInt(min: number, max: number, random: () => number): number {
-  if (max <= min) return min;
-  return Math.floor(random() * (max - min + 1)) + min;
 }
 
 export function shuffle<T>(items: readonly T[], random: () => number): T[] {

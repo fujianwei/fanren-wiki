@@ -1,3 +1,4 @@
+import spiritRootsData from "@/content/game/spirit-roots.json";
 import { pickStageEvent } from "@/lib/game/event-pool";
 import { FOCUSES } from "@/lib/game/lifecycle";
 import { buildEndingSummary, FATE_THREADS } from "@/lib/game/narrative";
@@ -10,12 +11,7 @@ import type {
   SpiritRoot,
 } from "@/types/game";
 
-const ROOTS: SpiritRoot[] = [
-  { type: "tianling", name: "天灵根", cultivationMult: 1.3, fortuneRange: [91, 100] },
-  { type: "shuang", name: "双灵根", cultivationMult: 1.15, fortuneRange: [81, 90] },
-  { type: "san", name: "三灵根", cultivationMult: 1, fortuneRange: [51, 80] },
-  { type: "wei", name: "伪灵根", cultivationMult: 0.85, fortuneRange: [1, 50] },
-];
+const ROOTS = spiritRootsData as SpiritRoot[];
 const INTENTS: HeartIntent[] = ["longevity", "revenge", "guard", "freedom"];
 
 function applySimulatedEffect(state: GameState, effect: EventEffect, eventId: string): GameState {
@@ -86,12 +82,12 @@ function chooseSimulatedOption(state: GameState, option: EventOption, optionInde
   });
 }
 
-export interface LifeSimulationResult {
+interface LifeSimulationResult {
   state: GameState;
   stages: number;
 }
 
-export function simulateLife(seed: number, root: SpiritRoot, intent: HeartIntent, maxStages = 60): LifeSimulationResult {
+function simulateLife(seed: number, root: SpiritRoot, intent: HeartIntent, maxStages = 60): LifeSimulationResult {
   let state = createInitialState(root, 50 + (seed % 51), undefined, seed);
   state = gameReducer(state, { type: "SET_HEART_INTENT", intent });
   let stages = 0;
@@ -136,7 +132,7 @@ export function simulateLife(seed: number, root: SpiritRoot, intent: HeartIntent
   return { state, stages };
 }
 
-export interface BalanceSummary {
+interface BalanceSummary {
   lives: number;
   minAge: number;
   maxAge: number;

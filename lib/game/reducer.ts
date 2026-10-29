@@ -1,5 +1,6 @@
-import itemsData from "@/content/game/items.json";
 import { calcXpGain, getRealmConfig } from "@/lib/game/engine";
+import { getAutoSaveItem, ITEM_MAP } from "@/lib/game/items";
+import { REALM_ORDER } from "@/lib/game/labels";
 import { advanceStage, applyHeartIntent } from "@/lib/game/lifecycle";
 import {
   applyNarrativeUpdate,
@@ -15,18 +16,9 @@ import {
 } from "@/lib/game/narrative";
 import { createRandom } from "@/lib/game/random";
 import { createCharacterName, createInitialRelations } from "@/lib/game/relations";
-import type {
-  GameAction,
-  GameState,
-  ItemConfig,
-  LifeArchive,
-  MetaState,
-  SpiritRoot,
-} from "@/types/game";
+import type { GameAction, GameState, LifeArchive, MetaState, SpiritRoot } from "@/types/game";
 
-const REALM_ORDER = ["lianqi", "zhuji", "jiedan", "yuanying", "huashen"] as const;
 type RealmOrderSlug = (typeof REALM_ORDER)[number];
-const items = itemsData as ItemConfig[];
 
 export const META_SCHEMA_VERSION = 3;
 export const EMPTY_META: MetaState = { schemaVersion: META_SCHEMA_VERSION, lives: [] };
@@ -70,7 +62,7 @@ export function createInitialState(
   const age = 12;
   const prophecy = pickProphecy(runSeed);
   const inheritedTag = meta.selectedObsession?.kind === "person" ? `前世执念 · ${meta.selectedObsession.title}` : undefined;
-  const relations = createInitialRelations(runSeed, createRandom(runSeed, "relations"), inheritedTag);
+  const relations = createInitialRelations(createRandom(runSeed, "relations"), inheritedTag);
   const characterName = createCharacterName(createRandom(runSeed, "name"));
   const lifeNumber = meta.lives.length + 1;
   const timeline = [{
@@ -107,9 +99,7 @@ export function createInitialState(
     eventHistory: [],
     runSeed,
     turn: 0,
-    lastThreadTurn: 0,
     narrative: createEmptyNarrativeState(),
-    choiceHistory: [],
     endingSummary: null,
     age,
     stage: 0,
@@ -235,8 +225,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "USE_ITEM": {
       const count = state.inventory[action.itemId] ?? 0;
       if (count <= 0) return state;
-      const item = items.find((candidate) => candidate.id === action.itemId);
-      if (!item) return state;
+      const item = ITEM_MAP[action.itemId];
+      if (!item || item.effect.type === "auto_save") return state;
 
       let next: GameState = {
         ...state,
@@ -270,14 +260,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case "SET_INJURY": {
       if (action.level === "dying") {
-        const xuming = state.inventory.xuming_dan ?? 0;
-        if (xuming > 0) {
+        const autoSave = getAutoSaveItem(state.inventory);
+        if (autoSave) {
+          const count = state.inventory[autoSave.id as keyof typeof state.inventory] ?? 0;
           return {
             ...state,
             injury: "heavy",
             rootIntact: false,
             rootDamageCount: state.rootDamageCount + 1,
-            inventory: { ...state.inventory, xuming_dan: xuming - 1 },
+            inventory: { ...state.inventory, [autoSave.id]: count - 1 },
           };
         }
         return finishGame(state, "death_battle");
@@ -292,7 +283,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "ADD_ENEMY":
-      return { ...state, enemies: [...state.enemies, action.enemy] };
+      return {
+        ...state,
+        enemies: state.enemies.some((enemy) => enemy.id === action.enemy.id)
+          ? state.enemies.map((enemy) => enemy.id === action.enemy.id ? action.enemy : enemy)
+          : [...state.enemies, action.enemy],
+      };
 
     case "REMOVE_ENEMY":
       return { ...state, enemies: state.enemies.filter((enemy) => enemy.id !== action.enemyId) };
@@ -304,7 +300,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...state,
         eventHistory: [...state.eventHistory, action.eventId],
         turn,
-        lastThreadTurn: action.threadId ? state.stage : state.lastThreadTurn,
         narrative: { ...state.narrative, threads },
       };
     }
@@ -312,7 +307,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "APPLY_NARRATIVE": {
       const updated = applyNarrativeUpdate(
         state.narrative,
-        state.choiceHistory,
         state.turn,
         action.record,
         action.axes,
@@ -398,9 +392,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "END_GAME":
       return finishGame(state, action.endingType ?? "natural");
 
-    case "SET_ENDING_SUMMARY":
-      return { ...state, endingSummary: action.summary };
-
     case "SET_SECT_PATH":
       return { ...state, sectPath: action.sectPath };
 
@@ -428,30 +419,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         meta: { ...state.meta, selectedObsession: action.obsession, lives },
-      };
-    }
-
-    case "RESET_RUN": {
-      const realm = getRealmConfig("lianqi");
-      return {
-        ...state,
-        phase: "gate",
-        age: 12,
-        lifespan: realm.normalLifespan - 12,
-        lifespanMax: realm.normalLifespan,
-        stage: 0,
-        stageFocus: null,
-        heartIntent: null,
-        endingType: null,
-        endingSummary: null,
-        archived: false,
-        eventHistory: [],
-        timeline: [],
-        focusHistory: [],
-        narrative: createEmptyNarrativeState(),
-        choiceHistory: [],
-        lastSettlement: null,
-        resolvedEventStage: null,
       };
     }
 

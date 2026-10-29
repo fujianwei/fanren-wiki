@@ -55,77 +55,6 @@ body {
   font-family: var(--font-sans);
 }
 
-/* 通用卡片渐变描边（伪元素） */
-.card-glow::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, rgba(74,222,154,0.15), transparent 50%, rgba(212,168,67,0.08)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* 陨落卡片裂纹背景纹理 */
-.card-death::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, rgba(239,68,68,0.25), transparent 50%, rgba(185,28,28,0.12)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-.card-death::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Cline x1='80' y1='0' x2='60' y2='300' stroke='%23ef4444' stroke-width='0.8' opacity='0.06'/%3E%3Cline x1='200' y1='20' x2='170' y2='280' stroke='%23ef4444' stroke-width='0.6' opacity='0.05'/%3E%3Cline x1='320' y1='0' x2='290' y2='300' stroke='%23ef4444' stroke-width='0.7' opacity='0.04'/%3E%3Cline x1='140' y1='0' x2='160' y2='300' stroke='%23ef4444' stroke-width='0.5' opacity='0.04'/%3E%3C/svg%3E");
-  background-size: cover;
-  pointer-events: none;
-}
-
-/* 分隔线 */
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 0;
-}
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #1a2820, #22c47a, #1a2820, transparent);
-}
-.divider-diamond {
-  width: 6px;
-  height: 6px;
-  background: #4ade9a;
-  transform: rotate(45deg);
-  box-shadow: 0 0 8px #4ade9a;
-  flex-shrink: 0;
-}
-
-/* 水墨角落纹饰 */
-.corner-ornament {
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  opacity: 0.15;
-  pointer-events: none;
-}
-.corner-ornament-tl { top: 12px; left: 12px; }
-.corner-ornament-br { bottom: 12px; right: 12px; transform: rotate(180deg); }
-
 /* 主按钮 */
 .btn-primary {
   background: linear-gradient(135deg, #22c47a, #4ade9a);
@@ -164,80 +93,11 @@ body {
   box-shadow: 0 0 16px rgba(74,222,154,0.15);
 }
 
-/* 陨落按钮（裂纹） */
-.btn-death {
-  position: relative;
-  background: linear-gradient(135deg, #7f1d1d, #b91c1c);
-  color: #fca5a5;
-  border: 1px solid rgba(239,68,68,0.5);
-  border-radius: 100px;
-  padding: 12px 36px;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  box-shadow: 0 0 24px rgba(239,68,68,0.25), 0 4px 12px rgba(0,0,0,0.4);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-  font-family: var(--font-serif);
-  overflow: hidden;
-}
-.btn-death::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='48'%3E%3Cpath d='M40 0 L35 48' stroke='%23ef4444' stroke-width='1' opacity='0.3'/%3E%3Cpath d='M90 5 L82 43' stroke='%23ef4444' stroke-width='0.8' opacity='0.25'/%3E%3Cpath d='M140 0 L135 48' stroke='%23ef4444' stroke-width='1' opacity='0.3'/%3E%3Cpath d='M170 8 L165 40' stroke='%23ef4444' stroke-width='0.6' opacity='0.2'/%3E%3C/svg%3E");
-  background-size: cover;
-  pointer-events: none;
-}
-.btn-death:hover {
-  box-shadow: 0 0 36px rgba(239,68,68,0.4), 0 4px 16px rgba(0,0,0,0.5);
-  transform: translateY(-1px);
-}
-
 .btn-primary:disabled,
-.btn-secondary:disabled,
-.btn-death:disabled {
+.btn-secondary:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
-}
-
-/* 滑块自定义样式 */
-input[type="range"].jade-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  background: #1a2820;
-  border-radius: 100px;
-  outline: none;
-  cursor: pointer;
-}
-input[type="range"].jade-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #4ade9a;
-  box-shadow: 0 0 12px rgba(74,222,154,0.5);
-  cursor: pointer;
-  transition: box-shadow 0.2s ease;
-}
-input[type="range"].jade-slider::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 20px rgba(74,222,154,0.7);
-}
-input[type="range"].jade-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #4ade9a;
-  box-shadow: 0 0 12px rgba(74,222,154,0.5);
-  cursor: pointer;
-  border: none;
-}
-input[type="range"].jade-slider:disabled {
-  opacity: 0.4;
 }
 
 /* 游戏 HUD 工具按钮 */

@@ -2,7 +2,6 @@
   {
     "id": "zj_001",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "karma",
     "title": "落难的结丹修士",
     "description": "山道上，一位结丹修士被人重创，勉强撑着一口气。他身上的气息显示修为远在你之上，却如今狼狈至此。",
@@ -65,9 +64,7 @@
   {
     "id": "zj_002",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "karma",
-    "requires_karma": "zj_saved_jiedan",
     "title": "结丹前辈的回报",
     "description": "你曾救助的结丹修士寻上门来，他已痊愈，气息稳健。他说：「那日若非你出手，老夫早已陨落。此物送你，望你早日结丹。」",
     "options": [
@@ -90,12 +87,13 @@
           }
         ]
       }
-    ]
+    ],
+    "requiresKarma": "zj_saved_jiedan",
+    "once": true
   },
   {
     "id": "zj_003",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "battle",
     "title": "仇家上门",
     "description": "炼气期结下的仇家终于找上门来，他已突破筑基，修为与你相当，眼中满是怨恨。「上次让你跑了，这次休想！」",
@@ -172,7 +170,6 @@
   {
     "id": "zj_004",
     "realmSlug": "zhuji",
-    "type": "active",
     "category": "normal",
     "title": "灵脉采集",
     "description": "你发现了一处隐秘的天然灵脉，灵气充沛，在此修炼一段时间可大有裨益。但此地并非无主，随时可能有人前来。",
@@ -218,7 +215,6 @@
   {
     "id": "zj_005",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "修炼瓶颈",
     "description": "你在筑基中期陷入瓶颈，修为停滞不前已有数月。一位师兄建议你尝试「以战养修」，以战斗刺激灵力突破；另一位建议你静心闭关。",
@@ -276,7 +272,6 @@
   {
     "id": "zj_006",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "坊市奇遇",
     "description": "在坊市中，你发现一个摊位上摆着一件外观普通的法器，摊主要价500灵石。旁边一位老修士偷偷告诉你，这东西他识得，实际价值远超此数。",
@@ -324,7 +319,6 @@
   {
     "id": "zj_007",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "遭遇天劫前兆",
     "description": "修炼中你感到天地异变，一股莫名的压迫感笼罩全身，随后风平浪静。老修士说这是小型天劫的前兆，你的修为引起了天道注意。",
@@ -374,7 +368,6 @@
   {
     "id": "zj_008",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "同门反目",
     "description": "一位曾经交好的同门突然翻脸，声称你偷了他的修炼资源，当众指责你，要求你赔偿500灵石。你知道这是无中生有，但众目睽睽之下难以辩解。",
@@ -430,7 +423,6 @@
   {
     "id": "zj_009",
     "realmSlug": "zhuji",
-    "type": "active",
     "category": "dungeon",
     "title": "废弃矿洞探索",
     "description": "听闻附近有一座废弃的灵石矿洞，早年被开采殆尽，但近来有人在其中发现了残余灵脉。矿洞深处危机四伏，但收益可观。",
@@ -471,7 +463,6 @@
   {
     "id": "zj_010",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "灵兽幼崽",
     "description": "你在山中发现了一只受伤的灵兽幼崽，它望着你的眼神清澈无辜。收养它需要花费大量灵石喂养，但灵兽向来重情义。",
@@ -525,9 +516,7 @@
   {
     "id": "zj_011",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "karma",
-    "requires_karma": "zj_adopted_beast",
     "title": "灵兽报恩",
     "description": "你收养的灵兽幼崽已经长大，它在你修炼时守护左右。一次遭遇偷袭时，它挺身而出替你挡下了致命一击，自己却身受重伤。",
     "options": [
@@ -554,12 +543,13 @@
           }
         ]
       }
-    ]
+    ],
+    "requiresKarma": "zj_adopted_beast",
+    "once": true
   },
   {
     "id": "zj_012",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "黑市交易",
     "description": "一个神秘人悄悄找到你，说手中有一件来路不明的宝贝，价格公道，但绝不能声张。他拿出一颗丹药，看成色应是降尘丹。",
@@ -608,7 +598,6 @@
   {
     "id": "zj_013",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "修炼资源被盗",
     "description": "你储存在洞府的一批灵石和丹药不翼而飞，显然是被人盗走。追查之下发现是一名低修为散修所为，已被抓获。",
@@ -668,7 +657,6 @@
   {
     "id": "zj_014",
     "realmSlug": "zhuji",
-    "type": "passive",
     "category": "normal",
     "title": "丹药副作用发作",
     "description": "你之前服用了过多聚气丹催修，如今副作用发作，气息紊乱，需要静养或花费灵石购买稳固气息的药材。",
@@ -704,7 +692,6 @@
   {
     "id": "zj_015",
     "realmSlug": "zhuji",
-    "type": "active",
     "category": "normal",
     "title": "坊市散活：护送商队",
     "description": "坊市告示栏上有一则散活：护送一批珍贵药材穿越险地，报酬丰厚。雇主说路上有强盗出没，需要有一定实力的修士护送。",

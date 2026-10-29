@@ -23,7 +23,6 @@ const fateEvents = fateThreads.flatMap((thread) =>
   thread.stages.map((stage, index) => ({
     id: `fate:${thread.id}:${index + 1}`,
     realmSlug: "lianqi",
-    type: "passive",
     category: "karma",
     title: thread.stageTitles[index],
     description: stage.description,

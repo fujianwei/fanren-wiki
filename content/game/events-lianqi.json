@@ -2,7 +2,6 @@
   {
     "id": "lq_001",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "karma",
     "title": "山中偶遇受伤散修",
     "description": "修炼途中，你遇到一位受伤的散修倒在路边，他神情警惕，但身上似乎有颗品质不错的丹药。",
@@ -55,9 +54,7 @@
   {
     "id": "lq_002",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
-    "requires_sect": true,
     "title": "宗门任务：采集灵草",
     "description": "宗门布告栏上有一则任务：前往后山采集三株灵草，报酬为100灵石。路途平坦，风险不大。",
     "options": [
@@ -79,12 +76,12 @@
         "text": "暂时不接，继续修炼",
         "effects": []
       }
-    ]
+    ],
+    "requiresSect": true
   },
   {
     "id": "lq_002b",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "坊市散活：护送商队",
     "description": "坊市告示栏上有一则散活：护送一支小型商队穿越山道，报酬80灵石。雇主说路上偶有妖兽出没，但整体安全。",
@@ -112,9 +109,7 @@
   {
     "id": "lq_003",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "karma",
-    "requires_karma": "lq_helped_wanderer",
     "title": "昔日恩情回报",
     "description": "你曾救治过的散修找上门来，带来了一颗筑基丹作为报答，神情真诚地说：「此恩此德，铭记于心。」",
     "options": [
@@ -133,12 +128,13 @@
           }
         ]
       }
-    ]
+    ],
+    "requiresKarma": "lq_helped_wanderer",
+    "once": true
   },
   {
     "id": "lq_004",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "山洞里发现前人遗留",
     "description": "你在山中偶然发现一处隐蔽山洞，洞内有前辈修士留下的遗物，一个锈迹斑斑的储物袋，里面不知有何物。",
@@ -171,7 +167,6 @@
   {
     "id": "lq_005",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "battle",
     "title": "野外遭遇妖兽袭击",
     "description": "外出途中，一头炼气期妖兽突然从草丛中扑出，眼中凶光毕露。它比你弱，但动作迅猛。",
@@ -237,7 +232,6 @@
   {
     "id": "lq_006",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "坊市遭遇骗局",
     "description": "一个神秘摊主向你兜售「极品灵根培育秘法」，声称服下后灵根品质大幅提升，索价200灵石。旁边几个托儿频频点头称赞。",
@@ -271,7 +265,6 @@
   {
     "id": "lq_007",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "拜访坊市老药师",
     "description": "坊市里有位年迈的药师，据说手中藏有不少好货。你登门拜访，他打量了你一眼，拿出几件东西供你挑选。",
@@ -325,7 +318,6 @@
   {
     "id": "lq_008",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "修炼走火入魔",
     "description": "一次修炼中你急于求成，强行催动灵力，不料走火入魔，气息大乱，经脉受损。",
@@ -361,7 +353,6 @@
   {
     "id": "lq_009",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "天降灵雨",
     "description": "难得一遇的灵雨从天而降，灵气浓郁，此时修炼事半功倍。你感到体内灵力涌动，修为隐隐有所增进。",
@@ -391,7 +382,6 @@
   {
     "id": "lq_010",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "同门师兄借钱",
     "description": "同门师兄找到你，说最近手头紧，向你借100灵石，承诺一个月后归还。他平日与你关系一般。",
@@ -441,9 +431,7 @@
   {
     "id": "lq_011",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "karma",
-    "requires_karma": "lq_lent_money",
     "title": "师兄归还灵石",
     "description": "那位借了你灵石的师兄找上门来，不仅还清了100灵石，还额外多给了50灵石作为谢礼，说你雪中送炭，他铭记在心。",
     "options": [
@@ -461,12 +449,13 @@
           }
         ]
       }
-    ]
+    ],
+    "requiresKarma": "lq_lent_money",
+    "once": true
   },
   {
     "id": "lq_012",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "battle",
     "title": "遭遇劫道散修",
     "description": "山道上，两名炼气期散修拦住去路，亮出法器，声称此路是他们的地盘，要交买路钱200灵石。",
@@ -536,7 +525,6 @@
   {
     "id": "lq_013",
     "realmSlug": "lianqi",
-    "type": "active",
     "category": "normal",
     "title": "深山探宝",
     "description": "听闻深山中有一处废弃的前辈洞府，或许藏有遗留的修炼资源。但深山中也有不少危险，此去凶吉未卜。",
@@ -577,7 +565,6 @@
   {
     "id": "lq_014",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "宗门惩处",
     "description": "你因上次修炼时误伤了宗门灵田，长老传唤你前去问责，罚没灵石100枚，并记入宗门档案。",
@@ -615,7 +602,6 @@
   {
     "id": "lq_015",
     "realmSlug": "lianqi",
-    "type": "passive",
     "category": "normal",
     "title": "偶遇前辈指点",
     "description": "一位结丹期前辈见你修炼姿势有误，主动停下来为你纠正，并传授了一些修炼心得，令你豁然开朗。",

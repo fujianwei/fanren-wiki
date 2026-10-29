@@ -1,28 +1,14 @@
 "use client";
 
 import { useGame } from "./GameProvider";
-import type { HeartIntent, RealmSlug } from "@/types/game";
-
-const REALM_NAMES: Record<RealmSlug, string> = {
-  lianqi: "炼气",
-  zhuji: "筑基",
-  jiedan: "结丹",
-  yuanying: "元婴",
-  huashen: "化神",
-};
-
-const INTENT_NAMES: Record<HeartIntent, string> = {
-  longevity: "求长生",
-  revenge: "求复仇",
-  guard: "求守护",
-  freedom: "求自在",
-};
+import { INTENT_LABELS, REALM_NAMES } from "@/lib/game/labels";
 
 interface Props {
   onOpenLife: () => void;
   onOpenInventory: () => void;
   onOpenMarket: () => void;
   onBattle: () => void;
+  onOpenSect: () => void;
 }
 
 function Metric({ label, value, accent = "#d8e5de", className = "" }: { label: string; value: string; accent?: string; className?: string }) {
@@ -34,7 +20,7 @@ function Metric({ label, value, accent = "#d8e5de", className = "" }: { label: s
   );
 }
 
-export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onBattle }: Props) {
+export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onBattle, onOpenSect }: Props) {
   const { state } = useGame();
   const subRealm = state.xp >= 90 ? "圆满" : state.xp >= 71 ? "后期" : state.xp >= 31 ? "中期" : "初期";
   const urgent = state.age >= state.lifespanMax * 0.82 || state.injury === "heavy" || state.injury === "dying";
@@ -64,7 +50,7 @@ export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onB
               <span className="rounded-full px-1.5 py-0.5 text-[8px]" style={{ color: "#d4a843", backgroundColor: "#1c180c" }}>第{state.lifeNumber}世</span>
             </div>
             <div className="mt-0.5 text-[10px]" style={{ color: "#698276" }}>
-              {state.spiritRoot.name} · {state.heartIntent ? INTENT_NAMES[state.heartIntent] : "本心未明"}
+              {state.spiritRoot.name} · {state.heartIntent ? INTENT_LABELS[state.heartIntent] : "本心未明"}
             </div>
           </div>
         </div>
@@ -88,6 +74,11 @@ export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onB
           <button onClick={onOpenInventory} className="game-tool-button flex items-center justify-center gap-1" title="打开储物袋">
             <span className="text-[13px]">囊</span><span className="hidden xl:inline">行囊</span>
           </button>
+          {!state.sectPath && (
+            <button onClick={onOpenSect} className="game-tool-button flex items-center justify-center gap-1" title="选择修行道路">
+              <span className="text-[13px]">道</span><span className="hidden xl:inline">择道</span>
+            </button>
+          )}
           <button onClick={onOpenMarket} className="game-tool-button hidden items-center justify-center gap-1 sm:flex" title="前往灵市">
             <span className="text-[13px]">市</span><span className="hidden xl:inline">灵市</span>
           </button>

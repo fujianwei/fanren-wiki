@@ -2,43 +2,25 @@
 
 import { useState, useMemo } from "react";
 import { useGame } from "./GameProvider";
-import itemsData from "@/content/game/items.json";
-import type { ItemId } from "@/types/game";
+import { ITEMS } from "@/lib/game/items";
+import { shuffle } from "@/lib/game/random";
+import type { ItemConfig, ItemId } from "@/types/game";
 
 interface Props {
   onClose: () => void;
 }
 
-interface ItemData {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  buyPrice: number | null;
-  sellPrice: number | null;
-}
-
 // 境界提升类：金色边框
-const BREAKTHROUGH_ITEMS = new Set(["zhuji_dan", "jucheng_dan", "butian_dan", "jiangyun_dan"]);
 // 超级稀有：整体金色
-const ULTRA_RARE_ITEMS = new Set(["butian_dan", "jiuqu_dan", "tiangang_zhen"]);
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+const ULTRA_RARE_ITEMS = new Set(["butian_dan", "jiuqu_dan", "tiangang_zhen", "xuming_dan"]);
 
 export default function MarketModal({ onClose }: Props) {
   const { state, dispatch } = useGame();
   const { lingshi, inventory } = state;
 
   const shopItems = useMemo(() => {
-    const buyable = (itemsData as ItemData[]).filter((i) => i.buyPrice !== null);
-    return shuffle(buyable).slice(0, 3);
+    const buyable = ITEMS.filter((i) => i.buyPrice !== null);
+    return shuffle(buyable, Math.random).slice(0, 3);
   }, []);
 
   const [tab, setTab] = useState<"buy" | "sell">("buy");
@@ -49,7 +31,7 @@ export default function MarketModal({ onClose }: Props) {
     setTimeout(() => setMessage(null), 2000);
   }
 
-  function handleBuy(item: ItemData) {
+  function handleBuy(item: ItemConfig) {
     if (!item.buyPrice || lingshi < item.buyPrice) {
       showMessage("灵石不足");
       return;
@@ -59,7 +41,7 @@ export default function MarketModal({ onClose }: Props) {
     showMessage(`购得 ${item.name}`);
   }
 
-  function handleSell(item: ItemData) {
+  function handleSell(item: ItemConfig) {
     const count = inventory[item.id as ItemId] ?? 0;
     if (count <= 0 || !item.sellPrice) return;
     dispatch({ type: "ADD_LINGSHI", amount: item.sellPrice });
@@ -67,7 +49,7 @@ export default function MarketModal({ onClose }: Props) {
     showMessage(`售出 ${item.name}，获得 ${item.sellPrice} 灵石`);
   }
 
-  const sellableItems = (itemsData as ItemData[]).filter(
+  const sellableItems = ITEMS.filter(
     (i) => i.sellPrice !== null && (inventory[i.id as ItemId] ?? 0) > 0
   );
 
@@ -124,7 +106,7 @@ export default function MarketModal({ onClose }: Props) {
           <div className="flex flex-col gap-2">
             {shopItems.map((item) => {
               const isUltra = ULTRA_RARE_ITEMS.has(item.id);
-              const isBreakthrough = BREAKTHROUGH_ITEMS.has(item.id);
+              const isBreakthrough = item.category === "breakthrough";
               const canBuy = !!(item.buyPrice && lingshi >= item.buyPrice);
 
               const bg = isUltra ? "#1e1608" : "#1a2820";

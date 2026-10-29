@@ -7,7 +7,7 @@ import { useGame } from "@/components/game/GameProvider";
 import PixelScene from "@/components/game/PixelScene";
 import { getSceneById } from "@/lib/game/scene-art";
 import { AXIS_LABELS, buildEndingSummary, getThreadTitle } from "@/lib/game/narrative";
-import type { HeartIntent } from "@/types/game";
+import { INTENT_LABELS } from "@/lib/game/labels";
 
 const ENDING_TEXT: Record<string, { title: string; text: string; color: string }> = {
   ascend: { title: "飞升灵界", text: "踏破虚空，你终于飞升灵界。此生的悲欢都化作了身后的一场风。", color: "#d4a843" },
@@ -16,13 +16,6 @@ const ENDING_TEXT: Record<string, { title: string; text: string; color: string }
   death_heart: { title: "心魔陨落", text: "心魔终究吞噬了你，你把最后一眼留给了自己的执念。", color: "#ef4444" },
   death_break: { title: "冲关陨落", text: "天雷散尽，你在最后一关前化成了灰。", color: "#ef4444" },
   ascend_fail: { title: "飞升失败", text: "天门曾在眼前打开，却最终在你面前合拢。", color: "#6a8878" },
-};
-
-const INTENTS: Record<HeartIntent, string> = {
-  longevity: "求长生",
-  revenge: "求复仇",
-  guard: "求守护",
-  freedom: "求自在",
 };
 
 const TEXTURE_LABELS: Record<string, string> = {
@@ -82,7 +75,7 @@ function EndingContent() {
           <div className="flex flex-wrap items-center justify-center gap-2 px-4 py-3" style={{ backgroundColor: "#0c1510", borderTop: "1px solid #263a30" }}>
             <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#d4a843", backgroundColor: "#181408" }}>第 {state.lifeNumber} 世</span>
             <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.characterName} · {state.age}岁</span>
-            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.heartIntent ? INTENTS[state.heartIntent] : "本心未明"}</span>
+            <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#101a14" }}>{state.heartIntent ? INTENT_LABELS[state.heartIntent] : "本心未明"}</span>
           </div>
         </section>
 

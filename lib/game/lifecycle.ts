@@ -1,5 +1,6 @@
 import focusesData from "@/content/game/focuses.json";
 import { calcXpGain } from "@/lib/game/engine";
+import { getRetreatXpBonus } from "@/lib/game/items";
 import { driftRelations } from "@/lib/game/relations";
 import { createRandom } from "@/lib/game/random";
 import type {
@@ -52,7 +53,7 @@ function makeTimeline(
   };
 }
 
-export interface StageAdvanceResult {
+interface StageAdvanceResult {
   state: GameState;
   settlement: StageSettlement;
 }
@@ -71,10 +72,13 @@ export function advanceStage(state: GameState): StageAdvanceResult {
   const remaining = Math.max(0, state.lifespan - years);
   const injuryMultiplier = state.injury === "heavy" ? 0.5 : state.injury === "light" ? 0.8 : state.injury === "dying" ? 0.15 : 1;
   const variation = 0.88 + random() * 0.24;
-  const baseXp = Math.max(2, Math.round(9 * focus.xpMult * state.spiritRoot.cultivationMult * injuryMultiplier * variation));
+  const retreatBonus = focusId === "cultivate" ? getRetreatXpBonus(state.inventory) : 0;
+  const sectXpMult = state.sectPath === "modao" ? 1.5 : 1;
+  const baseXp = Math.max(2, Math.round(9 * focus.xpMult * state.spiritRoot.cultivationMult * injuryMultiplier * variation * sectXpMult * (1 + retreatBonus)));
   const gainedXp = calcXpGain(baseXp, 1, state.xp);
   const nextXp = Math.min(100, state.xp + gainedXp);
-  const lingshiGain = Math.round(years * 8 * focus.stoneMult * (0.8 + random() * 0.45));
+  const sectStoneMult = state.sectPath === "zhengdao" ? 1.2 : 1;
+  const lingshiGain = Math.round(years * 8 * focus.stoneMult * sectStoneMult * (0.8 + random() * 0.45));
   const nextFate = Math.max(0, Math.min(100, state.fate + focus.fateDelta));
   const riskChance = focus.risk * (1.2 - nextFate / 240) + (state.injury === "heavy" ? 0.08 : 0);
   const riskTriggered = random() < riskChance;
@@ -116,6 +120,12 @@ export function advanceStage(state: GameState): StageAdvanceResult {
     lingshi: Math.max(0, state.lingshi + lingshiGain),
     fate: nextFate,
     injury,
+    emotion: state.sectPath === "modao"
+      ? {
+          positive: state.emotion.positive,
+          negative: Math.min(100, state.emotion.negative + 4),
+        }
+      : state.emotion,
     relations,
     stage: state.stage + 1,
     stageFocus: null,
@@ -189,9 +199,4 @@ export function applyHeartIntent(state: GameState, intent: GameState["heartInten
       ),
     ],
   };
-}
-
-export function applyStageDeathSummary(state: GameState, buildSummary: (value: GameState) => GameState["endingSummary"]): GameState {
-  if (state.phase !== "ended") return state;
-  return { ...state, endingSummary: buildSummary(state) };
 }

@@ -2,24 +2,10 @@
 
 import { useGame } from "./GameProvider";
 import { calcBreakthroughRate } from "@/lib/game/engine";
+import { getBreakthroughBonuses } from "@/lib/game/items";
+import { INTENT_LABELS, REALM_NAMES, SECT_LABELS } from "@/lib/game/labels";
 import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
 import { getFocusConfig, getStageYears } from "@/lib/game/lifecycle";
-import type { HeartIntent, ItemId, RealmSlug } from "@/types/game";
-
-const REALM_NAMES: Record<RealmSlug, string> = {
-  lianqi: "炼气期",
-  zhuji: "筑基期",
-  jiedan: "结丹期",
-  yuanying: "元婴期",
-  huashen: "化神期",
-};
-
-const INTENT_LABELS: Record<HeartIntent, string> = {
-  longevity: "求长生",
-  revenge: "求复仇",
-  guard: "求守护",
-  freedom: "求自在",
-};
 
 const INJURY_LABELS = {
   none: null,
@@ -44,9 +30,7 @@ export default function StatusPanel() {
   const dominant = getDominantAxes(narrative, 3);
   const activeThreads = Object.values(narrative.threads).filter((thread) => thread.status === "open");
   const endedThreads = Object.values(narrative.threads).filter((thread) => thread.status !== "open");
-  const arrayBonus = (inventory.tiangang_zhen ?? 0) > 0 ? 0.20 : (inventory.huti_zhen ?? 0) > 0 ? 0.12 : (inventory.juling_zhen ?? 0) > 0 ? 0.08 : 0;
-  const pillMap: Record<string, ItemId> = { lianqi: "zhuji_dan", zhuji: "jucheng_dan", jiedan: "butian_dan", yuanying: "jiangyun_dan" };
-  const pillBonus = (inventory[pillMap[realmSlug]] ?? 0) > 0 ? 0.25 : 0;
+  const { arrayBonus, pillBonus } = getBreakthroughBonuses(realmSlug, inventory);
   const rate = calcBreakthroughRate({
     realmSlug,
     xp,
@@ -55,6 +39,7 @@ export default function StatusPanel() {
     rootIntact: state.rootIntact,
     rootDamageCount: state.rootDamageCount,
     breakthroughExp,
+    sectPath: state.sectPath,
   });
 
   return (
@@ -72,6 +57,7 @@ export default function StatusPanel() {
             <div className="text-xs mt-1" style={{ color: "#6a8878" }}>
               {REALM_NAMES[realmSlug]} · {getSubRealm(xp)}
               {heartIntent ? ` · ${INTENT_LABELS[heartIntent]}` : " · 尚未立心"}
+              {state.sectPath ? ` · ${SECT_LABELS[state.sectPath]}` : " · 尚未择道"}
             </div>
           </div>
           <div className="text-right">
