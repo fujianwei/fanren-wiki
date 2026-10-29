@@ -1,0 +1,177 @@
+status,sequence,batch,kind,title,output
+pending,1,01-lianqi,event_scene,山中偶遇受伤散修,public/game/scenes/events/lq_001.png
+pending,2,01-lianqi,event_scene,宗门任务：采集灵草,public/game/scenes/events/lq_002.png
+pending,3,01-lianqi,event_scene,坊市散活：护送商队,public/game/scenes/events/lq_002b.png
+pending,4,01-lianqi,event_scene,昔日恩情回报,public/game/scenes/events/lq_003.png
+pending,5,01-lianqi,event_scene,山洞里发现前人遗留,public/game/scenes/events/lq_004.png
+pending,6,01-lianqi,event_scene,野外遭遇妖兽袭击,public/game/scenes/events/lq_005.png
+pending,7,01-lianqi,event_scene,坊市遭遇骗局,public/game/scenes/events/lq_006.png
+pending,8,01-lianqi,event_scene,拜访坊市老药师,public/game/scenes/events/lq_007.png
+pending,9,01-lianqi,event_scene,修炼走火入魔,public/game/scenes/events/lq_008.png
+pending,10,01-lianqi,event_scene,天降灵雨,public/game/scenes/events/lq_009.png
+pending,11,01-lianqi,event_scene,同门师兄借钱,public/game/scenes/events/lq_010.png
+pending,12,01-lianqi,event_scene,师兄归还灵石,public/game/scenes/events/lq_011.png
+pending,13,01-lianqi,event_scene,遭遇劫道散修,public/game/scenes/events/lq_012.png
+pending,14,01-lianqi,event_scene,深山探宝,public/game/scenes/events/lq_013.png
+pending,15,01-lianqi,event_scene,宗门惩处,public/game/scenes/events/lq_014.png
+pending,16,01-lianqi,event_scene,偶遇前辈指点,public/game/scenes/events/lq_015.png
+pending,17,02-zhuji,event_scene,落难的结丹修士,public/game/scenes/events/zj_001.png
+pending,18,02-zhuji,event_scene,结丹前辈的回报,public/game/scenes/events/zj_002.png
+pending,19,02-zhuji,event_scene,仇家上门,public/game/scenes/events/zj_003.png
+pending,20,02-zhuji,event_scene,灵脉采集,public/game/scenes/events/zj_004.png
+pending,21,02-zhuji,event_scene,修炼瓶颈,public/game/scenes/events/zj_005.png
+pending,22,02-zhuji,event_scene,坊市奇遇,public/game/scenes/events/zj_006.png
+pending,23,02-zhuji,event_scene,遭遇天劫前兆,public/game/scenes/events/zj_007.png
+pending,24,02-zhuji,event_scene,同门反目,public/game/scenes/events/zj_008.png
+pending,25,02-zhuji,event_scene,废弃矿洞探索,public/game/scenes/events/zj_009.png
+pending,26,02-zhuji,event_scene,灵兽幼崽,public/game/scenes/events/zj_010.png
+pending,27,02-zhuji,event_scene,灵兽报恩,public/game/scenes/events/zj_011.png
+pending,28,02-zhuji,event_scene,黑市交易,public/game/scenes/events/zj_012.png
+pending,29,02-zhuji,event_scene,修炼资源被盗,public/game/scenes/events/zj_013.png
+pending,30,02-zhuji,event_scene,丹药副作用发作,public/game/scenes/events/zj_014.png
+pending,31,02-zhuji,event_scene,坊市散活：护送商队,public/game/scenes/events/zj_015.png
+pending,32,03-jiedan,event_scene,弱小修士求援,public/game/scenes/events/jd_001.png
+pending,33,03-jiedan,event_scene,被救者的馈赠,public/game/scenes/events/jd_002.png
+pending,34,03-jiedan,event_scene,强敌突袭,public/game/scenes/events/jd_003.png
+pending,35,03-jiedan,event_scene,古修遗迹探索,public/game/scenes/events/jd_004.png
+pending,36,03-jiedan,event_scene,心魔初现,public/game/scenes/events/jd_005.png
+pending,37,03-jiedan,event_scene,修仙界大会,public/game/scenes/events/jd_006.png
+pending,38,03-jiedan,event_scene,魔修诱惑,public/game/scenes/events/jd_007.png
+pending,39,03-jiedan,event_scene,无辜者求助,public/game/scenes/events/jd_008.png
+pending,40,03-jiedan,event_scene,炼丹失败,public/game/scenes/events/jd_009.png
+pending,41,03-jiedan,event_scene,拍卖会,public/game/scenes/events/jd_010.png
+pending,42,03-jiedan,event_scene,旧友背叛,public/game/scenes/events/jd_011.png
+pending,43,03-jiedan,event_scene,灵脉争夺,public/game/scenes/events/jd_012.png
+pending,44,03-jiedan,event_scene,天材地宝现世,public/game/scenes/events/jd_013.png
+pending,45,03-jiedan,event_scene,渡劫失败的前辈,public/game/scenes/events/jd_014.png
+pending,46,03-jiedan,event_scene,坊市散活：讨伐妖兽,public/game/scenes/events/jd_015.png
+pending,47,04-yuanying,event_scene,垂死的化神前辈,public/game/scenes/events/yy_001.png
+pending,48,04-yuanying,event_scene,心愿了结,public/game/scenes/events/yy_002.png
+pending,49,04-yuanying,event_scene,化神修士的刁难,public/game/scenes/events/yy_003.png
+pending,50,04-yuanying,event_scene,秘境探索,public/game/scenes/events/yy_004.png
+pending,51,04-yuanying,event_scene,渡人成仙,public/game/scenes/events/yy_005.png
+pending,52,04-yuanying,event_scene,寿命告急,public/game/scenes/events/yy_006.png
+pending,53,04-yuanying,event_scene,魔道势力威胁,public/game/scenes/events/yy_007.png
+pending,54,04-yuanying,event_scene,天道感悟,public/game/scenes/events/yy_008.png
+pending,55,04-yuanying,event_scene,同阶修士挑战,public/game/scenes/events/yy_009.png
+pending,56,04-yuanying,event_scene,昔日仇人的最后一搏,public/game/scenes/events/yy_010.png
+pending,57,04-yuanying,event_scene,修炼资源枯竭,public/game/scenes/events/yy_011.png
+pending,58,04-yuanying,event_scene,拍卖稀世珍宝,public/game/scenes/events/yy_012.png
+pending,59,04-yuanying,event_scene,弟子遭难,public/game/scenes/events/yy_013.png
+pending,60,04-yuanying,event_scene,天外陨石,public/game/scenes/events/yy_014.png
+pending,61,04-yuanying,event_scene,坊市散活：护送稀世丹药,public/game/scenes/events/yy_015.png
+pending,62,05-huashen,event_scene,天道试炼,public/game/scenes/events/hs_001.png
+pending,63,05-huashen,event_scene,飞升在即的感悟,public/game/scenes/events/hs_002.png
+pending,64,05-huashen,event_scene,天魔入侵,public/game/scenes/events/hs_003.png
+pending,65,05-huashen,event_scene,飞升古道探索,public/game/scenes/events/hs_004.png
+pending,66,05-huashen,event_scene,后辈求道,public/game/scenes/events/hs_005.png
+pending,67,05-huashen,event_scene,旧怨清算,public/game/scenes/events/hs_006.png
+pending,68,05-huashen,event_scene,人界最后的守护,public/game/scenes/events/hs_007.png
+pending,69,05-huashen,event_scene,道心动摇,public/game/scenes/events/hs_008.png
+pending,70,05-huashen,event_scene,最后的积累,public/game/scenes/events/hs_009.png
+pending,71,05-huashen,event_scene,昔日同门的拜访,public/game/scenes/events/hs_010.png
+pending,72,05-huashen,event_scene,天道惩戒,public/game/scenes/events/hs_011.png
+pending,73,05-huashen,event_scene,灵界的召唤,public/game/scenes/events/hs_012.png
+pending,74,05-huashen,event_scene,无辜者的最后守护,public/game/scenes/events/hs_013.png
+pending,75,05-huashen,event_scene,修仙路的终极叩问,public/game/scenes/events/hs_014.png
+pending,76,05-huashen,event_scene,最后的坊市之行,public/game/scenes/events/hs_015.png
+pending,77,06-life,event_scene,师尊问心,public/game/scenes/events/life_master_question.png
+pending,78,06-life,event_scene,同门求助,public/game/scenes/events/life_peer_request.png
+pending,79,06-life,event_scene,旧怨堵门,public/game/scenes/events/life_rival_challenge.png
+pending,80,06-life,event_scene,故乡来信,public/game/scenes/events/life_family_letter.png
+pending,81,06-life,event_scene,丹炉生纹,public/game/scenes/events/life_furnace_crack.png
+pending,82,06-life,event_scene,秘境名额,public/game/scenes/events/life_secret_realm.png
+pending,83,06-life,event_scene,潮汐海图,public/game/scenes/events/life_sea_map.png
+pending,84,06-life,event_scene,黑市禁书,public/game/scenes/events/life_black_market.png
+pending,85,06-life,event_scene,山门征召,public/game/scenes/events/life_sect_call.png
+pending,86,06-life,event_scene,山下荒年,public/game/scenes/events/life_village_famine.png
+pending,87,06-life,event_scene,夜半心魔,public/game/scenes/events/life_heart_demon.png
+pending,88,06-life,event_scene,旧伤入骨,public/game/scenes/events/life_old_wound.png
+pending,89,06-life,event_scene,独行夜雨,public/game/scenes/events/life_lonely_rain.png
+pending,90,06-life,event_scene,旧友来信,public/game/scenes/events/life_friend_wedding.png
+pending,91,06-life,event_scene,旧师传召,public/game/scenes/events/life_old_teacher.png
+pending,92,06-life,event_scene,雪夜叩门,public/game/scenes/events/life_disciple.png
+pending,93,06-life,event_scene,乱星海·起航,public/game/scenes/events/life_sea_voyage.png
+pending,94,06-life,event_scene,乱星海·归来,public/game/scenes/events/life_sea_return.png
+pending,95,06-life,event_scene,乱星海·黑潮,public/game/scenes/events/life_sea_storm.png
+pending,96,06-life,event_scene,山中无大事,public/game/scenes/events/life_quiet_years.png
+pending,97,07-fate-wanderer_debt,fate_scene,雨夜旧恩 · 山道上的血,public/game/scenes/fate/wanderer_debt-1.png
+pending,98,07-fate-wanderer_debt,fate_scene,雨夜旧恩 · 旧人携礼而来,public/game/scenes/fate/wanderer_debt-2.png
+pending,99,07-fate-wanderer_debt,fate_scene,雨夜旧恩 · 一命如何两清,public/game/scenes/fate/wanderer_debt-3.png
+pending,100,08-fate-beast_bond,fate_scene,山中有灵 · 兽夹中的幼崽,public/game/scenes/fate/beast_bond-1.png
+pending,101,08-fate-beast_bond,fate_scene,山中有灵 · 山野旧识,public/game/scenes/fate/beast_bond-2.png
+pending,102,08-fate-beast_bond,fate_scene,山中有灵 · 兽潮同命,public/game/scenes/fate/beast_bond-3.png
+pending,103,09-fate-ancient_tomb,fate_scene,无主古墓 · 裂缝里的旧图,public/game/scenes/fate/ancient_tomb-1.png
+pending,104,09-fate-ancient_tomb,fate_scene,无主古墓 · 同道入墓,public/game/scenes/fate/ancient_tomb-2.png
+pending,105,09-fate-ancient_tomb,fate_scene,无主古墓 · 墓主最后一线神念,public/game/scenes/fate/ancient_tomb-3.png
+pending,106,10-fate-sect_purge,fate_scene,山门清洗 · 分派名单,public/game/scenes/fate/sect_purge-1.png
+pending,107,10-fate-sect_purge,fate_scene,山门清洗 · 两封密信,public/game/scenes/fate/sect_purge-2.png
+pending,108,10-fate-sect_purge,fate_scene,山门清洗 · 山门换主,public/game/scenes/fate/sect_purge-3.png
+pending,109,11-fate-mortal_kin,fate_scene,故乡灯火 · 家书,public/game/scenes/fate/mortal_kin-1.png
+pending,110,11-fate-mortal_kin,fate_scene,故乡灯火 · 白事,public/game/scenes/fate/mortal_kin-2.png
+pending,111,11-fate-mortal_kin,fate_scene,故乡灯火 · 仙凡一别,public/game/scenes/fate/mortal_kin-3.png
+pending,112,12-fate-demonic_bargain,fate_scene,黑市禁术 · 无字黑册,public/game/scenes/fate/demonic_bargain-1.png
+pending,113,12-fate-demonic_bargain,fate_scene,黑市禁术 · 反噬之夜,public/game/scenes/fate/demonic_bargain-2.png
+pending,114,12-fate-demonic_bargain,fate_scene,黑市禁术 · 一念成魔,public/game/scenes/fate/demonic_bargain-3.png
+pending,115,13-fate-sword_grave,fate_scene,夜半剑鸣 · 无名旧剑,public/game/scenes/fate/sword_grave-1.png
+pending,116,13-fate-sword_grave,fate_scene,夜半剑鸣 · 剑冢试锋,public/game/scenes/fate/sword_grave-2.png
+pending,117,13-fate-sword_grave,fate_scene,夜半剑鸣 · 剑心归处,public/game/scenes/fate/sword_grave-3.png
+pending,118,14-fate-pill_toxin,fate_scene,丹炉余烬 · 炉边捷径,public/game/scenes/fate/pill_toxin-1.png
+pending,119,14-fate-pill_toxin,fate_scene,丹炉余烬 · 药毒入骨,public/game/scenes/fate/pill_toxin-2.png
+pending,120,14-fate-pill_toxin,fate_scene,丹炉余烬 · 医人还是医己,public/game/scenes/fate/pill_toxin-3.png
+pending,121,15-fate-array_legacy,fate_scene,残阵山河 · 山腹残阵,public/game/scenes/fate/array_legacy-1.png
+pending,122,15-fate-array_legacy,fate_scene,残阵山河 · 护山大阵,public/game/scenes/fate/array_legacy-2.png
+pending,123,15-fate-array_legacy,fate_scene,残阵山河 · 阵心即人心,public/game/scenes/fate/array_legacy-3.png
+pending,124,16-fate-rival_brother,fate_scene,同门旧怨 · 试炼抽签,public/game/scenes/fate/rival_brother-1.png
+pending,125,16-fate-rival_brother,fate_scene,同门旧怨 · 旧怨重逢,public/game/scenes/fate/rival_brother-2.png
+pending,126,16-fate-rival_brother,fate_scene,同门旧怨 · 胜负之外,public/game/scenes/fate/rival_brother-3.png
+pending,127,17-fate-master_secret,fate_scene,师尊旧案 · 禁地残卷,public/game/scenes/fate/master_secret-1.png
+pending,128,17-fate-master_secret,fate_scene,师尊旧案 · 师尊的旧名,public/game/scenes/fate/master_secret-2.png
+pending,129,17-fate-master_secret,fate_scene,师尊旧案 · 欺师还是救师,public/game/scenes/fate/master_secret-3.png
+pending,130,18-fate-lost_soul,fate_scene,器中之魂 · 会说话的旧器,public/game/scenes/fate/lost_soul-1.png
+pending,131,18-fate-lost_soul,fate_scene,器中之魂 · 不属于你的记忆,public/game/scenes/fate/lost_soul-2.png
+pending,132,18-fate-lost_soul,fate_scene,器中之魂 · 谁在借你的手,public/game/scenes/fate/lost_soul-3.png
+pending,133,19-fate-merchant_ledger,fate_scene,坊市账簿 · 商队急单,public/game/scenes/fate/merchant_ledger-1.png
+pending,134,19-fate-merchant_ledger,fate_scene,坊市账簿 · 一本旧账,public/game/scenes/fate/merchant_ledger-2.png
+pending,135,19-fate-merchant_ledger,fate_scene,坊市账簿 · 坊市尽头,public/game/scenes/fate/merchant_ledger-3.png
+pending,136,20-fate-border_war,fate_scene,边地狼烟 · 征召令,public/game/scenes/fate/border_war-1.png
+pending,137,20-fate-border_war,fate_scene,边地狼烟 · 城破之前,public/game/scenes/fate/border_war-2.png
+pending,138,20-fate-border_war,fate_scene,边地狼烟 · 守土或独生,public/game/scenes/fate/border_war-3.png
+pending,139,21-fate-false_accusation,fate_scene,执法堂旧案 · 一纸传唤,public/game/scenes/fate/false_accusation-1.png
+pending,140,21-fate-false_accusation,fate_scene,执法堂旧案 · 旧案重审,public/game/scenes/fate/false_accusation-2.png
+pending,141,21-fate-false_accusation,fate_scene,执法堂旧案 · 清白值几条命,public/game/scenes/fate/false_accusation-3.png
+pending,142,22-fate-spirit_vein,fate_scene,一条灵脉 · 无主灵脉,public/game/scenes/fate/spirit_vein-1.png
+pending,143,22-fate-spirit_vein,fate_scene,一条灵脉 · 宗门索地,public/game/scenes/fate/spirit_vein-2.png
+pending,144,22-fate-spirit_vein,fate_scene,一条灵脉 · 灵脉之下,public/game/scenes/fate/spirit_vein-3.png
+pending,145,23-fate-ancient_artifact,fate_scene,器灵开价 · 沉睡古器,public/game/scenes/fate/ancient_artifact-1.png
+pending,146,23-fate-ancient_artifact,fate_scene,器灵开价 · 器灵索价,public/game/scenes/fate/ancient_artifact-2.png
+pending,147,23-fate-ancient_artifact,fate_scene,器灵开价 · 人器一体,public/game/scenes/fate/ancient_artifact-3.png
+pending,148,24-fate-ascension_choice,fate_scene,天门之前 · 天门初现,public/game/scenes/fate/ascension_choice-1.png
+pending,149,24-fate-ascension_choice,fate_scene,天门之前 · 旧人拦路,public/game/scenes/fate/ascension_choice-2.png
+pending,150,24-fate-ascension_choice,fate_scene,天门之前 · 飞升或留下,public/game/scenes/fate/ascension_choice-3.png
+pending,151,25-ui-scenes,intent_scene,求长生,public/game/scenes/opening/longevity.png
+pending,152,25-ui-scenes,intent_scene,求复仇,public/game/scenes/opening/revenge.png
+pending,153,25-ui-scenes,intent_scene,求守护,public/game/scenes/opening/guard.png
+pending,154,25-ui-scenes,intent_scene,求自在,public/game/scenes/opening/freedom.png
+pending,155,25-ui-scenes,focus_scene,苦修,public/game/scenes/focus/cultivate.png
+pending,156,25-ui-scenes,focus_scene,游历,public/game/scenes/focus/roam.png
+pending,157,25-ui-scenes,focus_scene,炼丹阵法,public/game/scenes/focus/craft.png
+pending,158,25-ui-scenes,focus_scene,宗门事务,public/game/scenes/focus/sect.png
+pending,159,25-ui-scenes,focus_scene,人情往来,public/game/scenes/focus/bond.png
+pending,160,25-ui-scenes,focus_scene,养伤隐居,public/game/scenes/focus/heal.png
+pending,161,25-ui-scenes,ending_scene,飞升灵界,public/game/scenes/ending/ascend.png
+pending,162,25-ui-scenes,ending_scene,天门遗恨,public/game/scenes/ending/ascend_fail.png
+pending,163,25-ui-scenes,ending_scene,寿尽归尘,public/game/scenes/ending/natural.png
+pending,164,25-ui-scenes,ending_scene,斗法陨落,public/game/scenes/ending/death_battle.png
+pending,165,25-ui-scenes,ending_scene,心魔坐化,public/game/scenes/ending/death_heart.png
+pending,166,25-ui-scenes,ending_scene,渡劫成灰,public/game/scenes/ending/death_break.png
+pending,167,26-action-icons,action_icon,交谈,public/game/actions/talk.png
+pending,168,26-action-icons,action_icon,争斗,public/game/actions/fight.png
+pending,169,26-action-icons,action_icon,远行,public/game/actions/travel.png
+pending,170,26-action-icons,action_icon,修行,public/game/actions/cultivate.png
+pending,171,26-action-icons,action_icon,交易,public/game/actions/trade.png
+pending,172,26-action-icons,action_icon,结缘,public/game/actions/bond.png
+pending,173,26-action-icons,action_icon,疗愈,public/game/actions/heal.png
+pending,174,26-action-icons,action_icon,涉险,public/game/actions/risk.png
+pending,175,26-action-icons,action_icon,拒绝,public/game/actions/refuse.png
+pending,176,26-action-icons,action_icon,观察,public/game/actions/observe.png

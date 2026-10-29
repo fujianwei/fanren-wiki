@@ -20,12 +20,14 @@
 ## 交接与美术生产
 
 - 当前状态、未完成项和续接步骤：[`docs/CONTINUATION.md`](docs/CONTINUATION.md)
-- **首发 55 张美术提示词总入口**：[`docs/image-prompts/core-pack/00-README.md`](docs/image-prompts/core-pack/00-README.md)
-- 场景母图复用规则：[`docs/image-prompts/core-pack/SCENE-MAP.md`](docs/image-prompts/core-pack/SCENE-MAP.md)
-- 优秀像素游戏参考与原创边界：[`docs/image-prompts/core-pack/REFERENCE-STYLE-GUIDE.md`](docs/image-prompts/core-pack/REFERENCE-STYLE-GUIDE.md)
-- 55 张分批生成索引：[`docs/image-prompts/core-pack/05-batch-index.md`](docs/image-prompts/core-pack/05-batch-index.md)
+- **176 张完整美术总入口**：[`docs/image-prompts/full-pack-176/00-README.md`](docs/image-prompts/full-pack-176/00-README.md)
+- **GPT 总任务提示词**：[`docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md`](docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md)
+- **GPT 一键执行指令**：[`docs/image-prompts/full-pack-176/GPT-EXECUTE-COMMAND.md`](docs/image-prompts/full-pack-176/GPT-EXECUTE-COMMAND.md)
+- 176 张分批索引：[`docs/image-prompts/full-pack-176/05-batch-index.md`](docs/image-prompts/full-pack-176/05-batch-index.md)
+- 生成后运行时替换映射：[`docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md`](docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md)
+- 55 张快速上线包：[`docs/image-prompts/core-pack/00-README.md`](docs/image-prompts/core-pack/00-README.md)
 
-> 当前线上仍是 29 张场景占位图和 10 个动作占位图标。正式美术只保留一套 55 张核心包；新 PNG 就绪后按同名路径替换占位图。
+> 当前线上仍是 29 张场景占位图和 10 个动作占位图标。完整库生成 176 张后，可先按运行时映射替换 29 张场景与 10 张动作图标；其余图片用于后续逐事件与命运三幕接入。
 
 ## 开发
 

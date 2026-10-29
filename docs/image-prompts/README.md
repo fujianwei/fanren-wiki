@@ -1,28 +1,32 @@
 # 像素美术提示词
 
-> 当前唯一保留的美术生产方案是 **55 张 Core Pack**。早期 515 张、176 张、81 张水墨方案、旧 39 张占位提示词及其压缩包均已移除。
+> 当前保留两套用途明确的方案：
+> **176 张完整生产库**用于逐事件、命运三幕和完整 UI；
+> **55 张 Core Pack** 用于快速上线并覆盖当前运行时。
 
 ## **正式入口**
 
-- 55 张制作说明：[core-pack/00-README.md](core-pack/00-README.md)
+### **176 张完整库**
+
+- 完整制作说明：[full-pack-176/00-README.md](full-pack-176/00-README.md)
+- GPT 总任务提示词：[full-pack-176/GPT-MASTER-PROMPT.md](full-pack-176/GPT-MASTER-PROMPT.md)
+- 26 个批次索引：[full-pack-176/05-batch-index.md](full-pack-176/05-batch-index.md)
+- 176 条机器任务：[full-pack-176/manifest.jsonl](full-pack-176/manifest.jsonl)
+- 176 张输出路径：[full-pack-176/OUTPUT-PATHS.txt](full-pack-176/OUTPUT-PATHS.txt)
+- 逐图完成清单：[full-pack-176/checklist.csv](full-pack-176/checklist.csv)
+- 当前运行时复制映射：[full-pack-176/RUNTIME-PROMOTION-MAP.md](full-pack-176/RUNTIME-PROMOTION-MAP.md)
+
+### **55 张 Core Pack**
+
+- 首发制作说明：[core-pack/00-README.md](core-pack/00-README.md)
 - 场景母图复用规则：[core-pack/SCENE-MAP.md](core-pack/SCENE-MAP.md)
-- 优秀像素游戏参考与原创边界：[core-pack/REFERENCE-STYLE-GUIDE.md](core-pack/REFERENCE-STYLE-GUIDE.md)
-- 3 个生成批次：[core-pack/05-batch-index.md](core-pack/05-batch-index.md)
-- 55 条机器可读任务：[core-pack/manifest.jsonl](core-pack/manifest.jsonl)
-- 55 行完成清单：[core-pack/checklist.csv](core-pack/checklist.csv)
-- 55 张输出路径：[core-pack/OUTPUT-PATHS.txt](core-pack/OUTPUT-PATHS.txt)
+- 3 个首发批次：[core-pack/05-batch-index.md](core-pack/05-batch-index.md)
 
-## **55 张构成**
+## **两套方案的关系**
 
-| 类别 | 数量 |
-|---|---:|
-| 场景母图 | 29 |
-| 本心开场 | 4 |
-| 年度重心 | 6 |
-| 结局 | 6 |
-| 动作图标 | 10 |
-| **合计** | **55** |
+| 方案 | 数量 | 用途 |
+|---|---:|---|
+| 完整库 | 176 | 逐事件、命运三幕和完整 UI 的正式生产库 |
+| 首发包 | 55 | 先用 29 张场景母图覆盖当前运行时，快速上线 |
 
-## **运行时说明**
-
-线上暂时保留 29 张场景占位图和 10 个动作占位图标，避免页面缺图。它们不是正式美术。新 PNG 按 `core-pack/OUTPUT-PATHS.txt` 生成后，同名替换 `public/game/` 下的占位文件即可；本心、年度重心和结局图在完成对应页面接入后使用。
+55 张不是从 176 个文件路径中简单删除 121 条。完整库保留逐事件变化；首发包把相同语义聚合到 29 个运行时场景 ID。两者都保留，按阶段使用。

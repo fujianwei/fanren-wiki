@@ -44,27 +44,36 @@
 
 ### **正式美术尚未生成**
 
-正式美术只保留一套 55 张核心包，不再维护多级扩展清单。
+正式美术保留两套用途明确的方案：
 
-| 正式资产 | 数量 |
-|---|---:|
-| 场景母图 | 29 |
-| 本心开场 | 4 |
-| 年度重心 | 6 |
-| 结局 | 6 |
-| 动作图标 | 10 |
-| **合计** | **55** |
+| 方案 | 资产 | 数量 |
+|---|---|---:|
+| 完整库 | 事件主图 | 96 |
+| 完整库 | 命运线三幕主图 | 54 |
+| 完整库 | 本心开场 | 4 |
+| 完整库 | 年度重心 | 6 |
+| 完整库 | 结局 | 6 |
+| 完整库 | 动作图标 | 10 |
+| **完整库合计** | | **176** |
+| 首发包 | 场景母图 + UI + 动作图标 | 55 |
 
-入口：
+完整库入口：
+
+- `docs/image-prompts/full-pack-176/00-README.md`
+- `docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md`
+- `docs/image-prompts/full-pack-176/05-batch-index.md`
+- `docs/image-prompts/full-pack-176/batches/`：26 个可逐批交给 GPT 的 Markdown 文件
+- `docs/image-prompts/full-pack-176/manifest.jsonl`
+- `docs/image-prompts/full-pack-176/checklist.csv`
+- `docs/image-prompts/full-pack-176/OUTPUT-PATHS.txt`
+- `docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md`
+
+55 张首发包入口：
 
 - `docs/image-prompts/core-pack/00-README.md`
-- `docs/image-prompts/core-pack/SCENE-MAP.md`：29 个场景母图如何覆盖 96 个基础事件和 54 个命运幕次
-- `docs/image-prompts/core-pack/REFERENCE-STYLE-GUIDE.md`
+- `docs/image-prompts/core-pack/SCENE-MAP.md`
 - `docs/image-prompts/core-pack/05-batch-index.md`
-- `docs/image-prompts/core-pack/batches/`：3 个可直接交给 GPT 的 Markdown 批次
 - `docs/image-prompts/core-pack/manifest.jsonl`
-- `docs/image-prompts/core-pack/checklist.csv`
-- `docs/image-prompts/core-pack/OUTPUT-PATHS.txt`：55 张正式图片目标路径
 
 ## **三、当前运行时如何选图**
 
@@ -80,13 +89,13 @@
 
 ## **四、收到新图后的接入顺序**
 
-1. 按 `core-pack/manifest.jsonl` 的 `output` 路径保存新 PNG。
-2. 29 张场景母图直接同名替换 `public/game/scenes/` 下的占位图，不需要逐事件建立新图片目录。
+1. 完整库按 `full-pack-176/manifest.jsonl` 的 `output` 路径保存新 PNG；快速上线可按 `core-pack/manifest.jsonl` 生成。
+2. 完整库生成后，先按 `full-pack-176/RUNTIME-PROMOTION-MAP.csv` 把 29 张代表性图片复制成当前运行时场景名，立即替换占位图。
 3. 10 个动作图标直接替换 `public/game/actions/` 下的占位图。
 4. 选项结果继续复用当前场景母图，并叠加动作图标和状态层，不单独生成结果图。
 5. 本心、年度重心和结局图按同名路径保存；对应页面完成图片接入后生效。
 6. 运行类型检查、Lint、测试、生产构建和桌面/移动端浏览器验收。
-7. 用 `docs/image-prompts/core-pack/checklist.csv` 核对 55 张完成状态。
+7. 用 `docs/image-prompts/full-pack-176/checklist.csv` 核对 176 张完成状态。
 
 ## **五、关键代码地图**
 
@@ -146,7 +155,7 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 ## **八、已知问题**
 
-1. **55 张正式美术尚未生成**，当前线上仍是 39 张占位图。
+1. **176 张完整正式美术尚未生成**，当前线上仍是 39 张占位图；55 张 Core Pack 可用于快速上线。
 2. 因此当前 UI 的图片好看程度不代表最终视觉质量。
 3. 当前图片映射是关键词复用，不是逐事件、逐选项独立图。
 4. 飞升率约 51.5%，仍高于原先“单一结局不超过 40%”的产品目标。
@@ -184,6 +193,6 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 新对话中可直接要求：
 
-> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts` 和 `lib/game/scene-art.ts`。当前线上仍使用 29 张占位场景和 10 个占位动作图标；55 张正式美术尚未交付。下一步是接收新图并按 `docs/image-prompts/core-pack/manifest.jsonl` 优先替换当前 29+10 个运行时路径，再用动作图标和 UI 状态层表达选项结果。
+> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts` 和 `lib/game/scene-art.ts`。当前线上仍使用 29 张占位场景和 10 个占位动作图标；176 张完整美术提示词已经准备好。下一步是按 `docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md` 分批生成，并按 `RUNTIME-PROMOTION-MAP.md` 优先替换当前 29 张场景和 10 张动作图标。
 
 这样即可从仓库状态继续，不依赖旧聊天记录。
