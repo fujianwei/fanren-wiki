@@ -36,5 +36,14 @@ https://raw.githubusercontent.com/fujianwei/fanren-wiki/main/docs/image-prompts/
 | 序号 | 文件名 | 输出路径 | 状态 |
 并写明累计完成数 4/176。
 
-生成完这 4 张后立刻停下来等我确认风格，不要继续阶段 1。
+生成完这 4 张后立刻停下来等我确认风格，不要继续阶段 1，也不要提交或推送。
+
+如果后续我明确说“本批验收通过，可以提交推送”，你必须按总任务书的 GitHub 交付规则执行：
+- 只暂存本批 manifest 对应 PNG，禁止 `git add -A`。
+- 运行 git diff --check，确认没有无关代码或文档改动。
+- 提交信息使用：art(game): add <batch-id> generated pixel art
+- 推送目标：origin main
+- 推送后报告 commit hash、本批文件数、git status 是否干净；没有实际执行成功不得声称已推送。
+
+如果我在某一批明确说“自检通过后自动提交并推送”，你可以在该批全部自检通过后直接执行上述 Git 流程；任何尺寸、文件名、缺图、无关改动、认证或网络异常都必须停止。
 ```
