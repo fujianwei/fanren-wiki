@@ -31,6 +31,7 @@ https://raw.githubusercontent.com/fujianwei/fanren-wiki/main/docs/image-prompts/
 - 不生成文字、汉字招牌、英文、logo、水印、UI 边框或字幕。
 - 不复制任何参考游戏的具体角色、服装、建筑、地图、构图、图标或可识别资产。
 - 每张图是独立成品，不拼联络表。
+- 生图源稿为 PNG，提交前必须按总任务书转换为 WebP：场景 q85，动作图标 q90；Git 只提交 WebP。
 
 完成后请输出：
 | 序号 | 文件名 | 输出路径 | 状态 |

@@ -1,4 +1,4 @@
-import type { GameEvent, RealmSlug } from "@/types/game";
+import type { FocusId, GameEvent, HeartIntent, RealmSlug } from "@/types/game";
 
 type ActionArtId =
   | "talk"
@@ -12,11 +12,21 @@ type ActionArtId =
   | "refuse"
   | "observe";
 
+type EndingArtId =
+  | "ascend"
+  | "ascend_fail"
+  | "natural"
+  | "death_battle"
+  | "death_heart"
+  | "death_break";
+
 export interface SceneArt {
   id: string;
   src: string;
+  fallbackSrc?: string;
   label: string;
   accent: string;
+  pixelated?: boolean;
 }
 
 const SCENES: Record<string, Omit<SceneArt, "src">> = {
@@ -52,16 +62,41 @@ const SCENES: Record<string, Omit<SceneArt, "src">> = {
 };
 
 const ACTION_ART: Record<ActionArtId, { src: string; label: string; accent: string }> = {
-  talk: { src: "/game/actions/talk.png", label: "交谈", accent: "#d4a843" },
-  fight: { src: "/game/actions/fight.png", label: "争斗", accent: "#ef6b62" },
-  travel: { src: "/game/actions/travel.png", label: "远行", accent: "#6ea8fe" },
-  cultivate: { src: "/game/actions/cultivate.png", label: "修行", accent: "#6fedb5" },
-  trade: { src: "/game/actions/trade.png", label: "交易", accent: "#f0c96b" },
-  bond: { src: "/game/actions/bond.png", label: "结缘", accent: "#f09aa8" },
-  heal: { src: "/game/actions/heal.png", label: "疗愈", accent: "#80c8b5" },
-  risk: { src: "/game/actions/risk.png", label: "涉险", accent: "#cdb0ff" },
-  refuse: { src: "/game/actions/refuse.png", label: "拒绝", accent: "#8fa79a" },
-  observe: { src: "/game/actions/observe.png", label: "观察", accent: "#a4b8ca" },
+  talk: { src: "/game/actions/talk.webp", label: "交谈", accent: "#d4a843" },
+  fight: { src: "/game/actions/fight.webp", label: "争斗", accent: "#ef6b62" },
+  travel: { src: "/game/actions/travel.webp", label: "远行", accent: "#6ea8fe" },
+  cultivate: { src: "/game/actions/cultivate.webp", label: "修行", accent: "#6fedb5" },
+  trade: { src: "/game/actions/trade.webp", label: "交易", accent: "#f0c96b" },
+  bond: { src: "/game/actions/bond.webp", label: "结缘", accent: "#f09aa8" },
+  heal: { src: "/game/actions/heal.webp", label: "疗愈", accent: "#80c8b5" },
+  risk: { src: "/game/actions/risk.webp", label: "涉险", accent: "#cdb0ff" },
+  refuse: { src: "/game/actions/refuse.webp", label: "拒绝", accent: "#8fa79a" },
+  observe: { src: "/game/actions/observe.webp", label: "观察", accent: "#a4b8ca" },
+};
+
+const INTENT_ART: Record<HeartIntent, { label: string; accent: string; fallback: string }> = {
+  longevity: { label: "求长生", accent: "#6fedb5", fallback: "cave" },
+  revenge: { label: "求复仇", accent: "#ef6b62", fallback: "battle" },
+  guard: { label: "求守护", accent: "#6ea8fe", fallback: "bonds" },
+  freedom: { label: "求自在", accent: "#d4a843", fallback: "sea" },
+};
+
+const FOCUS_ART: Record<FocusId, { label: string; accent: string; fallback: string }> = {
+  cultivate: { label: "苦修", accent: "#6fedb5", fallback: "cave" },
+  roam: { label: "游历", accent: "#8bc4ff", fallback: "wilderness" },
+  craft: { label: "炼丹阵法", accent: "#f0c96b", fallback: "medicine" },
+  sect: { label: "宗门事务", accent: "#6fedb5", fallback: "sect" },
+  bond: { label: "人情往来", accent: "#f09aa8", fallback: "bonds" },
+  heal: { label: "养伤隐居", accent: "#80c8b5", fallback: "sea" },
+};
+
+const ENDING_ART: Record<EndingArtId, { label: string; accent: string; fallback: string }> = {
+  ascend: { label: "飞升灵界", accent: "#d4a843", fallback: "ascension_choice" },
+  ascend_fail: { label: "天门遗恨", accent: "#8fa79a", fallback: "ascension_choice" },
+  natural: { label: "寿尽归尘", accent: "#4ade9a", fallback: "wilderness" },
+  death_battle: { label: "斗法陨落", accent: "#ef6b62", fallback: "battle" },
+  death_heart: { label: "心魔坐化", accent: "#ef6b62", fallback: "tribulation" },
+  death_break: { label: "渡劫成灰", accent: "#ef6b62", fallback: "tribulation" },
 };
 
 const FALLBACK_SCENE: Record<RealmSlug, string> = {
@@ -92,26 +127,115 @@ const KEYWORD_SCENES: Array<[RegExp, string]> = [
   [/洞府|闭关|修炼|吐纳|吐息|打坐|静修/, "cave"],
 ];
 
-export function getSceneById(id: string): SceneArt {
-  const scene = SCENES[id] ?? SCENES.wilderness;
-  return { ...scene, src: `/game/scenes/${scene.id}.png` };
+function makeArtwork(
+  id: string,
+  src: string,
+  label: string,
+  accent: string,
+  fallbackId: string
+): SceneArt {
+  const fallback = getSceneById(fallbackId);
+  return {
+    ...fallback,
+    id,
+    src,
+    fallbackSrc: fallback.src,
+    label,
+    accent,
+    pixelated: false,
+  };
 }
 
-export function getSceneForEvent(event: GameEvent | null, realmSlug: RealmSlug): SceneArt {
-  if (!event) return getSceneById(FALLBACK_SCENE[realmSlug]);
-  if (event.story?.threadId && SCENES[event.story.threadId]) return getSceneById(event.story.threadId);
-
-  if (event.id.startsWith("fate:")) {
-    const threadId = event.id.split(":")[1];
-    if (threadId && SCENES[threadId]) return getSceneById(threadId);
-  }
-
+function getEventFallback(event: GameEvent, realmSlug: RealmSlug): SceneArt {
   const haystack = `${event.id} ${event.title} ${event.description} ${event.category}`;
   for (const [pattern, sceneId] of KEYWORD_SCENES) {
     if (pattern.test(haystack)) return getSceneById(sceneId);
   }
-
   return getSceneById(FALLBACK_SCENE[realmSlug]);
+}
+
+export function getSceneById(id: string): SceneArt {
+  const scene = SCENES[id] ?? SCENES.wilderness;
+  return { ...scene, src: `/game/scenes/${scene.id}.png`, pixelated: true };
+}
+
+export function getSceneForEvent(event: GameEvent | null, realmSlug: RealmSlug): SceneArt {
+  if (!event) return getSceneById(FALLBACK_SCENE[realmSlug]);
+
+  const fallback = getEventFallback(event, realmSlug);
+
+  if (event.story?.threadId) {
+    const stage = Math.max(1, Math.min(event.story.stageCount, event.story.stage || 1));
+    return makeArtwork(
+      `fate-${event.story.threadId}-${stage}`,
+      `/game/scenes/fate/${event.story.threadId}-${stage}.webp`,
+      event.story.threadTitle,
+      fallback.accent,
+      fallback.id
+    );
+  }
+
+  if (event.id.startsWith("fate:")) {
+    const [, threadId, rawStage] = event.id.split(":");
+    if (threadId) {
+      const stage = Math.max(1, Math.min(3, Number(rawStage) || 1));
+      return makeArtwork(
+        `fate-${threadId}-${stage}`,
+        `/game/scenes/fate/${threadId}-${stage}.webp`,
+        fallback.label,
+        fallback.accent,
+        fallback.id
+      );
+    }
+  }
+
+  if (event.id) {
+    return makeArtwork(
+      `event-${event.id}`,
+      `/game/scenes/events/${event.id}.webp`,
+      fallback.label,
+      fallback.accent,
+      fallback.id
+    );
+  }
+
+  return fallback;
+}
+
+export function getIntentScene(intent: HeartIntent): SceneArt {
+  const key = (intent in INTENT_ART ? intent : "longevity") as HeartIntent;
+  const art = INTENT_ART[key];
+  return makeArtwork(
+    `opening-${key}`,
+    `/game/scenes/opening/${key}.webp`,
+    art.label,
+    art.accent,
+    art.fallback
+  );
+}
+
+export function getFocusScene(focusId: FocusId): SceneArt {
+  const key = (focusId in FOCUS_ART ? focusId : "cultivate") as FocusId;
+  const art = FOCUS_ART[key];
+  return makeArtwork(
+    `focus-${key}`,
+    `/game/scenes/focus/${key}.webp`,
+    art.label,
+    art.accent,
+    art.fallback
+  );
+}
+
+export function getEndingScene(endingType: string): SceneArt {
+  const key = (endingType in ENDING_ART ? endingType : "natural") as EndingArtId;
+  const art = ENDING_ART[key];
+  return makeArtwork(
+    `ending-${key}`,
+    `/game/scenes/ending/${key}.webp`,
+    art.label,
+    art.accent,
+    art.fallback
+  );
 }
 
 export function getActionArt(text: string): { id: ActionArtId; src: string; label: string; accent: string } {

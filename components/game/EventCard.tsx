@@ -106,7 +106,7 @@ export default function EventCard({ event, onChoose }: Props) {
                   className="grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-xl"
                   style={{ backgroundColor: `${action.accent}0e`, border: `1px solid ${action.accent}2f` }}
                 >
-                  <Image src={action.src} alt="" width={32} height={32} unoptimized style={{ imageRendering: "pixelated", opacity: affordable ? 1 : .35 }} />
+                  <Image src={action.src} alt="" width={32} height={32} sizes="44px" style={{ imageRendering: "pixelated", opacity: affordable ? 1 : .35 }} />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="mb-1 flex items-center gap-2">

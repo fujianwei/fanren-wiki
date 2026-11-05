@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { getCelestialById } from "@/lib/game/daily";
-import { getSceneById } from "@/lib/game/scene-art";
+import { getIntentScene, getSceneById } from "@/lib/game/scene-art";
 import type { GameState, HeartIntent } from "@/types/game";
 import PixelScene from "./PixelScene";
 
@@ -56,21 +57,36 @@ export default function FateOpening({ state, onChoose }: { state: GameState; onC
           <span className="text-[9px] tracking-[.22em]" style={{ color: "#668777" }}>选择此世最放不下的执念</span>
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
-          {INTENTS.map((intent) => (
-            <button
-              key={intent.id}
-              onClick={() => onChoose(intent.id)}
-              className="group flex min-h-[82px] items-center gap-3 rounded-2xl px-4 py-3 text-left transition-all hover:-translate-y-0.5"
-              style={{ backgroundColor: "#101b15", border: "1px solid #283e33" }}
-            >
-              <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl font-serif text-sm" style={{ color: intent.accent, border: `1px solid ${intent.accent}3d`, backgroundColor: `${intent.accent}0d` }}>{intent.icon}</div>
-              <div>
-                <div className="font-serif text-sm font-bold" style={{ color: "#edf4f0" }}>{intent.title}</div>
-                <div className="mt-0.5 text-[10px] leading-5" style={{ color: "#6f897c" }}>{intent.text}</div>
-              </div>
-              <span className="ml-auto text-lg opacity-0 transition-opacity group-hover:opacity-100" style={{ color: intent.accent }}>›</span>
-            </button>
-          ))}
+          {INTENTS.map((intent) => {
+            const art = getIntentScene(intent.id);
+            return (
+              <button
+                key={intent.id}
+                onClick={() => onChoose(intent.id)}
+                className="group relative flex min-h-[112px] items-center gap-3 overflow-hidden rounded-2xl px-4 py-3 text-left transition-all hover:-translate-y-0.5"
+                style={{ backgroundColor: "#101b15", border: `1px solid ${intent.accent}38` }}
+              >
+                <Image
+                  src={art.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 320px"
+                  className="object-cover opacity-40 transition-transform duration-500 group-hover:scale-[1.035]"
+                  style={{ objectPosition: "center 44%" }}
+                />
+                <span
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(90deg, rgba(7,13,10,.96) 0%, rgba(7,13,10,.78) 54%, rgba(7,13,10,.34) 100%)" }}
+                />
+                <div className="relative z-10 grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl font-serif text-sm backdrop-blur-sm" style={{ color: intent.accent, border: `1px solid ${intent.accent}55`, backgroundColor: "rgba(7,13,10,.62)" }}>{intent.icon}</div>
+                <div className="relative z-10 min-w-0">
+                  <div className="font-serif text-sm font-bold" style={{ color: "#edf4f0" }}>{intent.title}</div>
+                  <div className="mt-0.5 text-[10px] leading-5" style={{ color: "#9aafa3", textShadow: "0 1px 8px rgba(0,0,0,.75)" }}>{intent.text}</div>
+                </div>
+                <span className="relative z-10 ml-auto text-lg opacity-0 transition-opacity group-hover:opacity-100" style={{ color: intent.accent }}>›</span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

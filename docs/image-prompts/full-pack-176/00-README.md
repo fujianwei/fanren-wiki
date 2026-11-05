@@ -31,13 +31,19 @@
 1. 先上传 `GPT-MASTER-PROMPT.md`、`manifest.jsonl`、`REFERENCE-STYLE-GUIDE.md` 和 `05-batch-index.md`。
 2. 阶段 0 只让 GPT 生成 4 张风格校准图。
 3. 风格确认后，每次只上传一个批次 Markdown 文件。
-4. 每批返回后检查命名、数量和输出路径，再继续下一批。
+4. 每批返回后检查命名、数量和输出路径；场景转 WebP q85、动作图标转 WebP q90，再继续下一批。
 5. 每批图片验收通过后，可按总任务书中的 GitHub 交付规则，只暂存本批精确文件并推送 `main`。
-6. 176 张全部完成后，用 `RUNTIME-PROMOTION-MAP.md` 先把 29 张代表性母图复制成当前运行时文件名。
+6. 当前 176 张已全部完成，并转换为 WebP 接入 `lib/game/scene-art.ts`。
 
-## **四、当前运行时与完整库的差异**
+## **四、当前运行时接入状态**
 
-当前 `lib/game/scene-art.ts` 使用 29 个通用场景 ID。完整库中的 96 张事件图和 54 张命运幕次图需要后续改为逐事件映射才会全部使用。为了先生效，生成完成后可以按 `RUNTIME-PROMOTION-MAP.csv` 复制 29 张到当前场景路径；10 个动作图标本身已经是当前运行时路径。
+176 张图片已经全部完成并接入：
+
+- 96 张事件图按 `events/{eventId}.webp` 读取。
+- 54 张命运图按 `fate/{threadId}-{stage}.webp` 读取。
+- 4 张本心、6 张重心、6 张结局和 10 个动作图标均使用对应专属路径。
+- 专属图加载失败时自动回退到 29 张通用场景 PNG。
+- 部署图片已从约 498MB PNG 压缩为约 42MB WebP。
 
 ## **五、文件结构**
 
@@ -49,8 +55,6 @@
 | `checklist.csv` | 176 行完成状态 |
 | `05-batch-index.md` | 26 个批次 |
 | `batches/` | 26 个可逐批上传的 Markdown |
-| `RUNTIME-PROMOTION-MAP.md` | 生成后如何先替换当前 29 张场景 |
-| `RUNTIME-PROMOTION-MAP.csv` | 可交给脚本的复制映射 |
 
 ## **六、验收底线**
 

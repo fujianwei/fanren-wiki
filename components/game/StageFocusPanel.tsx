@@ -1,7 +1,7 @@
 "use client";
 
 import { FOCUSES, getStageYears } from "@/lib/game/lifecycle";
-import { getSceneById } from "@/lib/game/scene-art";
+import { getFocusScene } from "@/lib/game/scene-art";
 import type { FocusId, GameState } from "@/types/game";
 import PixelScene from "./PixelScene";
 
@@ -11,19 +11,10 @@ interface Props {
   onAdvance: () => void;
 }
 
-const FOCUS_SCENES: Record<FocusId, string> = {
-  cultivate: "cave",
-  roam: "wilderness",
-  craft: "medicine",
-  sect: "sect",
-  bond: "bonds",
-  heal: "sea",
-};
-
 export default function StageFocusPanel({ state, onSelect, onAdvance }: Props) {
   const selected = FOCUSES.find((focus) => focus.id === state.stageFocus);
   const years = getStageYears(state.realmSlug);
-  const scene = getSceneById(FOCUS_SCENES[(selected?.id ?? "cultivate") as FocusId]);
+  const scene = getFocusScene((selected?.id ?? "cultivate") as FocusId);
 
   return (
     <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #2a4035", boxShadow: "0 24px 80px rgba(0,0,0,.28)" }}>

@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useGame } from "@/components/game/GameProvider";
 import PixelScene from "@/components/game/PixelScene";
-import { getSceneById } from "@/lib/game/scene-art";
+import { getEndingScene } from "@/lib/game/scene-art";
 import { getAtlasSummary, getUnseenWhisper } from "@/lib/game/atlas";
 import { getDailyContext, getCelestialById } from "@/lib/game/daily";
 import { AXIS_LABELS, buildEndingSummary, getThreadTitle } from "@/lib/game/narrative";
@@ -42,15 +42,7 @@ function EndingContent() {
   const unseen = getUnseenWhisper(state.meta, state.runSeed);
   const daily = getDailyContext();
   const [shareState, setShareState] = useState("");
-  const scene = getSceneById(
-    endingType === "ascend" || endingType === "ascend_fail"
-      ? "ascension_choice"
-      : endingType === "death_battle"
-        ? "battle"
-        : endingType === "natural"
-          ? "wilderness"
-          : "tribulation"
-  );
+  const scene = getEndingScene(endingType);
 
   useEffect(() => {
     if (state.phase === "ended" && summary && !state.archived) dispatch({ type: "COMMIT_LIFE" });

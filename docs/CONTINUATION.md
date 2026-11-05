@@ -1,6 +1,6 @@
 # 项目交接与继续开发说明
 
-> 最后更新：2026-10-29。本文是切换对话或更换开发者时的首要入口。
+> 最后更新：2026-11-05。本文是切换对话或更换开发者时的首要入口。
 
 ## **一、当前仓库状态**
 
@@ -33,18 +33,21 @@
 
 ## **二、当前美术状态**
 
-### **已经进入运行时的占位美术**
+### **正式美术已接入**
 
 | 类型 | 数量 | 位置 | 状态 |
 |---|---:|---|---|
-| 场景占位图 | 29 | `public/game/scenes/` | 已接入，质量不合格，仅作占位 |
-| 动作图标 | 10 | `public/game/actions/` | 已接入，可临时使用 |
+| 基础/人生事件图 | 96 | `public/game/scenes/events/` | 已接入 WebP |
+| 命运线三幕图 | 54 | `public/game/scenes/fate/` | 已接入 WebP |
+| 本心开场 | 4 | `public/game/scenes/opening/` | 已接入 WebP |
+| 年度重心 | 6 | `public/game/scenes/focus/` | 已接入 WebP |
+| 结局 | 6 | `public/game/scenes/ending/` | 已接入 WebP |
+| 动作图标 | 10 | `public/game/actions/` | 已接入 WebP |
+| 通用回退场景 | 29 | `public/game/scenes/` | 专属图缺失时使用 PNG |
 
-这批图由 `scripts/generate-pixel-art.py` 程序化生成。用户已明确表示它们不能作为最终美术，但要求暂时保留，避免线上页面缺图。
+正式美术共 176 张，已经从约 498MB PNG 压缩为约 42MB WebP。通用回退场景仍保留，避免未来新增事件或图片异常时出现空白。
 
-### **正式美术尚未生成**
-
-正式美术保留两套用途明确的方案：
+美术提示词保留两套用途明确的方案：
 
 | 方案 | 资产 | 数量 |
 |---|---|---:|
@@ -66,7 +69,6 @@
 - `docs/image-prompts/full-pack-176/manifest.jsonl`
 - `docs/image-prompts/full-pack-176/checklist.csv`
 - `docs/image-prompts/full-pack-176/OUTPUT-PATHS.txt`
-- `docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md`
 
 55 张首发包入口：
 
@@ -77,25 +79,28 @@
 
 ## **三、当前运行时如何选图**
 
-当前使用简化占位映射：
+图片解析统一由 `lib/game/scene-art.ts` 负责：
 
-- `lib/game/scene-art.ts`
-- 命运线按 `threadId` 取图。
-- 基础事件按标题、描述和关键词归入 29 张通用场景。
-- 每个选项按文本语义归入 10 个动作图标。
-- 场景图片位于 `public/game/scenes/`。
+- 基础事件：`/game/scenes/events/{eventId}.webp`
+- 命运线：`/game/scenes/fate/{threadId}-{stage}.webp`
+- 本心：`/game/scenes/opening/{intentId}.webp`
+- 年度重心：`/game/scenes/focus/{focusId}.webp`
+- 结局：`/game/scenes/ending/{endingType}.webp`
+- 动作选项：`/game/actions/{actionId}.webp`
+- 专属图加载失败：自动回退到 `/game/scenes/{sceneId}.png`
 
-这是一种兼容性回退，不是最终的逐事件、逐选项美术架构。
+`PixelScene` 与 `SceneBackground` 已移除无条件 `unoptimized`，Next.js 会按设备宽度生成优化图片。浏览器实测请求使用 `/_next/image`。
 
-## **四、收到新图后的接入顺序**
+选项结果继续复用事件场景图，并叠加动作图标和状态层，不单独生成结果图。
 
-1. 完整库按 `full-pack-176/manifest.jsonl` 的 `output` 路径保存新 PNG；快速上线可按 `core-pack/manifest.jsonl` 生成。
-2. 完整库生成后，先按 `full-pack-176/RUNTIME-PROMOTION-MAP.csv` 把 29 张代表性图片复制成当前运行时场景名，立即替换占位图。
-3. 10 个动作图标直接替换 `public/game/actions/` 下的占位图。
-4. 选项结果继续复用当前场景母图，并叠加动作图标和状态层，不单独生成结果图。
-5. 本心、年度重心和结局图按同名路径保存；对应页面完成图片接入后生效。
-6. 运行类型检查、Lint、测试、生产构建和桌面/移动端浏览器验收。
-7. 用 `docs/image-prompts/full-pack-176/checklist.csv` 核对 176 张完成状态。
+## **四、更新美术时的接入顺序**
+
+1. 按 `full-pack-176/manifest.jsonl` 生成或替换 1536×864 PNG。
+2. 将事件、命运、开场、重心、结局和动作图转换为 WebP；当前生产质量为场景 q85、图标 q90。
+3. 保持现有文件名与目录结构，不要改事件 ID、命运 threadId 或 stage。
+4. 保留 29 张通用场景 PNG 作为回退。
+5. 运行 TypeScript、Lint、测试、生产构建和桌面/移动端浏览器验收。
+6. 用 `docs/image-prompts/full-pack-176/checklist.csv` 核对 176 张完成状态。
 
 ## **五、关键代码地图**
 
@@ -155,14 +160,13 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 ## **八、已知问题**
 
-1. **176 张完整正式美术尚未生成**，当前线上仍是 39 张占位图；55 张 Core Pack 可用于快速上线。
-2. 因此当前 UI 的图片好看程度不代表最终视觉质量。
-3. 当前图片映射是关键词复用，不是逐事件、逐选项独立图。
-4. 飞升率约 51.5%，仍高于原先“单一结局不超过 40%”的产品目标。
-5. 部分基础事件缺少专属结果文案，仍使用通用兜底。
-6. 乱星海目前是 4 个事件组成的短链，还不是完整大型区域。
-7. 关系事件目前主要以四类初始关系存在，还没有大量专属分支。
-8. 宗门、仇敌、丹药、阵法和条件事件已完成本轮兼容修复，后续改动必须通过 `content-integrity.test.ts`，避免再次出现内容字段被静默忽略。
+1. 事件场景使用高清仙侠插画风，动作图标使用更传统的像素风，两者仍存在视觉风格差异。
+2. 原始生成图片仍保留在 Git 历史中，当前部署只使用压缩后的 WebP。
+3. 飞升率约 51.5%，仍高于原先“单一结局不超过 40%”的产品目标。
+4. 部分基础事件缺少专属结果文案，仍使用通用兜底。
+5. 乱星海目前是 4 个事件组成的短链，还不是完整大型区域。
+6. 关系事件目前主要以四类初始关系存在，还没有大量专属分支。
+7. 宗门、仇敌、丹药、阵法和条件事件已完成兼容修复，后续改动必须通过 `content-integrity.test.ts`，避免再次出现内容字段被静默忽略。
 
 ## **九、产品材料**
 
@@ -193,6 +197,6 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 新对话中可直接要求：
 
-> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts` 和 `lib/game/scene-art.ts`。当前线上仍使用 29 张占位场景和 10 个占位动作图标；176 张完整美术提示词已经准备好。下一步是按 `docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md` 分批生成，并按 `RUNTIME-PROMOTION-MAP.md` 优先替换当前 29 张场景和 10 张动作图标。
+> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts`、`lib/game/scene-art.ts` 和 `components/game/PixelScene.tsx`。176 张正式美术已经完成并接入，事件、命运三幕、开场、重心、结局和动作图标都按对应 ID 读取 WebP；缺失时回退到 29 张通用场景。后续修改不得破坏这条解析链。
 
 这样即可从仓库状态继续，不依赖旧聊天记录。

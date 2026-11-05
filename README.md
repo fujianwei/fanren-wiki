@@ -24,10 +24,9 @@
 - **GPT 总任务提示词**：[`docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md`](docs/image-prompts/full-pack-176/GPT-MASTER-PROMPT.md)
 - **GPT 一键执行指令**：[`docs/image-prompts/full-pack-176/GPT-EXECUTE-COMMAND.md`](docs/image-prompts/full-pack-176/GPT-EXECUTE-COMMAND.md)
 - 176 张分批索引：[`docs/image-prompts/full-pack-176/05-batch-index.md`](docs/image-prompts/full-pack-176/05-batch-index.md)
-- 生成后运行时替换映射：[`docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md`](docs/image-prompts/full-pack-176/RUNTIME-PROMOTION-MAP.md)
 - 55 张快速上线包：[`docs/image-prompts/core-pack/00-README.md`](docs/image-prompts/core-pack/00-README.md)
 
-> 当前线上仍是 29 张场景占位图和 10 个动作占位图标。完整库生成 176 张后，可先按运行时映射替换 29 张场景与 10 张动作图标；其余图片用于后续逐事件与命运三幕接入。
+> 176 张正式美术已经完成并接入运行逻辑：事件按事件 ID、命运线按三幕阶段、开场/重心/结局按对应类型读取 WebP。缺失专属图时会自动回退到 29 张通用场景。
 
 ## 开发
 

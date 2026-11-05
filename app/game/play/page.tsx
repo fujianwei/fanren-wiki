@@ -16,7 +16,7 @@ import LifeDrawer from "@/components/game/LifeDrawer";
 import LifeOathPanel from "@/components/game/LifeOathPanel";
 import PixelScene from "@/components/game/PixelScene";
 import { AXIS_LABELS, getDominantAxes, getThreadTitle } from "@/lib/game/narrative";
-import { getActionArt, getSceneById, getSceneForEvent } from "@/lib/game/scene-art";
+import { getActionArt, getFocusScene, getSceneById, getSceneForEvent, type SceneArt } from "@/lib/game/scene-art";
 import { calcBreakthroughRate, calcFateAscendRate, calcHeartDemonRate, getRealmConfig } from "@/lib/game/engine";
 import { getBreakthroughBonuses, getHeartDemonBonus, ITEM_MAP, ITEMS } from "@/lib/game/items";
 import { NEXT_REALM_NAMES } from "@/lib/game/labels";
@@ -261,7 +261,7 @@ export default function GamePlayPage() {
     outcome: string;
     lines: string[];
     story?: string;
-    sceneId: string;
+    scene: SceneArt;
     action: ReturnType<typeof getActionArt>;
   } | null>(null);
   const [showLife, setShowLife] = useState(false);
@@ -399,7 +399,7 @@ export default function GamePlayPage() {
       outcome: toneText,
       lines,
       story: storyLabel,
-      sceneId: getSceneForEvent(activeEvent, state.realmSlug).id,
+      scene: getSceneForEvent(activeEvent, state.realmSlug),
       action: getActionArt(option.text),
     });
     setCurrentEvent(null);
@@ -432,22 +432,14 @@ export default function GamePlayPage() {
   if (state.phase === "gate" || state.phase === "ended") return null;
 
   const isDying = state.injury === "dying";
-  const focusSceneMap: Record<string, string> = {
-    cultivate: "cave",
-    roam: "wilderness",
-    craft: "medicine",
-    sect: "sect",
-    bond: "bonds",
-    heal: "sea",
-  };
-  const latestFocus = state.stageFocus ?? state.focusHistory.at(-1)?.focusId;
+  const latestFocus = state.stageFocus ?? state.focusHistory.at(-1)?.focusId ?? "cultivate";
   const currentScene = currentEvent
     ? getSceneForEvent(currentEvent, state.realmSlug)
     : state.phase === "breakthrough"
       ? getSceneById(state.realmSlug === "huashen" ? "ascension_choice" : "tribulation")
       : isDying
         ? getSceneById("battle")
-        : getSceneById(latestFocus ? focusSceneMap[latestFocus] ?? "cave" : "cave");
+        : getFocusScene(latestFocus);
 
   return (
     <div className="relative min-h-[calc(100vh-64px)] overflow-hidden px-2.5 pb-10 pt-2.5 md:px-4 md:pt-4">
@@ -550,10 +542,10 @@ export default function GamePlayPage() {
       {eventResult && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center px-3 py-6" style={{ backgroundColor: "rgba(0,0,0,.76)", backdropFilter: "blur(8px)" }} onClick={(event) => event.target === event.currentTarget && closeResult()}>
           <div className="w-full max-w-lg overflow-hidden rounded-[24px]" style={{ backgroundColor: "#0d1712", border: "1px solid #30473b", boxShadow: "0 32px 120px rgba(0,0,0,.55)" }}>
-            <PixelScene scene={getSceneById(eventResult.sceneId)} compact>
+            <PixelScene scene={eventResult.scene} compact>
               <div className="absolute inset-x-0 bottom-0 flex items-end gap-3 px-4 pb-4 md:px-5">
                 <span className="grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-xl backdrop-blur-md" style={{ color: eventResult.action.accent, backgroundColor: "rgba(7,13,10,.75)", border: `1px solid ${eventResult.action.accent}55` }}>
-                  <Image src={eventResult.action.src} alt="" width={30} height={30} unoptimized style={{ imageRendering: "pixelated" }} />
+                  <Image src={eventResult.action.src} alt="" width={30} height={30} sizes="40px" style={{ imageRendering: "pixelated" }} />
                 </span>
                 <div className="min-w-0">
                   <div className="mb-1 flex items-center gap-2 text-[8px] tracking-[.2em]" style={{ color: "rgba(218,232,224,.55)" }}>

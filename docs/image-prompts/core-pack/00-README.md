@@ -20,7 +20,7 @@
 1. 先生成 `batches/01-core-scenes.md` 的 29 张场景母图。
 2. 再生成 `batches/02-openings-focus-endings.md` 的 16 张关键氛围图。
 3. 最后生成 `batches/03-action-icons.md` 的 10 个动作图标。
-4. 将 PNG 按 `OUTPUT-PATHS.txt` 放入 `public/game/` 对应目录，同名覆盖占位图。
+4. 将 PNG 转为 WebP 后按 `OUTPUT-PATHS.txt` 的对应语义放入 `public/game/`；完整 176 张事件版本已接入，Core Pack 仅作快速覆盖与备用母图。
 5. 运行测试、构建，并在手机宽度检查主体、文字承托区和动作图标可读性。
 
 ## **三、为什么能从 515 压到 55**

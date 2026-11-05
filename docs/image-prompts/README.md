@@ -1,8 +1,8 @@
 # 像素美术提示词
 
 > 当前保留两套用途明确的方案：
-> **176 张完整生产库**用于逐事件、命运三幕和完整 UI；
-> **55 张 Core Pack** 用于快速上线并覆盖当前运行时。
+> **176 张完整生产库**已经完成、压缩为 WebP 并接入运行时；
+> **55 张 Core Pack** 保留为快速覆盖和备用母图方案。
 
 ## **正式入口**
 
@@ -14,7 +14,6 @@
 - 176 条机器任务：[full-pack-176/manifest.jsonl](full-pack-176/manifest.jsonl)
 - 176 张输出路径：[full-pack-176/OUTPUT-PATHS.txt](full-pack-176/OUTPUT-PATHS.txt)
 - 逐图完成清单：[full-pack-176/checklist.csv](full-pack-176/checklist.csv)
-- 当前运行时复制映射：[full-pack-176/RUNTIME-PROMOTION-MAP.md](full-pack-176/RUNTIME-PROMOTION-MAP.md)
 
 ### **55 张 Core Pack**
 
