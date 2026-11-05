@@ -72,7 +72,7 @@ manifest.jsonl 中的 .png 是生图源稿路径，不是最终部署格式。�
 - 动作图标：q90，建议 `cwebp -q 90 -m 6 -metadata none source.png -o source.webp`
 - 写入同目录同名 .webp 后删除源 .png。
 - Git 只提交 .webp，不提交大体量 PNG；PNG 源稿保留在 Git 旧历史或外部素材库即可。
-- 运行时路径统一为 .webp；29 张通用场景回退图继续保留 .png。
+- 运行时路径统一为 .webp；29 张通用场景回退图也从 GPT 生成图映射为 .webp，不再使用旧 PNG。
 
 【GitHub 交付与推送】
 只有在你实际拥有该仓库的本地工作区和写权限时才执行 Git 操作。仓库地址：

@@ -61,6 +61,38 @@ const SCENES: Record<string, Omit<SceneArt, "src">> = {
   wilderness: { id: "wilderness", label: "山野独行", accent: "#a4b8ca" },
 };
 
+const SCENE_ART_SOURCES: Record<string, string> = {
+  wanderer_debt: "/game/scenes/fate/wanderer_debt-1.webp",
+  beast_bond: "/game/scenes/fate/beast_bond-1.webp",
+  ancient_tomb: "/game/scenes/fate/ancient_tomb-1.webp",
+  sect_purge: "/game/scenes/fate/sect_purge-1.webp",
+  mortal_kin: "/game/scenes/fate/mortal_kin-1.webp",
+  demonic_bargain: "/game/scenes/fate/demonic_bargain-1.webp",
+  sword_grave: "/game/scenes/fate/sword_grave-1.webp",
+  pill_toxin: "/game/scenes/fate/pill_toxin-1.webp",
+  array_legacy: "/game/scenes/fate/array_legacy-1.webp",
+  rival_brother: "/game/scenes/fate/rival_brother-1.webp",
+  master_secret: "/game/scenes/fate/master_secret-1.webp",
+  lost_soul: "/game/scenes/fate/lost_soul-1.webp",
+  merchant_ledger: "/game/scenes/fate/merchant_ledger-1.webp",
+  border_war: "/game/scenes/fate/border_war-1.webp",
+  false_accusation: "/game/scenes/fate/false_accusation-1.webp",
+  spirit_vein: "/game/scenes/fate/spirit_vein-1.webp",
+  ancient_artifact: "/game/scenes/fate/ancient_artifact-1.webp",
+  ascension_choice: "/game/scenes/fate/ascension_choice-1.webp",
+  market: "/game/scenes/events/lq_006.webp",
+  village: "/game/scenes/events/life_village_famine.webp",
+  bonds: "/game/scenes/events/life_friend_wedding.webp",
+  battle: "/game/scenes/events/zj_003.webp",
+  cave: "/game/scenes/focus/cultivate.webp",
+  sea: "/game/scenes/events/life_sea_storm.webp",
+  tribulation: "/game/scenes/events/hs_001.webp",
+  sect: "/game/scenes/events/lq_014.webp",
+  ruins: "/game/scenes/events/jd_004.webp",
+  medicine: "/game/scenes/events/lq_007.webp",
+  wilderness: "/game/scenes/events/life_lonely_rain.webp",
+};
+
 const ACTION_ART: Record<ActionArtId, { src: string; label: string; accent: string }> = {
   talk: { src: "/game/actions/talk.webp", label: "交谈", accent: "#d4a843" },
   fight: { src: "/game/actions/fight.webp", label: "争斗", accent: "#ef6b62" },
@@ -156,7 +188,11 @@ function getEventFallback(event: GameEvent, realmSlug: RealmSlug): SceneArt {
 
 export function getSceneById(id: string): SceneArt {
   const scene = SCENES[id] ?? SCENES.wilderness;
-  return { ...scene, src: `/game/scenes/${scene.id}.png`, pixelated: true };
+  return {
+    ...scene,
+    src: SCENE_ART_SOURCES[scene.id] ?? SCENE_ART_SOURCES.wilderness,
+    pixelated: false,
+  };
 }
 
 export function getSceneForEvent(event: GameEvent | null, realmSlug: RealmSlug): SceneArt {

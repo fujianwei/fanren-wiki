@@ -12,6 +12,7 @@ import {
   getEndingScene,
   getFocusScene,
   getIntentScene,
+  getSceneById,
   getSceneForEvent,
 } from "@/lib/game/scene-art";
 import type { FocusId, GameEvent, HeartIntent } from "@/types/game";
@@ -48,7 +49,7 @@ describe("story image art", () => {
       const art = getSceneForEvent(event, event.realmSlug);
       expect(art.src).toBe(`/game/scenes/events/${event.id}.webp`);
       expectPublicFile(art.src);
-      expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.png$/);
+      expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.webp$/);
       expectPublicFile(art.fallbackSrc!);
     }
   });
@@ -58,7 +59,25 @@ describe("story image art", () => {
       const art = getSceneForEvent(event, event.realmSlug);
       expect(art.src).toBe(`/game/scenes/fate/${event.story!.threadId}-${event.story!.stage}.webp`);
       expectPublicFile(art.src);
-      expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.png$/);
+      expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.webp$/);
+    }
+  });
+
+  it("maps legacy scene IDs to GPT-generated fallback WebP art", () => {
+    const sceneIds = [
+      "wanderer_debt", "beast_bond", "ancient_tomb", "sect_purge", "mortal_kin",
+      "demonic_bargain", "sword_grave", "pill_toxin", "array_legacy", "rival_brother",
+      "master_secret", "lost_soul", "merchant_ledger", "border_war", "false_accusation",
+      "spirit_vein", "ancient_artifact", "ascension_choice", "market", "village",
+      "bonds", "battle", "cave", "sea", "tribulation", "sect", "ruins", "medicine",
+      "wilderness",
+    ];
+
+    for (const sceneId of sceneIds) {
+      const art = getSceneById(sceneId);
+      expect(art.src).toMatch(/\.webp$/);
+      expect(art.src).not.toContain(`/scenes/${sceneId}.png`);
+      expectPublicFile(art.src);
     }
   });
 
@@ -94,7 +113,7 @@ describe("story image art", () => {
     } as GameEvent;
     const art = getSceneForEvent(unknownEvent, "lianqi");
     expect(art.src).toBe("/game/scenes/events/event-without-art.webp");
-    expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.png$/);
+    expect(art.fallbackSrc).toMatch(/^\/game\/scenes\/.+\.webp$/);
     expectPublicFile(art.fallbackSrc!);
   });
 

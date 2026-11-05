@@ -26,7 +26,7 @@
 - 176 张分批索引：[`docs/image-prompts/full-pack-176/05-batch-index.md`](docs/image-prompts/full-pack-176/05-batch-index.md)
 - 55 张快速上线包：[`docs/image-prompts/core-pack/00-README.md`](docs/image-prompts/core-pack/00-README.md)
 
-> 176 张正式美术已经完成并接入运行逻辑：事件按事件 ID、命运线按三幕阶段、开场/重心/结局按对应类型读取 WebP。缺失专属图时会自动回退到 29 张通用场景。
+> 176 张正式美术已经完成并接入运行逻辑：事件按事件 ID、命运线按三幕阶段、开场/重心/结局按对应类型读取 WebP。缺失专属图时会自动回退到由 GPT 新图映射的 29 张通用场景 WebP。
 
 ## 开发
 

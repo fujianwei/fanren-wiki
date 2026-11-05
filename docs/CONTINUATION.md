@@ -43,7 +43,7 @@
 | 年度重心 | 6 | `public/game/scenes/focus/` | 已接入 WebP |
 | 结局 | 6 | `public/game/scenes/ending/` | 已接入 WebP |
 | 动作图标 | 10 | `public/game/actions/` | 已接入 WebP |
-| 通用回退场景 | 29 | `public/game/scenes/` | 专属图缺失时使用 PNG |
+| GPT 通用回退母图 | 29 | `public/game/scenes/` | 专属图缺失时使用 WebP 映射 |
 
 正式美术共 176 张，已经从约 498MB PNG 压缩为约 42MB WebP。通用回退场景仍保留，避免未来新增事件或图片异常时出现空白。
 
@@ -87,7 +87,7 @@
 - 年度重心：`/game/scenes/focus/{focusId}.webp`
 - 结局：`/game/scenes/ending/{endingType}.webp`
 - 动作选项：`/game/actions/{actionId}.webp`
-- 专属图加载失败：自动回退到 `/game/scenes/{sceneId}.png`
+- 专属图加载失败：自动回退到 `getSceneById()` 映射的 GPT 生成 WebP
 
 `PixelScene` 与 `SceneBackground` 已移除无条件 `unoptimized`，Next.js 会按设备宽度生成优化图片。浏览器实测请求使用 `/_next/image`。
 
@@ -98,7 +98,7 @@
 1. 按 `full-pack-176/manifest.jsonl` 生成或替换 1536×864 PNG。
 2. 将事件、命运、开场、重心、结局和动作图转换为 WebP；当前生产质量为场景 q85、图标 q90。
 3. 保持现有文件名与目录结构，不要改事件 ID、命运 threadId 或 stage。
-4. 保留 29 张通用场景 PNG 作为回退。
+4. 保留 29 个通用场景 ID 的 GPT WebP 映射作为回退，不再恢复旧占位 PNG。
 5. 运行 TypeScript、Lint、测试、生产构建和桌面/移动端浏览器验收。
 6. 用 `docs/image-prompts/full-pack-176/checklist.csv` 核对 176 张完成状态。
 
@@ -197,6 +197,6 @@ Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Ope
 
 新对话中可直接要求：
 
-> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts`、`lib/game/scene-art.ts` 和 `components/game/PixelScene.tsx`。176 张正式美术已经完成并接入，事件、命运三幕、开场、重心、结局和动作图标都按对应 ID 读取 WebP；缺失时回退到 29 张通用场景。后续修改不得破坏这条解析链。
+> 先阅读 `docs/CONTINUATION.md`、`types/game.ts`、`lib/game/reducer.ts`、`lib/game/narrative.ts`、`lib/game/scene-art.ts` 和 `components/game/PixelScene.tsx`。176 张正式美术已经完成并接入，事件、命运三幕、开场、重心、结局和动作图标都按对应 ID 读取 WebP；缺失时回退到 29 个 GPT WebP 场景。后续修改不得破坏这条解析链。
 
 这样即可从仓库状态继续，不依赖旧聊天记录。
