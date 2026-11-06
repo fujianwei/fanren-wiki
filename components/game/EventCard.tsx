@@ -38,7 +38,7 @@ export default function EventCard({ event, onChoose }: Props) {
       <PixelScene scene={scene} priority>
         <div className="absolute left-4 top-4 flex flex-wrap items-center gap-2 md:left-6 md:top-6">
           <span
-            className="rounded-full px-2.5 py-1 text-[9px] tracking-[.16em] backdrop-blur-md"
+            className="rounded-full px-2.5 py-1 text-[11px] tracking-[.16em] backdrop-blur-md"
             style={{
               color: isFate ? "#f3d27d" : "#b9d0c3",
               backgroundColor: "rgba(7,14,10,.72)",
@@ -48,16 +48,16 @@ export default function EventCard({ event, onChoose }: Props) {
             {category}
           </span>
           {event.story && (
-            <span className="rounded-full px-2.5 py-1 text-[9px] backdrop-blur-md" style={{ color: "#e9d8a4", backgroundColor: "rgba(7,14,10,.72)", border: "1px solid #ffffff18" }}>
+            <span className="rounded-full px-2.5 py-1 text-[11px] backdrop-blur-md" style={{ color: "#e9d8a4", backgroundColor: "rgba(7,14,10,.72)", border: "1px solid #ffffff18" }}>
               {event.story.threadTitle} · {event.story.stage}/{event.story.stageCount}
             </span>
           )}
         </div>
-        <div className="absolute right-4 top-4 text-right md:right-6 md:top-6">
-          <div className="text-[8px] tracking-[.24em]" style={{ color: "rgba(220,234,226,.55)" }}>SCENE</div>
-          <div className="font-serif text-[11px]" style={{ color: "rgba(235,244,239,.78)" }}>{scene.label}</div>
+        <div className="absolute right-4 top-4 hidden text-right sm:block md:right-6 md:top-6">
+          <div className="text-[11px] tracking-[.24em]" style={{ color: "rgba(220,234,226,.55)" }}>SCENE</div>
+          <div className="font-serif text-[13px]" style={{ color: "rgba(235,244,239,.78)" }}>{scene.label}</div>
         </div>
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-5 md:px-7 md:pb-6">
+        <div className="scene-caption absolute inset-x-0 bottom-0 px-5 pb-5 md:px-7 md:pb-6">
           <div className="mb-2 flex items-end justify-between gap-4">
             <h2 className="font-serif text-2xl font-bold leading-tight md:text-[32px]" style={{ color: "#f2f7f4", textShadow: "0 2px 24px rgba(0,0,0,.8)" }}>{event.title}</h2>
             {event.story && (
@@ -72,7 +72,7 @@ export default function EventCard({ event, onChoose }: Props) {
               </div>
             )}
           </div>
-          <p className="max-w-3xl text-[13px] leading-7 md:text-sm" style={{ color: "rgba(224,235,229,.84)", textShadow: "0 1px 12px rgba(0,0,0,.72)" }}>{event.description}</p>
+          <p className="max-w-3xl text-[15px] leading-7 md:text-sm" style={{ color: "rgba(224,235,229,.84)", textShadow: "0 1px 12px rgba(0,0,0,.72)" }}>{event.description}</p>
         </div>
       </PixelScene>
 
@@ -80,9 +80,9 @@ export default function EventCard({ event, onChoose }: Props) {
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-px w-7" style={{ backgroundColor: isFate ? "#d4a843" : "#4ade9a" }} />
-            <span className="text-[9px] tracking-[.22em]" style={{ color: isFate ? "#b89b57" : "#668777" }}>你会怎么做</span>
+            <span className="text-[11px] tracking-[.22em]" style={{ color: isFate ? "#b89b57" : "#93ad9f" }}>你会怎么做</span>
           </div>
-          <span className="hidden text-[9px] sm:block" style={{ color: "#506a5e" }}>选择会改变关系、命运线与结局</span>
+          <span className="hidden text-[11px] sm:block" style={{ color: "#8da998" }}>选择会改变关系、命运线与结局</span>
         </div>
 
         <div className="grid gap-2.5 md:grid-cols-2">
@@ -110,17 +110,17 @@ export default function EventCard({ event, onChoose }: Props) {
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="mb-1 flex items-center gap-2">
-                    <span className="font-serif text-[10px]" style={{ color: action.accent }}>{String.fromCharCode(65 + index)}</span>
-                    <span className="text-[9px] tracking-[.12em]" style={{ color: `${action.accent}aa` }}>{action.label}</span>
+                    <span className="font-serif text-[13px]" style={{ color: action.accent }}>{String.fromCharCode(65 + index)}</span>
+                    <span className="text-[11px] tracking-[.12em]" style={{ color: `${action.accent}aa` }}>{action.label}</span>
                   </span>
-                  <span className="block text-[13px] leading-6">{option.text}</span>
+                  <span className="block text-[15px] leading-6">{option.text}</span>
                   {(option.requires?.lingshi || option.requires?.itemId) && (
-                    <span className="mt-1 block text-[9px]" style={{ color: affordable ? "#789486" : "#8a4d4d" }}>
+                    <span className="mt-1 block text-[11px]" style={{ color: affordable ? "#a2baac" : "#dc9999" }}>
                       {option.requires.lingshi ? `需要 ${option.requires.lingshi} 灵石` : "需要对应物品"}
                     </span>
                   )}
                 </span>
-                <span className="text-lg opacity-0 transition-opacity group-hover:opacity-100" style={{ color: action.accent }}>›</span>
+                <span className="text-lg opacity-60 transition-opacity group-hover:opacity-100" style={{ color: action.accent }}>›</span>
               </button>
             );
           })}

@@ -8,19 +8,19 @@ const FEATURE_CARDS = [
 
 export default function HomePage() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
+    <div className="site-page max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-12">
       {/* Hero 区域 */}
-      <div className="flex flex-col md:flex-row gap-6 mb-16">
+      <div className="flex flex-col md:flex-row gap-4 mb-8 sm:gap-6 sm:mb-12">
         {/* 左：修仙模拟入口 */}
         <div
-          className="md:w-72 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4"
+          className="md:w-72 rounded-2xl p-5 sm:p-8 flex flex-col items-center justify-center text-center gap-4"
           style={{ backgroundColor: "#1a2810", border: "1px solid #d4a84333" }}
         >
           <div className="text-4xl">⚔️</div>
           <h2 className="font-serif font-bold text-xl tracking-wide" style={{ color: "#e8f0ec" }}>
             踏入修仙之路<br />命运由你掌握
           </h2>
-          <p className="text-xs leading-relaxed" style={{ color: "#b8ccc2" }}>
+          <p className="text-sm leading-7" style={{ color: "#b8ccc2" }}>
             抽灵根，得一句命格谶语<br />
             选择本心，在时间中活过一生<br />
             守山、远行、结缘、逆命，皆可成道<br />
@@ -28,7 +28,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/game"
-            className="btn-primary font-medium text-sm px-6 py-2.5 rounded-full"
+            className="btn-primary inline-flex w-full items-center justify-center font-medium text-sm rounded-full"
           >
             开始这一世
           </Link>
@@ -36,11 +36,11 @@ export default function HomePage() {
 
         {/* 右：网站介绍 */}
         <div
-          className="flex-1 rounded-2xl p-8 flex flex-col justify-center"
+          className="flex-1 rounded-2xl p-5 sm:p-8 flex flex-col justify-center"
           style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
         >
           <p className="text-sm tracking-widest mb-2" style={{ color: "#6a8878" }}>凡人修仙传 · 人界篇</p>
-          <h1 className="text-3xl font-serif font-bold tracking-wider mb-4" style={{ color: "#e8f0ec" }}>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold tracking-wider mb-4" style={{ color: "#e8f0ec" }}>
             人界百科全书
           </h1>
           <p className="text-sm leading-relaxed mb-6" style={{ color: "#b8ccc2" }}>
@@ -66,7 +66,7 @@ export default function HomePage() {
           >
             <div className="text-2xl mb-3">{item.icon}</div>
             <h3 className="font-serif font-bold mb-2" style={{ color: "#e8f0ec" }}>{item.title}</h3>
-            <p className="text-xs leading-relaxed" style={{ color: "#6a8878" }}>{item.desc}</p>
+            <p className="text-sm leading-7" style={{ color: "#6a8878" }}>{item.desc}</p>
             <p className="text-xs mt-3 font-medium" style={{ color: "#6a8878" }}>敬请期待</p>
           </div>
         ))}

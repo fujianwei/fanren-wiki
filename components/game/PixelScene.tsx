@@ -20,28 +20,28 @@ export default function PixelScene({ scene, children, className = "", priority =
 
   return (
     <div
-      className={`relative overflow-hidden ${compact ? "aspect-[16/10] sm:aspect-[2.35/1]" : "aspect-[4/3] sm:aspect-[16/8.7]"} ${className}`}
+      className={`scene-frame relative overflow-hidden ${className}`}
       style={{ backgroundColor: "#07100c", isolation: "isolate" }}
     >
+      <div className={`scene-media relative ${compact ? "scene-media-compact" : ""}`}>
       <Image
         key={src}
         src={src}
         alt={alt}
         fill
         priority={priority}
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1180px"
+        sizes="(max-width: 640px) calc(100vw - 24px), (max-width: 1280px) 90vw, 920px"
         className="object-cover"
         onError={() => {
           if (failedSrc !== scene.src && scene.fallbackSrc) setFailedSrc(scene.src);
         }}
         style={{
           imageRendering: scene.pixelated === false ? "auto" : "pixelated",
-          transform: "scale(1.012)",
           filter: "brightness(1.12) saturate(1.06) contrast(1.02)",
         }}
       />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="scene-shade absolute inset-0 pointer-events-none"
         style={{
           background: [
             "linear-gradient(180deg, rgba(4,8,6,.05) 0%, rgba(4,8,6,.02) 48%, rgba(4,8,6,.88) 100%)",
@@ -58,6 +58,7 @@ export default function PixelScene({ scene, children, className = "", priority =
         className="absolute inset-0 pointer-events-none opacity-[.16]"
         style={{ backgroundImage: `linear-gradient(90deg, ${scene.accent}14, transparent 32%, transparent 70%, ${scene.accent}12)` }}
       />
+      </div>
       {children}
     </div>
   );

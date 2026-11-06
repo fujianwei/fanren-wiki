@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,13 +9,22 @@ export const metadata: Metadata = {
   description: "一场从灵根、命格与选择开始的修仙人生模拟。灵根只决定起点，不决定你能走到哪里。",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0a0e0d",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh">
+    <html lang="zh-CN">
       <body className="min-h-screen flex flex-col">
+        <a href="#main-content" className="skip-link">跳到主要内容</a>
         <ParticleBackground />
         <Navbar />
-        <main className="flex-1 relative" style={{ zIndex: 1 }}>{children}</main>
+        <main id="main-content" className="min-w-0 flex-1 relative" style={{ zIndex: 1 }}>{children}</main>
         <Footer />
       </body>
     </html>

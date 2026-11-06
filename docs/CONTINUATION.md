@@ -1,6 +1,6 @@
 # 项目交接与继续开发说明
 
-> 最后更新：2026-11-05。本文是切换对话或更换开发者时的首要入口。
+> 最后更新：2026-11-06。本文是切换对话或更换开发者时的首要入口。
 
 ## **一、当前仓库状态**
 
@@ -127,6 +127,7 @@
 | 场景组件 | `components/game/PixelScene.tsx` |
 | HUD | `components/game/GameHud.tsx` |
 | 命途抽屉 | `components/game/LifeDrawer.tsx` |
+| 手机 / 桌面共用弹窗 | `components/game/GameDialog.tsx` |
 | 事件与选项卡片 | `components/game/EventCard.tsx` |
 | 出生灵根页 | `components/game/SpiritRootGate.tsx` |
 | 命誓选择 | `components/game/LifeOathPanel.tsx` |
@@ -159,6 +160,8 @@ npm run build
 Turbopack 在受限沙箱内可能无法创建 CSS 子进程；如果出现 `Operation not permitted`，构建命令需要在允许子进程的环境中执行。
 
 ## **八、已知问题**
+
+手机优先界面已完成本地实现与生产模式验收，见 `docs/acceptance/mobile-first-ui.md`。底部功能栏、完整场景图与下置剧情、动态高度弹窗、安全边距和存档恢复顺序均已适配。发布状态以实际 Git 提交和 Vercel 部署记录为准。
 
 1. 事件场景使用高清仙侠插画风，动作图标使用更传统的像素风，两者仍存在视觉风格差异。
 2. 原始生成图片仍保留在 Git 历史中，当前部署只使用压缩后的 WebP。

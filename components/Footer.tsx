@@ -1,7 +1,13 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/game")) return null;
   return (
     <footer
-      className="w-full py-6 mt-16 relative"
+      className="w-full px-4 py-6 mt-8 relative"
       style={{
         backgroundColor: "#0a0e0d",
         borderTop: "1px solid #1a2820",

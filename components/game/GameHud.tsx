@@ -12,87 +12,61 @@ interface Props {
   onOpenSect: () => void;
 }
 
-function Metric({ label, value, accent = "#d8e5de", className = "" }: { label: string; value: string; accent?: string; className?: string }) {
-  return (
-    <div className={`min-w-0 px-2.5 md:px-3 ${className}`}>
-      <div className="text-[8px] md:text-[9px] tracking-[.16em] uppercase" style={{ color: "#527064" }}>{label}</div>
-      <div className="mt-0.5 font-serif text-[11px] md:text-sm font-bold truncate" style={{ color: accent }}>{value}</div>
-    </div>
-  );
-}
-
 export default function GameHud({ onOpenLife, onOpenInventory, onOpenMarket, onBattle, onOpenSect }: Props) {
   const { state } = useGame();
   const subRealm = state.xp >= 90 ? "圆满" : state.xp >= 71 ? "后期" : state.xp >= 31 ? "中期" : "初期";
   const urgent = state.age >= state.lifespanMax * 0.82 || state.injury === "heavy" || state.injury === "dying";
+  const actions = [
+    { label: "命途", symbol: "命", action: onOpenLife },
+    { label: "行囊", symbol: "囊", action: onOpenInventory },
+    { label: "灵市", symbol: "市", action: onOpenMarket },
+    { label: "历练", symbol: "剑", action: onBattle },
+    ...(!state.sectPath ? [{ label: "择道", symbol: "道", action: onOpenSect }] : []),
+  ];
 
   return (
-    <header
-      className="relative z-30 mb-3 overflow-hidden rounded-2xl"
-      style={{
-        backgroundColor: "rgba(10, 17, 13, .88)",
-        border: "1px solid #26382f",
-        boxShadow: "0 18px 50px rgba(0,0,0,.22)",
-        backdropFilter: "blur(18px)",
-      }}
-    >
-      <div className="flex items-stretch min-h-[70px]">
-        <div className="hidden sm:flex items-center gap-3 px-4 pr-5" style={{ borderRight: "1px solid #1d2c25" }}>
-          <div
-            className="relative grid h-10 w-10 place-items-center rounded-xl font-serif text-lg font-bold"
-            style={{ color: "#d4a843", background: "linear-gradient(145deg, #1b241b, #0b110e)", border: "1px solid #d4a84344" }}
-          >
-            {state.characterName.slice(0, 1)}
-            <span className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full" style={{ backgroundColor: urgent ? "#ef6b62" : "#4ade9a", border: "2px solid #0a110d" }} />
+    <div className="game-hud mb-3">
+      <header className="game-status">
+        <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 pt-3">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: urgent ? "#ef6b62" : "#4ade9a" }} />
+            <span className="font-serif text-base font-bold text-mist-100">{state.characterName}</span>
+            <span className="text-xs text-mist-200">第{state.lifeNumber}世</span>
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-sm font-bold truncate" style={{ color: "#eef5f1" }}>{state.characterName}</span>
-              <span className="rounded-full px-1.5 py-0.5 text-[8px]" style={{ color: "#d4a843", backgroundColor: "#1c180c" }}>第{state.lifeNumber}世</span>
+          <span className="text-sm text-gold-bright">{REALM_NAMES[state.realmSlug]} · {subRealm}</span>
+        </div>
+        <div className="grid grid-cols-4 gap-1 px-3 py-3">
+          {[
+            { label: "年岁 / 寿元", value: state.age + " / " + state.lifespanMax, color: urgent ? "#ff9f96" : "#d8e5de" },
+            { label: "修为", value: state.xp + "%", color: "#6fedb5" },
+            { label: "灵石", value: String(state.lingshi), color: "#f0c96b" },
+            { label: "天命", value: String(state.fate), color: "#a9d8ff" },
+          ].map((metric) => (
+            <div key={metric.label} className="min-w-0 px-1">
+              <div className="text-[11px] text-mist-200">{metric.label}</div>
+              <div className="mt-1 break-words font-serif text-sm font-bold tabular-nums sm:text-base" style={{ color: metric.color }}>{metric.value}</div>
             </div>
-            <div className="mt-0.5 text-[10px]" style={{ color: "#698276" }}>
-              {state.spiritRoot.name} · {state.heartIntent ? INTENT_LABELS[state.heartIntent] : "本心未明"}
-            </div>
-          </div>
+          ))}
         </div>
-
-        <div className="flex min-w-0 flex-1 items-center divide-x" style={{ borderColor: "#1d2c25" }}>
-          <div className="block flex-shrink-0 sm:hidden px-3">
-            <div className="font-serif text-xs font-bold" style={{ color: "#eef5f1" }}>{state.characterName}</div>
-            <div className="mt-0.5 text-[8px]" style={{ color: "#698276" }}>{REALM_NAMES[state.realmSlug]} · 第{state.lifeNumber}世</div>
-          </div>
-          <div className="hidden md:block"><Metric label="境界" value={`${REALM_NAMES[state.realmSlug]} · ${subRealm}`} accent={state.xp >= 90 ? "#f0c96b" : "#d8e5de"} /></div>
-          <Metric label="年岁" value={`${state.age} / ${state.lifespanMax} 岁`} accent={urgent ? "#ff8e86" : "#d8e5de"} />
-          <Metric label="修为" value={`${state.xp}%`} accent={state.xp >= 90 ? "#f0c96b" : "#6fedb5"} />
-          <div className="hidden md:block"><Metric label="灵石" value={String(state.lingshi)} accent="#f0c96b" /></div>
-          <div className="hidden lg:block"><Metric label="天命" value={`${state.fate}`} accent="#a9d8ff" /></div>
+        <div className="hidden px-4 pb-3 text-xs text-mist-200 lg:block">
+          {state.spiritRoot.name} · {state.heartIntent ? INTENT_LABELS[state.heartIntent] : "本心未明"}
+          {urgent && <span className="ml-3 text-death-200">寿元或伤势告急，请留意此身状态</span>}
         </div>
-
-        <div className="flex items-center gap-1 px-2 md:px-3" style={{ borderLeft: "1px solid #1d2c25" }}>
-          <button onClick={onOpenLife} className="game-tool-button flex items-center justify-center gap-1" title="查看此世命途">
-            <span className="text-[13px]">命</span><span className="hidden xl:inline">命途</span>
-          </button>
-          <button onClick={onOpenInventory} className="game-tool-button flex items-center justify-center gap-1" title="打开储物袋">
-            <span className="text-[13px]">囊</span><span className="hidden xl:inline">行囊</span>
-          </button>
-          {!state.sectPath && (
-            <button onClick={onOpenSect} className="game-tool-button flex items-center justify-center gap-1" title="选择修行道路">
-              <span className="text-[13px]">道</span><span className="hidden xl:inline">择道</span>
-            </button>
-          )}
-          <Link href="/game/atlas" className="game-tool-button hidden items-center justify-center gap-1 lg:flex" title="命途图鉴">
-            <span className="text-[13px]">卷</span><span className="hidden xl:inline">图鉴</span>
-          </Link>
-          <button onClick={onOpenMarket} className="game-tool-button hidden items-center justify-center gap-1 sm:flex" title="前往灵市">
-            <span className="text-[13px]">市</span><span className="hidden xl:inline">灵市</span>
-          </button>
-          <button onClick={onBattle} className="game-tool-button hidden items-center justify-center gap-1 md:flex" title="外出历练">
-            <span className="text-[13px]">战</span><span className="hidden xl:inline">历练</span>
-          </button>
+        <div className="h-1 overflow-hidden bg-ink-800" role="progressbar" aria-label="修为" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.max(0, Math.min(100, state.xp))}>
+          <div className="h-full bg-jade-400 transition-[width] duration-500" style={{ width: Math.max(0, Math.min(100, state.xp)) + "%" }} />
         </div>
-      </div>
-      <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, transparent, #4ade9a55, #d4a84377, #4ade9a55, transparent)" }} />
-      <div className="absolute bottom-0 left-0 h-0.5 transition-all duration-700" style={{ width: `${Math.min(100, state.xp)}%`, backgroundColor: state.xp >= 90 ? "#d4a843" : "#4ade9a", boxShadow: "0 0 12px currentColor" }} />
-    </header>
+      </header>
+      <nav className="game-toolbar" aria-label="修仙常用功能" style={{ gridTemplateColumns: "repeat(" + (actions.length + 1) + ", minmax(0, 1fr))" }}>
+        {actions.map(({ label, symbol, action }) => (
+          <button key={label} onClick={action} className="game-tool-button" aria-label={label} aria-haspopup="dialog">
+            <span className="font-serif text-lg text-jade-200" aria-hidden="true">{symbol}</span>
+            <span>{label}</span>
+          </button>
+        ))}
+        <Link href="/game/atlas" className="game-tool-button" aria-label="图鉴">
+          <span className="font-serif text-lg text-gold-bright" aria-hidden="true">卷</span><span>图鉴</span>
+        </Link>
+      </nav>
+    </div>
   );
 }

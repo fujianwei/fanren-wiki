@@ -14,7 +14,7 @@ export default function SceneBackground({ scene }: Props) {
   const src = useFallback ? scene.fallbackSrc! : scene.src;
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+    <div aria-hidden="true" className="absolute inset-0 hidden pointer-events-none overflow-hidden md:block" style={{ zIndex: 0 }}>
       <Image
         key={`${scene.id}-${src}`}
         src={src}

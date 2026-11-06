@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import GameDialog from "./GameDialog";
 import { useGame } from "./GameProvider";
 import { ITEMS } from "@/lib/game/items";
 import { shuffle } from "@/lib/game/random";
@@ -54,13 +55,9 @@ export default function MarketModal({ onClose }: Props) {
   );
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
-      style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
-      onClick={(e) => e.target === e.currentTarget && onClose()}
-    >
+    <GameDialog label="灵市" onClose={onClose}>
       <div
-        className="w-full max-w-sm rounded-2xl p-6"
+        className="w-full p-4 sm:p-6"
         style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
       >
         <div className="flex items-center justify-between mb-4">
@@ -71,7 +68,7 @@ export default function MarketModal({ onClose }: Props) {
             <span className="text-sm" style={{ color: "#4ade9a" }}>
               灵石 ×{lingshi}
             </span>
-            <button onClick={onClose} className="text-xs" style={{ color: "#6a8878" }}>
+            <button onClick={onClose} className="text-sm" style={{ color: "#93ad9f" }}>
               关闭
             </button>
           </div>
@@ -82,10 +79,10 @@ export default function MarketModal({ onClose }: Props) {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className="px-4 py-1.5 rounded-full text-xs transition-all"
+              className="px-4 py-1.5 rounded-full text-sm transition-all"
               style={{
                 backgroundColor: tab === t ? "#4ade9a" : "#1a2820",
-                color: tab === t ? "#0a0e0d" : "#6a8878",
+                color: tab === t ? "#0a0e0d" : "#93ad9f",
               }}
             >
               {t === "buy" ? "购买" : "出售"}
@@ -94,8 +91,8 @@ export default function MarketModal({ onClose }: Props) {
         </div>
 
         {message && (
-          <div
-            className="text-xs text-center mb-3 py-2 rounded-lg"
+          <div role="status"
+            className="text-sm text-center mb-3 py-2 rounded-lg"
             style={{ backgroundColor: "#1a2820", color: "#4ade9a" }}
           >
             {message}
@@ -117,32 +114,32 @@ export default function MarketModal({ onClose }: Props) {
               return (
                 <div
                   key={item.id}
-                  className="relative flex items-center justify-between px-3 py-2.5 rounded-xl"
+                  className="relative flex flex-wrap items-center justify-between gap-3 px-3 py-4 rounded-xl"
                   style={{ backgroundColor: bg, border, boxShadow: shadow }}
                 >
                   {isUltra && (
                     <div
-                      className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded"
+                      className="w-full text-right px-1.5 py-0.5 rounded"
                       style={{ backgroundColor: "#d4a84333", color: "#d4a843", fontSize: "10px", lineHeight: 1.4 }}
                     >
                       ✦ 稀世
                     </div>
                   )}
-                  <div className="pr-12">
+                  <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium" style={{ color: nameColor }}>
                       {item.name}
                     </div>
-                    <div className="text-xs mt-0.5" style={{ color: "#6a8878" }}>
+                    <div className="text-sm mt-0.5" style={{ color: "#93ad9f" }}>
                       {item.description}
                     </div>
                   </div>
                   <button
                     onClick={() => handleBuy(item)}
                     disabled={!canBuy}
-                    className="ml-3 px-3 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0"
+                    className="ml-3 px-3 py-1 rounded-full text-sm whitespace-nowrap flex-shrink-0"
                     style={{
                       backgroundColor: canBuy ? (isUltra || isBreakthrough ? "#d4a843" : "#4ade9a") : "#1a2820",
-                      color: canBuy ? "#0a0e0d" : "#4a6a58",
+                      color: canBuy ? "#0a0e0d" : "#8da998",
                       cursor: canBuy ? "pointer" : "not-allowed",
                     }}
                   >
@@ -151,7 +148,7 @@ export default function MarketModal({ onClose }: Props) {
                 </div>
               );
             })}
-            <p className="text-xs text-center mt-2" style={{ color: "#4a6a58" }}>
+            <p className="text-sm text-center mt-2" style={{ color: "#8da998" }}>
               每次进入市场随机展示3件商品
             </p>
           </div>
@@ -160,7 +157,7 @@ export default function MarketModal({ onClose }: Props) {
         {tab === "sell" && (
           <div className="flex flex-col gap-2">
             {sellableItems.length === 0 && (
-              <p className="text-xs text-center py-4" style={{ color: "#4a6a58" }}>
+              <p className="text-sm text-center py-4" style={{ color: "#8da998" }}>
                 背包中没有可出售的道具
               </p>
             )}
@@ -177,7 +174,7 @@ export default function MarketModal({ onClose }: Props) {
                 </div>
                 <button
                   onClick={() => handleSell(item)}
-                  className="ml-3 px-3 py-1 rounded-full text-xs"
+                  className="ml-3 px-3 py-1 rounded-full text-sm"
                   style={{
                     backgroundColor: "#1a2820",
                     color: "#4ade9a",
@@ -191,6 +188,6 @@ export default function MarketModal({ onClose }: Props) {
           </div>
         )}
       </div>
-    </div>
+    </GameDialog>
   );
 }

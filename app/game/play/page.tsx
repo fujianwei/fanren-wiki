@@ -11,6 +11,7 @@ import SectChoiceModal from "@/components/game/SectChoiceModal";
 import SceneBackground from "@/components/game/SceneBackground";
 import FateOpening from "@/components/game/FateOpening";
 import StageFocusPanel from "@/components/game/StageFocusPanel";
+import GameDialog from "@/components/game/GameDialog";
 import GameHud from "@/components/game/GameHud";
 import LifeDrawer from "@/components/game/LifeDrawer";
 import LifeOathPanel from "@/components/game/LifeOathPanel";
@@ -105,12 +106,12 @@ function BreakthroughPanel() {
   return (
     <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: `1px solid ${result === "fail" ? "#ef6b6255" : "#d4a84355"}`, boxShadow: "0 28px 100px rgba(0,0,0,.34)" }}>
       <PixelScene scene={scene} priority compact>
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-4 md:px-6 md:pb-5">
-          <div className="mb-1 text-[8px] tracking-[.28em]" style={{ color: "rgba(221,231,225,.55)" }}>{state.realmSlug === "huashen" ? "THE FINAL GATE" : "TRIBULATION"}</div>
+        <div className="scene-caption absolute inset-x-0 bottom-0 px-5 pb-4 md:px-6 md:pb-5">
+          <div className="mb-1 text-[11px] tracking-[.28em]" style={{ color: "rgba(221,231,225,.55)" }}>{state.realmSlug === "huashen" ? "THE FINAL GATE" : "TRIBULATION"}</div>
           <h2 className="font-serif text-2xl font-bold" style={{ color: result === "fail" ? "#ff9d95" : "#f1f7f4", textShadow: "0 2px 20px rgba(0,0,0,.9)" }}>
             {result === "success" ? "冲关成功" : result === "fail" ? "冲关失败" : `冲关 · ${NEXT_REALM_NAMES[state.realmSlug]}`}
           </h2>
-          <p className="mt-1 max-w-2xl text-[10px] leading-5 md:text-xs" style={{ color: "rgba(225,235,229,.72)" }}>
+          <p className="mt-1 max-w-2xl text-[13px] leading-5 md:text-sm" style={{ color: "rgba(225,235,229,.72)" }}>
             {result === "success" ? "你从这一关活了下来。过去那些年里做错和做对的事，都成了此刻的一部分。" : result === "fail" ? "你退回了原来的境界。失败不会抹掉这一生，但会改变下一次面对天劫时的姿态。" : "失败不一定死亡。冲关不是唯一的路，换一条路继续走，也许更接近你真正想要的东西。"}
           </p>
         </div>
@@ -125,15 +126,15 @@ function BreakthroughPanel() {
           <>
             <div className="flex items-end justify-between gap-3">
               <div>
-                <div className="text-[9px] tracking-[.2em]" style={{ color: "#617f70" }}>成功概率</div>
+                <div className="text-[11px] tracking-[.2em]" style={{ color: "#8da998" }}>成功概率</div>
                 <div className="mt-1 font-serif text-3xl font-bold" style={{ color: "#f0c96b" }}>{Math.round(finalRate * 100)}%</div>
               </div>
-              <div className="text-right text-[9px] leading-5" style={{ color: "#668375" }}>
+              <div className="text-right text-[11px] leading-5" style={{ color: "#668375" }}>
                 <div>寿元消耗 {lifespanCost} 年</div>
                 <div>{state.realmSlug === "jiedan" ? "心魔会直接干扰此关" : "失败未必陨落"}</div>
               </div>
             </div>
-            <div className="mt-3 grid grid-cols-2 gap-2 text-[10px]">
+            <div className="mt-3 grid grid-cols-2 gap-2 text-[13px]">
               <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>基础</span><span>{Math.round(details.baseRate * 100)}%</span></div>
               <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>外物</span><span>+{Math.round((details.arrayBonus + details.pillBonus) * 100)}%</span></div>
               <div className="flex justify-between rounded-xl px-3 py-2" style={{ color: "#789385", backgroundColor: "#0a120e" }}><span>根基</span><span>{state.rootIntact ? "+15%" : `-${state.rootDamageCount * 5}%`}</span></div>
@@ -153,31 +154,31 @@ function BreakthroughPanel() {
 function InventoryModal({ onClose }: { onClose: () => void }) {
   const { state, dispatch } = useGame();
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(0,0,0,.7)" }} onClick={(event) => event.target === event.currentTarget && onClose()}>
-      <div className="w-full max-w-lg rounded-2xl overflow-hidden" style={{ backgroundColor: "#111a16", border: "1px solid #26352d" }}>
+    <GameDialog label="储物袋" onClose={onClose} wide>
+      <div className="w-full" style={{ backgroundColor: "#111a16", border: "1px solid #26352d" }}>
         <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid #1a2820" }}>
           <span className="font-serif font-bold" style={{ color: "#e8f0ec" }}>储物袋 · {state.lingshi} 灵石</span>
-          <button onClick={onClose} className="text-xs" style={{ color: "#6a8878" }}>关闭</button>
+          <button onClick={onClose} className="text-sm" style={{ color: "#93ad9f" }}>关闭</button>
         </div>
-        <div className="p-4 grid sm:grid-cols-2 gap-2 max-h-[65vh] overflow-y-auto">
+        <div className="p-4 grid sm:grid-cols-2 gap-3">
           {ITEMS.map((item) => {
             const count = state.inventory[item.id] ?? 0;
             return (
               <div key={item.id} className="rounded-xl px-3 py-3" style={{ backgroundColor: count ? "#0e1610" : "#0b110e", opacity: count ? 1 : .42 }}>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-medium" style={{ color: "#dce8e1" }}>{item.name}</span>
-                  <span className="text-xs" style={{ color: "#4ade9a" }}>×{count}</span>
+                  <span className="text-sm font-medium" style={{ color: "#dce8e1" }}>{item.name}</span>
+                  <span className="text-sm" style={{ color: "#4ade9a" }}>×{count}</span>
                 </div>
-                <div className="text-[10px] leading-relaxed mt-1" style={{ color: "#4a6a58" }}>{item.description}</div>
-                {count > 0 && item.effect.type === "auto_save" && <div className="mt-2 text-[10px]" style={{ color: "#d4a843" }}>濒死时自动使用</div>}
-                {count > 0 && item.category === "array" && <div className="mt-2 text-[10px]" style={{ color: "#62dca0" }}>持有期间自动生效</div>}
-                {count > 0 && item.category === "mechanism" && item.effect.type !== "auto_save" && <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id })} className="text-[10px] mt-2 px-2 py-1 rounded-full" style={{ color: "#4ade9a", border: "1px solid #4ade9a33" }}>使用</button>}
+                <div className="text-[13px] leading-relaxed mt-1" style={{ color: "#8da998" }}>{item.description}</div>
+                {count > 0 && item.effect.type === "auto_save" && <div className="mt-2 text-[13px]" style={{ color: "#d4a843" }}>濒死时自动使用</div>}
+                {count > 0 && item.category === "array" && <div className="mt-2 text-[13px]" style={{ color: "#62dca0" }}>持有期间自动生效</div>}
+                {count > 0 && item.category === "mechanism" && item.effect.type !== "auto_save" && <button onClick={() => dispatch({ type: "USE_ITEM", itemId: item.id })} className="text-[13px] mt-2 px-2 py-1 rounded-full" style={{ color: "#4ade9a", border: "1px solid #4ade9a33" }}>使用</button>}
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </GameDialog>
   );
 }
 
@@ -197,14 +198,14 @@ function JourneyCompanion({ state, onOpenLife }: { state: GameState; onOpenLife:
       <section className="overflow-hidden rounded-2xl" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
         <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid #1d2e26" }}>
           <span className="font-serif text-sm font-bold" style={{ color: "#e8f0ec" }}>此生正在成为</span>
-          <span className="text-[8px] tracking-[.18em]" style={{ color: "#587466" }}>INNER COMPASS</span>
+          <span className="text-[11px] tracking-[.18em]" style={{ color: "#8da998" }}>INNER COMPASS</span>
         </div>
         <div className="space-y-3 px-4 py-4">
           {axes.map((axis, index) => (
             <div key={axis}>
-              <div className="mb-1 flex items-center justify-between text-[10px]">
+              <div className="mb-1 flex items-center justify-between text-[13px]">
                 <span style={{ color: index === 0 ? "#d4a843" : "#9cb1a5" }}>{AXIS_LABELS[axis]}</span>
-                <span style={{ color: "#526e60" }}>{state.narrative.axes[axis] > 0 ? "+" : ""}{state.narrative.axes[axis]}</span>
+                <span style={{ color: "#8fa99a" }}>{state.narrative.axes[axis] > 0 ? "+" : ""}{state.narrative.axes[axis]}</span>
               </div>
               <div className="h-1 overflow-hidden rounded-full" style={{ backgroundColor: "#1a2922" }}>
                 <div className="h-full rounded-full" style={{ width: `${Math.max(4, Math.abs(state.narrative.axes[axis]) / maxAxis * 100)}%`, backgroundColor: index === 0 ? "#d4a843" : "#4f8b70" }} />
@@ -215,36 +216,36 @@ function JourneyCompanion({ state, onOpenLife }: { state: GameState; onOpenLife:
       </section>
 
       <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
-        <div className="mb-2 text-[8px] tracking-[.2em]" style={{ color: "#587466" }}>NEAREST BOND</div>
+        <div className="mb-2 text-[11px] tracking-[.2em]" style={{ color: "#8da998" }}>NEAREST BOND</div>
         {relation ? (
           <>
             <div className="font-serif text-sm font-bold" style={{ color: "#dfece5" }}>{relation.name}</div>
-            <div className="mt-1 text-[10px]" style={{ color: relation.affinity < 0 ? "#ef8d8d" : "#7fa08e" }}>{relation.title} · {relation.affinity >= 0 ? "亲近" : "疏离"}</div>
+            <div className="mt-1 text-[13px]" style={{ color: relation.affinity < 0 ? "#ef8d8d" : "#7fa08e" }}>{relation.title} · {relation.affinity >= 0 ? "亲近" : "疏离"}</div>
           </>
-        ) : <div className="text-xs" style={{ color: "#5d786a" }}>此世尚无牵挂之人</div>}
+        ) : <div className="text-sm" style={{ color: "#8da998" }}>此世尚无牵挂之人</div>}
       </section>
 
       <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-[8px] tracking-[.2em]" style={{ color: "#587466" }}>OPEN THREADS</span>
-          <span className="text-[9px]" style={{ color: "#8a7442" }}>{threads.length} 条</span>
+          <span className="text-[11px] tracking-[.2em]" style={{ color: "#8da998" }}>OPEN THREADS</span>
+          <span className="text-[11px]" style={{ color: "#8a7442" }}>{threads.length} 条</span>
         </div>
         {threads.length ? threads.map((thread) => (
-          <div key={thread.threadId} className="mb-1.5 flex items-center gap-2 text-[10px]" style={{ color: "#9fb4a8" }}>
+          <div key={thread.threadId} className="mb-1.5 flex items-center gap-2 text-[13px]" style={{ color: "#9fb4a8" }}>
             <span className="h-1 w-1 rounded-full" style={{ backgroundColor: "#d4a843" }} />
             {getThreadTitle(thread.threadId)}
           </div>
-        )) : <div className="text-[10px] leading-5" style={{ color: "#587466" }}>尚无旧事悬在身后。</div>}
+        )) : <div className="text-[13px] leading-5" style={{ color: "#8da998" }}>尚无旧事悬在身后。</div>}
       </section>
 
       {lastLife && (
         <section className="rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(16,14,8,.8)", border: "1px solid #493a1f" }}>
-          <div className="mb-1 text-[8px] tracking-[.2em]" style={{ color: "#786334" }}>THREE-LIFE MIRROR</div>
-          <div className="text-[11px] leading-5" style={{ color: "#b9aa7a" }}>前世：{lastLife.endingTitle} · {lastLife.finalAge}岁</div>
+          <div className="mb-1 text-[11px] tracking-[.2em]" style={{ color: "#786334" }}>THREE-LIFE MIRROR</div>
+          <div className="text-[13px] leading-5" style={{ color: "#b9aa7a" }}>前世：{lastLife.endingTitle} · {lastLife.finalAge}岁</div>
         </section>
       )}
 
-      <button onClick={onOpenLife} className="mt-auto w-full rounded-2xl px-4 py-3 text-center font-serif text-xs" style={{ color: "#a3b8ab", backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #2b4136" }}>
+      <button onClick={onOpenLife} className="mt-auto w-full rounded-2xl px-4 py-3 text-center font-serif text-sm" style={{ color: "#a3b8ab", backgroundColor: "rgba(12,21,16,.86)", border: "1px solid #2b4136" }}>
         查看完整人生档案
       </button>
     </aside>
@@ -271,6 +272,10 @@ export default function GamePlayPage() {
   const [battleEnemy, setBattleEnemy] = useState<{ id?: string; name: string; realm: RealmSlug; desc: string } | null>(null);
   const [showSectChoice, setShowSectChoice] = useState(false);
   const processedStage = useRef(-1);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [currentEvent?.id, state.phase, state.heartIntent, state.lifeOathId, state.lifeOathSkipped, state.stage]);
 
   useEffect(() => {
     if (state.phase === "gate") router.replace("/game");
@@ -442,10 +447,10 @@ export default function GamePlayPage() {
         : getFocusScene(latestFocus);
 
   return (
-    <div className="relative min-h-[calc(100vh-64px)] overflow-hidden px-2.5 pb-10 pt-2.5 md:px-4 md:pt-4">
+    <div className="game-play relative">
       <SceneBackground scene={currentScene} />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px]">
+      <div className="relative z-10 mx-auto w-full max-w-[1200px]">
         <GameHud
           onOpenLife={() => setShowLife(true)}
           onOpenInventory={() => setShowInventory(true)}
@@ -455,7 +460,7 @@ export default function GamePlayPage() {
         />
 
         <div className="flex items-start gap-4">
-          <main className="min-w-0 flex-1">
+          <div id="game-story" className="min-w-0 flex-1">
             {!state.heartIntent ? (
               <FateOpening state={state} onChoose={(intent) => dispatch({ type: "SET_HEART_INTENT", intent })} />
             ) : !state.lifeOathId && !state.lifeOathSkipped ? (
@@ -467,10 +472,10 @@ export default function GamePlayPage() {
             ) : isDying ? (
               <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #ef6b6266", boxShadow: "0 28px 100px rgba(0,0,0,.38)" }}>
                 <PixelScene scene={getSceneById("battle")} priority compact>
-                  <div className="absolute inset-x-0 bottom-0 px-5 pb-5 md:px-6">
-                    <div className="mb-1 text-[8px] tracking-[.3em]" style={{ color: "rgba(255,190,184,.6)" }}>BETWEEN LIFE AND DEATH</div>
+                  <div className="scene-caption absolute inset-x-0 bottom-0 px-5 pb-5 md:px-6">
+                    <div className="mb-1 text-[11px] tracking-[.3em]" style={{ color: "rgba(255,190,184,.6)" }}>BETWEEN LIFE AND DEATH</div>
                     <h1 className="font-serif text-2xl font-bold" style={{ color: "#ff9f96", textShadow: "0 2px 20px rgba(0,0,0,.9)" }}>你已濒临陨落</h1>
-                    <p className="mt-1 text-[10px] leading-5 md:text-xs" style={{ color: "rgba(239,205,200,.72)" }}>这一次，先活下来。你可以散财求医，也可以拿寿元换一条命。</p>
+                    <p className="mt-1 text-[13px] leading-5 md:text-sm" style={{ color: "rgba(239,205,200,.72)" }}>这一次，先活下来。你可以散财求医，也可以拿寿元换一条命。</p>
                   </div>
                 </PixelScene>
                 <div className="flex flex-col gap-2 p-4 sm:flex-row md:p-5">
@@ -481,7 +486,7 @@ export default function GamePlayPage() {
                       dispatch({ type: "SET_INJURY", level: "heavy" });
                     }}
                     disabled={state.lingshi < 120}
-                    className="flex-1 rounded-xl px-4 py-3 font-serif text-xs"
+                    className="flex-1 rounded-xl px-4 py-3 font-serif text-sm"
                     style={{ opacity: state.lingshi < 120 ? .35 : 1, color: "#f0c96b", border: "1px solid #d4a84355", backgroundColor: "#191409" }}
                   >
                     散尽 120 灵石求医
@@ -491,12 +496,12 @@ export default function GamePlayPage() {
                       dispatch({ type: "CONSUME_LIFESPAN", years: 10 });
                       if (state.lifespan > 10) dispatch({ type: "SET_INJURY", level: "heavy" });
                     }}
-                    className="flex-1 rounded-xl px-4 py-3 font-serif text-xs"
+                    className="flex-1 rounded-xl px-4 py-3 font-serif text-sm"
                     style={{ color: "#ff9f96", border: "1px solid #ef6b6255", backgroundColor: "#1b0e0e" }}
                   >
                     以 10 年寿元换命
                   </button>
-                  <button onClick={() => setShowInventory(true)} className="rounded-xl px-4 py-3 font-serif text-xs" style={{ color: "#94ad9f", border: "1px solid #31473a" }}>打开储物袋</button>
+                  <button onClick={() => setShowInventory(true)} className="rounded-xl px-4 py-3 font-serif text-sm" style={{ color: "#94ad9f", border: "1px solid #31473a" }}>打开储物袋</button>
                 </div>
               </section>
             ) : (
@@ -504,15 +509,15 @@ export default function GamePlayPage() {
                 {state.lastSettlement && (
                   <section className="flex flex-col gap-2 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:justify-between" style={{ backgroundColor: "rgba(13,23,18,.90)", border: "1px solid #273c31", backdropFilter: "blur(14px)" }}>
                     <div className="flex items-center gap-3">
-                      <span className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-lg font-serif text-[11px]" style={{ color: state.lastSettlement.breakthroughReady ? "#d4a843" : "#6fedb5", backgroundColor: "#111d17", border: "1px solid #2b4236" }}>
+                      <span className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-lg font-serif text-[13px]" style={{ color: state.lastSettlement.breakthroughReady ? "#d4a843" : "#6fedb5", backgroundColor: "#111d17", border: "1px solid #2b4236" }}>
                         {state.lastSettlement.breakthroughReady ? "破" : "岁"}
                       </span>
                       <div>
-                        <div className="font-serif text-xs font-bold" style={{ color: state.lastSettlement.breakthroughReady ? "#e8c86a" : "#d8e6df" }}>{state.lastSettlement.headline}</div>
-                        <div className="mt-0.5 text-[9px]" style={{ color: "#678274" }}>{state.lastSettlement.fromAge}–{state.lastSettlement.toAge}岁 · {state.lastSettlement.lines.join(" · ")}</div>
+                        <div className="font-serif text-sm font-bold" style={{ color: state.lastSettlement.breakthroughReady ? "#e8c86a" : "#d8e6df" }}>{state.lastSettlement.headline}</div>
+                        <div className="mt-0.5 text-[11px]" style={{ color: "#678274" }}>{state.lastSettlement.fromAge}–{state.lastSettlement.toAge}岁 · {state.lastSettlement.lines.join(" · ")}</div>
                       </div>
                     </div>
-                    {state.lastSettlement.breakthroughReady && <span className="rounded-full px-2.5 py-1 text-[9px]" style={{ color: "#d4a843", backgroundColor: "#1a160b", border: "1px solid #d4a84333" }}>修为已至巅峰</span>}
+                    {state.lastSettlement.breakthroughReady && <span className="rounded-full px-2.5 py-1 text-[11px]" style={{ color: "#d4a843", backgroundColor: "#1a160b", border: "1px solid #d4a84333" }}>修为已至巅峰</span>}
                   </section>
                 )}
                 <StageFocusPanel state={state} onSelect={(focusId) => dispatch({ type: "SET_STAGE_FOCUS", focusId })} onAdvance={() => dispatch({ type: "ADVANCE_STAGE" })} />
@@ -527,7 +532,7 @@ export default function GamePlayPage() {
                 )}
               </div>
             )}
-          </main>
+          </div>
 
           <JourneyCompanion state={state} onOpenLife={() => setShowLife(true)} />
         </div>
@@ -540,31 +545,31 @@ export default function GamePlayPage() {
       {showBattle && battleEnemy && <BattleModal enemyName={battleEnemy.name} enemyRealm={battleEnemy.realm} enemyDesc={battleEnemy.desc} onWin={() => { if (battleEnemy.id) dispatch({ type: "REMOVE_ENEMY", enemyId: battleEnemy.id }); }} onLose={() => {}} onClose={() => { setShowBattle(false); setBattleEnemy(null); }} />}
 
       {eventResult && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center px-3 py-6" style={{ backgroundColor: "rgba(0,0,0,.76)", backdropFilter: "blur(8px)" }} onClick={(event) => event.target === event.currentTarget && closeResult()}>
-          <div className="w-full max-w-lg overflow-hidden rounded-[24px]" style={{ backgroundColor: "#0d1712", border: "1px solid #30473b", boxShadow: "0 32px 120px rgba(0,0,0,.55)" }}>
+        <GameDialog label="选择结果" onClose={closeResult} wide>
+          <div className="w-full" style={{ backgroundColor: "#0d1712", border: "1px solid #30473b", boxShadow: "0 32px 120px rgba(0,0,0,.55)" }}>
             <PixelScene scene={eventResult.scene} compact>
-              <div className="absolute inset-x-0 bottom-0 flex items-end gap-3 px-4 pb-4 md:px-5">
+              <div className="scene-caption absolute inset-x-0 bottom-0 flex items-end gap-3 px-4 pb-4 md:px-5">
                 <span className="grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-xl backdrop-blur-md" style={{ color: eventResult.action.accent, backgroundColor: "rgba(7,13,10,.75)", border: `1px solid ${eventResult.action.accent}55` }}>
                   <Image src={eventResult.action.src} alt="" width={30} height={30} sizes="40px" style={{ imageRendering: "pixelated" }} />
                 </span>
                 <div className="min-w-0">
-                  <div className="mb-1 flex items-center gap-2 text-[8px] tracking-[.2em]" style={{ color: "rgba(218,232,224,.55)" }}>
+                  <div className="mb-1 flex items-center gap-2 text-[11px] tracking-[.2em]" style={{ color: "rgba(218,232,224,.55)" }}>
                     <span>{eventResult.title}</span><span>·</span><span style={{ color: eventResult.action.accent }}>{eventResult.action.label}</span>
                   </div>
                   <div className="font-serif text-lg font-bold leading-6" style={{ color: "#edf5f1", textShadow: "0 2px 18px rgba(0,0,0,.8)" }}>「{eventResult.choice}」</div>
-                  {eventResult.story && <div className="mt-1 text-[9px]" style={{ color: "#d4a843" }}>{eventResult.story}</div>}
+                  {eventResult.story && <div className="mt-1 text-[11px]" style={{ color: "#d4a843" }}>{eventResult.story}</div>}
                 </div>
               </div>
             </PixelScene>
             <div className="p-4 md:p-5">
-              <p className="mb-4 text-[13px] leading-7" style={{ color: "#b8ccc2" }}>{eventResult.outcome}</p>
+              <p className="mb-4 text-[15px] leading-7" style={{ color: "#b8ccc2" }}>{eventResult.outcome}</p>
               <div className="flex flex-wrap gap-1.5">
-                {eventResult.lines.map((line) => <span key={line} className="rounded-full px-2 py-1 text-[9px]" style={{ color: "#8fa79a", backgroundColor: "#0b130f", border: "1px solid #1e3027" }}>{line}</span>)}
+                {eventResult.lines.map((line) => <span key={line} className="rounded-full px-2 py-1 text-[11px]" style={{ color: "#8fa79a", backgroundColor: "#0b130f", border: "1px solid #1e3027" }}>{line}</span>)}
               </div>
-              <button onClick={closeResult} className="mt-4 w-full rounded-xl py-3 font-serif text-xs font-bold tracking-[.12em]" style={{ color: "#07100c", backgroundColor: "#62dca0", boxShadow: "0 8px 28px rgba(74,222,154,.14)" }}>继续活下去</button>
+              <button onClick={closeResult} className="mt-4 w-full rounded-xl py-3 font-serif text-sm font-bold tracking-[.12em]" style={{ color: "#07100c", backgroundColor: "#62dca0", boxShadow: "0 8px 28px rgba(74,222,154,.14)" }}>继续活下去</button>
             </div>
           </div>
-        </div>
+        </GameDialog>
       )}
     </div>
   );

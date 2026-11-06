@@ -13,6 +13,7 @@ export default function ParticleBackground() {
     if (!ctx) return;
 
     let W = 0, H = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     interface Particle {
       x: number; y: number; r: number;
@@ -26,7 +27,7 @@ export default function ParticleBackground() {
     function init() {
       W = canvas!.width = window.innerWidth;
       H = canvas!.height = window.innerHeight;
-      particles = Array.from({ length: 80 }, () => ({
+      particles = Array.from({ length: window.innerWidth < 768 ? 24 : 60 }, () => ({
         x: Math.random() * W,
         y: Math.random() * H,
         r: Math.random() * 1.8 + 0.3,
@@ -66,23 +67,32 @@ export default function ParticleBackground() {
         if (p.x < -10) p.x = W + 10;
         if (p.x > W + 10) p.x = -10;
       }
-      animRef.current = requestAnimationFrame(draw);
+      if (!document.hidden && !reducedMotion.matches) animRef.current = requestAnimationFrame(draw);
     }
 
     init();
     draw();
 
-    const handleResize = () => init();
+    const handleResize = () => { init(); restart(); };
+    function restart() {
+      cancelAnimationFrame(animRef.current);
+      if (!document.hidden) draw();
+    }
+    document.addEventListener("visibilitychange", restart);
+    reducedMotion.addEventListener("change", restart);
     window.addEventListener("resize", handleResize);
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", restart);
+      reducedMotion.removeEventListener("change", restart);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       style={{
         position: "fixed",
         inset: 0,

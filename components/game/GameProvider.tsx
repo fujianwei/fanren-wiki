@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useReducer, useRef } from "react";
+import React, { createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
 import { createInitialState, EMPTY_META, gameReducer, META_SCHEMA_VERSION } from "@/lib/game/reducer";
 import type { GameAction, GameState, MetaState } from "@/types/game";
 
@@ -48,6 +48,7 @@ function readRun(): GameState | null {
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, PLACEHOLDER_STATE);
+  const [hydrated, setHydrated] = useState(false);
   const hydratedRef = useRef(false);
 
   useEffect(() => {
@@ -68,6 +69,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       dispatch({ type: "HYDRATE_RUN", state: { ...PLACEHOLDER_STATE, meta } });
     }
     hydratedRef.current = true;
+    // Route guards must wait for browser storage; the server has no saved run.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
@@ -85,7 +89,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <GameContext.Provider value={{ state, dispatch }}>
-      {children}
+      {hydrated ? children : <div className="game-loading" role="status">正在续接此生命途…</div>}
     </GameContext.Provider>
   );
 }

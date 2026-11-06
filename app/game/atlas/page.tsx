@@ -12,15 +12,15 @@ export default function FateAtlasPage() {
   const hintedUnseen = FATE_THREADS.filter((thread) => !atlas[thread.id]?.encountered).slice(0, 3).map((thread) => thread.id);
 
   return (
-    <div className="min-h-screen px-4 py-8 md:px-6 md:py-12">
+    <div className="game-page px-4 py-6 md:px-6 md:py-10">
       <div className="mx-auto max-w-5xl">
         <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="text-[9px] tracking-[.35em]" style={{ color: "#627f70" }}>THE ATLAS OF FATES</div>
+            <div className="text-[11px] tracking-[.35em]" style={{ color: "#627f70" }}>THE ATLAS OF FATES</div>
             <h1 className="mt-2 font-serif text-3xl font-bold md:text-4xl" style={{ color: "#edf5f1" }}>命途图鉴</h1>
-            <p className="mt-2 text-xs leading-6" style={{ color: "#789486" }}>你见过、走完、错过和从未靠近的命运，都会留在这里。</p>
+            <p className="mt-2 text-sm leading-6" style={{ color: "#789486" }}>你见过、走完、错过和从未靠近的命运，都会留在这里。</p>
           </div>
-          <Link href="/game" className="rounded-full px-4 py-2 text-xs" style={{ color: "#d4a843", border: "1px solid #d4a84344" }}>回到轮回</Link>
+          <Link href={state.phase === "playing" || state.phase === "breakthrough" ? "/game/play" : "/game"} className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm" style={{ color: "#d4a843", border: "1px solid #d4a84344" }}>{state.phase === "playing" || state.phase === "breakthrough" ? "继续此生" : "回到轮回"}</Link>
         </div>
 
         <div className="mb-5 grid grid-cols-2 gap-2 md:grid-cols-4">
@@ -31,14 +31,14 @@ export default function FateAtlasPage() {
             ["未见", summary.unseen, "#8fa79a"],
           ].map(([label, value, color]) => (
             <div key={label} className="rounded-2xl px-4 py-3" style={{ backgroundColor: "#0f1914", border: "1px solid #24382f" }}>
-              <div className="text-[9px] tracking-[.18em]" style={{ color: "#5e7a6c" }}>{label}</div>
-              <div className="mt-1 font-serif text-2xl font-bold" style={{ color: String(color) }}>{value}<span className="ml-1 text-xs" style={{ color: "#4e685b" }}>/{summary.total}</span></div>
+              <div className="text-[11px] tracking-[.18em]" style={{ color: "#5e7a6c" }}>{label}</div>
+              <div className="mt-1 font-serif text-2xl font-bold" style={{ color: String(color) }}>{value}<span className="ml-1 text-sm" style={{ color: "#8da998" }}>/{summary.total}</span></div>
             </div>
           ))}
         </div>
 
         <div className="mb-6 rounded-2xl px-4 py-3" style={{ backgroundColor: "#101915", border: "1px solid #263b31" }}>
-          <div className="mb-2 flex items-center justify-between text-[9px]" style={{ color: "#627f70" }}>
+          <div className="mb-2 flex items-center justify-between text-[11px]" style={{ color: "#627f70" }}>
             <span>命运显影</span><span>{Math.round(summary.seen / summary.total * 100)}%</span>
           </div>
           <div className="h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: "#192a22" }}>
@@ -51,16 +51,16 @@ export default function FateAtlasPage() {
             const entry = atlas[thread.id];
             const seen = Boolean(entry?.encountered);
             const status = entry?.resolved ? "已得偿" : entry?.broken ? "已断裂" : seen ? "因果未竟" : "未见";
-            const color = entry?.resolved ? "#6fedb5" : entry?.broken ? "#ef6b62" : seen ? "#d4a843" : "#526e60";
+            const color = entry?.resolved ? "#6fedb5" : entry?.broken ? "#ef6b62" : seen ? "#d4a843" : "#8fa99a";
             return (
               <article key={thread.id} className="min-h-[150px] rounded-2xl px-4 py-4" style={{ backgroundColor: seen ? "#101915" : "#0b130f", border: `1px solid ${seen ? `${color}33` : "#1d2e26"}` }}>
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <span className="text-[9px] tracking-[.14em]" style={{ color }}>{status}</span>
-                  {seen && <span className="text-[8px]" style={{ color: "#4e685b" }}>第 {entry.lastLife} 世</span>}
+                  <span className="text-[11px] tracking-[.14em]" style={{ color }}>{status}</span>
+                  {seen && <span className="text-[11px]" style={{ color: "#8da998" }}>第 {entry.lastLife} 世</span>}
                 </div>
                 <h2 className="font-serif text-sm font-bold" style={{ color: seen ? "#e3eee8" : "#6c877a" }}>{seen ? thread.title : "未显之线"}</h2>
-                <p className="mt-1 text-[9px]" style={{ color: "#5d786a" }}>{thread.theme}</p>
-                <p className="mt-3 text-[10px] leading-5" style={{ color: seen ? "#769184" : "#5a7567" }}>
+                <p className="mt-1 text-[11px]" style={{ color: "#8da998" }}>{thread.theme}</p>
+                <p className="mt-3 text-[13px] leading-5" style={{ color: seen ? "#769184" : "#5a7567" }}>
                   {seen
                     ? entry.resolution ?? `${thread.stageTitles[0]}之后，这段因果仍在继续。`
                     : hintedUnseen.includes(thread.id)

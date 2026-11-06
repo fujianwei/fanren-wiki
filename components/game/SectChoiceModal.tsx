@@ -1,5 +1,6 @@
 "use client";
 
+import GameDialog from "./GameDialog";
 import { useGame } from "./GameProvider";
 
 interface Props {
@@ -36,10 +37,7 @@ const SECT_OPTIONS = [
 export default function SectChoiceModal({ onClose }: Props) {
   const { state, dispatch } = useGame();
 
-  if (state.sectPath) {
-    onClose();
-    return null;
-  }
+  if (state.sectPath) return null;
 
   function handleChoose(sectId: "zhengdao" | "modao" | "sanxiu") {
     dispatch({ type: "SET_SECT_PATH", sectPath: sectId });
@@ -51,17 +49,14 @@ export default function SectChoiceModal({ onClose }: Props) {
   }
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
-      style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
-    >
+    <GameDialog label="选择修行道路" onClose={onClose}>
       <div
-        className="w-full max-w-sm rounded-2xl overflow-hidden"
-        style={{ backgroundColor: "#111a16", border: "1px solid #1a2820", maxHeight: "85vh", overflowY: "auto" }}
+        className="w-full"
+        style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
       >
         <div className="px-5 py-4" style={{ borderBottom: "1px solid #1a2820" }}>
-          <div className="font-serif font-bold text-sm mb-1" style={{ color: "#e8f0ec" }}>选择你的道路</div>
-          <p className="text-xs" style={{ color: "#6a8878" }}>此选择将影响你的整个修仙历程，请慎重。</p>
+          <div className="flex items-center justify-between gap-2"><h2 className="font-serif font-bold text-base" style={{ color: "#e8f0ec" }}>选择你的道路</h2><button onClick={onClose} className="dialog-close" aria-label="关闭择道">关闭</button></div>
+          <p className="text-sm" style={{ color: "#93ad9f" }}>此选择将影响你的整个修仙历程，请慎重。</p>
         </div>
 
         <div className="p-4 flex flex-col gap-3">
@@ -75,8 +70,8 @@ export default function SectChoiceModal({ onClose }: Props) {
               onMouseLeave={e => e.currentTarget.style.borderColor = `${opt.color}33`}
             >
               <div className="font-bold text-sm mb-1" style={{ color: opt.color }}>{opt.name}</div>
-              <p className="text-xs mb-2" style={{ color: "#b8ccc2" }}>{opt.desc}</p>
-              <div className="flex gap-3 text-xs">
+              <p className="text-sm mb-2" style={{ color: "#b8ccc2" }}>{opt.desc}</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
                 <div>
                   {opt.pros.map(p => <div key={p} style={{ color: "#4ade9a" }}>+ {p}</div>)}
                 </div>
@@ -88,6 +83,6 @@ export default function SectChoiceModal({ onClose }: Props) {
           ))}
         </div>
       </div>
-    </div>
+    </GameDialog>
   );
 }

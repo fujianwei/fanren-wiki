@@ -211,8 +211,8 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="relative text-center px-8 max-w-sm mx-auto" style={{ zIndex: 1 }}>
+    <div className="game-gate relative flex items-center justify-center">
+      <div className="relative w-full text-center px-4 max-w-md mx-auto" style={{ zIndex: 1 }}>
         {phase === "spinning" && (
           <div className="flex flex-col items-center gap-8">
             <BlueFlame />
@@ -223,7 +223,7 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
         )}
 
         {phase === "revealed" && (
-          <div className="flex flex-col items-center gap-6 animate-[fadeIn_0.8s_ease-in]">
+          <div className="flex flex-col items-center gap-4 animate-[fadeIn_0.8s_ease-in] sm:gap-6">
             <div className="relative flex items-center justify-center" style={{ width: 96, height: 96 }}>
               <div
                 className="absolute inset-0 rounded-full animate-pulse"
@@ -257,13 +257,13 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
                 backgroundColor: root.glowColor === "transparent" ? "rgba(74,222,154,0.03)" : root.glowColor,
               }}
             >
-              <p className="text-xs tracking-widest mb-1" style={{ color: root.textColor }}>你的灵根</p>
+              <p className="text-sm tracking-widest mb-1" style={{ color: root.textColor }}>你的灵根</p>
               <p className="font-serif font-bold text-lg" style={{ color: root.textColor }}>{root.label}</p>
-              <p className="text-xs mt-1" style={{ color: "#6a8878" }}>{root.desc}</p>
+              <p className="text-sm mt-1" style={{ color: "#93ad9f" }}>{root.desc}</p>
             </div>
 
             <div className="rounded-xl px-4 py-3 text-center" style={{ backgroundColor: "#0e1610", border: "1px solid #1a2820" }}>
-              <p className="text-[10px] leading-relaxed" style={{ color: "#6a8878" }}>
+              <p className="text-[13px] leading-relaxed" style={{ color: "#93ad9f" }}>
                 灵根决定起步快慢与擅长的路，不封死秘境、禁术、乱星海与飞升。此后能走多远，交给选择。
               </p>
             </div>
@@ -279,14 +279,14 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
               return mirror ? (
                 <div className="w-full rounded-xl px-4 py-4 text-left" style={{ backgroundColor: "#101915", border: "1px solid #26352d" }}>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-[10px]" style={{ color: "#d4a843" }}>三生镜 · 前 {Math.min(3, state.meta.lives.length)} 世</div>
-                    <div className="text-[9px]" style={{ color: "#4a6a58" }}>{mirror.selectionBias}</div>
+                    <div className="text-[13px]" style={{ color: "#d4a843" }}>三生镜 · 前 {Math.min(3, state.meta.lives.length)} 世</div>
+                    <div className="text-[11px]" style={{ color: "#8da998" }}>{mirror.selectionBias}</div>
                   </div>
                   <p className="font-serif text-sm leading-6 mb-1" style={{ color: "#e8f0ec" }}>{mirror.headline}</p>
-                  <p className="text-[10px] leading-relaxed" style={{ color: "#6a8878" }}>{mirror.insight}</p>
+                  <p className="text-[13px] leading-relaxed" style={{ color: "#93ad9f" }}>{mirror.insight}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {Object.entries(mirror.axisCounts).sort((a,b)=>b[1]-a[1]).map(([axis,count]) => (
-                      <span key={axis} className="text-[9px] px-2 py-0.5 rounded-full" style={{ color: "#d4a843", backgroundColor: "#16140a" }}>{AXIS_LABELS[axis as keyof typeof AXIS_LABELS]} ×{count}</span>
+                      <span key={axis} className="text-[11px] px-2 py-0.5 rounded-full" style={{ color: "#d4a843", backgroundColor: "#16140a" }}>{AXIS_LABELS[axis as keyof typeof AXIS_LABELS]} ×{count}</span>
                     ))}
                   </div>
                 </div>
@@ -294,11 +294,11 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
             })()}
 
             <div className="w-full rounded-xl px-4 py-3 text-left" style={{ backgroundColor: "#101915", border: `1px solid ${todayCelestial.color}35` }}>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[9px] tracking-[.18em]" style={{ color: todayCelestial.color }}>今日天象 · {todayCelestial.name}</span>
-                <span className="text-[9px]" style={{ color: "#5c786a" }}>{daily.dateKey} · {daily.spiritRoot.name}</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[11px] tracking-[.18em]" style={{ color: todayCelestial.color }}>今日天象 · {todayCelestial.name}</span>
+                <span className="text-[11px]" style={{ color: "#8da998" }}>{daily.dateKey} · {daily.spiritRoot.name}</span>
               </div>
-              <p className="mt-1 text-[10px] leading-5" style={{ color: "#779285" }}>{todayCelestial.epithet}。{todayCelestial.description}</p>
+              <p className="mt-1 text-[13px] leading-5" style={{ color: "#779285" }}>{todayCelestial.epithet}。{todayCelestial.description}</p>
             </div>
 
             <button onClick={handleStart} className="btn-primary w-full">
@@ -309,7 +309,7 @@ export default function SpiritRootGate({ onComplete, dailyKey }: Props) {
               今日同命 · 直接看看这一世
             </button>
 
-            <Link href="/game/atlas" className="text-[10px]" style={{ color: "#7d998a" }}>
+            <Link href="/game/atlas" className="text-[13px]" style={{ color: "#7d998a" }}>
               命途图鉴 · 已见 {atlas.seen}/{atlas.total} · 未见 {atlas.unseen}
             </Link>
 

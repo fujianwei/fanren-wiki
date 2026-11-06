@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  if (pathname === "/game/play") return null;
   return (
     <nav
-      className="w-full border-b px-3 py-3 sticky top-0 md:px-6"
+      aria-label="网站导航"
+      className="site-nav w-full border-b sticky top-0"
       style={{
         backgroundColor: "rgba(10,14,13,0.85)",
         backdropFilter: "blur(12px)",
@@ -16,7 +20,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         <Link
           href="/"
-          className="whitespace-nowrap font-serif font-bold text-base tracking-widest md:text-lg"
+          className="inline-flex min-h-11 items-center whitespace-nowrap font-serif font-bold text-base tracking-widest md:text-lg"
           style={{
             background: "linear-gradient(90deg, #6fedb5, #d4a843)",
             WebkitBackgroundClip: "text",
@@ -32,7 +36,7 @@ export default function Navbar() {
           <span className="hidden cursor-not-allowed opacity-50 md:inline" title="敬请期待">剧情时间线</span>
           <Link
             href="/game"
-            className="font-medium transition-colors"
+            className="inline-flex min-h-11 items-center font-medium transition-colors"
             style={{ color: "#d4a843" }}
             onMouseEnter={e => (e.currentTarget.style.color = "#e8c86a")}
             onMouseLeave={e => (e.currentTarget.style.color = "#d4a843")}

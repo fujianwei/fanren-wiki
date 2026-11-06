@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import GameDialog from "./GameDialog";
 import { useGame } from "./GameProvider";
 import type { RealmSlug } from "@/types/game";
 import { REALM_ORDER } from "@/lib/game/labels";
@@ -126,7 +127,7 @@ export default function BattleModal({
   const RESULT_COLORS: Record<string, string> = {
     "完胜": "#d4a843",
     "小胜": "#4ade9a",
-    "平局": "#6a8878",
+    "平局": "#93ad9f",
     "小败": "#f59e0b",
     "败北": "#ef4444",
     "惨败": "#7f1d1d",
@@ -135,25 +136,22 @@ export default function BattleModal({
   const currentRoundOptions = rounds[currentRound] ?? DEFAULT_ROUNDS[Math.min(currentRound, 2)];
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
-      style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
-    >
+    <GameDialog label="战斗">
       <div
-        className="w-full max-w-sm rounded-2xl overflow-hidden"
+        className="w-full"
         style={{ backgroundColor: "#111a16", border: "1px solid #1a2820" }}
       >
         {/* 标题 */}
         <div className="px-5 py-4" style={{ borderBottom: "1px solid #1a2820" }}>
           <div className="flex items-center justify-between mb-1">
             <span className="font-serif font-bold text-sm" style={{ color: "#ef4444" }}>战斗</span>
-            <span className="text-xs" style={{ color: "#6a8878" }}>
+            <span className="text-sm" style={{ color: "#93ad9f" }}>
               {REALM_ORDER.indexOf(enemyRealm) > playerIdx ? "⚠ 对方境界更高" :
                REALM_ORDER.indexOf(enemyRealm) < playerIdx ? "对方境界较低" : "势均力敌"}
             </span>
           </div>
           <div className="font-bold" style={{ color: "#e8f0ec" }}>{enemyName}</div>
-          <div className="text-xs mt-1" style={{ color: "#6a8878" }}>{enemyDesc}</div>
+          <div className="text-sm mt-1" style={{ color: "#93ad9f" }}>{enemyDesc}</div>
         </div>
 
         {phase === "intro" && (
@@ -162,12 +160,12 @@ export default function BattleModal({
               战斗一触即发，你需要做出三次关键决策。每次选择都将影响战局走向。
             </p>
             {realmBonus !== 0 && (
-              <p className="text-xs mb-4" style={{ color: realmBonus > 0 ? "#4ade9a" : "#ef4444" }}>
+              <p className="text-sm mb-4" style={{ color: realmBonus > 0 ? "#4ade9a" : "#ef4444" }}>
                 境界修正：{realmBonus > 0 ? `+${realmBonus}` : realmBonus}（{realmBonus > 0 ? "你境界更高" : "对方境界更高"}）
               </p>
             )}
             {state.sectPath === "sanxiu" && (
-              <p className="text-xs mb-4" style={{ color: "#4ade9a" }}>散修加成：每回合+1</p>
+              <p className="text-sm mb-4" style={{ color: "#4ade9a" }}>散修加成：每回合+1</p>
             )}
             <button
               onClick={() => setPhase("fighting")}
@@ -182,7 +180,7 @@ export default function BattleModal({
         {phase === "fighting" && (
           <div className="px-5 py-4">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs" style={{ color: "#6a8878" }}>第 {currentRound + 1} / {rounds.length} 回合</span>
+              <span className="text-sm" style={{ color: "#93ad9f" }}>第 {currentRound + 1} / {rounds.length} 回合</span>
               <div className="flex gap-1">
                 {rounds.map((_, i) => (
                   <div
@@ -205,16 +203,16 @@ export default function BattleModal({
                     style={{
                       backgroundColor: canAfford ? "#1a2820" : "#0e1610",
                       border: "1px solid #2a3828",
-                      color: canAfford ? "#e8f0ec" : "#4a6a58",
+                      color: canAfford ? "#e8f0ec" : "#8da998",
                       cursor: canAfford ? "pointer" : "not-allowed",
                     }}
                   >
                     <span className="mr-2" style={{ color: "#ef4444" }}>{String.fromCharCode(65 + i)}.</span>
                     {opt.text}
                     {opt.cost?.lingshi && (
-                      <span className="ml-2 text-xs" style={{ color: "#6a8878" }}>（{opt.cost.lingshi}灵石）</span>
+                      <span className="ml-2 text-sm" style={{ color: "#93ad9f" }}>（{opt.cost.lingshi}灵石）</span>
                     )}
-                    <div className="text-xs mt-0.5" style={{ color: "#4a6a58" }}>{opt.desc}</div>
+                    <div className="text-sm mt-0.5" style={{ color: "#8da998" }}>{opt.desc}</div>
                   </button>
                 );
               })}
@@ -247,6 +245,6 @@ export default function BattleModal({
           </div>
         )}
       </div>
-    </div>
+    </GameDialog>
   );
 }
