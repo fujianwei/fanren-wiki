@@ -520,7 +520,7 @@ export default function GamePlayPage() {
                     {state.lastSettlement.breakthroughReady && <span className="rounded-full px-2.5 py-1 text-[11px]" style={{ color: "#d4a843", backgroundColor: "#1a160b", border: "1px solid #d4a84333" }}>修为已至巅峰</span>}
                   </section>
                 )}
-                <StageFocusPanel state={state} onSelect={(focusId) => dispatch({ type: "SET_STAGE_FOCUS", focusId })} onAdvance={() => dispatch({ type: "ADVANCE_STAGE" })} />
+                <StageFocusPanel key={state.stage} state={state} onSelect={(focusId) => dispatch({ type: "SET_STAGE_FOCUS", focusId })} onAdvance={() => dispatch({ type: "ADVANCE_STAGE" })} />
                 {state.xp >= 90 && (
                   <button
                     onClick={() => state.realmSlug === "huashen" ? handleAscend() : dispatch({ type: "ATTEMPT_BREAKTHROUGH" })}
@@ -534,7 +534,7 @@ export default function GamePlayPage() {
             )}
           </div>
 
-          <JourneyCompanion state={state} onOpenLife={() => setShowLife(true)} />
+          {state.heartIntent && (state.lifeOathId || state.lifeOathSkipped) && <JourneyCompanion state={state} onOpenLife={() => setShowLife(true)} />}
         </div>
       </div>
 

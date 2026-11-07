@@ -1,9 +1,11 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { FOCUSES, getStageYears } from "@/lib/game/lifecycle";
 import { getFocusScene } from "@/lib/game/scene-art";
 import type { FocusId, GameState } from "@/types/game";
 import PixelScene from "./PixelScene";
+import { useGuidedStep } from "./useGuidedStep";
 
 interface Props {
   state: GameState;
@@ -12,13 +14,28 @@ interface Props {
 }
 
 export default function StageFocusPanel({ state, onSelect, onAdvance }: Props) {
-  const selected = FOCUSES.find((focus) => focus.id === state.stageFocus);
+  const { step, goTo, leaving, panel } = useGuidedStep<"choose" | "confirm">("choose");
+  const [advancing, setAdvancing] = useState(false);
+  const submitted = useRef(false);
+  const selected = FOCUSES.find(focus => focus.id === state.stageFocus);
   const years = getStageYears(state.realmSlug);
-  const scene = getFocusScene((selected?.id ?? "cultivate") as FocusId);
+
+  function advance() {
+    if (!selected || submitted.current) return;
+    submitted.current = true;
+    setAdvancing(true);
+    onAdvance();
+  }
 
   return (
-    <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #2a4035", boxShadow: "0 24px 80px rgba(0,0,0,.28)" }}>
-      <PixelScene scene={scene} priority compact>
+    <section className="guided-card" aria-label="安排下一段人生">
+      <div className="guided-progress">
+        <span className="text-mist-200">第 {state.stage + 1} 段人生 · {years} 年</span>
+        <span className="text-gold-bright">{step === "choose" ? "1 · 选择重心" : "2 · 启程"}</span>
+      </div>
+      <div ref={panel} tabIndex={-1} aria-label={step === "choose" ? "选择生活重心" : "确认人生安排"} className={"guided-panel " + (leaving ? "is-leaving" : "")}>
+        <div key={step} className="guided-enter">
+          <PixelScene scene={getFocusScene(step === "confirm" && selected ? selected.id : "cultivate")} priority compact>
         <div className="scene-caption absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 px-5 pb-4 md:px-6 md:pb-5">
           <div>
             <div className="mb-1 text-[11px] tracking-[.3em]" style={{ color: "rgba(219,233,225,.56)" }}>LIFE CHAPTER</div>
@@ -30,16 +47,17 @@ export default function StageFocusPanel({ state, onSelect, onAdvance }: Props) {
             <div className="text-[11px] tracking-[.2em]" style={{ color: "rgba(220,231,224,.55)" }}>CHAPTER</div>
           </div>
         </div>
-      </PixelScene>
-
-      <div className="p-4 md:p-5">
+          </PixelScene>
+          <div className="guided-body">
+            {step === "choose" ? <>
         <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
           {FOCUSES.map((focus) => {
             const active = focus.id === state.stageFocus;
             return (
               <button
                 key={focus.id}
-                onClick={() => onSelect(focus.id)}
+                disabled={leaving}
+                onClick={() => { onSelect(focus.id); goTo("confirm"); }}
                 aria-pressed={active}
                 className="group relative min-h-[102px] overflow-hidden rounded-2xl px-3 py-3 text-left transition-all hover:-translate-y-0.5 md:px-4 md:py-3.5"
                 style={{
@@ -61,31 +79,20 @@ export default function StageFocusPanel({ state, onSelect, onAdvance }: Props) {
           })}
         </div>
 
-        <div
-          className="focus-confirm mt-3 flex flex-col gap-3 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
-          style={{ backgroundColor: selected ? "#111d16" : "#0b130f", border: `1px solid ${selected ? "#31493d" : "#1d2c25"}` }}
-        >
-          <div className="min-w-0">
-            <div className="text-[13px] font-medium" style={{ color: selected?.color ?? "#6c877a" }}>
-              {selected ? `${selected.name} · 代价` : "尚未选择生活重心"}
-            </div>
-            <div className="mt-1 text-[13px] leading-5" style={{ color: "#708d7e" }}>
-              {selected?.cost ?? "六种重心会改变事件、关系和修为，但不会锁死你的一生。"}
-            </div>
+              <div className="rounded-2xl px-4 py-3" style={{ backgroundColor: "#0b130f", border: "1px solid #1d2c25" }}>
+                <p className="text-[13px] text-mist-200">{selected ? selected.name : "尚未选择生活重心"}</p>
+                <p className="mt-1 text-[13px] leading-5 text-mist-200">六种重心会改变事件、关系和修为，但不会锁死你的一生。</p>
+              </div>
+            </> : selected && <>
+              <div className="guided-plan">
+                <div><span className="text-sm text-mist-200">有所收获</span><p className="mt-1 text-base" style={{ color: selected.color }}>{selected.benefit}</p></div>
+                <div><span className="text-sm" style={{ color: selected.color }}>{selected.name} · 代价</span><p className="mt-1 text-sm leading-6 text-mist-100">{selected.cost}</p></div>
+              </div>
+              <button className="guided-primary" disabled={leaving || advancing} onClick={advance}>{advancing ? "岁月正在展开…" : "推演这 " + years + " 年"}</button>
+              <p className="text-center text-sm text-mist-200">点击后岁月才会前行，你会遇见这段人生的经历。</p>
+              <button className="guided-back" disabled={leaving || advancing} onClick={() => goTo("choose")}>← 换一种过法</button>
+            </>}
           </div>
-          <button
-            onClick={onAdvance}
-            disabled={!selected}
-            className="w-full flex-shrink-0 rounded-xl px-5 py-3 font-serif text-sm font-bold tracking-[.14em] transition-all sm:w-auto"
-            style={{
-              color: selected ? "#07100c" : "#476052",
-              backgroundColor: selected ? "#62dca0" : "#132019",
-              cursor: selected ? "pointer" : "not-allowed",
-              boxShadow: selected ? "0 8px 30px rgba(74,222,154,.16)" : "none",
-            }}
-          >
-            推演这 {years} 年
-          </button>
         </div>
       </div>
     </section>

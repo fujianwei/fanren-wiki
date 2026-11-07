@@ -5,6 +5,7 @@ import { getCelestialById } from "@/lib/game/daily";
 import { getIntentScene, getSceneById } from "@/lib/game/scene-art";
 import type { GameState, HeartIntent } from "@/types/game";
 import PixelScene from "./PixelScene";
+import { useGuidedStep } from "./useGuidedStep";
 
 const INTENTS: Array<{ id: HeartIntent; icon: string; title: string; text: string; accent: string }> = [
   { id: "longevity", icon: "生", title: "求长生", text: "我想看看，这条路的尽头究竟有什么。", accent: "#6fedb5" },
@@ -14,54 +15,53 @@ const INTENTS: Array<{ id: HeartIntent; icon: string; title: string; text: strin
 ];
 
 export default function FateOpening({ state, onChoose }: { state: GameState; onChoose: (intent: HeartIntent) => void }) {
-  const lastLife = state.meta.lives.at(-1);
+  const { step, goTo, leaving, panel } = useGuidedStep(0);
   const celestial = getCelestialById(state.celestialId);
-  const scene = getSceneById("cave");
+  const lastLife = state.meta.lives.at(-1);
+  const titles = ["你的命格谶语 · " + state.prophecy.title, "今日天象 · " + celestial.name, "入世之前，先问本心"];
+
   return (
-    <section className="overflow-hidden rounded-[26px]" style={{ backgroundColor: "#0d1712", border: "1px solid #2d4438", boxShadow: "0 28px 100px rgba(0,0,0,.35)" }}>
-      <PixelScene scene={scene} priority>
-        <div className="scene-caption absolute inset-x-0 bottom-0 px-5 pb-5 text-center md:px-8 md:pb-7">
-          <div className="mb-2 text-[11px] tracking-[.36em]" style={{ color: "rgba(231,239,234,.55)" }}>FATE BEFORE THE FIRST STEP</div>
-          <h2 className="font-serif text-2xl font-bold md:text-4xl" style={{ color: "#f2f7f4", textShadow: "0 2px 28px rgba(0,0,0,.9)" }}>入世之前，先问本心</h2>
-          <p className="mt-2 text-[13px] leading-6 md:text-sm" style={{ color: "rgba(226,237,230,.78)" }}>灵根只决定你从哪里出发。此后每一步，都是你自己选的。</p>
-        </div>
-      </PixelScene>
-
-      <div className="p-4 md:p-6">
-        <div className="mb-3 rounded-xl px-4 py-3" style={{ backgroundColor: "#101915", border: `1px solid ${celestial.color}33` }}>
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-[11px] tracking-[.16em]" style={{ color: celestial.color }}>今日天象 · {celestial.name}</span>
-            <span className="text-[11px]" style={{ color: "#8da998" }}>{celestial.epithet}</span>
-          </div>
-          <p className="mt-1 text-[13px] leading-5" style={{ color: "#708d7e" }}>{celestial.description}</p>
-        </div>
-
-        <div className="mb-4 rounded-2xl px-5 py-4 text-center" style={{ backgroundColor: "#17150b", border: "1px solid #d4a8433d" }}>
-          <div className="mb-2 text-[11px] tracking-[.24em]" style={{ color: "#bfa76d" }}>你的命格谶语 · {state.prophecy.title}</div>
-          <p className="font-serif text-base leading-7 md:text-lg" style={{ color: "#e9d79f" }}>「{state.prophecy.text}」</p>
-          <div className="mt-1.5 text-[11px]" style={{ color: "#b5a16c" }}>它只是一个假设。你可以应验它，也可以逆着它活。</div>
-        </div>
-
-        {lastLife && (
-          <div className="mb-4 rounded-xl px-4 py-3" style={{ backgroundColor: "#0f1a14", border: "1px solid #243a2f" }}>
-            <div className="text-[11px]" style={{ color: "#658074" }}>前世留下的回响</div>
-            <div className="mt-1 text-sm leading-6" style={{ color: "#b8ccc2" }}>
-              第 {lastLife.lifeNumber} 世 · {lastLife.endingTitle}。{lastLife.karmaMarks[0] ? `还有一段因果没有走完：${lastLife.karmaMarks[0]}` : "你把前世的一切都留在了身后。"}
+    <section className="guided-card" aria-label="入世引导">
+      <div className="guided-progress">
+        <ol className="flex items-center gap-3" aria-label="引导进度">
+          {["命格", "天象", "本心"].map((label, index) => <li key={label} aria-current={step === index ? "step" : undefined} className={step === index ? "text-gold-bright" : "text-mist-200"}>{index + 1} · {label}</li>)}
+        </ol>
+        {step < 2 && <button disabled={leaving} onClick={() => goTo(2)} className="guided-back">跳过介绍</button>}
+      </div>
+      <div ref={panel} tabIndex={-1} aria-label={titles[step]} className={"guided-panel " + (leaving ? "is-leaving" : "")}>
+        <div key={step} className="guided-enter">
+          <PixelScene scene={getSceneById("cave")} priority compact>
+            <div className="scene-caption text-center">
+              {step === 2 && <div className="mb-2 text-[11px] tracking-[.36em]" style={{ color: "rgba(231,239,234,.55)" }}>FATE BEFORE THE FIRST STEP</div>}
+              <h2 className="font-serif text-2xl font-bold text-mist-100 md:text-3xl">{titles[step]}</h2>
+              {step === 2 && <p className="mt-2 text-[13px] leading-6 md:text-sm" style={{ color: "rgba(226,237,230,.78)" }}>灵根只决定你从哪里出发。此后每一步，都是你自己选的。</p>}
             </div>
-            {state.meta.selectedObsession && <div className="mt-1.5 text-[13px]" style={{ color: "#d4a843" }}>这一世，你还记得：{state.meta.selectedObsession.title}</div>}
-          </div>
-        )}
-
-        <div className="mb-2 flex items-center gap-2">
-          <span className="h-px w-7" style={{ backgroundColor: "#4ade9a" }} />
-          <span className="text-[11px] tracking-[.22em]" style={{ color: "#93ad9f" }}>选择此世最放不下的执念</span>
-        </div>
+          </PixelScene>
+          <div className="guided-body">
+            {step === 0 && <>
+              <p className="text-center text-sm text-gold-bright">你的命格谶语 · {state.prophecy.title}</p>
+              <blockquote className="guided-quote">「{state.prophecy.text}」</blockquote>
+              <p className="text-center text-sm text-mist-200">它只是一个假设。你可以应验它，也可以逆着它活。</p>
+              <button className="guided-primary" disabled={leaving} onClick={() => goTo(1)}>看看今日天象 →</button>
+            </>}
+            {step === 1 && <>
+              <div className="text-center">
+                <p className="font-serif text-2xl font-bold" style={{ color: celestial.color }}>{celestial.name}</p>
+                <p className="mt-3 text-base leading-8 text-mist-100">{celestial.description}</p>
+                <p className="mt-2 text-sm text-mist-200">{celestial.epithet}</p>
+              </div>
+              <button className="guided-primary" disabled={leaving} onClick={() => goTo(2)}>选择我的本心 →</button>
+              <button className="guided-back" disabled={leaving} onClick={() => goTo(0)}>← 回看命格</button>
+            </>}
+            {step === 2 && <>
+              <p className="text-sm text-mist-200">选择此世最放不下的执念</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {INTENTS.map((intent) => {
             const art = getIntentScene(intent.id);
             return (
               <button
                 key={intent.id}
+                disabled={leaving}
                 onClick={() => onChoose(intent.id)}
                 className="group relative flex min-h-[112px] items-center gap-3 overflow-hidden rounded-2xl px-4 py-3 text-left transition-all hover:-translate-y-0.5"
                 style={{ backgroundColor: "#101b15", border: `1px solid ${intent.accent}38` }}
@@ -87,6 +87,17 @@ export default function FateOpening({ state, onChoose }: { state: GameState; onC
               </button>
             );
           })}
+        </div>
+              <details className="guided-details">
+                <summary>回看命格、天象与前世回响</summary>
+                <p className="mt-3 text-gold-bright">{state.prophecy.title} · {state.prophecy.text}</p>
+                <p className="mt-3">{celestial.name} · {celestial.description}</p>
+                {lastLife && <p className="mt-3"><span className="block">前世留下的回响</span>第 {lastLife.lifeNumber} 世 · {lastLife.endingTitle}。{lastLife.karmaMarks[0] ? "还有一段因果没有走完：" + lastLife.karmaMarks[0] : "你把前世的一切都留在了身后。"}</p>}
+                {state.meta.selectedObsession && <p className="mt-3">这一世，你还记得：{state.meta.selectedObsession.title}</p>}
+              </details>
+              <button className="guided-back" disabled={leaving} onClick={() => goTo(1)}>← 回看天象</button>
+            </>}
+          </div>
         </div>
       </div>
     </section>

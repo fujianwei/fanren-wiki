@@ -169,3 +169,23 @@ button:disabled { cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Player-paced guided cards: no automatic story advancement. */
+.guided-card { border: 1px solid #2d4438; border-radius: 24px; background: #0d1712; overflow: hidden; }
+.guided-progress { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; padding: 8px 16px; min-height: 56px; font-size: 12px; border-bottom: 1px solid #263b31; }
+.guided-panel { outline: none; scroll-margin-top: 12px; transition: opacity 150ms ease, transform 150ms ease; }
+.guided-panel.is-leaving { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+.guided-enter { animation: guided-arrive 220ms ease both; }
+.guided-body { display: flex; flex-direction: column; gap: 16px; padding: 20px 16px; }
+.guided-quote { max-width: 34em; margin: 8px auto; text-align: center; font-family: var(--font-serif); font-size: clamp(20px, 4.8vw, 28px); line-height: 1.9; color: #ead597; }
+.guided-primary { width: 100%; min-height: 56px; padding: 14px 18px; border-radius: 14px; background: linear-gradient(120deg, #62dca0, #a8f5d4); color: #07100c; font-size: 17px; font-weight: 700; box-shadow: 0 8px 28px #4ade9a20; }
+.guided-primary:disabled { opacity: .55; }
+.guided-back { padding: 10px 12px; color: #a8c4b5; font-size: 13px; }
+.guided-plan { display: grid; gap: 16px; padding: 16px; border: 1px solid #314b3c; border-radius: 16px; background: #101e16; }
+.guided-details { color: #b8ccc2; font-size: 14px; line-height: 1.8; }
+.guided-details summary { min-height: 44px; padding-block: 10px; cursor: pointer; color: #a8c4b5; }
+@keyframes guided-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 768px) { .guided-body { padding: 24px; } .guided-plan { grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: reduce) { .guided-enter { animation: none; } .guided-panel { transition: none; } }
+
+.guided-card { max-width: 960px; margin-inline: auto; }
